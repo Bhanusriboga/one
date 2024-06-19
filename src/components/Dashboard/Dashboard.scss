@@ -1,9 +1,15 @@
-.pageHeader{
-    height: 8%;
-}
 .pageContainer{
     height: 67%;
 }
 .pageFooter {
     height: 25%;
+}
+.dashbcg{
+    background-image: url('../../Assets/dashboardBcg.svg') !important;
+    background-repeat: no-repeat;
+    // background-size: 1445px 100%;
+}
+.navbck{
+    background-color: #780024 !important;
+    color: white !important;
 }

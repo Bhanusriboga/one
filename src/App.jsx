@@ -5,7 +5,7 @@ import Routes from './app.routes.jsx'
 
 const App = () => {
   return (
-    <div className='vh-100'>
+    <div className='vh-100 pagewidth'>
       <BrowserRouter>
         <Routes></Routes>
       </BrowserRouter>

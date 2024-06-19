@@ -1,7 +1,112 @@
-.cButton:focus,.cButton:active {
+.loginContent {
+  width: 48%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+
+
+.cButton:focus,
+.cButton:active {
   outline: none !important;
   box-shadow: none;
 }
+
 .fitWidth {
   width: fit-content;
+}
+.fogbck {
+  background-image: url('../../Assets/forgotbck.svg') !important;
+  background-repeat: no-repeat;
+}
+.bcgimg {
+  background-image: url('../../Assets/Login.png');
+  background-size: 1445px 100%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  background-repeat: no-repeat;
+}
+
+.pagehw {
+  height: 100%;
+  width: 100%;
+}
+
+.eyebutton {
+  transform: 'translateY(-50%)';
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  bottom: 20%;
+  border: none;
+  left: 90%;
+  padding: 2px;
+}
+
+.emailinput {
+  border-right: none;
+}
+
+.emailicon {
+  position: absolute;
+  bottom: 29%;
+  border: none;
+  left: 91%;
+}
+
+.loginhead {
+  color: #780024 !important;
+}
+
+.btnback {
+  background-color: #780024 !important;
+}
+
+.signupbtn {
+  font-weight: bold !important;
+}
+
+.letterIconplace {
+  position: relative;
+  width: 68%;
+}
+
+.forgotwidth {
+  width: 77% !important;
+}
+
+.submitbtn {
+  width: 72% !important;
+}
+
+@media screen and (max-width: 992px) {
+  .bcgimg {
+    display: flex;
+    align-items: center;
+  }
+  .loginContent {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 700px) {
+  .bcgimg {
+    display: flex;
+    align-items: center;
+  }
+  .loginContent {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
 }
