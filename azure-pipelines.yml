@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: my-personal-computer
 
 steps:
 - task: NodeTool@0
