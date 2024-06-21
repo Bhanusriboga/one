@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: MyPool
+  vmImage: Azure Pipelines
 
 steps:
 - task: NodeTool@0
