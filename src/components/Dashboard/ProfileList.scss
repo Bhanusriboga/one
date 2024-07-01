@@ -1,0 +1,25 @@
+.circle {
+    display: flex;
+    width: 80px;
+    height: 80px;
+    background-color: gray;
+    border-radius: 50%;
+  }
+  .cardwidth{
+    width: 230px !important;
+  }
+  .cardColorDash {
+    background: linear-gradient(#B88A44 0%,#E0AA3E 31%, #F9F295 55% ,#E0AA3E 71%,#B88A44 100%) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 270px !important;
+  }
+  .cardColorredDash{
+    background: #780024 !important;
+    color: white !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 270px !important;
+  }
