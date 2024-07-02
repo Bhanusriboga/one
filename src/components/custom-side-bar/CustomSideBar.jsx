@@ -55,7 +55,7 @@ const CustomSideBar = () => {
             </div>
           ))}
         </Col>
-        <Col xs="12" md="8" className="content">
+        <Col xs="12" md="8" className="content" data-testid="content">
           <RenderContent/>
         </Col>  
       </Row>

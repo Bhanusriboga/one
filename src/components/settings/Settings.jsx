@@ -102,7 +102,7 @@ const Settings = () => {
     <Container 
     style={{ background: '#D9D9D9', paddingBottom: '20px' }}
      fluid>
-      <h1 className="title">Settings</h1>
+      <h1 className="title" data-testid="settings">Settings</h1>
       <Form onSubmit={handleSubmit}>
         <section>
           <h2 className="subTitle">Change your email</h2>
