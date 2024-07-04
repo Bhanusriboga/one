@@ -1,0 +1,349 @@
+
+.fonts{
+    font-size: 15px;
+    font-style: oblique;
+    font-weight: 500;
+}
+.cont-2{
+
+}
+
+
+.forms{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    margin-left:-12vw ;
+  
+    
+    
+}
+
+.main-cont{
+    display: flex;
+    justify-content: space-between;
+    width: 100vw; 
+    height:auto;
+    align-items: center;
+    background-color: #F3F3F3;
+  }
+  .forms{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35vw;
+    margin-left:-10vw ;
+    margin-top: -11vh;
+    
+}
+.imgs{
+    height: 140vh;
+    width: 50vw;
+    margin-left: -5vw;
+}
+.top-logo
+    {align-self:flex-start;height:25vh;width:12vw}
+ .star{color:rgb(121, 1, 37);font-size:8.3vh}
+ .genders{
+    width:45vw;
+    height:9vh;
+    border: 1.5px solid grey;
+    font-size: 20px;
+    
+
+}
+.form-control.genderss{width:35vw;height:9vh;border: 1.5px solid grey;color:rgb(22, 21, 21)}
+
+
+.form-control.genderss.select{
+    width:35vw;height:9vh;border: 1.5px solid grey;color:rgb(22, 21, 21)
+}
+.form-control.genderss::placeholder{
+    font-size: 20px;
+    font-weight: 400;
+    color: rgb(174, 172, 172);
+    
+
+}
+.otp-cont{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: space-between;
+    height: 20vh;
+
+}
+.check{display:flex;height:10vh;align-items:center;
+    justify-content:space-between;width:20vw;margin-top:-8vh;align-self:flex-start}
+
+.form.next-button{width:12vw; height: 7vh;border-radius: 25px; font-size: large;font-weight: bold; background-color:rgb(121, 1, 37)}
+.already{
+    text-align: center;
+    font-weight: 600;
+}
+.req{color:red;position:absolute;top:8px;left:115px}
+.req-iam{color:red;position:absolute;top:10px;left:58px}
+    .req-email{color:red;position:absolute;top:8px;left:95px}
+    .req-pass{color:red;position:absolute;top:8px;left:108px}
+    .req-repeat{color:red;position:absolute;top:8px;left:192px}
+
+   .form.otpbox::placeholder{
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(174, 172, 172);
+    }
+@media (max-width:400px) and (min-width:300px){
+    .form.next-button{width:20vw;background-color:rgb(121, 1, 37);margin-left:-10vw}
+    .check{display:flex;height:10vh;align-items:center;
+        justify-content:space-between;width:70vw;margin-left:1vw;margin-top:-5vh;align-self:flex-start}
+    .main-cont{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100vw; 
+        height:120vh;
+        align-items: center;
+        background-color: #F3F3F3;
+        
+      }
+      .forms{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 120vh;
+        margin-left: 1vh;
+        
+    }
+    .req{color:red;position:absolute;top:18px;left:112px}
+    .req-iam{color:red;position:absolute;top:18px;left:50px}
+    .req-email{color:red;position:absolute;top:18px;left:95px}
+    .req-pass{color:red;position:absolute;top:18px;left:108px}
+    .req-repeat{color:red;position:absolute;top:18px;left:188px}
+
+
+    .top-logo{
+      width: 35vw;  
+height: 25vh;
+      align-self: flex-start;
+      margin-left: -30px;
+      margin-top:-30px;
+      padding-bottom: -30px;
+      
+    }
+    .star{color:rgb(121, 1, 37);font-size:4.5vh}
+    .genders{
+        width:60vw;
+        height:7vh;
+        border-color: grey;
+        border-style: solid;
+        border-width: 2px;
+    }
+    .form-control.genderss{
+        width: 80vw;
+    }
+    .form-control.genderss.select{
+        width:80vw;height:9vh;border: 1.5px solid grey;color:rgb(22, 21, 21)
+    }
+    .otp-cont{
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        justify-content: space-between;
+        height: 20vh;
+    
+    }
+    .already{
+        margin-left: -10vw;
+        font-weight: 500;
+    }
+}
+    
+@media (max-width:500px) and (min-width:380px) {
+    .form.next-button{width:20vw;background-color:rgb(121, 1, 37);margin-left:-10vw}
+    .check{display:flex;height:10vh;align-items:center;
+        justify-content:space-between;width:65vw;margin-left:15vw;margin-top:-8vh;align-self:flex-start}
+    .main-cont{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100vw; 
+        height:130vh;
+        align-items: center;
+        background-color:  #F3F3F3;
+       
+      }
+      .forms{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 125vh;
+        margin-left: 1vh;
+        
+    }
+    .req{color:red;position:absolute;top:12px;left:112px}
+    .req-iam{color:red;position:absolute;top:8px;left:57px}
+    .req-email{color:red;position:absolute;top:8px;left:95px}
+    .req-pass{color:red;position:absolute;top:7px;left:108px}
+    .req-repeat{color:red;position:absolute;top:9px;left:193px}
+
+    
+    .imgs{
+        display: none;
+    }
+    
+
+    .star{color:rgb(121, 1, 37);font-size:4.5vh}
+    .genders{
+        width:60vw;
+        height:7vh;
+        border-color: grey;
+        border-style: solid;
+        border-width: 2px;
+    }
+    .form-control.genderss{
+        width: 80vw;
+    }
+    .form-control.genderss.select{
+        width:80vw;height:9vh;border: 1.5px solid grey;color:rgb(22, 21, 21)
+    }
+    .otp-cont{
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        justify-content: space-between;
+        height: 20vh;
+    
+    }
+    .already{
+        margin-left: -10vw;
+        font-weight: 500;
+    }
+    
+
+}
+
+@media 
+(min-width:700px)and  (max-width:1000px) {
+    .form.next-button{width:30vw;background-color:rgb(121, 1, 37);margin-left:-10vw}
+    .check{display:flex;height:10vh;align-items:center;
+        justify-content:space-between;width:60vw;margin-left:15vw;margin-top:-8vh;align-self:flex-start}
+        .imgs{
+            display: block;
+        }
+        .check{display:flex;height:10vh;align-items:center;
+            justify-content:space-between;width: 32vw;margin-left:30vw;margin-top:-1vh;align-self:flex-start}
+            .req{color:red;position:absolute;top:29px;left:120px}
+            .req-iam{color:red;position:absolute;top:29px;left:60px}
+    .req-email{color:red;position:absolute;top:29px;left:95px}
+    .req-pass{color:red;position:absolute;top:29px;left:108px}
+    .req-repeat{color:red;position:absolute;top:29px;left:195px}
+    .main-cont{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100vw; 
+        height:130vh;
+        align-items: center;
+        background-color: #F3F3F3;
+      }
+      .already{
+        margin-left: -10vw;
+        font-weight: 500;
+    }
+      .forms{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 125vh;
+        margin-left: 1vh;
+        
+    }
+    
+    .imgs{
+        display: none;
+    }
+    .top-logo
+    {align-self:flex-start;height:20vh;width:25vw}
+
+    .star{color:rgb(121, 1, 37);font-size:4.5vh}
+    .genders{
+        width:60vw;
+        height:7vh;
+        border-color: grey;
+        border-style: solid;
+        border-width: 2px;
+    }
+    .form-control.genderss{
+        width: 80vw;
+    }
+    .form-control.genderss.select{
+        width:80vw;height:9vh;border: 1.5px solid grey;color:rgb(22, 21, 21)
+    }
+    .otp-cont{
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        justify-content: space-between;
+        height: 20vh;
+    
+    }
+    
+
+}
+
+
+.password-cont{
+    position: relative;
+}
+
+
+
+
+
+.repass{
+width: 40vw;
+}
+.email{
+    width: 40vw;
+}
+.custom-input {
+    width: 45vw;
+    height:9vh;
+    border-color: grey;
+    border-style: solid;
+    border-width: 2px;
+  }
+  
+  
+
+.otp{
+    width: 40vw;
+}
+.passwords{
+    width:40vw
+}
+.buttons{
+    width: 20vw;
+}
+.num-cont{
+    display:"flex";
+    justify-content: space-between;
+    width: 40vw;
+}
+.fullname{
+    width:40vw;
+    height:9vh;
+    border-color: grey;
+    border-style: solid;
+    border-width: 2px;
+    
+}
