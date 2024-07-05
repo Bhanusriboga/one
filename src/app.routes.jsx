@@ -5,7 +5,7 @@ import ForgotPage from './components/Forgot/ForgotPage'
 import SignUp from './components/Signup/SignUp'
 import Dashboard from './components/Dashboard/Dashboard'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom'
-
+import AddPreference from './components/AddPreferences/AddPreference'
 const Routes = () => {
     return (
         <>
@@ -21,6 +21,9 @@ const Routes = () => {
                 </Route>
                 <Route path="/dashboard">
                     <Dashboard/>
+                </Route>
+                <Route path="/addPreference">
+                    <AddPreference/>
                 </Route>
                 <Redirect path='/' to="login"></Redirect>
             </Switch>

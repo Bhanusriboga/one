@@ -1,0 +1,224 @@
+.preference {
+    width: 296px;
+    height: 76px;
+    top: 124px;
+    left: 365px;
+    gap: 0px;
+    opacity: 0px;
+    font-family: Poppins;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 76px;
+    text-align: left;
+    color: rgba(120, 0, 36, 1);
+  }
+  .field-container {
+    background-color: #f3f3f3;
+    position: relative;
+    padding-left:2%;
+    padding-right: 2%;
+    margin: auto;
+  }
+  .profile {
+    width: 181px !important;
+    height: 30px;
+  }
+  .chatImg{
+    display:flex;
+    position:fixed;
+    float:right;
+    right:0
+  }
+  .field-input {
+    width: 243px !important;
+    height: 46px;
+    border-radius: 4px 0px 0px 0px;
+    border: 1px 0px 0px 0px;
+    border: 1px solid #780024 !important;
+  }
+  .sm-field-input {
+    width: 122px !important;
+  
+    border-radius: 3px 0px 0px 0px;
+    border: 1px solid rgba(192, 192, 192, 1);
+  }
+  .dp-field-input {
+    width: 122px !important;
+  
+    border-radius: 3px 0px 0px 0px;
+    border: 1px solid rgba(192, 192, 192, 1);
+  }
+  .height {
+    width: 100px !important;
+  
+    font-family: Poppins;
+    font-size: 17.97px;
+    font-weight: 400;
+    text-align: left;
+    color: #780024;
+  }
+  .height-1 {
+    width: 95px !important;
+  
+    font-family: Poppins;
+    font-size: 17.97px;
+    font-weight: 400;
+    text-align: left;
+    color: #780024;
+  }
+  .arrow{
+    display:none
+  }
+  .bg-field-input {
+    width: 517px !important;
+    height: 46px;
+    border-radius: 4px 0px 0px 0px;
+    border: 1px 0px 0px 0px;
+  
+    border: 1px solid rgba(120, 0, 36, 1) !important;
+  }
+  .age-1 {
+    width: 77px !important;
+  
+    color: #780024;
+    font-family: Poppins;
+    font-size: 17.97px;
+    font-weight: 400;
+    text-align: left;
+  }
+  .age {
+    width: 72px !important;
+  
+    color: #780024;
+    font-family: Poppins;
+    font-size: 17.97px;
+    font-weight: 400;
+  
+    text-align: left;
+  }
+  .button {
+    font-family:bold;
+    width: 45%;
+    height: 45px;
+    background: rgba(125, 0, 36, 1) !important;
+    border-radius: 9px 0px 0px 0px;
+   
+  }
+  
+  .select1 {
+    width: 40px !important;
+    height: 57px;
+    top: 370px;
+    left: 372px;
+    gap: 0px;
+    opacity: 0px;
+    font-family: Poppins;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 56.9px;
+    text-align: left;
+  
+    color: rgba(172, 172, 172, 1) !important;
+  }
+  .chatImg{
+    float: right;
+ 
+    
+}
+.sideimg{
+    width: 100px;
+    height: 150px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    
+}
+  
+  @media (max-width: 768px) {
+  
+    /* * {
+      padding: 2px;
+    } */
+    .sm-field-input {
+        width: 150px !important;}
+        .dp-field-input {
+            width: 150px !important;}
+    .field-input::after {
+      width: 200px!important;;
+      content: '';
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+    
+    .field-input option {
+      word-wrap: break-word;
+      
+    }
+    .form-container {
+      padding: 10px;
+    }
+    .field-input{
+      width: 100% !important;
+      height: 46px;
+      border-radius: 4px 0px 0px 0px;
+      border: 1px 0px 0px 0px;
+      border: 1px solid rgba(192, 192, 192, 1);
+    }
+    .bg-field-input{
+      width: 100% !important;
+      height: 46px;
+      border-radius: 4px 0px 0px 0px;
+      border: 1px 0px 0px 0px;
+    
+      border: 1px solid rgba(120, 0, 36, 1) !important;
+    }
+   
+    .button{
+      width: 100% ;
+    }
+    .minmaxage{
+     display: inline;
+  
+    }
+    .avcssc{
+      width:100%
+    }
+    .dp-field-input {
+      width: 200px;
+   
+      border-radius: 3px 0px 0px 0px;
+      border: 1px solid rgba(192, 192, 192, 1);
+    }
+    .field-container {
+      background-color: #f3f3f3;
+      position: relative;
+    }
+
+    .backgroungImg{
+        background-image: url("./Assets/mobilebackground.svg") !important;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      
+    }
+    .chatImg{
+        float: right;
+     
+        
+    }
+    .arrow{
+        display: flex;
+        font-size: 25px;
+        color:#780024
+    }
+    .mobile-view{
+        display:flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+  }
+  
