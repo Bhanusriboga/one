@@ -19,14 +19,15 @@ const Routes = () => {
                 </Route>
                 <Route path="/signUp">
                     <SignUp/>
-                </Route>
-                <Route path="/dashboard">
+                </Route>                
+                <Route path="/">
+                {/* <Route path="/dashboard"> */}
                     <Dashboard/>
                 </Route>
                 <Route path="/profile">
                     <CustomSideBar/>
                 </Route>
-                <Redirect path='/' to="login"></Redirect>
+                {/* <Redirect path='/' to="login"></Redirect> */}
             </Switch>
         </>
     )
