@@ -2,9 +2,10 @@
 
 ```javascript
 import networkCall from './networkCall';
+import { endPoints } from './config/config';
 
 const fetchData = async () => {
-  const result = await networkCall('your-endpoint', 'GET');
+  const result = await networkCall(endPoints.auth, 'GET');//end points are need to take from config file if not exist then mention and take those
   if (result.error) {
     console.error(result.error);
   } else {
@@ -37,3 +38,42 @@ It's recommended to avoid implementing custom encryption or decryption methods a
 
 Please adhere to these guidelines to maintain consistency and security across the application.
 
+## Using Constants Instead of Direct Text
+
+To ensure consistency and maintainability, developers are required to use constants instead of direct text in the project. Follow these steps:
+
+1. **Create Constants File**: 
+   - Create a new file under the `utils` folder, named `constants.js`.
+
+2. **Define Constants**:
+   - Define all text constants in the `constants.js` file as follows:
+
+     ```javascript
+     // utils/constants.js
+     export const messages = {
+         greeting: "Hello, World!",
+         error: "An error occurred.",
+         // Add more constants as needed
+     };
+     ```
+
+3. **Import Constants**:
+   - In any file where text is needed, import the constants from `constants.js`:
+
+     ```javascript
+     // Example usage in your files
+     import { messages } from './utils/constants.js';
+
+     console.log(messages.greeting); // Outputs: Hello, World!
+     console.error(messages.error); // Outputs: An error occurred.
+     ```
+
+4. **Usage**:
+   - Replace direct text with the corresponding constant from `constants.js` throughout the codebase.
+
+5. **Benefits**:
+   - **Consistency**: Ensures consistent messaging.
+   - **Maintainability**: Facilitates easier updates and maintenance.
+   - **Scalability**: Supports scalability by centralizing text content.
+
+Integrate these practices into your development workflow to improve code quality and readability.
