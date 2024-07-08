@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
+import { FaBarsStaggered } from "react-icons/fa6";
+import { RxCross2 } from "react-icons/rx";
+import { MdEdit } from "react-icons/md";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './CustomSideBar.css';
 import Settings from '../settings/Settings';
+
 const CustomSideBar = () => {
   const [activeContent, setActiveContent] = useState('userImage');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const buttonData = [
     { id: 'editImage', label: 'Edit Image' },
@@ -17,7 +23,7 @@ const CustomSideBar = () => {
 
   const RenderContent = () => {
     //replace all the items with component which we going to develop
-    switch (activeContent) {  
+    switch (activeContent) {
       case 'editImage':
         return <div>Edit Image Content</div>;
       case 'addPreferences':
@@ -37,34 +43,41 @@ const CustomSideBar = () => {
 
   return (
     <>
-    <Container fluid className='outer-container'>
-      <Row>
-        <Col xs="11" md="3" className="sidebar">
-        <div className='image-container'>
-          <Button className='add'>
-            Add
-            <i class="fa-solid fa-pen" color='#fff'></i>
-          </Button>
-        </div>
-          {buttonData.map((button,index) => (
-            <div key={button.id} className='button-parent'>
-            <button block className="sidebar-button" onClick={() => setActiveContent(button.id)} >
-              {button.label}
+      <Container fluid className='outer-container'>
+        <Row className='row'>
+          <Col xs="11" className="d-flex flex-row justify-content-between d-md-none">
+            <button className="toggle-button" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+            {isSidebarOpen?
+            <RxCross2 size={60} color='#780024'/>:<FaBarsStaggered size={60} color='#780024'/>}
             </button>
-           {index!==buttonData.length-1 && <hr className='hr'/>}
+            <div className='image-container'>
+               <MdEdit className='add'/>
             </div>
-          ))}
-        </Col>
-        <Col xs="12" md="8" className="content" data-testid="content">
-          <RenderContent/>
-        </Col>  
-      </Row>
-    </Container>
+          </Col>
+          <Col xs="12" md="3" className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+            <div className='image-container1'>
+              <Button className='d-flex align-item-center justify-content-center add'>
+                Add
+               <MdEdit size={'16px'} className='mt-1'/>
+              </Button>
+            </div>
+            {buttonData.map((button, index) => (
+              <div key={button.id} className='button-parent'>
+                <button block="true" className="sidebar-button" onClick={() => setActiveContent(button.id)}>
+                  {button.label}
+                </button>
+                {index !== buttonData.length - 1 && <hr className='hr' />}
+              </div>
+            ))}
+          </Col>
+          <Col xs="12" md="8"  data-testid="content">
+            <RenderContent />
+          </Col>
+        </Row>
+      </Container>
  
     </>
   );
 };
 
 export default CustomSideBar;
-
-

@@ -37,30 +37,29 @@ const Settings = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let isValid = true;
-
-    if (showOtp && !/^\d{6}$/.test(otp)) {
-      setEmailError('OTP must be a 6-digit number');
-      isValid = false;
-    } else {
-      setEmailError('');
+    if(email){
+      if (showOtp && !/^\d{6}$/.test(otp)) {
+        setEmailError('OTP must be a 6-digit number');
+        isValid = false;
+      } else {
+        setEmailError('');
+      }
     }
-
-    if (!currentPassword || !newPassword || !confirmPassword) {
-      setPasswordError('All password fields are required');
-      isValid = false;
-    } else if (newPassword !== confirmPassword) {
-      setPasswordError('New Password and Confirm Password do not match');
-      isValid = false;
-    } else {
-      setPasswordError('');
-    }
-
-    if (isValid) {
-      // Handle form submission logic
+    if(currentPassword!==""){
+      if (!currentPassword || !newPassword || !confirmPassword) {
+        setPasswordError('All password fields are required');
+        isValid = false;
+      } else if (newPassword !== confirmPassword) {
+        setPasswordError('New Password and Confirm Password do not match');
+        isValid = false;
+      } else {
+        // need to make otp call
+        setPasswordError('');
+      }
     }
   };
   const logout=()=>{
-
+    
   }
   const emailFields = [
     {

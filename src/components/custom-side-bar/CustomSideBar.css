@@ -1,7 +1,6 @@
 .container-fluid {
   padding: 0;
   background-color: #D9D9D9;
-  /* height: 100% */
 }
 
 .sidebar {
@@ -16,14 +15,15 @@
   justify-content: center;
   height: fit-content;
   margin-top: 20px;
-  margin-left: 20px;
+  transition: transform 0.3s ease;
+  max-width: 500px;
 }
 
 .sidebar button {
   background: transparent;
   color: #E0AA3E;
   border: none;
-  margin: 0px ;
+  margin: 0px;
 }
 
 .sidebar button:hover {
@@ -65,18 +65,64 @@
 .outer-container{
   background-color: #D9D9D9;
 }
-.image-container{
+
+.image-container {
+  display: flex;
   width: 100px;
   height: 100px;
   border-radius: 50px;
   background-color: #7C7C7C;
   position: relative;
 }
-.add{
+
+.image-container1 {
+  display: none;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background-color: #7C7C7C;
+  position: relative;
+}
+.add {
   position: absolute;
-  background: #780024!important;
-  color: #fff!important;
+  color: #D9D9D9 !important;
   bottom: 0;
   width: 80%;
   left: 10%;
+}
+
+/* Add styles for mobile sidebar */
+.toggle-button {
+
+  background: transparent;
+  border: none;
+}
+
+.sidebar {
+  transform: translateX(-100%);
+  display: none;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+  display: flex;
+}
+
+/* Ensure sidebar is always visible on larger screens */
+@media (min-width: 768px) {
+  .add{
+  background: #780024 !important;
+
+  }
+  .sidebar {
+    transform: translateX(0);
+   display: flex;
+
+  }
+  .image-container {
+    display: none;
+  }
+  .image-container1 {
+    display: flex;
+  }
 }
