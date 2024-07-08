@@ -3,6 +3,8 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './CustomSideBar.css';
 import Settings from '../settings/Settings';
+import IgnoreUsers from '../ignoreUsers/IgnoreUsers';
+import ShortListedUsers from '../shortlistedUsers/ShortListedUsers';
 const CustomSideBar = () => {
   const [activeContent, setActiveContent] = useState('userImage');
 
@@ -25,9 +27,9 @@ const CustomSideBar = () => {
       case 'editProfile':
         return <div>Edit Profile Content</div>;
       case 'ignoredUsers':
-        return <div>Ignored Users Content</div>;
+        return <IgnoreUsers/>;
       case 'shortlisted':
-        return <div>Shortlisted Content</div>;
+        return <ShortListedUsers />
       case 'settings':
         return <Settings />;
       default:
@@ -38,7 +40,7 @@ const CustomSideBar = () => {
   return (
     <>
     <Container fluid className='outer-container'>
-      <Row>
+      <Row className='row' >
         <Col xs="11" md="3" className="sidebar">
         <div className='image-container'>
           <Button className='add'>
@@ -55,7 +57,7 @@ const CustomSideBar = () => {
             </div>
           ))}
         </Col>
-        <Col xs="12" md="8" className="content" data-testid="content">
+        <Col xs="12" md="9" data-testid="content">
           <RenderContent/>
         </Col>  
       </Row>

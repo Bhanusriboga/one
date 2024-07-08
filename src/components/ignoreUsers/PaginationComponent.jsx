@@ -2,6 +2,7 @@ import React from 'react';
 
 import  { useEffect, useState } from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import './PaginationComponent.css'
 
 const PaginationComponent = (paginationDetails) => {
     const { totalPages, currentPage, onPageChange } = paginationDetails

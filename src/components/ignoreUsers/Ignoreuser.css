@@ -1,19 +1,22 @@
 .ignore-container{
-    margin: auto;
-    padding-left: 26%;
-    padding-right: 28px;
-    padding-top: 3%;
+    /* margin: auto; */
+    /* padding-left: 26%; */
+    padding-right: 10px;
+    /* padding-top: 3%; */
+    width:100%
 }
 
 .ignore1-rightsize-image{
-    position: absolute; right: 0; width: 110px 
+    position: absolute; right: 0; width: 50px ;
+    height:100px
 }
 
 .ignore-back-btn{
 color:  #616161;
 position: absolute;  
 right:0;
-    margin-bottom: 20px;
+margin-top: 45px;
+ 
     margin-right: 8%;
     cursor: pointer;
 }
@@ -23,6 +26,9 @@ right:0;
     font-size:28px;
     margin-left: 8px;
 
+}
+.remove-icon{
+    width: 25px; height: 25px; cursor: pointer;
 }
 .navigate-back-mobile{
     display:none
@@ -46,7 +52,8 @@ right:0;
 }
 .user-card-icons-container{
     display:flex;
-    align-items:center;justify-Content:space-between
+    align-items:center;
+    justify-Content:space-between
 }
 .ignorecase-ignoresymbol{
     width:22px;
@@ -131,46 +138,21 @@ align-self: center;
 
 }
 /* Usercard.css */
-.shortlisted-pagination{
-    padding-top: 40px;
+.ignoredlisted-pagination{
+   
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
-.pagination-custom .page-link {
-    width: 40px; /* Adjust the width as needed */
-    text-align: center;
-  }
-  
-  .pagination-custom .page-item.active .page-link {
-    background-color:#780024 ; /* Active background color */
-    color: #E0AA3E; /* Active text color */
-    border-color: #780024; /* Active border color */
-  }
-  
-  .pagination-custom .page-link:first-child,
-  .pagination-custom .page-link:last-child {
-    background-color: #f8f9fa; /* Default background color */
-  }
-  
-  .pagination-custom .page-item:first-child .page-link,
-  .pagination-custom .page-item:last-child .page-link {
-    border-radius: 5px; /* Make arrow buttons round */
-    width: 50px; /* Adjust the width as needed */
-  }
-  
-  .pagination-custom .page-item.active:first-child .page-link,
-  .pagination-custom .page-item.active:last-child .page-link {
-    background-color:#780024 ; /* Active arrow background color */
-    color: #E0AA3E; /* Active arrow text color */
-  }
-  .chatimage{
-     width: 56px; height: 56px; float: right; margin-top: 20px
+
+  .ignore-chatimage{
+     width: 56px; height: 56px; align-self: flex-end;
   }
  
   @media (min-width: 769px) and (max-width: 1150px) {
     .ignore-container{
-        padding-left: 10px;
+        padding-left: 0px;
         padding-right: 10px;
     }
 
@@ -180,6 +162,7 @@ align-self: center;
     }
     .age{
         width: 100%;
+        font-size: 13px;
     }
     .ignorecase{
         padding-left: 10px;
@@ -205,8 +188,8 @@ align-self: center;
         margin:auto
     }
     .ignore-container{
-        padding-left: 6px;
-        padding-right: 6px;
+        padding-left: 0px;
+        padding-right: 0px;
     }
     .ignorecase-text{
         gap:0px
@@ -274,13 +257,13 @@ align-self: center;
         display:none
     }
     .chatimage{
-        display:none
+       margin-top: 0px;
     }
   }
-  @media (min-width: 575px) and (max-width: 768px) {
+  @media (min-width: 576px) and (max-width: 767px) {
     .ignore-container{
-        padding-left: 10px;
-        padding-right: 10px;
+       max-width: 500px;
+       margin: auto !important;
     }
     .ignorecase-text{
         gap:0px;
@@ -294,7 +277,7 @@ align-self: center;
         padding-right: 8px;
     }
   }
-   @media (min-width:0)and (max-width:317px){
+   @media (min-width:0)and (max-width:338px){
     .age{
         font-size: 15px;
     }
@@ -314,3 +297,5 @@ align-self: center;
        }
    
   } 
+ 
+ 

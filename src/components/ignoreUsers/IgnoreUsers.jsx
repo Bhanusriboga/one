@@ -4,7 +4,7 @@ import { Col, Row } from 'reactstrap';
 import { users } from '../shortlistedUsers/Data';
 import { FaArrowLeft } from "react-icons/fa6";
 import './Ignoreuser.css';
-// import { useNavigate } from 'react-router-dom';
+
 import IgnoreCard from './IgnoreCard';
 import { toast } from 'react-toastify';
 import PaginationComponent from './PaginationComponent';
@@ -147,10 +147,11 @@ function IgnoreUsers() {
   }, [shortList, pendingShortList, currentPage, currentUsers.length]);
 
   return (
-    <div style={{ position: "relative" }}>
-      <img src={image1} alt='pello' className='ignore1-rightsize-image' />
+    <div>
+      {/* <img src={image1} alt='pello' className='ignore1-rightsize-image' />
+      <img src={image} alt='back' className="ignore-back-btn" style={{ width: '100px'}} onClick={() => navigate(-1)} /> */}
       <div className="ignore-container">
-        <img src={image} alt='back' className="ignore-back-btn" style={{ width: '100px', height: '60px' }} onClick={() => navigate(-1)} />
+       
 
         <div className='mobile-back-arrow-container'>
           <FaArrowLeft className='ignore-back-mobile' //onClick={() => navigate(-1)} 
@@ -158,7 +159,7 @@ function IgnoreUsers() {
           <h4 className='ignore-heading'>Ignorelisted</h4>
         </div>
 
-        <Row xs={1} sm={2} md={3} lg={4}className="g-2 g-sm-2 g-md-3">
+        <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-4 g-md-3">
           {currentUsers.map((user, index) => {
             const even = index % 2 === 0;
             const styles = {
@@ -183,9 +184,10 @@ function IgnoreUsers() {
             );
           })}
         </Row>
-        <img src={chat} className='chatimage'
+     
+        <div className='ignoredlisted-pagination'>
+        <img src={chat} className='ignore-chatimage'
       />
-        <div className='shortlisted-pagination'>
           <PaginationComponent
             totalPages={totalPages}
             currentPage={currentPage}

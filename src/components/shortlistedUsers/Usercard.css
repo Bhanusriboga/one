@@ -1,7 +1,5 @@
 .shortlist-container{
     margin: auto;
-    padding-left: 26%;
-    padding-right: 28px;
     padding-top: 3%;
 }
 .back-button{    
@@ -119,50 +117,26 @@ justify-content: space-between;
 }
 /* Usercard.css */
 .shortlisted-pagination{
-    padding-top: 40px;
+  
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 .usercard-button-mobile{
     display:none
 }
-.pagination-custom .page-link {
-    width: 40px; /* Adjust the width as needed */
-    text-align: center;
-  }
-  
-  .pagination-custom .page-item.active .page-link {
-    background-color:#780024 ; /* Active background color */
-    color: #E0AA3E; /* Active text color */
-    border-color: #780024; /* Active border color */
-  }
-  
-  .pagination-custom .page-link:first-child,
-  .pagination-custom .page-link:last-child {
-    background-color: #f8f9fa; /* Default background color */
-  }
-  
-  .pagination-custom .page-item:first-child .page-link,
-  .pagination-custom .page-item:last-child .page-link {
-    border-radius: 5px; /* Make arrow buttons round */
-    width: 50px; /* Adjust the width as needed */
-  }
-  
-  .pagination-custom .page-item.active:first-child .page-link,
-  .pagination-custom .page-item.active:last-child .page-link {
-    background-color:#780024 ; /* Active arrow background color */
-    color: #E0AA3E; /* Active arrow text color */
-  }
+
   .chat-image{
-    width:56px;height:56px;float:right;margin-top:20px;
+    width:56px;height:56px;
+    align-self: flex-end;
   }
   .user-age{
     width:50%;
     text-align: left;
     line-height: 1.8;
   }
-  @media(max-width:768px){
+  /* @media(max-width:768px){
     .shortlist-container{
         padding-left: 10px;
         padding-right: 10px;
@@ -184,15 +158,18 @@ justify-content: space-between;
         padding-left: 0px;
     }
 
-  }
+  } */
   @media(min-width:768px)and (max-width:1150px){
     .shortlist-container{
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 0px;
+        padding-right: 0px;
     }
     .usercard-text {
         gap:0px;
         padding-left: 0px;
+    }
+    .user-age{
+        font-size: 13px;
     }
   }
   @media(min-width:0px)and (max-width:575px){
@@ -205,6 +182,7 @@ justify-content: space-between;
     }
     .user-age{
         width:100%;
+
     }
      .user-card-maincontainer{
         max-width: 360px;
@@ -243,7 +221,7 @@ justify-content: space-between;
         padding-bottom: 13px;
     }
     .usercard-name{
-        font-size: 25px;
+        font-size: 21px;
         font-weight: 600;
     }
     .shortlist-mobile-back-arrow-container{
@@ -270,6 +248,14 @@ justify-content: space-between;
     .shortlist-heading{
         font-size: 24px;
     }
+  }
+  @media(min-width:576px)and (max-width:767px){
+   
+    .shortlist-container{
+    max-width: 500px;
+    }
+    
+
   }
   @media(min-width:0px)and (max-width:338px){
     .usercard{

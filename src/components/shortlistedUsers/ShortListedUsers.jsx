@@ -11,6 +11,7 @@ import PaginationComponent from '../ignoreUsers/PaginationComponent';
 
 import image from '../../Assets/back.svg'
 import image1 from '../../Assets/pella.svg'
+import chat from '../../Assets/chat.svg'
 function ShortListedUsers() {
   
   const [currentPage, setCurrentPage] = useState(1);
@@ -154,7 +155,7 @@ const removeUserFromShortList= (userId)=>{
       >Shortlisted</h4>
       </div>
     
-      <Row xs={1} sm={3} md={4} className="g-2 g-sm-2 g-md-3">
+      <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3">
         {currentUsers.map((user, index) => {
           if(ignoreList.includes(user.id)){
           
@@ -194,9 +195,10 @@ const removeUserFromShortList= (userId)=>{
           );
         })}
       </Row>
-      <img src='Group 202.svg'className='chat-image' 
-      />
+    
       <div className='shortlisted-pagination'>
+      <img src={chat}className='chat-image' 
+      />
     
       <PaginationComponent
        totalPages={totalPages}

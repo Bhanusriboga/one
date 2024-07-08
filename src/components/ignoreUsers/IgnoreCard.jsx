@@ -24,13 +24,16 @@ function IgnoreCard(userDetails) {
     <div className='ignore-card-maincontainer'>
       <Card className='ignorecase' style={{ background: background, color: color }}>
         <div className='user-card-icons-container'>
-          <img src={image} alt='ignore' style={{ width: '25px', height: '25px', cursor: 'pointer' }} onClick={removeUserFromIgnoreList} />
+          
+          <img src={image} alt='ignore' className='remove-icon'
+          onClick={removeUserFromIgnoreList} />
+         
           <GoHeart data-testid="ignorecase-hearticon" className='ignorecase-hearticon' style={{ color: 'white', cursor: 'pointer' }} onClick={onMoveToShortList} />
         </div>
         <div className='ignore-only-mobile'>
           <div className='ignorecase-image-container'></div>
           <div>
-            <h6 className='ignorecase-name'>{user?.name}</h6>
+            <h6 className='ignorecase-name'>{user.name}</h6>
             <button className='ignorecase-button-mobile' style={{ backgroundColor: buttonBackgroundColor, color: viewButtonColor }}>
               <Link to={`/user/${user.id}`} style={{ color: viewButtonColor, textDecoration: 'none' }}>View Profile</Link>
             </button>
