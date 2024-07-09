@@ -5,7 +5,7 @@ import chat from "./Assets/chatbox.svg";
 import design from "./Assets/design.svg";
 import { FaArrowLeft } from "react-icons/fa6";
 import "./Preference.css";
- const dropdowns = [option1,optipn2,option3,option4]
+//  const dropdowns = [option1,optipn2,option3,option4]
 
 const AddPreference = () => {
 
