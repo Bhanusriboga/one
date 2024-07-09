@@ -1,6 +1,9 @@
 .shortlist-container{
     margin: auto;
     padding-top: 3%;
+    padding-left: 8px;
+    padding-right: 10px;
+    
 }
 .back-button{    
 color:  #616161;

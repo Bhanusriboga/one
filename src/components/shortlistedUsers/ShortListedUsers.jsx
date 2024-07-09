@@ -9,8 +9,7 @@ import './Usercard.css';
 import { toast } from 'react-toastify';
 import PaginationComponent from '../ignoreUsers/PaginationComponent';
 
-import image from '../../Assets/back.svg'
-import image1 from '../../Assets/pella.svg'
+
 import chat from '../../Assets/chat.svg'
 function ShortListedUsers() {
   
@@ -143,13 +142,13 @@ const removeUserFromShortList= (userId)=>{
   }, [ignoreList, currentPage, currentUsers.length]);
   return (
     <div style={{position:"relative"}} >
-      <img src={image1} alt='pello' className='shortlist-rightsize-image'
-      style={{position:"absolute",right:"0",width:'110px'}} />
+      {/* <img src={image1} alt='pello' className='shortlist-rightsize-image'
+      style={{position:"absolute",right:"0",width:'110px'}} /> */}
    
       <div className="shortlist-container">
-      <img src={image} alt='back-image' className="back-button"   style={{width:'100px',height:'60px'} }/>
+      {/* <img src={image} alt='back-image' className="back-button"   style={{width:'100px',height:'60px'} }/> */}
       <div className='shortlist-mobile-back-arrow-container'>
-      <FaArrowLeft className='shortlist-back-mobile' //onClick={() => navigate(-1)}
+      <FaArrowLeft className='shortlist-back-mobile' 
        />
       <h4 className='shortlist-heading'
       >Shortlisted</h4>

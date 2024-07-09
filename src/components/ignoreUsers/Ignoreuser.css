@@ -1,9 +1,9 @@
 .ignore-container{
-    /* margin: auto; */
-    /* padding-left: 26%; */
+  
     padding-right: 10px;
-    /* padding-top: 3%; */
-    width:100%
+    
+    width:100%;
+    padding-left: 8px;
 }
 
 .ignore1-rightsize-image{
@@ -134,7 +134,7 @@ align-self: center;
 .age{
     width: 50%;
     text-align: left; 
-    line-height: 1.5;
+    line-height: 1.8;
 
 }
 /* Usercard.css */
