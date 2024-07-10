@@ -14,8 +14,8 @@ function UsersCard(userDetails) {
         const birthDate = new Date(dob);
         const today = new Date();
         let age = today.getFullYear() - birthDate.getFullYear();
-        const m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        const mon = today.getMonth() - birthDate.getMonth();
+        if (mon < 0 || (mon === 0 && today.getDate() < birthDate.getDate())) {
             age--;
         }
         return age;

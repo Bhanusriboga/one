@@ -117,7 +117,7 @@ const removeUserFromShortList= (userId)=>{
   const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
-  // const navigate = useNavigate();
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -142,11 +142,10 @@ const removeUserFromShortList= (userId)=>{
   }, [ignoreList, currentPage, currentUsers.length]);
   return (
     <div style={{position:"relative"}} >
-      {/* <img src={image1} alt='pello' className='shortlist-rightsize-image'
-      style={{position:"absolute",right:"0",width:'110px'}} /> */}
+     
    
       <div className="shortlist-container">
-      {/* <img src={image} alt='back-image' className="back-button"   style={{width:'100px',height:'60px'} }/> */}
+
       <div className='shortlist-mobile-back-arrow-container'>
       <FaArrowLeft className='shortlist-back-mobile' 
        />

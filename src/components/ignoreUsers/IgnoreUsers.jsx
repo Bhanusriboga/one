@@ -8,9 +8,6 @@ import './Ignoreuser.css';
 import IgnoreCard from './IgnoreCard';
 import { toast } from 'react-toastify';
 import PaginationComponent from './PaginationComponent';
-
-import image from '../../Assets/back.svg'
-import image1 from '../../Assets/pella.svg'
 import chat from '../../Assets/chat.svg'
 
 function IgnoreUsers() {
@@ -90,7 +87,7 @@ function IgnoreUsers() {
     setPendingShortList((prevList) => prevList.filter(id => id !== userId));
     toast.update(toastId, {
       render: 'User move to shortlist cancelled',
-      // type: toast.TYPE.INFO,
+   
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -122,7 +119,7 @@ function IgnoreUsers() {
   const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
-  // const navigate = useNavigate();
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -148,13 +145,12 @@ function IgnoreUsers() {
 
   return (
     <div>
-      {/* <img src={image1} alt='pello' className='ignore1-rightsize-image' />
-      <img src={image} alt='back' className="ignore-back-btn" style={{ width: '100px'}} onClick={() => navigate(-1)} /> */}
+     
       <div className="ignore-container">
        
 
         <div className='mobile-back-arrow-container'>
-          <FaArrowLeft className='ignore-back-mobile' //onClick={() => navigate(-1)} 
+          <FaArrowLeft className='ignore-back-mobile' 
             />
           <h4 className='ignore-heading'>Ignorelisted</h4>
         </div>
@@ -186,8 +182,7 @@ function IgnoreUsers() {
         </Row>
      
         <div className='ignoredlisted-pagination'>
-        <img src={chat} className='ignore-chatimage'
-      />
+        <img src={chat} className='ignore-chatimage' />
           <PaginationComponent
             totalPages={totalPages}
             currentPage={currentPage}

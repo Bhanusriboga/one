@@ -6,14 +6,11 @@
     padding-left: 8px;
 }
 
-.ignore1-rightsize-image{
-    position: absolute; right: 0; width: 50px ;
-    height:100px
-}
+
 
 .ignore-back-btn{
 color:  #616161;
-position: absolute;  
+ 
 right:0;
 margin-top: 45px;
  
@@ -74,6 +71,8 @@ align-items:center;
 .ignorecase-hearticon{
     width: 26px;
     height: 26px;
+    cursor:pointer;
+    color:white;
 }
 .ignorecase-image-container{
     width:105px;
@@ -180,9 +179,7 @@ align-self: center;
         justify-content: flex-start;
         margin: auto;
     }
-    .ignore1-rightsize-image{
-        width:40px
-    }
+  
     .ignore-card-maincontainer{
         max-width: 365px;
         margin:auto

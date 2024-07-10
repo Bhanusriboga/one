@@ -7,7 +7,7 @@
 }
 .back-button{    
 color:  #616161;
-position: absolute;  
+ 
 right:0;
     margin-bottom: 20px;
     margin-right: 8%;
@@ -139,29 +139,7 @@ justify-content: space-between;
     text-align: left;
     line-height: 1.8;
   }
-  /* @media(max-width:768px){
-    .shortlist-container{
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    .usercard-button {
-        margin-top: 6px;
-    }
-    .chat-image{
-        width:56px;height:56px;float:right;margin-top:0px;
-      }
-      .shortlisted-pagination{
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .usercard-text {
-        gap:0px;
-        padding-left: 0px;
-    }
-
-  } */
+ 
   @media(min-width:768px)and (max-width:1150px){
     .shortlist-container{
         padding-left: 0px;

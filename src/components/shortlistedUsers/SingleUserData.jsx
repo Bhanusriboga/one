@@ -2,6 +2,7 @@
 import { useParams } from "react-router-dom";
 import { users } from "./Data";
 import { useState } from "react";
+
 function SingleUserData() {
   const [selectedimage,setselectedimage] = useState('/dummy.jpg')
   const handleimagechange= (image)=>{

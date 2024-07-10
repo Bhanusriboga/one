@@ -13,8 +13,8 @@ function IgnoreCard(userDetails) {
     const birthDate = new Date(dob);
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    const mon = today.getMonth() - birthDate.getMonth();
+    if (mon < 0 || (mon === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
     return age;
@@ -28,7 +28,7 @@ function IgnoreCard(userDetails) {
           <img src={image} alt='ignore' className='remove-icon'
           onClick={removeUserFromIgnoreList} />
          
-          <GoHeart data-testid="ignorecase-hearticon" className='ignorecase-hearticon' style={{ color: 'white', cursor: 'pointer' }} onClick={onMoveToShortList} />
+          <GoHeart data-testid="ignorecase-hearticon" className='ignorecase-hearticon'  onClick={onMoveToShortList} />
         </div>
         <div className='ignore-only-mobile'>
           <div className='ignorecase-image-container'></div>
