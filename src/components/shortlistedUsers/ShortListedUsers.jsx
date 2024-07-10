@@ -4,6 +4,7 @@ import { Col, Row} from 'reactstrap';
 import { users } from "./Data";
 import UsersCard from "./UsersCard";
 import { FaArrowLeft } from "react-icons/fa6";
+import { ignoreUserText } from '../../utils/constants';
 
 import './Usercard.css';
 import { toast } from 'react-toastify';
@@ -150,7 +151,7 @@ const removeUserFromShortList= (userId)=>{
       <FaArrowLeft className='shortlist-back-mobile' 
        />
       <h4 className='shortlist-heading'
-      >Shortlisted</h4>
+      >{ignoreUserText.heading1}</h4>
       </div>
     
       <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3">
@@ -194,10 +195,7 @@ const removeUserFromShortList= (userId)=>{
         })}
       </Row>
     
-      <div className='shortlisted-pagination'>
-      <img src={chat}className='chat-image' 
-      />
-    
+      <div className='shortlisted-pagination'>   
       <PaginationComponent
        totalPages={totalPages}
        currentPage={currentPage}

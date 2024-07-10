@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { GoHeart } from "react-icons/go"
 import './Usercard.css'
 import { Card } from 'react-bootstrap';
+import { ignoreUserText } from '../../utils/constants';
 import ignore from '../../Assets/Ignore.svg'
 function UsersCard(userDetails) {
     
@@ -44,14 +45,14 @@ function UsersCard(userDetails) {
                 </button>
                 <div className='usercard-only-mobileview'>
                 <div  className='usercard-text'>
-                <p className='user-age'>Age : </p><p className='user-age'>{getAge(user.time_of_birth)}</p>
+                <p className='user-age'>{ignoreUserText.Age} : </p><p className='user-age'>{getAge(user.time_of_birth)}</p>
                 </div>
                 <div  className='usercard-text'>
-                 <p className='user-age'>Religion :</p><p className='user-age'>{user.religion.religion_name}</p> 
+                 <p className='user-age'>{ignoreUserText.Religion} :</p><p className='user-age'>{user.religion.religion_name}</p> 
              </div>
              </div>
                 <button className='usercard-button' style={{backgroundColor:buttonBackgroundColor,color:viewButtonColor}}>
-                    <Link to={`/user/${user.id}`} style={{color:viewButtonColor,  textDecoration: 'none' }}>View Profile</Link>
+                    <Link to={`/user/${user.id}`} style={{color:viewButtonColor,  textDecoration: 'none' }}>{ignoreUserText.ViewProfileBtn}</Link>
                 </button>
             </div>
             </div>

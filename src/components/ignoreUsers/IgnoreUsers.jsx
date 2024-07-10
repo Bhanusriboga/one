@@ -4,6 +4,7 @@ import { Col, Row } from 'reactstrap';
 import { users } from '../shortlistedUsers/Data';
 import { FaArrowLeft } from "react-icons/fa6";
 import './Ignoreuser.css';
+import { ignoreUserText } from '../../utils/constants';
 
 import IgnoreCard from './IgnoreCard';
 import { toast } from 'react-toastify';
@@ -152,7 +153,7 @@ function IgnoreUsers() {
         <div className='mobile-back-arrow-container'>
           <FaArrowLeft className='ignore-back-mobile' 
             />
-          <h4 className='ignore-heading'>Ignorelisted</h4>
+          <h4 className='ignore-heading'>{ignoreUserText.heading}</h4>
         </div>
 
         <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-4 g-md-3">
@@ -182,7 +183,7 @@ function IgnoreUsers() {
         </Row>
      
         <div className='ignoredlisted-pagination'>
-        <img src={chat} className='ignore-chatimage' />
+       
           <PaginationComponent
             totalPages={totalPages}
             currentPage={currentPage}

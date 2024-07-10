@@ -33,3 +33,10 @@ export const forgot={
   forgotMsg:'Enter your email and we\'ll send you a link to reset your password',
   signup:'Signup'
 }
+export const ignoreUserText={
+  heading:'Ignorelisted',
+  Age:'Age',
+  Religion:'Religion',
+  ViewProfileBtn:'View Profile',
+  heading1:"Shortlisted"
+}
