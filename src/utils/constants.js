@@ -21,11 +21,13 @@ export const login={
   passwordPlaceholder:'Password',
   forgot:'Forgot password ?',
   noAccount:'Don\'t have an account? ',
-  signup:'Signup'
+  signup:'Signup',
+  otpPlaceHolder:'Please Enter OTP'
 }
 export const forgot={
   subbtn: 'Submit',
   emailPlaceholder:'Email',
+  verify:'Verify',
   passwordPlaceholder:'Password',
   forgot:'Forgot Password',
   forgotMsg:'Enter your email and we\'ll send you a link to reset your password',

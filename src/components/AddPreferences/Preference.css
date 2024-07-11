@@ -1,216 +1,157 @@
+
 .preference {
-    width: 296px;
-    height: 76px;
-    top: 124px;
-    left: 365px;
-    gap: 0px;
-    opacity: 0px;
-    font-family: Poppins;
-    font-size: 36px;
-    font-weight: 400;
-    line-height: 76px;
-    text-align: left;
-    color: rgba(120, 0, 36, 1);
+    
+  font-family: Poppins;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 76px;
+  text-align: left;
+  color: rgba(120, 0, 36, 1);
+}
+.input-height{
+  height: 44px ;
+
+}
+.field-container {
+ 
+
+  padding-left:1%;
+  padding-right: 1%;
+ 
+  padding-bottom: 20px;
+  width:100% ;
+  
+}
+.profile-field-input{
+  max-width:550px ;
+}
+.minmaxage{
+  width:128px;
+}
+.profile{
+  font-size: 20px;
+  font-weight: 400;
+  font-family: poppins;
+  color:rgba(120, 0, 36, 1)
+}
+select {
+  color:rgba(172, 172, 172, 1) !important;
+}
+
+
+Input::placeholder{
+  color:rgba(172, 172, 172, 1) !important;
+}
+Input{
+  border:1px solid rgba(120, 0, 36, 1) !important;
+}
+select {
+  color:black(172, 172, 172, 1) !important;
+  border:1px solid rgba(120, 0, 36, 1) !important;
+}
+select::before{
+  color:#780024 !important
+}
+
+
+
+
+.arrow{
+  display:none
+}
+.religion{
+  display:flex ;align-items:center ;gap:10px ;
+}
+.religion-text{
+  width:270px!important
+}
+
+
+.button {
+  font-family:bold;
+  width: 30%;
+  height: 45px;
+  background: rgba(125, 0, 36, 1) !important;
+  border-radius: 9px 9px 9px 9px;
+ margin-top: 20px;
+ margin-bottom: 20px !important;
+ margin-left: 20%;
+
+ 
+}
+@media (max-width: 768px) {
+
+  .religion{
+    display:flex ;align-items:center ;gap:10px ;flex-wrap:wrap
   }
+  .religion-text{
+    width:100% !important
+  }
+  .profile-field-input{
+    max-width:100% ;
+  }
+
+  .form-container {
+    padding: 10px;
+  }
+
+  .button{
+    width: 100% ;
+    margin-bottom: 15px;
+    margin-left: 0;
+  }
+  .minmaxage{
+   display: inline;
+
+  }
+  .avcssc{
+    width:100%
+  }
+  
   .field-container {
     background-color: #f3f3f3;
     position: relative;
-    padding-left:2%;
-    padding-right: 2%;
-    margin: auto;
-    padding-bottom: 20px;
   }
-  .profile {
-font-size: 19px;
-font-weight: 400;
-text-align: left;
-width: 150px !important;
-font-family: Poppins;
-color: #780024;
 
+  .backgroungImg{
+      background-image: url("./Assets/mobilebackground.svg") !important;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    
   }
   .chatImg{
-    display:flex;
-    position:fixed;
-    float:right;
-    right:0
-  }
-  .field-input {
-    width: 243px !important;
-    height: 46px;
-    border-radius: 4px 0px 0px 0px;
-    border: 1px 0px 0px 0px;
-    border: 1px solid #780024 !important;
-  }
-  .sm-field-input {
-    width: 122px !important;
-  
-    border-radius: 3px 0px 0px 0px;
-    border: 1px solid rgba(192, 192, 192, 1);
-  }
-  .dp-field-input {
-    width: 122px !important;
-  
-    border-radius: 3px 0px 0px 0px;
-    border: 1px solid rgba(192, 192, 192, 1);
-  }
-
-  .height-1 {
-    width: 100px !important;
-  
-    font-family: Poppins;
-    font-size: 17.97px;
-    font-weight: 400;
-    text-align: left;
-    color: #780024;
+      float: right;
+   
+      
   }
   .arrow{
-    display:none
+      display: flex;
+      font-size: 25px;
+      color:#780024
   }
-  .bg-field-input {
-    width: 517px !important;
-    height: 46px;
-    border-radius: 4px 0px 0px 0px;
-    border: 1px 0px 0px 0px;
-  
-    border: 1px solid rgba(120, 0, 36, 1) !important;
+  .mobile-view{
+      display:flex;
+      align-items: center;
+      justify-content: flex-start;
   }
-  .age-1 {
-    width: 77px !important;
-  
-    color: #780024;
-    font-family: Poppins;
-    font-size: 17.97px;
-    font-weight: 400;
-    text-align: left;
+  .minmaxage{
+    width:48.2% !important;
   }
  
-  
-  .button {
-    font-family:bold;
-    width: 40%;
-    height: 45px;
-    background: rgba(125, 0, 36, 1) !important;
-    border-radius: 9px 0px 0px 0px;
-   margin-top: 20px;
-   margin-bottom: 20px !important;
-   
-  }
-  
-  .select1 {
-    width: 40px !important;
-    height: 57px;
-    top: 370px;
-    left: 372px;
-    gap: 0px;
-    opacity: 0px;
-    font-family: Poppins;
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 56.9px;
-    text-align: left;
-  
-    color: rgba(172, 172, 172, 1) !important;
-  }
-  .chatImg{
-    float: right;
- 
-    
 }
-.sideimg{
-    width: 100px;
-    height: 150px;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    
-}
-  
-  @media (max-width: 768px) {
-  
-  
-    .sm-field-input {
-        width: 190px !important;}
-        .dp-field-input {
-            width: 190px !important;}
-    .field-input::after {
-      width: 200px!important;
-      content: '';
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-    
-    .field-input option {
-      word-wrap: break-word;
-      
-    }
-    .form-container {
-      padding: 10px;
-    }
-    .field-input{
-      width: 100% !important;
-      height: 46px;
-      border-radius: 4px 0px 0px 0px;
-      border: 1px 0px 0px 0px;
-      border: 1px solid rgba(192, 192, 192, 1);
-    }
-    .bg-field-input{
-      width: 100% !important;
-      height: 46px;
-      border-radius: 4px 0px 0px 0px;
-      border: 1px 0px 0px 0px;
-    
-      border: 1px solid rgba(120, 0, 36, 1) !important;
-    }
-   
-    .button{
-      width: 100% ;
-      margin-bottom: 15px;
-    }
-    .minmaxage{
-     display: inline;
-  
-    }
-    .avcssc{
-      width:100%
-    }
-    .dp-field-input {
-      width: 200px;
-   
-      border-radius: 3px 0px 0px 0px;
-      border: 1px solid rgba(192, 192, 192, 1);
-    }
-    .field-container {
-      background-color: #f3f3f3;
-      position: relative;
-    }
+@media(min-width:769px)and (max-width:820px){
+  .profile-field-input{
 
-    .backgroungImg{
-        background-image: url("./Assets/mobilebackground.svg") !important;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-      
-    }
-    .chatImg{
-        float: right;
-     
-        
-    }
-    .arrow{
-        display: flex;
-        font-size: 25px;
-        color:#780024
-    }
-    .mobile-view{
-        display:flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
-   
-    
+    max-width:550px !important;
   }
-  
+  .button {
+    margin-left: 33%;
+  }
+
+}
+@media(min-width:821px)and (max-width:1100px){
+  .button {
+    margin-left: 29%;
+  }
+}
