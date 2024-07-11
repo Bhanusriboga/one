@@ -18,10 +18,16 @@
     padding-left:2%;
     padding-right: 2%;
     margin: auto;
+    padding-bottom: 20px;
   }
   .profile {
-    width: 181px !important;
-    height: 30px;
+font-size: 19px;
+font-weight: 400;
+text-align: left;
+width: 150px !important;
+font-family: Poppins;
+color: #780024;
+
   }
   .chatImg{
     display:flex;
@@ -48,17 +54,9 @@
     border-radius: 3px 0px 0px 0px;
     border: 1px solid rgba(192, 192, 192, 1);
   }
-  .height {
-    width: 100px !important;
-  
-    font-family: Poppins;
-    font-size: 17.97px;
-    font-weight: 400;
-    text-align: left;
-    color: #780024;
-  }
+
   .height-1 {
-    width: 95px !important;
+    width: 100px !important;
   
     font-family: Poppins;
     font-size: 17.97px;
@@ -86,22 +84,16 @@
     font-weight: 400;
     text-align: left;
   }
-  .age {
-    width: 72px !important;
+ 
   
-    color: #780024;
-    font-family: Poppins;
-    font-size: 17.97px;
-    font-weight: 400;
-  
-    text-align: left;
-  }
   .button {
     font-family:bold;
-    width: 45%;
+    width: 40%;
     height: 45px;
     background: rgba(125, 0, 36, 1) !important;
     border-radius: 9px 0px 0px 0px;
+   margin-top: 20px;
+   margin-bottom: 20px !important;
    
   }
   
@@ -136,15 +128,13 @@
   
   @media (max-width: 768px) {
   
-    /* * {
-      padding: 2px;
-    } */
+  
     .sm-field-input {
-        width: 150px !important;}
+        width: 190px !important;}
         .dp-field-input {
-            width: 150px !important;}
+            width: 190px !important;}
     .field-input::after {
-      width: 200px!important;;
+      width: 200px!important;
       content: '';
       position: absolute;
       right: 10px;
@@ -178,6 +168,7 @@
    
     .button{
       width: 100% ;
+      margin-bottom: 15px;
     }
     .minmaxage{
      display: inline;
@@ -219,6 +210,7 @@
         align-items: center;
         justify-content: flex-start;
     }
+   
     
   }
   

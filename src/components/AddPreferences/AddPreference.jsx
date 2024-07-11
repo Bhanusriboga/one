@@ -5,7 +5,6 @@ import chat from "./Assets/chatbox.svg";
 import design from "./Assets/design.svg";
 import { FaArrowLeft } from "react-icons/fa6";
 import "./Preference.css";
-//  const dropdowns = [option1,optipn2,option3,option4]
 
 const AddPreference = () => {
 
@@ -84,7 +83,6 @@ const AddPreference = () => {
     );
    
   };
-
   return (
     <div className="field-container">
       <img className="sideimg" src={design}alt="design"/>
@@ -97,7 +95,7 @@ const AddPreference = () => {
             </div>
             <FormGroup>
               <Label for="profileCreatedFor">
-                <h5 className="profile" style={{ color: "#780024" }}>
+                <h5 className="profile">
                   Profile Created For
                 </h5>
               </Label>
@@ -109,7 +107,7 @@ const AddPreference = () => {
                 onChange={() => handleChange("profileCreatedFor")}
                 required
                 invalid={validation.profileCreatedFor.invalid}>
-            {drop}
+           
                  <option className="avcssc" value="">
                   Select
                 </option>
@@ -143,11 +141,10 @@ const AddPreference = () => {
                   </FormFeedback>
                 </FormGroup>
               </div>
-              {/* <div className="col-md-1 ">  <p>-</p></div> */}
               <div className=" col-5 col-md-3 ">
                 <FormGroup>
                   <Label for="maxAge">
-                    <h5 className="age">Max age</h5>
+                    <h5 className="age-1">Max Age</h5>
                   </Label>
                   <Input
                     type="text"
@@ -191,10 +188,10 @@ const AddPreference = () => {
                   </FormFeedback>
                 </FormGroup>
               </div>
-              <div className=" col-6 col-md-3 ">
+              <div className=" col-5 col-md-3 ">
                 <FormGroup>
                   <Label for="minHeight">
-                    <h5 className="height">Min Height </h5>
+                    <h5 className="height-1">Min Height </h5>
                   </Label>
                   <Input
                     type="select"
@@ -220,12 +217,11 @@ const AddPreference = () => {
             <div className="col-md-2 sm-2"></div> 
           <div className="col-md-1 sm-1"></div>
         </div>
-        {/* -------------------row started here---------------------- */}
         <div className="row ">
           <div className="col-md-5">
             <FormGroup>
               <Label for="motherTongue">
-                <h5 style={{ color: "#780024" }}>Mother Tongue </h5>
+                <h5 className="profile">Mother Tongue </h5>
               </Label>
               <Input
                 type="select"
@@ -249,7 +245,6 @@ const AddPreference = () => {
           <div className="col-md-4"></div>
        
         </div>
-        {/* -------------------row started here---------------------- */}
         <div className="row  backgroungImg">
           <div className="col-md-8">
           <img src={chat} className="chatImg" />
@@ -257,7 +252,7 @@ const AddPreference = () => {
               <div className="col-md-4">
                 <FormGroup>
                   <Label for="religion">
-                    <h5 style={{ color: "#780024" }}>Religion </h5>
+                    <h5 className="profile" >Religion </h5>
                   </Label>
                   <Input
                     className="field-input"
@@ -282,7 +277,7 @@ const AddPreference = () => {
               <div className="col-md-3">
                 <FormGroup>
                   <Label for="caste">
-                    <h5 style={{ color: " #780024" }}>Caste</h5>
+                    <h5 className="profile">Caste</h5>
                   </Label>
                   <Input
                     type="text"
@@ -305,7 +300,7 @@ const AddPreference = () => {
               <div className="col-md-4">
                 <FormGroup>
                   <Label for="star">
-                    <h5 style={{ color: " #780024" }}>Star</h5>
+                    <h5 className="profile">Star</h5>
                   </Label>
                   <Input
                     type="select"
@@ -332,7 +327,7 @@ const AddPreference = () => {
               <div className="col-md-3">
                 <FormGroup>
                   <Label for="dhosam">
-                    <h5 style={{ color: " #780024" }}>Dosham</h5>
+                    <h5 className="profile">Dosham</h5>
                   </Label>
                   <Input
                     type="select"
@@ -368,7 +363,7 @@ const AddPreference = () => {
           <div className="col-md-8">
             <FormGroup>
               <Label for="education">
-                <h5 style={{ color: " #780024" }}>Education</h5>
+                <h5 className="profile">Education</h5>
               </Label>
               <Input
                 type="select"
@@ -394,7 +389,7 @@ const AddPreference = () => {
               <div className="col-md-4">
                 <FormGroup>
                   <Label for="occupation">
-                    <h5 style={{ color: " #780024" }}>Occupation</h5>
+                    <h5 className="profile">Occupation</h5>
                   </Label>
                   <Input
                     type="select"
@@ -420,7 +415,7 @@ const AddPreference = () => {
               <div className="col-md-3">
                 <FormGroup>
                   <Label for="employment">
-                    <h5 style={{ color: " #780024" }}>Employment Type</h5>
+                    <h5 className="profile">Employment Type</h5>
                   </Label>
                   <Input
                     type="select"
@@ -448,7 +443,7 @@ const AddPreference = () => {
               <div className="col-md-4">
                 <FormGroup>
                   <Label for="annualIncome">
-                    <h5 style={{ color: " #780024" }}>Annual Income </h5>
+                    <h5 className="profile">Annual Income </h5>
                   </Label>
                   <Input
                     type="select"
@@ -474,7 +469,7 @@ const AddPreference = () => {
               <div className="col-md-3">
                 <FormGroup>
                   <Label for="city">
-                    <h5 style={{ color: " #780024" }}>City</h5>
+                    <h5 className="profile">City</h5>
                   </Label>
                   <Input
                     type="text"
@@ -496,7 +491,7 @@ const AddPreference = () => {
               <div className="col-md-4">
                 <FormGroup>
                   <Label for="state">
-                    <h5 style={{ color: " #780024" }}>State</h5>
+                    <h5 className="profile">State</h5>
                   </Label>
                   <Input
                     type="text"
@@ -519,7 +514,7 @@ const AddPreference = () => {
               >
                 <FormGroup>
                   <Label for="country">
-                    <h5 style={{ color: " #780024" }}>Country</h5>
+                    <h5 className="profile">Country</h5>
                   </Label>
                   <Input
                     type="text"
@@ -545,7 +540,7 @@ const AddPreference = () => {
           <div className="col-md-6">
             <FormGroup>
               <Label for="maritalStatus">
-                <h5 style={{ color: " #780024" }}>Marital Status</h5>
+                <h5 className="profile">Marital Status</h5>
               </Label>
               <Input
                 type="select"
@@ -575,7 +570,7 @@ const AddPreference = () => {
           <div className="col-md-6">
             <FormGroup>
               <Label for="disability">
-                <h5 style={{ color: " #780024" }}>Disability</h5>
+                <h5 className="profile">Disability</h5>
               </Label>
               <Input
                 type="select"
@@ -606,7 +601,7 @@ const AddPreference = () => {
           <div className="col-md-6">
             <FormGroup>
               <Label for="drinkingHabits">
-                <h5 style={{ color: " #780024" }}>Drinking Habits</h5>
+                <h5 className="profile">Drinking Habits</h5>
               </Label>
               <Input
                 type="select"
@@ -636,7 +631,7 @@ const AddPreference = () => {
           <div className="col-md-6">
             <FormGroup>
               <Label for="smokingHabits">
-                <h5 style={{ color: " #780024" }}>Smoking Habits</h5>
+                <h5 className="profile">Smoking Habits</h5>
               </Label>
               <Input
                 type="select"
@@ -667,7 +662,7 @@ const AddPreference = () => {
           <div className="col-md-6">
             <FormGroup>
               <Label for="eatingHabits">
-                <h5 style={{ color: " #780024" }}>Eating Habits</h5>
+                <h5 className="profile">Eating Habits</h5>
               </Label>
               <Input
                 type="select"
@@ -676,6 +671,7 @@ const AddPreference = () => {
                 onBlur={handleBlur}
                 onChange={() => handleChange("eatingHabits")}
                 required
+              
                 invalid={validation.eatingHabits.invalid}
               >
                 <option value="" disabled selected>
@@ -696,7 +692,7 @@ const AddPreference = () => {
         <div className="row">
           <div
             className="col-md-5"
-            style={{ textAlign: "center", fontFamily: "" }}
+            style={{ textAlign: "center"}}
           >
             <Button className="mb-2 button" type="submit">
               Save
