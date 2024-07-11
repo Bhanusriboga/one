@@ -49,22 +49,23 @@
  .star{color:rgb(121, 1, 37);font-size:8.3vh}
  .genders{
     width:45vw;
-    height:9vh;
+    height:8vh;
     border: 1.5px solid grey;
     font-size: 20px;
     
 
 }
-.form-control.genderss{width:35vw;height:9vh;border: 1.5px solid grey;color:rgb(22, 21, 21)}
+.form-control.genderss{width:35vw;height:8vh;border: 1.5px solid grey;color:rgb(22, 21, 21);font-weight: 500;}
 
 
 .form-control.genderss.select{
-    width:35vw;height:9vh;border: 1.5px solid grey;color:rgb(22, 21, 21)
+    width:35vw;height:8vh;border: 1.5px solid grey;color:rgb(22, 21, 21);font-weight: 500;
 }
-.form-control.genderss::placeholder{
+.form-control.genderss.select::placeholder{
     font-size: 20px;
     font-weight: 400;
     color: rgb(174, 172, 172);
+    font-weight: 500;
     
 
 }
