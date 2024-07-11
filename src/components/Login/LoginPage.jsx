@@ -59,7 +59,7 @@ const LoginPage = (props) => {
                             className='emailinput'
                             required
                         />
-                        <button className='eyebutton' onClick={handleeyebtn}>{showPassword ? <FaEye color='#d3d3d3' /> : <FaEyeSlash color='#d3d3d3' />}</button>
+                        <button className='eyebutton' data-testid="eye" onClick={handleeyebtn}>{showPassword ? <FaEye color='#d3d3d3' /> : <FaEyeSlash color='#d3d3d3' />}</button>
 
                     </Col>
                 </div>
@@ -87,6 +87,7 @@ const LoginPage = (props) => {
                         className='w-25 mt-2 rounded-pill btnback'
                         size="lg"
                         onClick={handleLogin}
+                        data-testid="login"
                     >
                         {login.login}
                     </Button>
