@@ -5,7 +5,7 @@ import ForgotPage from './components/Forgot/ForgotPage'
 import SignUp from './components/Signup/SignUp'
 import Dashboard from './components/Dashboard/Dashboard'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom'
-import Userprofile1 from './components/UserProfile/Userprofile1'
+import Userprofile from './components/Userprofile/Userprofile'
 
 const Routes = () => {
     return (
@@ -24,7 +24,7 @@ const Routes = () => {
                     <Dashboard/>
                 </Route>
                 <Route path="/userprofile">
-                    <Userprofile1/>
+                    <Userprofile/>
                 </Route>
                 <Redirect path='/' to="login"></Redirect>
             </Switch>

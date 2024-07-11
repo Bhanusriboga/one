@@ -31,3 +31,17 @@ export const forgot={
   forgotMsg:'Enter your email and we\'ll send you a link to reset your password',
   signup:'Signup'
 }
+
+export const userProfile ={
+  Religion: "Religion",
+  Family: {
+      FamilyInformation: "Family Informaton",
+  },
+  personal: {
+      PersonalInformation: "Personal Information",
+  },
+  Professional: {
+      ProfessionalDetail: "Perofessional Details",
+  },
+
+}
