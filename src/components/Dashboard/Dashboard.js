@@ -6,11 +6,11 @@ import './Dashboard.scss'
 
 const Dashboard = props => {
   return (
-    <div className='h-100'>
-      <div className='pageHeader'>
+    <div className='h-100 w-100 pgback'>
+      <div className='pageHeader fixed-top'>
         <Header/>
       </div>
-      <div className='pageContainer'>
+      <div className='pageContainer conwidth'>
         <PageContainer/>
       </div>
       <div className='fixed-bottom'>
