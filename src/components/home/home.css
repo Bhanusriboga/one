@@ -166,7 +166,7 @@ background-color: transparent;
     flex-direction: column;
     align-items:center ;
     justify-content: space-between;
-    width: 100vw;
+    width: 110vw;
    padding: 5vw;
 }
 .explore-cont{
@@ -195,11 +195,14 @@ border: 1px 0px 0px 0px;
 opacity: 0px;
 }
 .leftexplore{
-    height: 30vh;
-    width: 10vw;
+    height: 45vh;
+    width: 13vw;
     align-self: flex-start;
+    justify-self: flex-end;
     position: absolute;
-    top: 190vh;
+    left: 0vw;
+    top: 205vh;
+
 }
 .exploreRight{
     align-self: flex-start;

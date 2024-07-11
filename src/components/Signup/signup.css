@@ -40,9 +40,17 @@
     
 }
 .imgs{
+    height: 150vh;
+    width: 70vw;
+
+    
+}
+.img-cont{
     height: 140vh;
-    width: 50vw;
-    margin-left: -5vw;
+    width: 100vw;
+    object-fit: contain;
+    background-color: aquamarine;
+    background-image: url("../../utils/Group 303.png");
 }
 .top-logo
     {align-self:flex-start;height:25vh;width:12vw}
@@ -55,10 +63,49 @@
     
 
 }
+.fullname-cont {position: relative }
+.fullname-conts {position: relative }
+.fullname-error{ color: red; align-self: flex-start }
+.pass-err{
+    color: red;
+}
+
+.select-tag{ color: rgb(174, 172, 172)}
+.opt-color{
+    color: black;
+}
+.email-error{ color: red; font-family: monospace; align-self: flex-start }
+.eye-icon-1{
+    position: absolute;
+    right: 10px;
+    top: 25%;
+    transform: translateY(-35%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none
+}
+.eye-icon-2{
+    position: absolute,;
+    right: 10px;
+    top: 45%;
+    transform: translateY(-80%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none
+}
+.check-1{ margin-top: -10px; border-radius: 10px; height: 10vh }
+.check-2{ margin-top: -12px; border-radius: 10px; height: 10vh }
+.span-class{
+    color: blue;
+}
+.already-login { color: rgb(121, 1, 37) }
+
 .form-control.genderss{width:35vw;height:8vh;border: 1.5px solid grey;color:rgb(22, 21, 21);font-weight: 500;}
 
 
-.form-control.genderss.select{
+.form-control.genderss.select.option{
     width:35vw;height:8vh;border: 1.5px solid grey;color:rgb(22, 21, 21);font-weight: 500;
 }
 .form-control.genderss.select::placeholder{

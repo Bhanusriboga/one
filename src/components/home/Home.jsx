@@ -124,10 +124,12 @@ function Home() {
           <img src={ringsframe}/>
            </div>
         </div>
-        <img src={lefthalfimg} className='leftexplore'/>
+        <div style={{alignSelf:"flex-start",justifySelf:"flex-end"}}>
+          <img src={lefthalfimg} className='leftexplore'/> 
+          </div>
 
          <div className="explore">
-         
+          
           <p className='exploretext'>Explore matrimonial profiles</p>
            <div className="explore-cont">
             <img className='explore-imgs' src={religionimg}/>
