@@ -33,7 +33,7 @@ stages:
               deployToSlotOrASE: true
               resourceGroupName: 'Pr_pellisambandalu'
               slotName: 'production'
-              package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+              package: '$(System.DefaultWorkingDirectory)/path/to/your/react/app/build'
               deploymentMethod: 'auto'
   
 
