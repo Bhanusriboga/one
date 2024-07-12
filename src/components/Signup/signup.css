@@ -14,8 +14,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 40vw;
-    margin-left:-12vw ;
+    margin-right: 5vw;
+    
   
     
     
@@ -24,7 +24,8 @@
 .main-cont{
     display: flex;
     justify-content: space-between;
-    width: 100vw; 
+    width: 114vw;
+    
     height:auto;
     align-items: center;
     background-color: #F3F3F3;
@@ -102,19 +103,42 @@
 }
 .already-login { color: rgb(121, 1, 37) }
 
-.form-control.genderss{width:35vw;height:8vh;border: 1.5px solid grey;color:rgb(22, 21, 21);font-weight: 500;}
+.form-control.genderss{width:35vw;height:8vh;border: 1.4px solid grey;color:rgb(22, 21, 21);font-weight: 500;}
+
+.form-control.genderss::placeholder{
+    color: rgba(171, 171, 171, 1);
+    font-family: Poppins;
+font-size: 20px;
+font-weight: 400;
+line-height: 30px;
+text-align: left;
 
 
-.form-control.genderss.select.option{
-    width:35vw;height:8vh;border: 1.5px solid grey;color:rgb(22, 21, 21);font-weight: 500;
 }
-.form-control.genderss.select::placeholder{
-    font-size: 20px;
-    font-weight: 400;
-    color: rgb(174, 172, 172);
-    font-weight: 500;
-    
+.form-control.genderss.select.option.place{
+    width:35vw;height:8vh;border: 1.4px solid grey;color:rgb(22, 21, 21);font-weight: 500;
 
+}
+.form-control.genderss.select.option.place::placeholder{
+    color: rgba(171, 171, 171, 1);
+    font-family: Poppins;
+font-size: 20px;
+font-weight: 400;
+line-height: 30px;
+text-align: left;
+
+}
+.select-tag::placeholder{
+    color: rgba(171, 171, 171, 1);
+    font-family: Poppins;
+font-size: 20px;
+font-weight: 400;
+line-height: 30px;
+text-align: left;
+
+}
+.place-style{
+    color: aqua ;
 }
 .otp-cont{
     display: flex;
@@ -132,11 +156,11 @@
     text-align: center;
     font-weight: 600;
 }
-.req{color:red;position:absolute;top:8px;left:115px}
-.req-iam{color:red;position:absolute;top:10px;left:58px}
-    .req-email{color:red;position:absolute;top:8px;left:95px}
-    .req-pass{color:red;position:absolute;top:8px;left:108px}
-    .req-repeat{color:red;position:absolute;top:8px;left:192px}
+.req{color: rgba(253, 89, 89, 1);position:absolute;top:8px;left:111px}
+.req-iam{color: rgba(253, 89, 89, 1);position:absolute;top:8px;left:52px}
+    .req-email{color: rgba(253, 89, 89, 1);position:absolute;top:5px;left:95px}
+    .req-pass{color: rgba(253, 89, 89, 1);position:absolute;top:5px;left:102px}
+    .req-repeat{color: rgba(253, 89, 89, 1);position:absolute;top:5px;left:176px}
 
    .form.otpbox::placeholder{
     font-size: 20px;
@@ -342,6 +366,7 @@ height: 25vh;
         align-self: center;
         justify-content: space-between;
         height: 20vh;
+        
     
     }
     
@@ -394,4 +419,178 @@ width: 40vw;
     border-style: solid;
     border-width: 2px;
     
+}
+.otp-container{
+width: 1000px;
+height: 50vh;
+
+gap: 0px;
+
+opacity: 0px;
+background: rgba(255, 255, 255, 1);
+
+
+}
+.popup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+}
+.popup-display{
+
+}
+.right-bg{
+    background-image: url("../../utils/rig.png");
+    background-repeat: no-repeat;
+    object-fit: cover;
+ 
+    width: 70vw;
+    height: 819px;
+    top: -6774px;
+    left: 13069px;
+    gap: 0px;
+    opacity: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 9vw;
+
+}
+.right-bg-head{
+    font-family: Poppins;
+font-size: 35px;
+
+font-weight: 700;
+line-height: 52.5px;
+text-align: left;
+color: rgba(255, 255, 255, 1);
+
+}
+.right-bg-para{
+    font-family: Poppins;
+font-size: 26px;
+width: 39vw;
+font-weight: 300;
+text-align: left;
+color: rgba(187, 185, 185, 1);
+
+}
+.pellisambandalu{
+    width: 19vw;
+    height: 6vh;
+}
+.right-bg-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: var(--bs-modal-padding);
+    height: 55vh;
+}
+.otp-head{
+    font-family: Poppins;
+font-size: 36px;
+font-weight: 500;
+line-height: 54px;
+text-align: left;
+
+
+}
+.otp-para{
+    font-family: Poppins;
+font-size: 18px;
+font-weight: 400;
+line-height: 30px;
+text-align: center;
+width: 24vw;
+color: rgba(82, 82, 82, 1);
+
+}
+.otp-input{
+   
+    text-align: center;
+    border: 1px solid rgba(154, 154, 154, 1);
+    font-family: Poppins;
+font-size: 20px;
+font-weight: 400;
+line-height: 30px;
+text-align: center;
+width: 300px;
+height: 50px;
+top: 343px;
+left: 491px;
+gap: 0px;
+border-radius: 9px;
+opacity: 0px;
+
+
+    
+}
+.otp-input::placeholder{
+    text-align: center;
+}
+.didnt{
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    
+}
+.didnt-span{
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    color: rgb(121, 1, 37);
+    text-decoration: underline;
+}
+.verify-modal{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
+   
+}
+.verify-button{
+    width: 9vw;
+height: 5vh;
+border: none;
+gap: 0px;
+border-radius: 22.98px;
+opacity: 0px;
+background-color: rgba(120, 0, 36, 1);
+color: rgba(255, 255, 255, 1);
+font-family: Poppins;
+font-size: 14px;
+font-weight: 600;
+line-height: 21px;
+text-align: center;
+
+
+}
+.verify-head{
+    font-family: Poppins;
+font-size: 20px;
+font-weight: 500;
+line-height: 30px;
+text-align: left;
+
+}
+.verified-para{
+    font-family: Poppins;
+font-size: 14.58px;
+font-weight: 400;
+line-height: 21.88px;
+text-align: center;
+
 }

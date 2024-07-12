@@ -1,24 +1,65 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { Input, Button, Label } from 'reactstrap'
+import React, { useState, useRef, useEffect } from 'react';
+import { Input, Button, Modal,ModalBody,ModalHeader } from 'reactstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import "./signup.css";
+import tick from "../../utils/mdi_tick.png";
+import circle from "../../utils/Ellipse 57.png";
 
+import log from "../../utils/top-logo.jpeg";
+import head from "../../utils/Group 302.png";
+import pelli from "../../utils/Pellisambandalu 1.png";
 
-import logo from "../../utils/right-img-.png"
-import log from "../../utils/top-logo.jpeg"
 
 
 
 
 // import axios from 'axios';
 const SignUp = ({signupState,setSignedUp}) => {
+    const [modal, setModal] = useState(false);
+    const [successModal,setSuccessModal]=useState(false)
+    const [displayerr,setDisplayErr]=useState(false)
+
+    const toggle = () => {
+        setModal(!modal)
+        setFormData({userEmail: "",
+            userPass: "",
+            repeatPass: "",
+            fullname: "",
+            mobile: "",
+            gender: "I am",
+            otp: "",})
+        
+    };
+
+    const toggleSuccesfull=()=>{
+        
+        if(formData.otp!==""){
+            setDisplayErr(false)
+            setSuccessModal(!successModal);
+            setModal(false)
+        }
+        else{
+            setDisplayErr(true)
+            setSuccessModal(false)
+            setModal(true)
+            
+        }
+        
+    }
+
     const [btnCondition, setBtnConditon] = useState(true);
+
     const [passwordError, setPasswordError] = useState('');
+
     const [rePassError, setRePassError] = useState(false);
+
     const [showPassword, setShowPassword] = useState(false);
+
     const [otpError, setOtpError] = useState(false);
+
     const myRef = useRef(null);
+
     const [isChecked, setIsChecked] = useState(false);
     
     const [formData, setFormData] = useState({
@@ -67,6 +108,13 @@ const SignUp = ({signupState,setSignedUp}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setdisplayOtp(true)
+        setFormData({userEmail: "",
+            userPass: "",
+            repeatPass: "",
+            fullname: "",
+            mobile: "",
+            gender: "I am",
+            otp: "",})
         
         if (formData.userPass !== formData.repeatPass) {
             setPasswordError('Passwords do not match');
@@ -94,17 +142,17 @@ const SignUp = ({signupState,setSignedUp}) => {
             setPasswordError('');
             setOtpError(false)
             setNumError("")
-            alert("otp sent succesfully")
             setdisplayOtp(true)
             setSignedUp(true)
-
+            
+            
+        };
 
 
         }
 
-        console.log(formData)
 
-    }
+    
     const onCheck = (e) => {
         setIsChecked(e.target.checked)
     }
@@ -143,7 +191,7 @@ const SignUp = ({signupState,setSignedUp}) => {
     }
     const handleChange = (event) => {
         const { name, value } = event.target;
-        console.log(myRef.current)
+
         setFormData({
             ...formData,
             [name]: value
@@ -162,13 +210,54 @@ const SignUp = ({signupState,setSignedUp}) => {
             navigator.push("/dashboard")
         }
     }
+    
+    const closeBtn = (
+        <button className="close" onClick={toggleSuccesfull} type="button">
+         &times;
+        </button>
+      );
 
 
     return (
 
         <div className='main-cont'>
             <img src={log} className='top-logo' />
-
+           
+            <Modal isOpen={modal} toggle={toggle} >
+            <ModalBody className="popup" >
+                <h5 className='otp-head'>OTP Verification</h5>
+                <p className='otp-para'>One - Time password sent to your registered mobile number</p>
+                <input type='text' className='otp-input' value={formData.otp} name='otp' onChange={handleChange} placeholder='Enter Otp'/>
+                {displayerr&&<p></p>}
+                {displayerr&&<p style={{color:"red"}}>please enter received otp</p>}
+                <p className='didnt'>Didn’t receive the OTP?<span className='didnt-span'>Resend OTP</span></p>
+                <button className='verify-button' onClick={toggleSuccesfull}>
+            Verify
+          </button>
+            
+        </ModalBody>
+            
+      </Modal>
+        <div >
+        <Modal isOpen={successModal} size='sm'   toggle={toggle} >
+      <ModalHeader toggle={toggleSuccesfull} close={closeBtn}></ModalHeader>
+            <ModalBody className='verify-modal'>
+                <div style={{position:"relative"}}>
+                <img src={circle}   />
+                <img src={tick} style={{position:"absolute",top:"1vh",left:"1vw"}}/>
+                </div>
+                
+                <h5 className='verified-head'>Verified Successfully </h5>
+                <p className='verified-para'>Your mobile number has been 
+                successfully verified</p>
+                
+            
+        </ModalBody>
+            
+      </Modal>
+            
+        </div>
+     
             <form onSubmit={handleSubmit} className='forms'>
                 <h1 className='star'>Signup</h1>
                 <p> </p>
@@ -182,10 +271,10 @@ const SignUp = ({signupState,setSignedUp}) => {
                 {formData.fullname == "" && displayOtp && <p className='fullname-error'>please enter your full name</p>}
                 {!fullNameError && <p> </p>}
                 <div className='fullname-cont'>
-                    <select className="form-control genderss select option"
-                        placeholder="I am"
+                    <select className="form-control genderss select option place"
+                        
                         value={formData.gender} onChange={handleChange} name="gender">
-                        <option className='select-tag' value="">
+                        <option value="" >
                             I am
                         </option>
                         <option value="male" className="opt-color">
@@ -274,9 +363,7 @@ const SignUp = ({signupState,setSignedUp}) => {
                 <Input bsSize="lg" className="form-control genderss" type='number' onChange={handleChange} value={formData.mobile} name='mobile' onBlur={handleBlur} placeholder='Enter Number' required  />
                 {numError&& <div className='pass-err'>{numError}</div>}
                 <p> </p>
-                {displayOtp && <div className='otp-cont' style={{ alignSelf: "flex-start" }}>
-                    <Input bsSize="lg" className='form otpbox' style={{ borderStyle: "solid", borderWidth: "1.5px", borderColor: "grey", height: "9vh", width: "20vw" }} type="text" id="otp" onChange={handleChange} onBlur={handleBlur} name='otp' value={formData.otp} placeholder=' Enter Otp' required />
-                </div>}
+              
                 <br/>
                 <br/>
                 <div className='check'>
@@ -289,36 +376,30 @@ const SignUp = ({signupState,setSignedUp}) => {
 
                 {displayOtp && <p> </p>}
 
-                {displayOtp ? <Button className='form next-button'
+                 <Button className='form next-button'
                     type='submit'
-                    onClick={onsubmitt}
-
+                    disabled={btnCondition}
+                    onClick={toggle}
                 >
                     Signup
-                </Button> :
-                    < Button className='form next-button'
-                        type='submit'
-                        disabled={btnCondition}
-                        onClick={onNext}>
-                        Next
-                    </Button>}
+                </Button>
 
 
                 <p> </p>
 
                 <p className="already">
                     Already have an account? <span><a href='/login'className='already-login'>Login</a></span></p>
-
-
-
+                    
             </form>
-            
-              <img src={logo} className='imgs'/>
-            
-            
+            <div className='right-bg'>
+        <div className='right-bg-row'>
+           <h5 className='right-bg-head'>Welcome back to </h5>
+           <img src={pelli} className='pellisambandalu'/>
         </div>
-
-
+           <p className='right-bg-para'>Our expert team provides comprehensive planning and personalized services to ensure your special day is perfect. Trust us to turn your dream wedding into reality. Contact us today!</p>
+            </div>
+              
+        </div>
     )
 }
 
