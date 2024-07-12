@@ -25,5 +25,15 @@ stages:
               ArtifactName: 'drop'
               publishLocation: 'Container'
             displayName: 'Publish Build Artifacts'
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: 'Azure subscription_Accumenta (c85ec78d-8a5c-478e-abc8-8c32d9ae4e05)'
+              appType: 'webApp'
+              appName: 'pr-pelisambandalu-react-Development'
+              deployToSlotOrASE: true
+              resourceGroupName: 'Pr_pellisambandalu'
+              slotName: 'production'
+              package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+              deploymentMethod: 'auto'
   
 
