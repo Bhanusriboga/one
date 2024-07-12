@@ -1,0 +1,27 @@
+import React from 'react';
+import { Button, Card, CardBody, CardText, CardTitle, CardSubtitle } from 'reactstrap';
+import { PiWarningCircle } from "react-icons/pi";
+import {settings} from "../../../utils/constants"
+
+const DeleteAlert = (props) => {
+    const { onCancel, onDelete } = props
+    return (
+        <div className="d-flex justify-content-center align-items-center vh-100  overlay">
+            <Card className="text-center p-4">
+                <CardBody>
+                    <PiWarningCircle size={40} className="text-danger mb-3" />
+                    <CardTitle tag="h5">{settings.deleteTitle}</CardTitle>
+                    <CardSubtitle tag="h6" className="mb-3 text-muted">
+                        {settings.deleteSubTitle}
+                    </CardSubtitle>
+                    <CardText className="d-flex justify-content-around">
+                        <Button color="secondary" onClick={onCancel}>{settings.cancel}</Button>
+                        <Button color="danger" onClick={onDelete}>{settings.deleteBtn}</Button>
+                    </CardText>
+                </CardBody>
+            </Card>
+        </div>
+    )
+};
+
+export default DeleteAlert;

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import './Settings.css';
-
+import { validateEmail } from "../../utils/validation";
+import { settings } from '../../utils/constants';
+import "./Settings.css"
+import DeleteAlert from './inner-components/DeleteAlert';
 const Settings = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
@@ -15,18 +17,26 @@ const Settings = () => {
   const [deleteReason, setDeleteReason] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [showAlert, setShowAlert] = useState(true);
 
-  const handleInputChange = (setter) => (e) => setter(e.target.value);
-  const handleCheckboxChange = (setter) => (e) => setter(e.target.checked);
+  const handleCancel = () => {
+    setShowAlert(false);
+  };
 
-  const handleEmailVerify = (e) => {
-    e.preventDefault();
-    if (email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+  const handleDelete = () => {
+    setShowAlert(false);
+  };
+  const handleInputChange = (setter) => (event) => setter(event.target.value);
+  const handleCheckboxChange = (setter) => (event) => setter(event.target.checked);
+
+  const handleEmailVerify = (event) => {
+    event.preventDefault();
+    if (validateEmail(email)) {
       setEmailError('');
       setShowOtp(true);
       sendOtp();
     } else {
-      setEmailError('Please enter a valid email address');
+      setEmailError(settings.validEmailError);
     }
   };
 
@@ -34,78 +44,78 @@ const Settings = () => {
     // Add OTP sending logic here
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     let isValid = true;
 
-    if (showOtp && !/^\d{6}$/.test(otp)) {
-      setEmailError('OTP must be a 6-digit number');
-      isValid = false;
-    } else {
-      setEmailError('');
+    if(deleteProfile){
+      setShowAlert(true);
     }
-
-    if (!currentPassword || !newPassword || !confirmPassword) {
-      setPasswordError('All password fields are required');
-      isValid = false;
-    } else if (newPassword !== confirmPassword) {
-      setPasswordError('New Password and Confirm Password do not match');
-      isValid = false;
-    } else {
-      setPasswordError('');
+    else if (email) {
+      if (showOtp && !/^\d{6}$/.test(otp)) {
+        setEmailError(settings.otpError);
+        isValid = false;
+      } else {
+        setEmailError('');
+      }
     }
-
-    if (isValid) {
-      // Handle form submission logic
+    if (currentPassword !== "") {
+      if (!currentPassword || !newPassword || !confirmPassword) {
+        setPasswordError(settings.passwordFieldsError);
+        isValid = false;
+      } else if (newPassword !== confirmPassword) {
+        setPasswordError(settings.passwordMatchError);
+        isValid = false;
+      } else {
+        setPasswordError('');
+      }
     }
   };
-  const logout=()=>{
 
-  }
+  const logout = () => {
+    // Add logout logic here
+  };
+
   const emailFields = [
     {
       id: 'email',
       type: 'email',
-      placeholder: 'accumenta@gmail.com',
+      placeholder: settings.emailPlaceholder,
       value: email,
       onChange: handleInputChange(setEmail),
-      label: 'Email'
+      label: settings.emailLabel
     },
     showOtp && {
       id: 'otp',
       type: 'text',
-      placeholder: 'Enter OTP',
+      placeholder: settings.otpPlaceholder,
       value: otp,
-      onChange: (event) => {
-        if (event.target.value.match(/^[0-9]*$/)) {
-          handleInputChange(setOtp(event));
-        }
-      },
+      onChange: handleInputChange(setOtp),
       maxLength: 6
     },
     showOtp && {
       id: 'new-mail',
       type: 'text',
-      placeholder: 'Enter New Mail',
+      placeholder: settings.newMailPlaceholder,
       value: newMail,
       onChange: handleInputChange(setNewMail),
     }
   ].filter(Boolean);
 
   const passwordFields = [
-    { id: 'currentPassword', type: 'password', placeholder: 'Enter Current Password', value: currentPassword, onChange: handleInputChange(setCurrentPassword) },
-    { id: 'newPassword', type: 'password', placeholder: 'Enter New Password', value: newPassword, onChange: handleInputChange(setNewPassword) },
-    { id: 'confirmPassword', type: 'password', placeholder: 'Confirm Password', value: confirmPassword, onChange: handleInputChange(setConfirmPassword) }
+    { id: 'currentPassword', type: 'password', placeholder: settings.currentPasswordPlaceholder, value: currentPassword, onChange: handleInputChange(setCurrentPassword) },
+    { id: 'newPassword', type: 'password', placeholder: settings.newPasswordPlaceholder, value: newPassword, onChange: handleInputChange(setNewPassword) },
+    { id: 'confirmPassword', type: 'password', placeholder: settings.confirmPasswordPlaceholder, value: confirmPassword, onChange: handleInputChange(setConfirmPassword) }
   ];
 
   return (
-    <Container 
-    style={{ background: '#D9D9D9', paddingBottom: '20px' }}
-     fluid>
-      <h1 className="title" data-testid="settings">Settings</h1>
+    <>
+    {showAlert&&<DeleteAlert onCancel={handleCancel} onDelete={handleDelete} />}
+    <Container fluid className={showAlert?'blur':''}>
+      <h1 className="title" data-testid="settings">{settings.settingsTitle}</h1>
       <Form onSubmit={handleSubmit}>
         <section>
-          <h2 className="subTitle">Change your email</h2>
+          <h2 className="subTitle">{settings.changeEmailTitle}</h2>
           {emailFields.map(({ id, type, placeholder, value, onChange, label, maxLength }) => (
             <FormGroup key={id}>
               {label && <Label for={id}>{label}</Label>}
@@ -120,9 +130,9 @@ const Settings = () => {
                   maxLength={maxLength}
                 />
                 {id === 'email' && (
-                  <button onClick={handleEmailVerify} className='logout verify'>
-                    Verify
-                  </button>
+                  <Button onClick={handleEmailVerify} className='verify bg-transparent h-75 d-flex align-items-center justify-content-center'>
+                    {settings.verifyButton}
+                  </Button>
                 )}
               </div>
               {id === 'email' && emailError && <div className="error-message">{emailError}</div>}
@@ -130,10 +140,10 @@ const Settings = () => {
           ))}
         </section>
         <section>
-          <h2 className="subTitle">Change Password</h2>
+          <h2 className="subTitle">{settings.changePasswordTitle}</h2>
           {passwordFields.map(({ id, type, placeholder, value, onChange }) => (
             <FormGroup key={id}>
-              <input
+              <Input
                 type={type}
                 id={id}
                 placeholder={placeholder}
@@ -145,29 +155,29 @@ const Settings = () => {
           ))}
           {passwordError && <div className="error-message">{passwordError}</div>}
           <Button className='save-button' onClick={handleSubmit}>
-            Save Password
+            {settings.savePasswordButton}
           </Button>
         </section>
         <section>
-          <h2 className="subTitle">Your Profile Privacy</h2>
+          <h2 className="subTitle">{settings.profilePrivacyTitle}</h2>
           <FormGroup check>
             <Label check>
               <Input type="checkbox" checked={profilePrivacy} onChange={handleCheckboxChange(setProfilePrivacy)} />{' '}
-              Let others know that I shortlisted their profile
+              {settings.profilePrivacyLabel}
             </Label>
           </FormGroup>
         </section>
         <section>
-          <h2 className="subTitle">Delete Profile</h2>
+          <h2 className="subTitle">{settings.deleteProfileTitle}</h2>
           <FormGroup check>
             <Label check>
               <Input type="checkbox" checked={deleteProfile} onChange={handleCheckboxChange(setDeleteProfile)} />{' '}
-              Please choose a reason for profile deletion
+              {settings.deleteProfileCheckboxLabel}
             </Label>
           </FormGroup>
           {deleteProfile && (
             <FormGroup>
-              <div>Reason for deletion</div>
+              <div>{settings.deleteReasonLabel}</div>
               <div className="radio-container">
                 <Input
                   type="radio"
@@ -177,7 +187,7 @@ const Settings = () => {
                   checked={deleteReason === 'married'}
                   onChange={handleInputChange(setDeleteReason)}
                 />
-                <Label for="married" className='radio-label'>Married</Label>
+                <Label for="married" className='radio-label'>{settings.marriedLabel}</Label>
               </div>
               <div className="radio-container">
                 <Input
@@ -189,26 +199,27 @@ const Settings = () => {
                   onChange={handleInputChange(setDeleteReason)}
                 />
                 <Label for="notInterested" className='radio-label'>
-                  Not interested
+                  {settings.notInterestedLabel}
                 </Label>
               </div>
             </FormGroup>
           )}
-          <h2 className="subTitle">Log out</h2>
+          <h2 className="subTitle">{settings.logoutTitle}</h2>
           <div>
-            If you have any questions or need further assistance, please feel free to contact our support team
+            {settings.logoutMessage}
           </div>
           <button onClick={logout} className='logout logout-design'>
-            Logout
+            {settings.logoutButton}
           </button>
           <div className='save-button-container'>
             <Button className='save-button' type='submit'>
-              Save All
+              {settings.saveAllButton}
             </Button>
           </div>
         </section>
       </Form>
     </Container>
+    </>
   );
 };
 
