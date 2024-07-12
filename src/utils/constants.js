@@ -66,3 +66,9 @@ export const settings={
   cancel: 'Cancel',
   deleteBtn: 'Delete'
 }
+export const CustomSideBar = {
+  title: "Add / Edit your profile photo",
+  fromGallery: "From Gallery",
+  fromCamera: "From Camera",
+  cancel: "Cancel"
+};

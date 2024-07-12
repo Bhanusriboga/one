@@ -49,7 +49,9 @@ const CustomSideBar = () => {
             {isSidebarOpen ? <RxCross2 size={30} color='#780024' /> : <FaBarsStaggered size={30} color='#780024' />}
           </Button>
           <div className='image-container'>
-               <MdEdit className='add'/>
+            <div className='position-absolute bottom-0 end-0 bg-white d-flex align-item-center justify-content-center rounded-circle p-1'>
+               <MdEdit />
+            </div>
           </div>
         </Col>
         <Col xs="12" md="3" className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>

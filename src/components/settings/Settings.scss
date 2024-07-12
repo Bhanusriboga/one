@@ -16,10 +16,13 @@ line-height: 76px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
+  & .secondary{
+    color: #FF3131;
+}
 }
 .subTitle{
   font-size: 18px;
-  font-family: 'poppins';
+  font-family: 'poppins'; 
   font-weight: 500;
   line-height: 55px;
   color:#000
@@ -31,7 +34,6 @@ line-height: 76px;
 .input-style:focus{
   border:none;
 }
-
 .verify{
   position: absolute;
   right: 10px;

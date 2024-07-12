@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { validateEmail } from "../../utils/validation";
 import { settings } from '../../utils/constants';
-import "./Settings.css"
+import "./Settings.scss"
 import DeleteAlert from './inner-components/DeleteAlert';
 const Settings = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +13,6 @@ const Settings = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showOtp, setShowOtp] = useState(false);
   const [profilePrivacy, setProfilePrivacy] = useState(false);
-  const [deleteProfile, setDeleteProfile] = useState(false);
   const [deleteReason, setDeleteReason] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -22,8 +21,11 @@ const Settings = () => {
   const handleCancel = () => {
     setShowAlert(false);
   };
-
-  const handleDelete = () => {
+  const handleDelete=()=>{
+      setShowAlert(true);
+      // need to call delete api
+  }
+  const handleDeleteConfirm = () => { 
     setShowAlert(false);
   };
   const handleInputChange = (setter) => (event) => setter(event.target.value);
@@ -47,11 +49,7 @@ const Settings = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     let isValid = true;
-
-    if(deleteProfile){
-      setShowAlert(true);
-    }
-    else if (email) {
+    if (email) {
       if (showOtp && !/^\d{6}$/.test(otp)) {
         setEmailError(settings.otpError);
         isValid = false;
@@ -110,7 +108,7 @@ const Settings = () => {
 
   return (
     <>
-    {showAlert&&<DeleteAlert onCancel={handleCancel} onDelete={handleDelete} />}
+    {showAlert&&<DeleteAlert onCancel={handleCancel} onDelete={handleDeleteConfirm} />}
     <Container fluid className={showAlert?'blur':''}>
       <h1 className="title" data-testid="settings">{settings.settingsTitle}</h1>
       <Form onSubmit={handleSubmit}>
@@ -169,15 +167,8 @@ const Settings = () => {
         </section>
         <section>
           <h2 className="subTitle">{settings.deleteProfileTitle}</h2>
-          <FormGroup check>
-            <Label check>
-              <Input type="checkbox" checked={deleteProfile} onChange={handleCheckboxChange(setDeleteProfile)} />{' '}
-              {settings.deleteProfileCheckboxLabel}
-            </Label>
-          </FormGroup>
-          {deleteProfile && (
             <FormGroup>
-              <div>{settings.deleteReasonLabel}</div>
+              <div>{settings.deleteProfileCheckboxLabel}</div>
               <div className="radio-container">
                 <Input
                   type="radio"
@@ -203,7 +194,9 @@ const Settings = () => {
                 </Label>
               </div>
             </FormGroup>
-          )}
+              {deleteReason&&<button onClick={handleDelete} className='logout logout-design'>
+                {settings.deleteBtn}
+              </button>}
           <h2 className="subTitle">{settings.logoutTitle}</h2>
           <div>
             {settings.logoutMessage}

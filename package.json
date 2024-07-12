@@ -29,7 +29,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "jest":"test"
+    "test":"jest"
   },
   "eslintConfig": {
     "extends": [
