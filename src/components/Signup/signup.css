@@ -7,6 +7,23 @@
 .cont-2{
 
 }
+.number-cont{
+    display: flex;
+    justify-content: space-between;
+    width: 30vw;
+}
+.form-control.genderss.country{
+    width: 5vw;
+    text-align: center;
+   
+
+}
+.form-control.genderss.country::placeholder{
+    text-align: center;
+}
+.form-control.genderss.number{
+    width: 24vw;
+}
 
 
 .forms{
@@ -24,8 +41,7 @@
 .main-cont{
     display: flex;
     justify-content: space-between;
-    width: 114vw;
-    
+  
     height:auto;
     align-items: center;
     background-color: #F3F3F3;
@@ -35,9 +51,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 35vw;
-    margin-left:-10vw ;
-    margin-top: -11vh;
+    width: 30vw;
+    margin-top: 4vw;
     
 }
 .imgs{
@@ -54,8 +69,24 @@
     background-image: url("../../utils/Group 303.png");
 }
 .top-logo
-    {align-self:flex-start;height:25vh;width:12vw}
- .star{color:rgb(121, 1, 37);font-size:8.3vh}
+    {align-self:flex-start;
+        height: 23vh;
+        width: 8vw;
+        }
+ .star{font-family: Poppins;
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 66px;
+    text-align: left;
+    font-family: Poppins;
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 66px;
+    text-align: left;
+    color: rgba(120, 0, 36, 1);
+
+    
+    }
  .genders{
     width:45vw;
     height:8vh;
@@ -103,7 +134,7 @@
 }
 .already-login { color: rgb(121, 1, 37) }
 
-.form-control.genderss{width:35vw;height:8vh;border: 1.4px solid grey;color:rgb(22, 21, 21);font-weight: 500;}
+.form-control.genderss{width:30vw;height:8vh;border: 1.4px solid grey;color:rgb(22, 21, 21);font-weight: 500;}
 
 .form-control.genderss::placeholder{
     color: rgba(171, 171, 171, 1);
@@ -116,7 +147,7 @@ text-align: left;
 
 }
 .form-control.genderss.select.option.place{
-    width:35vw;height:8vh;border: 1.4px solid grey;color:rgb(22, 21, 21);font-weight: 500;
+    width:30vw;height:8vh;border: 1.4px solid grey;color:rgb(22, 21, 21);font-weight: 500;
 
 }
 .form-control.genderss.select.option.place::placeholder{
@@ -149,7 +180,7 @@ text-align: left;
 
 }
 .check{display:flex;height:10vh;align-items:center;
-    justify-content:space-between;width:20vw;margin-top:-8vh;align-self:flex-start}
+    justify-content:space-between;width:20vw;margin-top:-8vh;align-self: flex-start;}
 
 .form.next-button{width:12vw; height: 7vh;border-radius: 25px; font-size: large;font-weight: bold; background-color:rgb(121, 1, 37)}
 .already{
@@ -170,7 +201,7 @@ text-align: left;
 @media (max-width:400px) and (min-width:300px){
     .form.next-button{width:20vw;background-color:rgb(121, 1, 37);margin-left:-10vw}
     .check{display:flex;height:10vh;align-items:center;
-        justify-content:space-between;width:70vw;margin-left:1vw;margin-top:-5vh;align-self:flex-start}
+        justify-content:space-between;width:70vw;margin-left:0vw;margin-top:-5vh;align-self:flex-start}
     .main-cont{
         display: flex;
         flex-direction: column;
@@ -218,7 +249,7 @@ height: 25vh;
     .form-control.genderss{
         width: 80vw;
     }
-    .form-control.genderss.select{
+    .form-control.genderss.select.option.place{
         width:80vw;height:9vh;border: 1.5px solid grey;color:rgb(22, 21, 21)
     }
     .otp-cont{
@@ -233,12 +264,15 @@ height: 25vh;
         margin-left: -10vw;
         font-weight: 500;
     }
+    .right-bg{
+        display: none;
+    }
 }
     
 @media (max-width:500px) and (min-width:380px) {
-    .form.next-button{width:20vw;background-color:rgb(121, 1, 37);margin-left:-10vw}
+    .form.next-button{width:22vw;background-color:rgb(121, 1, 37);align-self: center;}
     .check{display:flex;height:10vh;align-items:center;
-        justify-content:space-between;width:65vw;margin-left:15vw;margin-top:-8vh;align-self:flex-start}
+        justify-content:center;width:62.5vw;margin-left:11vw;margin-top:-8vh;align-self:flex-start}
     .main-cont{
         display: flex;
         flex-direction: column;
@@ -256,7 +290,7 @@ height: 25vh;
         align-items: center;
         width: 100vw;
         height: 125vh;
-        margin-left: 1vh;
+        margin-left: 4vw;
         
     }
     .req{color:red;position:absolute;top:12px;left:112px}
@@ -270,7 +304,14 @@ height: 25vh;
         display: none;
     }
     
-
+    .top-logo{
+        width: 35vw;  
+        height: 25vh;
+              align-self: flex-start;
+              margin-left: -30px;
+              margin-top:-30px;
+              padding-bottom: -30px;
+    }
     .star{color:rgb(121, 1, 37);font-size:4.5vh}
     .genders{
         width:60vw;
@@ -282,7 +323,7 @@ height: 25vh;
     .form-control.genderss{
         width: 80vw;
     }
-    .form-control.genderss.select{
+    .form-control.genderss.select.option.place{
         width:80vw;height:9vh;border: 1.5px solid grey;color:rgb(22, 21, 21)
     }
     .otp-cont{
@@ -297,20 +338,26 @@ height: 25vh;
         margin-left: -10vw;
         font-weight: 500;
     }
-    
+    .right-bg{
+        background: none;
+        display: none;
+    }
+    .pellisambandalu{
+        display: none;
+    }
 
 }
 
 @media 
 (min-width:700px)and  (max-width:1000px) {
-    .form.next-button{width:30vw;background-color:rgb(121, 1, 37);margin-left:-10vw}
+    .form.next-button{width:30vw;background-color:rgb(121, 1, 37);margin-left:-7vw}
     .check{display:flex;height:10vh;align-items:center;
-        justify-content:space-between;width:60vw;margin-left:15vw;margin-top:-8vh;align-self:flex-start}
+        justify-content:space-between;width:60vw;margin-top:-18vh;align-self:flex-start}
         .imgs{
             display: block;
         }
         .check{display:flex;height:10vh;align-items:center;
-            justify-content:space-between;width: 32vw;margin-left:30vw;margin-top:-1vh;align-self:flex-start}
+            justify-content:space-between;width: 32vw;margin-left:11vw;margin-top:-5vh;align-self:flex-start}
             .req{color:red;position:absolute;top:29px;left:120px}
             .req-iam{color:red;position:absolute;top:29px;left:60px}
     .req-email{color:red;position:absolute;top:29px;left:95px}
@@ -357,7 +404,7 @@ height: 25vh;
     .form-control.genderss{
         width: 80vw;
     }
-    .form-control.genderss.select{
+    .form-control.genderss.select.option.place{
         width:80vw;height:9vh;border: 1.5px solid grey;color:rgb(22, 21, 21)
     }
     .otp-cont{
@@ -445,7 +492,7 @@ background: rgba(255, 255, 255, 1);
     background-image: url("../../utils/rig.png");
     background-repeat: no-repeat;
     object-fit: cover;
- 
+    zoom: 0.85;
     width: 70vw;
     height: 819px;
     top: -6774px;

@@ -81,7 +81,8 @@ const SignUp = ({signupState,setSignedUp}) => {
     const [numError, setNumError] = useState(false)
     const [genderError, setGenderError] = useState("")
     const [displayOtp, setdisplayOtp] = useState(false)
-
+    const [width,setWidth]=useState(window.innerWidth)
+    
 
     useEffect(() => {
         if (formData.userEmail == "" && formData.fullname == "" && formData.gender == "" && formData.mobile == "" && formData.userPass == "", formData.repeatPass == "") {
@@ -91,6 +92,15 @@ const SignUp = ({signupState,setSignedUp}) => {
             setBtnConditon(false)
         }
     }, [formData])
+    
+    useEffect(()=>{
+        const update=()=>{
+            setWidth(window.innerWidth)
+            
+        }
+         window.addEventListener("resize",update)
+         return () => window.removeEventListener("resize", update)
+    },[])
     
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -108,13 +118,7 @@ const SignUp = ({signupState,setSignedUp}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setdisplayOtp(true)
-        setFormData({userEmail: "",
-            userPass: "",
-            repeatPass: "",
-            fullname: "",
-            mobile: "",
-            gender: "I am",
-            otp: "",})
+        
         
         if (formData.userPass !== formData.repeatPass) {
             setPasswordError('Passwords do not match');
@@ -144,6 +148,13 @@ const SignUp = ({signupState,setSignedUp}) => {
             setNumError("")
             setdisplayOtp(true)
             setSignedUp(true)
+            setFormData({userEmail: "",
+                userPass: "",
+                repeatPass: "",
+                fullname: "",
+                mobile: "",
+                gender: "I am",
+                otp: "",})
             
             
         };
@@ -271,10 +282,8 @@ const SignUp = ({signupState,setSignedUp}) => {
                 {formData.fullname == "" && displayOtp && <p className='fullname-error'>please enter your full name</p>}
                 {!fullNameError && <p> </p>}
                 <div className='fullname-cont'>
-                    <select className="form-control genderss select option place"
-                        
-                        value={formData.gender} onChange={handleChange} name="gender">
-                        <option value="" >
+                    <Input type='select' className="form-control genderss select option place" value={formData.gender} onChange={handleChange} name="gender">
+                    <option value="" >
                             I am
                         </option>
                         <option value="male" className="opt-color">
@@ -286,7 +295,8 @@ const SignUp = ({signupState,setSignedUp}) => {
                         <option value="others" className="opt-color">
                             others
                         </option>
-                    </select>
+                    </Input>
+                    
                     {formData.gender == "I am" ? <p className='req-iam'>*</p> : null}
                 </div>
                 {genderError && <p className='fullname-error'>please select a gender</p>}
@@ -359,8 +369,11 @@ const SignUp = ({signupState,setSignedUp}) => {
                 </div>
 
                 {passwordError && <div className='pass-err'>{passwordError}</div>}
-
-                <Input bsSize="lg" className="form-control genderss" type='number' onChange={handleChange} value={formData.mobile} name='mobile' onBlur={handleBlur} placeholder='Enter Number' required  />
+                <div className='number-cont'>
+          
+                <Input placeholder='+91' className="form-control genderss country"/>
+                <Input bsSize="lg" className="form-control genderss number" type='number' onChange={handleChange} value={formData.mobile} name='mobile' onBlur={handleBlur} placeholder='Enter Number' required  />
+                </div>
                 {numError&& <div className='pass-err'>{numError}</div>}
                 <p> </p>
               
@@ -391,13 +404,14 @@ const SignUp = ({signupState,setSignedUp}) => {
                     Already have an account? <span><a href='/login'className='already-login'>Login</a></span></p>
                     
             </form>
-            <div className='right-bg'>
+            {width>900 && <div className='right-bg'>
         <div className='right-bg-row'>
            <h5 className='right-bg-head'>Welcome back to </h5>
            <img src={pelli} className='pellisambandalu'/>
         </div>
            <p className='right-bg-para'>Our expert team provides comprehensive planning and personalized services to ensure your special day is perfect. Trust us to turn your dream wedding into reality. Contact us today!</p>
-            </div>
+            </div>}
+            
               
         </div>
     )
