@@ -3,18 +3,14 @@ import { Route, Router,Switch } from 'react-router-dom'
 import LoginPage from './components/Login/LoginPage'
 import ForgotPage from './components/Forgot/ForgotPage'
 import SignUp from './components/Signup/SignUp'
-import Home from './components/home/Home'
+// import Home from './components/home/Home'
 import Dashboard from './components/Dashboard/Dashboard'
-import { Redirect } from 'react-router-dom/cjs/react-router-dom'
-
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min'
 const Routes = () => {
     const [signedUp,setSignedUp]=useState(false)
     return (
         <>
             <Switch>
-                <Route exact path="/">
-                  <Home/>
-                </Route>
                 <Route path="/login">
                     <LoginPage />
                 </Route>

@@ -11,7 +11,6 @@
 
 .home-page-div{
     width: 100vw;
-   
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -22,6 +21,7 @@
 .content{
     background: linear-gradient(180deg, #B88A44 0%, #E0AA3E 7%, #E0AA3E 16.5%, #F9F295 23.5%, #FFFEF2 51.5%, #F9F295 79.5%, #E0AA3E 85.5%, #E0AA3E 95%, #B88A44 100%);
     width: 100vw;
+    overflow-x: hidden;
 gap: 0px;
 opacity: 0px;
 display: flex;
@@ -130,16 +130,30 @@ opacity: 0px;
     width: 100vw;
 opacity: 0px;
 display: flex;
-padding: 4vw;
 align-items: center;
 justify-content: center;
+
+}
+.side-choose{
+position: absolute;
+
+top: 90vh;
+left: 0vw;
+gap: 0px;
+opacity: 0px;
+
+
 
 }
 .choose-us-cont{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    justify-self: center;
+    height: 60vh;
+   
+    
 }
 .choose-us{
     color:  rgba(120, 0, 36, 1);
@@ -206,8 +220,11 @@ opacity: 0px;
 }
 .exploreRight{
     align-self: flex-start;
-    height: 35vh;
-    width: 10vw;
+    height: 50vh;
+    width: 10%;
+    position: absolute;
+    top: 145vh;
+    left: 90vw;
 
 
 }
@@ -390,18 +407,26 @@ margin-left: 5vw;
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 90vh;
+    height: 100vh;
     justify-content: center;
 }
 
 .first-bottom{
-    background: #780024;
-    height: 40vh;
+   
     width: 100vw;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.first-row{
+    display: flex;
+    flex-direction: column;
+    background: #780024;
+    height: 50vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+   
 }
 .right-side-img-bottom{
     position: absolute;
@@ -429,11 +454,11 @@ margin-left: 5vw;
 .bottom-text-1{
     color: rgba(224, 170, 62, 1);
     font-family: Poppins;
-font-size: 28px;
+font-size: 25px;
 font-weight: 500;
 line-height: 29px;
 text-align: left;
-width: 20vw;
+width: 23vw;
 height: 203px;
 top: 3102px;
 left: 123.59px;
@@ -443,6 +468,8 @@ opacity: 0px;
     
 
 }
+
+
 .bottom-text-1-span{
     
 
@@ -618,7 +645,7 @@ width: 40vw;
 
 .nav-link {
 font-size: 77px;
-font-family: 'Courier New', Courier, monospace;
+font-family: poppins;
 color: antiquewhite;
 display: block;
 padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);

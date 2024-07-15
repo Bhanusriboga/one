@@ -1,30 +1,31 @@
 import React,{useEffect, useState} from 'react'
+
 import animation from "../../utils/Animation - 1720516602656.json"
 import Lottie from "react-lottie"
-import img from "../../utils/Group 191.png"
+
 import logo from "../../utils/Logo01 1.svg"
 import "./home.css"
 import playstore from "../../utils/Rectangle 4453.png"
 import appstore from "../../utils/Rectangle 4455.png"
-import bottomimage from "../../utils/Screenshot 2024-07-06 144008.png"
+
 import frame1 from"../../utils/Frame 45.png"
 import frame2 from "../../utils/Frame 46.png"
-import sideimg from "../../utils/394317-PCMJUW-273-Photoroom 4.png"
+
 import coupleimg from "../../utils/Rectangle 4110.png"
 import ringsframe from "../../utils/Frame 39.png"
-import cards from "../../utils/Card-Slide01 1.png"
+
 import casteimg from "../../utils/Group 38.png"
 import religionimg from "../../utils/Group 40.png"
 import mothertoungeimg from "../../utils/Group 39.png"
-import rings from "../../utils/Rings 1.png"
+
 import yukthi from "../../utils/Frame 40.png";
 import leftArrow from "../../utils/Frame 42.png"
 import rightArrow from "../../utils/Frame 41.png"
 import sidehalfimg from "../../utils/394317-PCMJUW-273-Photoroom 9.png"
-import rightimg from "../../utils/011 3.png"
 import exploreright from "../../utils/394317-PCMJUW-273-Photoroom 9 (2).png"
 import lefthalfimg from "../../utils/394317-PCMJUW-273-Photoroom 10.png"
-import imgss from "../../utils/011 1.png"
+
+
 import bottomleftimg from "../../utils/394317-PCMJUW-273-Photoroom 8.png"
 import facebook from "../../utils/facebook.png"
 import instagram from "../../utils/instagram.png"
@@ -33,21 +34,8 @@ import twitter from "../../utils/ri_twitter-x-fill.png"
 import verticalline from "../../utils/Line 44.png"
 import horizontalline from "../../utils/Line 47.png"
 import rightbottomimgside from "../../utils/394317-PCMJUW-273-Photoroom 7.png"
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-} from 'reactstrap';
-const ringsData=["Trustworthy","Outreach","Stakeholders","Franchise","Vendor"]
+
+
 
 function Home() {
   const [scrolled,setScrolled]=useState(false)
@@ -86,10 +74,10 @@ function Home() {
         <a className="nav-link" href="#">About us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Signup</a>
+        <a class="nav-link" href="/signUp">Signup</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+        <a class="nav-link" href="/login">Login</a>
       </li>
      
     </ul>
@@ -117,13 +105,14 @@ function Home() {
        
         
         <div className='choose'>
-          {/* <img src={sidehalfimg}/> */}
+           
           <div className='choose-us-cont'>
           <p className='choose-us'>Why Choose Us ?</p>
           <p style={{textAlign:"center",width:"80vw"}}>In the enchanting landscape of matrimony, we proudly stand as the beacon of excellence. Our dedication to creating meaningful connections, coupled with a personalized approach, sets us apart as the premier destination for those seeking lifelong companionship. Trust in us to navigate the path to your happily ever after, for in the realm of matrimony, we are simply the best.</p>
           <img src={ringsframe}/>
            </div>
         </div>
+        <img src={sidehalfimg} className='side-choose'/> 
         <div style={{alignSelf:"flex-start",justifySelf:"flex-end"}}>
           <img src={lefthalfimg} className='leftexplore'/> 
           </div>
@@ -136,8 +125,9 @@ function Home() {
              <img className='explore-imgs'  src={casteimg}/>
              <img className='explore-imgs'  src={mothertoungeimg}/>
            </div>
-           {/* <img src={exploreright} className='exploreRight'/> */}
+           
          </div>
+         <img src={exploreright} className='exploreRight'/>
         <div className="endorsements">
          
           <div className='endorse-cont'>
@@ -163,17 +153,20 @@ function Home() {
        </div>
 
        <div className='bottom'>
+          
           <div className='first-bottom'>
+           <div className='first-row'>
            <h3 className='heading'>Let's write our own love story together : Download Our App For Any Queries</h3>
       
             <p className='paragraph'>Our platform is dedicated to helping you find a lifelong partner who shares your values, dreams, and aspirations. </p>
             <div className="connect">
              <img src={playstore}/>
              <img src={appstore} className='appstore'/>
-             
             </div>
             
        </div>
+          </div>
+         
        
            
       <div className='second-bottom'>
@@ -198,7 +191,7 @@ function Home() {
           </div>
           <img src={verticalline} className='line'/>
           </div>
-          
+
         <div className='privacy-cont'>
           <div className='privacy-sub-cont'>
                 <h4 className='privacy-head'>Privacy & You</h4>
@@ -211,18 +204,14 @@ function Home() {
         </div>
         <img src={logo} className='bottom-logo'/>
         </div>
-
         <div>
         <img src={horizontalline} className='horline'/>
         </div>
         <p className='copyright'>Copyright@2024 All rights reserved</p>
-
-      </div>
-        
+      </div>   
     </div>
     <img src={rightbottomimgside} className='right-side-img-bottom'/>
   </div>
-
   )
 }
 
