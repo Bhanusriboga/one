@@ -26,9 +26,6 @@ const Routes = () => {
                 <Route path="/profile">
                     <CustomSideBar/>
                 </Route>
-                <Route path="/addPreference">
-                    <AddPreference/>
-                </Route>
                 <Redirect path='/' to="login"></Redirect>
             </Switch>
         </>

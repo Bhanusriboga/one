@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './CustomSideBar.css';
 import Settings from '../settings/Settings';
-import AddPreference from '../AddPreferences/AddPreference';
+import AddPreferences from '../AddPreferences/AddPreference';
 const CustomSideBar = () => {
   const [activeContent, setActiveContent] = useState('userImage');
 
@@ -22,7 +22,7 @@ const CustomSideBar = () => {
       case 'editImage':
         return <div>Edit Image Content</div>;
       case 'addPreferences':
-        return <AddPreference />;
+        return <AddPreferences />;
       case 'editProfile':
         return <div>Edit Profile Content</div>;
       case 'ignoredUsers':
