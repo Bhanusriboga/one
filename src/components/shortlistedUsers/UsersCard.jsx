@@ -6,6 +6,7 @@ import './Usercard.css'
 import { Card } from 'react-bootstrap';
 import { ignoreUserText } from '../../utils/constants';
 import ignore from '../../Assets/Ignore.svg'
+import { AiFillHeart } from "react-icons/ai"
 function UsersCard(userDetails) {
     
     const {user,background,color ,viewButtonColor, buttonBackgroundColor,onMoveToIgnoreList,removeUserFromShortList}=userDetails
@@ -34,7 +35,7 @@ function UsersCard(userDetails) {
          >
         <div className='user-card-icons-container'>
             <img src={ignore} alt='ignore' style={{width:'25px',height:'25px',cursor:'pointer',}} data-testid="usercard-ignoreicon" onClick={onMoveToIgnoreList} />
-            <GoHeart className='usercard-hearticon' style={{color:'white'}} data-testid="usercard-hearticon" onClick={removeUserFromShortList}/></div>
+            <AiFillHeart className='usercard-hearticon' style={{color:'white'}} data-testid="usercard-hearticon" onClick={removeUserFromShortList}/></div>
             <div className='shortlist-mobile'>
            
             <div className='usercard-image-container' ></div>

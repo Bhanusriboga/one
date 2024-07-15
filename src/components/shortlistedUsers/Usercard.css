@@ -154,7 +154,7 @@ justify-content: space-between;
         font-size: 13px;
     }
   }
-  @media(min-width:0px)and (max-width:575px){
+  @media(min-width:0px)and (max-width:575px){ 
     .usercard{
         width:100%;
         padding-left: 12px;

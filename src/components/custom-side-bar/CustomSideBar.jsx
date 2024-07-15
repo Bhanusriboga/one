@@ -65,7 +65,7 @@ const CustomSideBar = () => {
             <div key={button.id} className='button-parent'>
               <Button block="true" className="bg-transparent border-0 text-warning" onClick={() => setActiveContent(button.id)}>
                 {button.label}
-              </Button>
+              </Button> 
               {index !== buttonData.length - 1 && <hr className='hr' />}
             </div>
           ))}
