@@ -41,20 +41,13 @@
     "plugins": [
       "react",
       "import",
-      "jsx-a11y",
-      "only-warn"
+      "jsx-a11y"
     ],
     "rules": {
       "react/prop-types": 0,
-      "indent": [
-        "warn",
-        2
-      ],
+      "indent": ["error", 2],
       "linebreak-style": 1,
-      "quotes": [
-        "warn",
-        "single"
-      ]
+      "quotes": ["error", "double"]
     },
     "parserOptions": {
       "ecmaVersion": 2021,

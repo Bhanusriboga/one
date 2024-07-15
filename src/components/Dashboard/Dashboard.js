@@ -3,7 +3,7 @@ import Header from './Header'
 import FooterBar from './FooterBar'
 import PageContainer from './PageContainer'
 import './Dashboard.scss'
-import ComingSoon from '../ComingSoon/ComingSoon'
+// import ComingSoon from '../ComingSoon/ComingSoon'
 
 const Dashboard = props => {
   return (
