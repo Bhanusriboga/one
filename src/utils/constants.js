@@ -33,6 +33,15 @@ export const forgot={
   forgotMsg:'Enter your email and we\'ll send you a link to reset your password',
   signup:'Signup'
 }
+export const religion=[
+  'Hindu',
+  'Muslim',
+  'Cristian',
+  'Sikh',
+  'Jain',
+  'Buddist',
+  'Others'
+]
 
 export const settings={
   settingsTitle: 'Settings',
@@ -65,6 +74,14 @@ export const settings={
   deleteSubTitle: 'This action will permanently delete your profile data',
   cancel: 'Cancel',
   deleteBtn: 'Delete'
+}
+
+export const ignoreUserText={
+  heading:'Ignorelisted',
+  Age:'Age',
+  Religion:'Religion',
+  ViewProfileBtn:'View Profile',
+  heading1:'Shortlisted'
 }
 export const CustomSideBar = {
   title: "Add / Edit your profile photo",

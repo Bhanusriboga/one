@@ -16,7 +16,7 @@ const Settings = () => {
   const [deleteReason, setDeleteReason] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [showAlert, setShowAlert] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleCancel = () => {
     setShowAlert(false);
