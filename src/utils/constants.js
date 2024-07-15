@@ -75,3 +75,11 @@ export const settings={
   cancel: 'Cancel',
   deleteBtn: 'Delete'
 }
+
+export const ignoreUserText={
+  heading:'Ignorelisted',
+  Age:'Age',
+  Religion:'Religion',
+  ViewProfileBtn:'View Profile',
+  heading1:'Shortlisted'
+}
