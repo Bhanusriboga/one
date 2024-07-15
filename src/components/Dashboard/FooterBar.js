@@ -4,9 +4,9 @@ import './Dashboard.scss'
 const FooterBar = props => {
   return (
     <div className='navbar navbar-expand-md navbar-light navbck'>
-      {/* <div>
+      <div>
         {footerContent.registrationlabel}
-      </div> */}
+      </div>
     </div>
   )
 }

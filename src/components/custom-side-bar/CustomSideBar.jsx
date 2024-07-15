@@ -3,8 +3,9 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './CustomSideBar.css';
 import Settings from '../settings/Settings';
+import ProfileList from '../Dashboard/ProfileList';
 const CustomSideBar = () => {
-  const [activeContent, setActiveContent] = useState('userImage');
+  const [activeContent, setActiveContent] = useState('');
 
   const buttonData = [
     { id: 'editImage', label: 'Edit Image' },
@@ -31,15 +32,15 @@ const CustomSideBar = () => {
       case 'settings':
         return <Settings />;
       default:
-        return null;
+        return <ProfileList />
     }
   };
 
   return (
     <>
-    <Container fluid className='outer-container'>
+    <Container fluid className='outer-container mt-4'>
       <Row>
-        <Col xs="11" md="3" className="sidebar">
+        <Col xs="3" className="sidebar">
         <div className='image-container'>
           <Button className='add'>
             Add
@@ -55,7 +56,8 @@ const CustomSideBar = () => {
             </div>
           ))}
         </Col>
-        <Col xs="12" md="8" className="content" data-testid="content">
+        <Col xs="9" className="content ml-4" data-testid="content">
+        {activeContent !== ''?<button onClick={() => setActiveContent('')}>back</button>:null}
           <RenderContent/>
         </Col>  
       </Row>

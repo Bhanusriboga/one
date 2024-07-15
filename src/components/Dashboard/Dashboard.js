@@ -12,12 +12,13 @@ const Dashboard = props => {
         <Header/>
       </div>
       <div className='pageContainer conwidth'>
-        <ComingSoon/>
-        {/* <PageContainer/> */}
-      </div>
-      <div className='fixed-bottom pageFooter'>
+        {/* <ComingSoon/> */}
+        <PageContainer/>
+        <div className='pageFooter'>
         <FooterBar/>
       </div>
+      </div>
+
 
     </div>
   )
