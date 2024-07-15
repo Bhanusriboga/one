@@ -42,3 +42,36 @@ export const religion=[
   "Buddist",
   "Others"
 ]
+
+export const settings={
+  settingsTitle: 'Settings',
+  changeEmailTitle: 'Change your email',
+  emailLabel: 'Email',
+  emailPlaceholder: 'Enter your email',
+  validEmailError: 'Please enter a valid email address',
+  otpPlaceholder: 'Enter OTP',
+  newMailPlaceholder: 'Enter New Mail',
+  verifyButton: 'Verify',
+  changePasswordTitle: 'Change Password',
+  currentPasswordPlaceholder: 'Enter Current Password',
+  newPasswordPlaceholder: 'Enter New Password',
+  confirmPasswordPlaceholder: 'Confirm Password',
+  passwordFieldsError: 'All password fields are required',
+  passwordMatchError: 'New Password and Confirm Password do not match',
+  savePasswordButton: 'Save Password',
+  profilePrivacyTitle: 'Your Profile Privacy',
+  profilePrivacyLabel: 'Let others know that I shortlisted their profile',
+  deleteProfileTitle: 'Delete Profile',
+  deleteProfileCheckboxLabel: 'Please choose a reason for profile deletion',
+  deleteReasonLabel: 'Reason for deletion',
+  marriedLabel: 'Married',
+  notInterestedLabel: 'Not interested',
+  logoutTitle: 'Log out',
+  logoutMessage: 'If you have any questions or need further assistance, please feel free to contact our support team',
+  logoutButton: 'Logout',
+  saveAllButton: 'Save All',
+  deleteTitle: 'Are you sure?',
+  deleteSubTitle: 'This action will permanently delete your profile data',
+  cancel: 'Cancel',
+  deleteBtn: 'Delete'
+}
