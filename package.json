@@ -43,8 +43,7 @@
     "plugins": [
       "react",
       "import",
-      "jsx-a11y",
-      "only-warn"
+      "jsx-a11y"
     ],
     "rules": {
       "react/prop-types": 0,
