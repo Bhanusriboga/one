@@ -1,5 +1,5 @@
-import axiosInstance from "./axiosInstance";
-
+import axiosInstance from './axiosInstance';
+import { baseURL } from '../config/config';
 const resolve = async (promise) => {
   const resolved = {
     response: null,
@@ -9,7 +9,7 @@ const resolve = async (promise) => {
     const response = await promise();
     resolved.response = response;
   } catch (e) {
-    resolved.error = "Something went wrong...";
+    resolved.error = 'Something went wrong...';
   }
 
   return resolved;
@@ -17,18 +17,17 @@ const resolve = async (promise) => {
 
 const networkCall = async (
   url,
-  method = "GET",
+  method = 'GET',
   data = null,
   headers = {},
-  responseType = "json"
+  responseType = 'json'
 ) => {
 
   const makeCall = async () => {
-    try {
       const fullUrl = /(http(s?)):\/\//i.test(url) ? url : `${baseURL}/${url}`;
       const defaultHeaders = {
-        "Content-Type":
-          data instanceof FormData ? "multipart/form-data" : "application/json",
+        'Content-Type':
+          data instanceof FormData ? 'multipart/form-data' : 'application/json',
         ...headers,
       };
 
@@ -41,11 +40,9 @@ const networkCall = async (
       };
 
       const response = await axiosInstance(config);
-      console.log("network call response", response);
+      console.log('network call response', response);
       return response.data;
-    } catch (error) {
-      throw error;
-    }
+
   };
   return await resolve(makeCall);
 };

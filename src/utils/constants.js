@@ -33,6 +33,15 @@ export const forgot={
   forgotMsg:'Enter your email and we\'ll send you a link to reset your password',
   signup:'Signup'
 }
+export const religion=[
+  'Hindu',
+  'Muslim',
+  'Cristian',
+  'Sikh',
+  'Jain',
+  'Buddist',
+  'Others'
+]
 
 export const settings={
   settingsTitle: 'Settings',
@@ -72,5 +81,5 @@ export const ignoreUserText={
   Age:'Age',
   Religion:'Religion',
   ViewProfileBtn:'View Profile',
-  heading1:"Shortlisted"
+  heading1:'Shortlisted'
 }

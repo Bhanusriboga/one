@@ -17,10 +17,6 @@ describe('ShortListedUsers Component', () => {
 
   test('handles moving a user to ignorelist', () => {
     render(<ShortListedUsers />);
-    
-    // Mock a user ID to move to ignorelist
-    const userId = 1;
-
     // Trigger move to ignorelist action
     fireEvent.click(screen.getByText('Move to Ignorelist')); // Adjust based on your UsersCard button text
 
@@ -34,10 +30,6 @@ describe('ShortListedUsers Component', () => {
 
   test('handles removing a user from shortlist', () => {
     render(<ShortListedUsers />);
-    
-    // Mock a user ID to remove from shortlist
-    const userId = 1;
-
     // Trigger remove from shortlist action
     fireEvent.click(screen.getByText('Remove from Shortlist')); // Adjust based on your UsersCard button text
 

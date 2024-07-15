@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/preset-env": "^7.24.7",
     "@babel/preset-react": "^7.24.7",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -44,18 +43,17 @@
     "plugins": [
       "react",
       "import",
-      "jsx-a11y",
-      "only-warn"
+      "jsx-a11y"
     ],
     "rules": {
       "react/prop-types": 0,
       "indent": [
-        "warn",
+        "error",
         2
       ],
       "linebreak-style": 1,
       "quotes": [
-        "warn",
+        "error",
         "single"
       ]
     },
@@ -100,6 +98,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.24.8",
+    "@babel/preset-env": "^7.24.8",
     "@eslint/compat": "^1.0.3",
     "@eslint/js": "^9.4.0",
     "eslint-config-react-app": "^7.0.1",

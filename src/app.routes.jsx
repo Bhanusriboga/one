@@ -22,7 +22,7 @@ const Routes = () => {
                 </Route>
                 <Route path="/signUp">
                     <SignUp/>
-                </Route>
+                </Route>                
                 <Route path="/dashboard">
                     <Dashboard/>
                 </Route>

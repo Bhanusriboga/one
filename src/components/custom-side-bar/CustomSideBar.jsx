@@ -9,9 +9,10 @@ import './CustomSideBar.scss';
 import Settings from '../settings/Settings';
 import IgnoreUsers from '../ignoreUsers/IgnoreUsers';
 import ShortListedUsers from '../shortlistedUsers/ShortListedUsers';
+import ProfileList from '../Dashboard/ProfileList';
 
 const CustomSideBar = () => {
-  const [activeContent, setActiveContent] = useState('userImage');
+  const [activeContent, setActiveContent] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
  
   const buttonData = [
@@ -39,12 +40,12 @@ const CustomSideBar = () => {
       case 'settings':
         return <Settings />;
       default:
-        return null;
+        return <ProfileList />
     }
   };
 
   return (
-    <Container fluid className='outer-container'>
+    <Container fluid className='outer-container mt-4'>
       <Row className='row'>
         <Col xs="12" className="d-flex flex-row justify-content-between d-md-none">
           <Button className="bg-transparent border-0" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
@@ -54,7 +55,7 @@ const CustomSideBar = () => {
                <MdEdit className='add'/>
           </div>
         </Col>
-        <Col xs="12" md="3" className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+        <Col xs={isSidebarOpen?"12":"3"} className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
           <div className='image-container1'>
             <Button className='d-flex align-item-center justify-content-center border-0 position-absolute bottom-0 add'>
               Add
@@ -70,7 +71,8 @@ const CustomSideBar = () => {
             </div>
           ))}
         </Col>
-        <Col xs="12" md="9" data-testid="content">
+        <Col xs="12" md="9" className="content ml-4 pt-0" data-testid="content">
+        {activeContent !== ''?<button onClick={() => setActiveContent('')}>back</button>:null}
           <RenderContent/>
         </Col>  
       </Row>
