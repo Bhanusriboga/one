@@ -26,11 +26,13 @@ const Filters = props => {
   }
   const toggleSearch = (e) => {
     e.preventDefault()
+    // props.handleFilters()
     setDropdownOpen(false)
   };
   const handleSelect = (e) => {
     console.log(e.target.value, 'testig')
   }
+
   return (
     <div className='p-2 pl-0'>
       <Form>
@@ -82,12 +84,12 @@ const Filters = props => {
             </FormGroup>
           </Col>
           <Col md={2} className='d-flex align-items-center mt-4'>
-            <Button className='seatchButton'>Search</Button>
+            <Button className='seatchButton' onClick={toggleSearch}>Search</Button>
           </Col>
           <Col md={3} className='d-flex align-items-center mt-5'>
             <FormGroup className='mb-4'>
               <Dropdown isOpen={dropdownOpen} toggle={(e) => toggle(e)}>
-                <DropdownToggle caret>Advanced Filters</DropdownToggle>
+                <DropdownToggle caret outline color="dark">Advanced Filters</DropdownToggle>
                 <DropdownMenu className='dropDownBack' color='beige'>
                   <DropdownItem header>Marital status</DropdownItem>
                   <Form>

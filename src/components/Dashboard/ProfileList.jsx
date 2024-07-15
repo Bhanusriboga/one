@@ -7,19 +7,17 @@ import { CiHeart } from "react-icons/ci";
 import Filters from './filters';
 
 const ProfileList = () => {
-  const [filterdata, setfilterData]=useState([])
+  const [filterdata, setfilterData]=useState(testjson)
    const handleFilters=(data)=>{
     
    }
-   useEffect(()=>{
 
-   },[])
   return (
     <div>
       <Filters handlefilters={handleFilters}/>
       <div className="row d-flex justify-content-center align-items-center w-100 bcg">
 
-    {testjson.map(val=>(
+    {filterdata.map(val=>(
          <div className="col-md-3 mr-2 cardwidth">
         <Card
         body
