@@ -2,18 +2,18 @@ export const ProfileCreatedFor = ["Myself","daughter","Son","Friend","Sibling","
 export const MotherTongue = ["Telugu","Hindi","Tamil","English","Malayalam","Kannada","Punjabi","Bengali","Others"]
 export const Religion = ["Hindu","Muslim","Christian","Sikh","Jain","Jewish","Buddhist","Others"]
 export const Star = ["Aswinee/Aswini/Ashwini","Bharani/Barani",
-    "Karthikai / KiruthigaiKruthikai /KiruthikaiKrittikaa",
-    "Rohini / Rohinee","Mrigasiram /Mrigaseersham","Ardra Or Thiruvathirai","Punarpoosam/PunarpusamPunarvasu",
-    "Poosam / PusamPushyam","Ayilyam.Aslesha","Poosam / PusamPushyam","Makam / MagamMakham","Pooram / PuramPoorva Phalguni",
-    "Uttara / UttaraiUttara","Chithira / ChithiraiChithira","Hastham",
-       "Swathi - Svathi","AnushamAnuradha","KettaiJyeshta","Moolam / Mulam","Pooradam / PuradamPoorvashada","UthiradamUthrashada",
-       "ThiruvonamSravanam","AvittamDhanishta","Sadhayam / SathayamSathabhisha","Poorattadhi / PurattathiPoorvabhadrapada","UthirattadhiUtharabhadrapada",
-       "Revathi - Rewati"]
+    "Karthikai / KiruthigaiKruthikai",
+    "Rohini/Rohinee","Mrigasiram/Mrigaseersham","Ardra Or Thiruvathirai","Punarpoosam",
+    "Poosam/PusamPushyam","Ayilyam.Aslesha","Poosam / PusamPushyam","Makam / MagamMakham","Pooram / PuramPoorva Phalguni",
+    "Uttara / UttaraiUttara","Chithira/ChithiraiChithira","Hastham",
+    "Swathi/Svathi","AnushamAnuradha","KettaiJyeshta","Moolam/Mulam","Pooradam / PuradamPoorvashada","UthiradamUthrashada",
+    "ThiruvonamSravanam","AvittamDhanishta","Sadhayam","Poorattadhi",
+    "Revathi - Rewati"]
 export const Dosham = ["Yes","No"]
 export const Education=["10th","12th","Graduation","Post Graduation","PHD","Others"]
 export const   Occupation=["Celebrity","Corporate Employee","Government Employee","Business Owner","Self Employed","Unemployed","Others"]
 export const Employeement=["Full Time","Part Time","Contract","Others"]
-  export const AnnualIncome=["0-1Lakh","1-5Lakh","5-10Lakh","10-20Lakh","20-50Lakh","50-1Crore","Above"]
+export const AnnualIncome=["0-1Lakh","1-5Lakh","5-10Lakh","10-20Lakh","20-50Lakh","50-1Crore","Above"]
 export const MaritalStatus=["Single","Married","Unmarried","Widowed","Divorced"]
 export const Disability=["Yes","No"]
 export const DrinkingHabits=["I don’t drink","Once a week","Twice/ trice a month","Almost every night","very rarely"]

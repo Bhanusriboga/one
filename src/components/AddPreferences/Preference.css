@@ -10,20 +10,16 @@
 }
 .input-height{
   height: 44px ;
-
+  border:1px solid rgba(120, 0, 36, 1)!important;
 }
 .field-container {
- 
-
   padding-left:1%;
   padding-right: 1%;
- 
   padding-bottom: 20px;
   width:100% ;
-  
 }
 .profile-field-input{
-  max-width:550px ;
+  max-width:550px !important ;
 }
 .minmaxage{
   width:128px;
@@ -34,28 +30,9 @@
   font-family: poppins;
   color:rgba(120, 0, 36, 1)
 }
-select {
-  color:rgba(172, 172, 172, 1) !important;
-}
-
-
 Input::placeholder{
   color:rgba(172, 172, 172, 1) !important;
 }
-Input{
-  border:1px solid rgba(120, 0, 36, 1) !important;
-}
-select {
-  color:black(172, 172, 172, 1) !important;
-  border:1px solid rgba(120, 0, 36, 1) !important;
-}
-select::before{
-  color:#780024 !important
-}
-
-
-
-
 .arrow{
   display:none
 }
@@ -65,8 +42,6 @@ select::before{
 .religion-text{
   width:270px!important
 }
-
-
 .button {
   font-family:bold;
   width: 30%;
@@ -74,10 +49,8 @@ select::before{
   background: rgba(125, 0, 36, 1) !important;
   border-radius: 9px 9px 9px 9px;
  margin-top: 20px;
- margin-bottom: 20px !important;
+ margin-bottom: 10px !important;
  margin-left: 20%;
-
- 
 }
 @media (max-width: 768px) {
 
@@ -88,7 +61,7 @@ select::before{
     width:100% !important
   }
   .profile-field-input{
-    max-width:100% ;
+    max-width:100% !important
   }
 
   .form-container {
@@ -113,17 +86,16 @@ select::before{
     position: relative;
   }
 
-  .backgroungImg{
+  .backgroundImg{
       background-image: url("./Assets/mobilebackground.svg") !important;
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
-    
+      
   }
   .chatImg{
       float: right;
-   
-      
+     
   }
   .arrow{
       display: flex;
