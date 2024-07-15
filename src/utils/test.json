@@ -26,7 +26,31 @@
 },{
     "name":"yuva",
     "age":26,
-    "religion":"Hindu",
+    "religion":"muslim",
+    "cast":"OC",
+    "subcast":"Reddy",
+    "maritalstatus":"single",
+    "occupation":"corporate employee",
+    "annualincome":7.8,
+    "city":"Hyderabad",
+    "state":"Telangana"
+
+},{
+    "name":"yuva",
+    "age":26,
+    "religion":"Hind",
+    "cast":"OC",
+    "subcast":"Reddy",
+    "maritalstatus":"single",
+    "occupation":"corporate employee",
+    "annualincome":7.8,
+    "city":"Hyderabad",
+    "state":"Telangana"
+
+},{
+    "name":"yuva",
+    "age":26,
+    "religion":"Hind",
     "cast":"OC",
     "subcast":"Reddy",
     "maritalstatus":"single",
@@ -52,31 +76,7 @@
     "age":26,
     "religion":"Hindu",
     "cast":"OC",
-    "subcast":"Reddy",
-    "maritalstatus":"single",
-    "occupation":"corporate employee",
-    "annualincome":7.8,
-    "city":"Hyderabad",
-    "state":"Telangana"
-
-},{
-    "name":"yuva",
-    "age":26,
-    "religion":"Hindu",
-    "cast":"OC",
-    "subcast":"Reddy",
-    "maritalstatus":"single",
-    "occupation":"corporate employee",
-    "annualincome":7.8,
-    "city":"Hyderabad",
-    "state":"Telangana"
-
-},{
-    "name":"yuva",
-    "age":26,
-    "religion":"Hindu",
-    "cast":"OC",
-    "subcast":"Reddy",
+    "subcast":"Naidu",
     "maritalstatus":"single",
     "occupation":"corporate employee",
     "annualincome":7.8,
