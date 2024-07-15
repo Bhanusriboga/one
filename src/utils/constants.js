@@ -34,13 +34,13 @@ export const forgot={
   signup:'Signup'
 }
 export const religion=[
-  "Hindu",
-  "Muslim",
-  "Cristian",
-  "Sikh",
-  "Jain",
-  "Buddist",
-  "Others"
+  'Hindu',
+  'Muslim',
+  'Cristian',
+  'Sikh',
+  'Jain',
+  'Buddist',
+  'Others'
 ]
 
 export const settings={
