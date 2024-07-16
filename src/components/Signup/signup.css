@@ -337,12 +337,10 @@ input[type=checkbox] {
         width: 18vw;
         text-align: center;
     }
-
     .form-control.genderss.country::placeholder {
         text-align: left;
         font-size: medium
     }
-
     .form-control.genderss.number {
         width: 40vw;
         position: relative;
