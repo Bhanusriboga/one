@@ -66,3 +66,14 @@ export const settings={
   cancel: 'Cancel',
   deleteBtn: 'Delete'
 }
+
+export const EditProfile={
+  editprofile:"Edit Profile",
+  save:"Save",
+  basicdetails:"Basic Details",
+  personaldetails:"Personal Details",
+  edit:"Edit",
+  professionaldetails:"Professional Details",
+  media:"Media",
+  add:"Add",
+}

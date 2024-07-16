@@ -7,6 +7,7 @@ import { MdEdit } from "react-icons/md";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './CustomSideBar.scss';
 import Settings from '../settings/Settings';
+import Editprofile from '../editprofile/Editprofile';
 
 const CustomSideBar = () => {
   const [activeContent, setActiveContent] = useState('userImage');
@@ -29,7 +30,7 @@ const CustomSideBar = () => {
       case 'addPreferences':
         return <div>Add Preferences Content</div>;
       case 'editProfile':
-        return <div>Edit Profile Content</div>;
+        return <Editprofile />
       case 'ignoredUsers':
         return <div>Ignored Users Content</div>;
       case 'shortlisted':
@@ -68,7 +69,7 @@ const CustomSideBar = () => {
             </div>
           ))}
         </Col>
-          <Col xs="12" md="8"  data-testid="content">
+          <Col xs="12" md="9"  data-testid="content">
           <RenderContent />
         </Col>
       </Row>
