@@ -24,7 +24,7 @@
 }
 
 .main-img {
-    height: 130vh;
+    min-height: 130vh;
     width: 100vw;
 }
 
@@ -35,17 +35,6 @@
     width: 100vw;
 }
 
-.imgs {
-    height: 150vh;
-    width: 70vw;
-}
-
-.top-logo {
-    align-self: flex-start;
-    height: 23vh;
-    width: 8vw;
-    display: none;
-}
 
 .star {
     font-family: Poppins;
@@ -57,39 +46,16 @@
     color: rgba(120, 0, 36, 1);
     padding-bottom: 20px;
 }
-
-.genders {
-    width: 45vw;
-    height: 8vh;
-    border: 1.5px solid grey;
-    font-size: 20px;
-}
-
-.fullname-cont {
-    position: relative
-}
-
-.fullname-conts {
-    position: relative
-}
-
 .fullname-error {
     color: red;
     align-self: flex-start
 }
-
 .pass-err {
     color: red;
 }
-
-.select-tag {
-    color: rgb(174, 172, 172)
-}
-
 .opt-color {
     color: black;
 }
-
 .email-error {
     color: red;
     font-family: monospace;
@@ -97,32 +63,29 @@
 }
 
 .eye-icon-1 {
+    top: 30%;
+    transform: translateY(-35%);
+}
+.eye{
     position: absolute;
     right: 10px;
-    top: 25%;
-    transform: translateY(-35%);
     background-color: transparent;
     border: none;
     cursor: pointer;
-    outline: none
+    outline: none;
+    top:32%
 }
-
+.eye-icon-2 {
+    top: 45%;
+    transform: translateY(-100%);
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.eye-icon-2 {
-    position: absolute;
-    right: 10px;
-    top: 45%;
-    transform: translateY(-80%);
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none
-}
+
 
 .check-1 {
     margin-top: -10px;
@@ -214,7 +177,6 @@ input[type=checkbox] {
     top: 0.5vh;
     left: 0.7vw
 }
-
 .req-iam {
     color: rgba(253, 89, 89, 1);
     position: absolute;
@@ -227,69 +189,14 @@ input[type=checkbox] {
     font-weight: 500;
     color: rgb(174, 172, 172);
 }
-
-.password-cont {
-    position: relative;
-}
-
-.repass {
-    width: 40vw;
-}
-
-.email {
-    width: 40vw;
-}
-
-.custom-input {
-    width: 45vw;
-    height: 9vh;
-    border-color: grey;
-    border-style: solid;
-    border-width: 2px;
-}
-
-.otp {
-    width: 40vw;
-}
-
-.passwords {
-    width: 40vw
-}
-
-.buttons {
-    width: 20vw;
-}
-
-.num-cont {
-    display: "flex";
-    justify-content: space-between;
-    width: 40vw;
-}
-
-.fullname {
-    width: 40vw;
-    height: 9vh;
-    border-color: grey;
-    border-style: solid;
-    border-width: 2px;
-}
-
-.otp-container {
-    width: 1000px;
-    height: 50vh;
-    gap: 0px;
-    opacity: 0px;
-    background: rgba(255, 255, 255, 1);
-}
-
-
-
 .right-bg-cont {
     position: absolute;
     top: 18%;
     left: 54%;
-
-
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .right-bg-head {
@@ -298,10 +205,7 @@ input[type=checkbox] {
     font-weight: 700;
     color: rgba(255, 255, 255, 1);
     margin-top: 5px;
-
     align-self: flex-end;
-
-
 }
 
 .right-bg-para {
@@ -325,42 +229,17 @@ input[type=checkbox] {
    width: 100vw;
 }
 
-.top-logo-main {
-    align-self: flex-start;
-    height: 23vh;
-    width: 9vw;
-    display: none;
-}
 
 @media (max-width:900px) {
     .main-img {
         display: none;
     }
-
-    .top-logo-main {
-        align-self: flex-start;
-        height: 13vh;
-        width: 20vw;
-        position: absolute;
-        top: 0vw;
-        left: 0vh;
-        display: block;
-    }
-
     .req {
         color: rgba(253, 89, 89, 1);
         position: absolute;
         top: 0.8vh;
         left: 1vw
     }
-
-    .req-iam {
-        color: rgba(253, 89, 89, 1);
-        position: absolute;
-        top: 0.8vh;
-        left: 1vw
-    }
-
     .main-cont {
         background-color: #F3F3F3;
     }
@@ -407,6 +286,7 @@ input[type=checkbox] {
 
     .form-control.genderss.number {
         width: 46vw;
+        position:relative
     }
 
     .number-cont {
@@ -427,19 +307,11 @@ input[type=checkbox] {
         height: 10vh;
         width: auto;
     }
-
-    .check-1 {
-        margin-top: -10px;
-        border-radius: 10px;
-        height: 10vh
-    }
-
     .check-2 {
         margin-top: -12px;
         border-radius: 10px;
         height: 10vh
     }
-
     .form.next-button {
         width: 30vw;
         height: 7vh;
@@ -447,6 +319,16 @@ input[type=checkbox] {
         font-size: large;
         font-weight: bold;
         background-color: rgb(121, 1, 37)
+    }
+    .right-bg-cont {
+        display:none;
+        position: absolute;
+        top: 18%;
+        left: 54%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 }
 @media (min-width:300px) and (max-width:700px) {
@@ -463,6 +345,7 @@ input[type=checkbox] {
 
     .form-control.genderss.number {
         width: 40vw;
+        position: relative;
     }
 }
 .modal-body {
@@ -515,10 +398,7 @@ input[type=checkbox] {
     line-height: 21px;
     text-align: left;
 }
-.didnt-span {
-    color: rgb(121, 1, 37);
-    text-decoration: underline;
-}
+
 .verify-button {
     width: 9vw;
     height: 5vh;
@@ -534,12 +414,7 @@ input[type=checkbox] {
     line-height: 21px;
     text-align: center;
 }
-.verify-head {
-    font-family: Poppins;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 30px;
-}
+
 .verified-para {
     font-size: 14.58px;
     font-weight: 400;
