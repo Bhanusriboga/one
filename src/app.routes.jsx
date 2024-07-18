@@ -23,7 +23,7 @@ const Routes = () => {
                 <Route path="/dashboard">
                     {signedUp?<Dashboard/>:<Redirect to="/signUp"></Redirect>}
                 </Route>
-                
+                <Redirect path='/' to="login"></Redirect>
             </Switch>
         </>
     )
