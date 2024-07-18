@@ -3,7 +3,7 @@ import { Input, Button, Modal, ModalBody, ModalHeader, Form, FormGroup } from 'r
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./signup.css";
 import { pelli, tick, backgroundImg } from "./assets";
-import { singnup } from "../../utils/constants"
+import { singnup } from "../../utils/constants copy"
 
 const styles = {
     eyeIcon: {
@@ -174,14 +174,14 @@ const SignUp = ({ signupState, setSignedUp }) => {
             <Form onSubmit={handleSubmit} className="forms d-flex flex-column justify-content-center align-items-center">
                 <h1 className='star'>{singnup.title}</h1>
                 <div className='position-relative'>
-                    <Input placeholder={singnup.fullName} bsSize="lg" className="form-control genderss" type='singnup' onChange={handleChange} value={formData.fullname} name='fullname' onBlur={handleBlur} required title='full name is required' />
+                    <Input placeholder={singnup.fullName} bsSize="lg" className={fullNameError?"form-control genderss":"form-control genderss mb-3"} type='singnup' onChange={handleChange} value={formData.fullname} name='fullname' onBlur={handleBlur} required title='full name is required' />
                     {formData.fullname === "" ? <p className='req'>*</p> : null}
                 </div>
                 {fullNameError && <p className='fullname-error'>please enter your full name</p>}
                 {formData.fullname === "" && displayOtp && <p className='fullname-error'>please enter your full name</p>}
-                {!fullNameError && <p> </p>}
+                
                 <div className='position-relative'>
-                    <Input type='select' className="form-control genderss select option place" value={formData.gender} onChange={handleChange} name="gender">
+                    <Input type='select' className="form-control genderss select option place mb-3" value={formData.gender} onChange={handleChange} name="gender">
                         <option value="">{singnup.gender}</option>
                         <option value="male" className="opt-color">male</option>
                         <option value="female" className="opt-color">female</option>
@@ -190,19 +190,18 @@ const SignUp = ({ signupState, setSignedUp }) => {
                     {formData.gender === "I am" ? <p className='req'>*</p> : null}
                 </div>
                 {genderError && <p className='fullname-error'>please select a gender</p>}
-                <p> </p>
+                
                 <div className='position-relative'>
-                    <Input bsSize="lg" type='email' className="form-control genderss" onChange={handleChange} value={formData.userEmail} name='userEmail' onBlur={handleBlur} placeholder={singnup.emailId} required />
+                    <Input bsSize="lg" type='email' className={!emailIdError?"form-control genderss mb-3":"form-control genderss"} onChange={handleChange} value={formData.userEmail} name='userEmail' onBlur={handleBlur} placeholder={singnup.emailId} required />
                     {formData.userEmail === "" ? <p className='req'>*</p> : null}
                 </div>
                 {emailIdError && <p className='email-error'>please enter email id</p>}
-                {!emailIdError && <p> </p>}
+              
                 <div>
                     <div className='position-relative'>
                         <Input
                             bsSize="lg"
-                            className="form-control 
-                            genderss"
+                            className={passError?"form-control genderss":"form-control genderss mb-3"}
  type={showPassword ? 'singnup' : 'password'}
                             id="passwo" onChange={handleChange}
                             onBlur={handleBlur}
@@ -223,15 +222,15 @@ const SignUp = ({ signupState, setSignedUp }) => {
                     </div>
                     
                     {passError && <p className='email-error' >please enter a password</p>}
-                    {!passError && <p> </p>}
+                   
                 </div>
                 <div className='position-relative'>
                     <div>
-                        <Input bsSize="lg" className="form-control genderss" type={rePassError ? 'singnup' : 'password'} id="reenter" onChange={handleChange} onBlur={handleBlur} name='repeatPass' value={formData.repeatPass} placeholder={singnup.reenterPassword} required />
+                        <Input bsSize="lg" className={rePassError?"form-control genderss":"form-control genderss mb-3"} type={rePassError ? 'singnup' : 'password'} id="reenter" onChange={handleChange} onBlur={handleBlur} name='repeatPass' value={formData.repeatPass} placeholder={singnup.reenterPassword} required />
                         {formData.repeatPass === "" ? <p className='req'>*</p> : null}
                     </div>
                     {repeatpassError && <p className='email-error'>please re-enter your password</p>}
-                    {!repeatpassError && <p> </p>}
+                  
                     <button
                         type="button"
                         onClick={togglePasswordVisibilities}
@@ -243,21 +242,21 @@ const SignUp = ({ signupState, setSignedUp }) => {
                 {passwordError && <div className='pass-err'>{passwordError}</div>}
                 <div className='number-cont'>
                     <FormGroup>
+
                         <Input type="select" name="select" placeholder='+91' className="form-control genderss country" >
                             <option value="+91">
                                 +91
                             </option>
                         </Input>
                     </FormGroup>
-                    <Input bsSize="lg" className="form-control genderss number" type='number' onChange={handleChange} value={formData.mobile} name='mobile' onBlur={handleBlur} placeholder={singnup.enterNumber} required />
+                    <Input bsSize="lg" className="form-control genderss number mb-2" type='number' onChange={handleChange} value={formData.mobile} name='mobile' onBlur={handleBlur} placeholder={singnup.enterNumber} required />
                     {formData.mobile === "" ? <p className='req'>*</p> : null}
                 </div>
                 {numError && <div className='pass-err'>{numError}</div>}
-                <p> </p>
                 <br />
                 <br />
                 <div className='check d-flex justify-content-space-between align-items-center align-self-start'>
-                    <input type='checkbox' onChange={onCheck} value={isChecked} className="check-2-checkin " />
+                    <input type='checkbox' onChange={onCheck} value={isChecked} className="check-2-checkin" />
                     <div className='ml-2 '>
                         <p className='para-terms' >{singnup.agreeTerms}<span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span></p>
                     </div>

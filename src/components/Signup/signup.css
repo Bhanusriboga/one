@@ -9,9 +9,13 @@
     width: 6.5vw;
     height: 8vh !important;
     text-align: left;
+    color: rgba(171, 171, 171, 1);
+
 }
+
 .form-control.genderss.country::placeholder {
     text-align: left;
+    color: rgba(171, 171, 171, 1);
 }
 .form-control.genderss.number {
     width: 28vw;
@@ -84,18 +88,13 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
-
-
 .check-1 {
     margin-top: -10px;
     border-radius: 10px;
 }
-
 input[type=checkbox] {
     -webkit-transform: scale(1.2);
 }
-
 .check-2-checkin {
     margin-top: -12px;
     border-radius: 15px;
@@ -134,17 +133,20 @@ input[type=checkbox] {
     height: 8vh;
     border: 1.4px solid grey;
     color: rgb(22, 21, 21);
+    color: rgba(171, 171, 171, 1);
     font-weight: 500;
+
 }
 
 .form-control.genderss.select.option.place::placeholder {
     color: rgba(171, 171, 171, 1);
     font-family: Poppins;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 400;
     line-height: 30px;
     text-align: left;
 }
+
 
 .select-tag::placeholder {
     color: rgba(171, 171, 171, 1);
@@ -282,6 +284,7 @@ input[type=checkbox] {
 
     .form-control.genderss.country::placeholder {
         text-align: left;
+        
     }
 
     .form-control.genderss.number {
