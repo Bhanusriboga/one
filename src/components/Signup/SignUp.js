@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Input, Button, Modal, ModalBody, ModalHeader, Form, FormGroup } from 'reactstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./signup.css";
+import { useHistory } from "react-router-dom";
 import { pelli, tick, backgroundImg } from "./assets";
 import { singnup } from "../../utils/constants copy"
 
@@ -21,7 +22,8 @@ const styles = {
     }
 };
 
-const SignUp = ({ signupState, setSignedUp }) => {
+const SignUp = () => {
+    const history=useHistory()
     const [modal, setModal] = useState(false);
     const [successModal, setSuccessModal] = useState(false);
     const [displayerr, setDisplayErr] = useState(false);
@@ -68,7 +70,7 @@ const SignUp = ({ signupState, setSignedUp }) => {
     const closeBox = () => {
         setSuccessModal(false);
         setModal(false);
-
+        history.push("/dashboard")
     };
     const toggleSuccesfull = () => {
         if (formData.otp !== "") {
@@ -103,7 +105,7 @@ const SignUp = ({ signupState, setSignedUp }) => {
             setModal(true);
             setNumError("");
             setDisplayOtp(true);
-            setSignedUp(true);
+            
             toggle();
         }
     };
@@ -163,7 +165,7 @@ const SignUp = ({ signupState, setSignedUp }) => {
             </Modal>
             <Modal isOpen={successModal} size='sm' toggle={toggle}>
                 <ModalHeader toggle={toggleSuccesfull} close={closeBtn}></ModalHeader>
-                <div className='d-flex flex-column align-items-center justify-content-center'>
+                <div className='d-flex flex-column align-items-center justify-content-center text-center'>
                     <div className='d-flex align-items-center justify-content-center rounded-circle align-self-center' style={styles.verifiedIcon}>
                         <img src={tick} alt="Verified" />
                     </div>
