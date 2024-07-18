@@ -1,0 +1,86 @@
+[{
+    "name":"yuva",
+    "age":26,
+    "religion":"Hindu",
+    "cast":"OC",
+    "subcast":"Reddy",
+    "maritalstatus":"single",
+    "occupation":"corporate employee",
+    "annualincome":7.8,
+    "city":"Hyderabad",
+    "state":"Telangana"
+
+},{
+    "name":"naresh",
+    "age":28,
+    "religion":"Hindu",
+    "cast":"BC",
+    "subcast":"Nayudu",
+    "maritalstatus":"Diversed",
+    "occupation":"corporate employee",
+    "annualincome":27,
+    "city":"Karnool",
+    "state":"Andra pradesh",
+    "color":"red"
+
+},{
+    "name":"yuva",
+    "age":26,
+    "religion":"muslim",
+    "cast":"OC",
+    "subcast":"Reddy",
+    "maritalstatus":"single",
+    "occupation":"corporate employee",
+    "annualincome":7.8,
+    "city":"Hyderabad",
+    "state":"Telangana"
+
+},{
+    "name":"yuva",
+    "age":26,
+    "religion":"Hind",
+    "cast":"OC",
+    "subcast":"Reddy",
+    "maritalstatus":"single",
+    "occupation":"corporate employee",
+    "annualincome":7.8,
+    "city":"Hyderabad",
+    "state":"Telangana"
+
+},{
+    "name":"yuva",
+    "age":26,
+    "religion":"Hind",
+    "cast":"OC",
+    "subcast":"Reddy",
+    "maritalstatus":"single",
+    "occupation":"corporate employee",
+    "annualincome":7.8,
+    "city":"Hyderabad",
+    "state":"Telangana"
+
+},{
+    "name":"yuva",
+    "age":26,
+    "religion":"Hindu",
+    "cast":"OC",
+    "subcast":"Reddy",
+    "maritalstatus":"single",
+    "occupation":"corporate employee",
+    "annualincome":7.8,
+    "city":"Hyderabad",
+    "state":"Telangana"
+
+},{
+    "name":"yuva",
+    "age":26,
+    "religion":"Hindu",
+    "cast":"OC",
+    "subcast":"Naidu",
+    "maritalstatus":"single",
+    "occupation":"corporate employee",
+    "annualincome":7.8,
+    "city":"Hyderabad",
+    "state":"Telangana"
+
+}]

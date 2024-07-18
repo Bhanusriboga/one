@@ -7,10 +7,13 @@ import { MdEdit } from "react-icons/md";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './CustomSideBar.scss';
 import Settings from '../settings/Settings';
+import IgnoreUsers from '../ignoreUsers/IgnoreUsers';
+import ShortListedUsers from '../shortlistedUsers/ShortListedUsers';
+import ProfileList from '../Dashboard/ProfileList';
 import Editprofile from '../editprofile/Editprofile';
 
 const CustomSideBar = () => {
-  const [activeContent, setActiveContent] = useState('userImage');
+  const [activeContent, setActiveContent] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
  
   const buttonData = [
@@ -32,18 +35,18 @@ const CustomSideBar = () => {
       case 'editProfile':
         return <Editprofile />
       case 'ignoredUsers':
-        return <div>Ignored Users Content</div>;
+        return <IgnoreUsers/>;
       case 'shortlisted':
-        return <div>Shortlisted Content</div>;
+        return <ShortListedUsers />
       case 'settings':
         return <Settings />;
       default:
-        return null;
+        return <ProfileList />
     }
   };
 
   return (
-    <Container fluid className='outer-container'>
+    <Container fluid className='outer-container mt-4'>
       <Row className='row'>
         <Col xs="12" className="d-flex flex-row justify-content-between d-md-none">
           <Button className="bg-transparent border-0" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
@@ -53,7 +56,7 @@ const CustomSideBar = () => {
                <MdEdit className='add'/>
           </div>
         </Col>
-        <Col xs="12" md="3" className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+        <Col xs={isSidebarOpen?"12":"3"} className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
           <div className='image-container1'>
             <Button className='d-flex align-item-center justify-content-center border-0 position-absolute bottom-0 add'>
               Add
@@ -64,14 +67,15 @@ const CustomSideBar = () => {
             <div key={button.id} className='button-parent'>
               <Button block="true" className="bg-transparent border-0 text-warning" onClick={() => setActiveContent(button.id)}>
                 {button.label}
-              </Button>
+              </Button> 
               {index !== buttonData.length - 1 && <hr className='hr' />}
             </div>
           ))}
         </Col>
-          <Col xs="12" md="9"  data-testid="content">
-          <RenderContent />
-        </Col>
+        <Col xs="12" md="9" className="content ml-4 pt-0" data-testid="content">
+        {activeContent !== ''?<button onClick={() => setActiveContent('')}>back</button>:null}
+          <RenderContent/>
+        </Col>  
       </Row>
     </Container>
   );
