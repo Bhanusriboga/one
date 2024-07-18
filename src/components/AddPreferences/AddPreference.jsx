@@ -1,5 +1,6 @@
-import React, { useEffect , useState } from "react";
+import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
+import { addPreference } from "../../utils/constants";
 import {
   Button,
   Form,
@@ -9,7 +10,6 @@ import {
   FormFeedback,
 } from "reactstrap";
 import "./Preference.css";
-import { addPreference } from "../../utils/constants";
 import {
   MinHeight,
   MaxHeight,
@@ -34,79 +34,70 @@ const AddPreference = () => {
     profileCreatedFor: {
       value: "",
       invalid: false,
-      message: addPreference.profileCreatedFor,
+      message: addPreference.ProfileCreatedFor,
     },
-    minAge: { value: "", invalid: false, message:addPreference.minAge}, 
-    maxAge: { value: "", invalid: false, message: addPreference.maxAge},
-    minHeight: {
-      value: "",
-      invalid: false,
-      message:addPreference.minHeight,
-    },
-    maxHeight: {
-      value: "",
-      invalid: false,
-      message: addPreference.maxHeight
-    },
+    minAge: { value: "", invalid: false, message: addPreference.MinAge },
+    maxAge: { value: "", invalid: false, message: addPreference.MaxAge },
+    minHeight: { value: "", invalid: false, message: addPreference.MinHeight },
+    maxHeight: { value: "", invalid: false, message: addPreference.MaxHeight },
     motherTongue: {
       value: "",
       invalid: false,
-      message: addPreference.motherTongue,
+      message: addPreference.MotherTongue,
     },
-    religion: { value: "", invalid: false, message: addPreference.religion },
-    caste: { value: "", invalid: false, message:addPreference.caste },
-    star: { value: "", invalid: false, message: addPreference.star },
-    dosham: { value: "", invalid: false, message: addPreference.dosham },
-    education: { value: "", invalid: false, message: addPreference.education },
+    religion: { value: "", invalid: false, message: addPreference.Religion },
+    caste: { value: "", invalid: false, message: addPreference.Caste },
+    star: { value: "", invalid: false, message: addPreference.Star },
+    dosham: { value: "", invalid: false, message: addPreference.Dosham },
+    education: { value: "", invalid: false, message: addPreference.Education },
     occupation: {
       value: "",
       invalid: false,
-      message: addPreference.occupation,
+      message: addPreference.Occupation,
     },
     employment: {
       value: "",
       invalid: false,
-      message: addPreference.employment,
+      message: addPreference.Employment,
     },
     annualIncome: {
       value: "",
       invalid: false,
-      message: addPreference.annualIncome,
+      message: addPreference.AnnualIncome,
     },
-    city: { value: "", invalid: false, message: addPreference. city},
-    state: { value: "", invalid: false, message: addPreference. state},
-    country: { value: "", invalid: false, message: addPreference. country},
+    city: { value: "", invalid: false, message: addPreference.City },
+    state: { value: "", invalid: false, message: addPreference.State },
+    country: { value: "", invalid: false, message: addPreference.Country },
     maritalStatus: {
       value: "",
       invalid: false,
-      message: addPreference. maritalStatus,
+      message: addPreference.MaritalStatus,
     },
     disability: {
       value: "",
       invalid: false,
-      message: addPreference. disability,
+      message: addPreference.Disability,
     },
     drinkingHabits: {
       value: "",
       invalid: false,
-      message: addPreference. drinkingHabits,
+      message: addPreference. DrinkingHabits,
     },
     smokingHabits: {
       value: "",
       invalid: false,
-      message: addPreference. smokingHabits,
+      message: addPreference.SmokingHabits,
     },
     eatingHabits: {
       value: "",
       invalid: false,
-      message: addPreference. eatingHabits,
+      message: addPreference.EatingHabits,
     },
   });
 
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleBlur = () => {
-    console.log({ validation });
     let newValidation = { ...validation };
     const firstInvalidField = Object.keys(newValidation).find((key) => {
       return validation[key].value === "" || validation[key].value === "Select";
@@ -135,14 +126,14 @@ const AddPreference = () => {
     });
   };
 
-  const handleSubmit = (event) =>{
+  const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     let newValidation = { ...validation };
     let firstInvalidField = null;
-    for (let field of Object.keys(validation)){
+    for (let field of Object.keys(validation)) {
       const fieldElement = form[field];
-      if (!fieldElement.value) {
+      if (fieldElement.value==""||fieldElement.value=="select") {
         if (!firstInvalidField) {
           firstInvalidField = field;
         }
@@ -160,13 +151,13 @@ const AddPreference = () => {
     <div>
       <Form noValidate onSubmit={handleSubmit}>
         <div className="mobile-view">
-          <FaArrowLeft className="arrow"/>
+          <FaArrowLeft className="arrow" />
           <h2 className="preference">{addPreference.hedding}</h2>
         </div>
         <div className="backgroundImg">
           <FormGroup className="religion-text">
             <Label for="profileCreatedFor">
-              <h5 className="profile">{addPreference.Profilecreatedfor}</h5>
+              <h5 className="profile">{addPreference.profile}</h5>
             </Label>
             <Input
               className={"input-height"}
@@ -189,9 +180,9 @@ const AddPreference = () => {
                 selected
                 disabled={validation.profileCreatedFor.value !== ""}
               >
-                Select
+                {addPreference.select}
               </option>
-              {ProfileCreatedFor.map((item, id) =>(
+              {ProfileCreatedFor.map((item, id) => (
                 <option key={id} value={item}>
                   {item}
                 </option>
@@ -201,7 +192,6 @@ const AddPreference = () => {
               {validation.profileCreatedFor.invalid && errorMessage}
             </FormFeedback>
           </FormGroup>
-
           <div className="religion">
             <FormGroup className="minmaxage">
               <Label for="minAge">
@@ -225,7 +215,7 @@ const AddPreference = () => {
             </FormGroup>
             <FormGroup className="minmaxage">
               <Label for="maxAge">
-                <h5 className="profile">{addPreference. maxage}</h5>
+                <h5 className="profile">{addPreference.maxage}</h5>
               </Label>
               <Input
                 type="number"
@@ -244,11 +234,10 @@ const AddPreference = () => {
               </FormFeedback>
             </FormGroup>
           </div>
-
           <div className="religion">
             <FormGroup className="minmaxage">
               <Label for="minHeight">
-                <h5 className="profile">{addPreference. minHight}</h5>
+                <h5 className="profile">{addPreference.minheight}</h5>
               </Label>
               <Input
                 style={
@@ -271,7 +260,7 @@ const AddPreference = () => {
                   selected
                   disabled={validation.minHeight.value !== ""}
                 >
-                  Select
+                  {addPreference.select}
                 </option>
                 {MinHeight.map((item, id) => (
                   <option key={id} value={item}>
@@ -286,7 +275,7 @@ const AddPreference = () => {
 
             <FormGroup className="minmaxage">
               <Label for="maxHeight">
-                <h5 className="profile">{addPreference. maxHight}</h5>
+                <h5 className="profile">{addPreference.maxheight}</h5>
               </Label>
               <Input
                 style={
@@ -309,7 +298,7 @@ const AddPreference = () => {
                   selected
                   disabled={validation.maxHeight.value !== ""}
                 >
-                  Select
+                  {addPreference.select}
                 </option>
                 {MaxHeight.map((item, id) => (
                   <option key={id} value={item}>
@@ -322,10 +311,9 @@ const AddPreference = () => {
               </FormFeedback>
             </FormGroup>
           </div>
-
           <FormGroup className="religion-text">
             <Label for="motherTongue">
-              <h5 className="profile">{addPreference. motherTongue}</h5>
+              <h5 className="profile">{addPreference.mothertongue}</h5>
             </Label>
             <Input
               style={
@@ -348,7 +336,7 @@ const AddPreference = () => {
                 selected
                 disabled={validation.motherTongue.value !== ""}
               >
-                Select
+                {addPreference.select}
               </option>
               {MotherTongue.map((item, id) => (
                 <option key={id} value={item}>
@@ -360,11 +348,10 @@ const AddPreference = () => {
               {validation.motherTongue.invalid && errorMessage}
             </FormFeedback>
           </FormGroup>
-
           <div className="religion">
             <FormGroup className="religion-text">
               <Label for="religion">
-                <h5 className="profile">{addPreference. religion}</h5>
+                <h5 className="profile">{addPreference.religion}</h5>
               </Label>
               <Input
                 style={
@@ -387,7 +374,7 @@ const AddPreference = () => {
                   selected
                   disabled={validation.religion.value !== ""}
                 >
-                  Select
+                  {addPreference.select}
                 </option>
                 {Religion.map((item, id) => (
                   <option key={id} value={item}>
@@ -399,109 +386,107 @@ const AddPreference = () => {
                 {validation.religion.invalid && errorMessage}
               </FormFeedback>
             </FormGroup>
+            <FormGroup className="religion-text">
+              <Label for="caste">
+                <h5 className="profile">{addPreference.caste}</h5>
+              </Label>
+              <Input
+                type="text"
+                placeholder="Enter"
+                className="input-height"
+                id="caste"
+                name="caste"
+                onBlur={handleBlur}
+                onChange={handleInputChange}
+                required
+                invalid={validation.caste.invalid}
+                value={validation.caste.value}
+              />
+              <FormFeedback>
+                {validation.caste.invalid && errorMessage}
+              </FormFeedback>
+            </FormGroup>
           </div>
-          <FormGroup className="religion-text">
-            <Label for="caste">
-              <h5 className="profile">{addPreference.caste}</h5>
-            </Label>
-            <Input
-              type="text"
-              placeholder="Enter"
-              className="input-height"
-              id="caste"
-              name="caste"
-              onBlur={handleBlur}
-              onChange={handleInputChange}
-              required
-              invalid={validation.caste.invalid}
-              value={validation.caste.value}
-            />
-            <FormFeedback>
-              {validation.caste.invalid && errorMessage}
-            </FormFeedback>
-          </FormGroup>
-        </div>
-        <div className="religion">
-          <FormGroup className="religion-text">
-            <Label for="star">
-              <h5 className="profile">{addPreference. star}</h5>
-            </Label>
-            <Input
-              style={
-                validation.star.value == ""
-                  ? { color: "rgba(172, 172, 172, 1)" }
-                  : { color: "#000" }
-              }
-              type="select"
-              className="input-height"
-              id="star"
-              name="star"
-              onBlur={handleBlur}
-              onChange={handleInputChange}
-              required
-              invalid={validation.star.invalid}
-              value={validation.star.value}
-            >
-              <option
-                value={"Select"}
-                selected
-                disabled={validation.star.value !== ""}
+          <div className="religion">
+            <FormGroup className="religion-text">
+              <Label for="star">
+                <h5 className="profile">{addPreference.star}</h5>
+              </Label>
+              <Input
+                style={
+                  validation.star.value == ""
+                    ? { color: "rgba(172, 172, 172, 1)" }
+                    : { color: "#000" }
+                }
+                type="select"
+                className="input-height"
+                id="star"
+                name="star"
+                onBlur={handleBlur}
+                onChange={handleInputChange}
+                required
+                invalid={validation.star.invalid}
+                value={validation.star.value}
               >
-                Select
-              </option>
-              {Star.map((item, id) => (
-                <option key={id} value={item}>
-                  {item}
+                <option
+                  value={"Select"}
+                  selected
+                  disabled={validation.star.value !== ""}
+                >
+                  {addPreference.select}
                 </option>
-              ))}
-            </Input>
-            <FormFeedback>
-              {validation.star.invalid && errorMessage}
-            </FormFeedback>
-          </FormGroup>
-
-          <FormGroup className="religion-text">
-            <Label for="dosham">
-              <h5 className="profile">{addPreference.dosham}</h5>
-            </Label>
-            <Input
-              style={
-                validation.dosham.value == ""
-                  ? { color: "rgba(172, 172, 172, 1)" }
-                  : { color: "#000" }
-              }
-              type="select"
-              className="input-height"
-              id="dosham"
-              name="dosham"
-              onBlur={handleBlur}
-              onChange={handleInputChange}
-              required
-              invalid={validation.dosham.invalid}
-              value={validation.dosham.value}
-            >
-              <option
-                value={"Select"}
-                selected
-                disabled={validation.dosham.value !== ""}
+                {Star.map((item, id) => (
+                  <option key={id} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </Input>
+              <FormFeedback>
+                {validation.star.invalid && errorMessage}
+              </FormFeedback>
+            </FormGroup>
+            <FormGroup className="religion-text">
+              <Label for="dosham">
+                <h5 className="profile">{addPreference.dosham}</h5>
+              </Label>
+              <Input
+                style={
+                  validation.dosham.value == ""
+                    ? { color: "rgba(172, 172, 172, 1)" }
+                    : { color: "#000" }
+                }
+                type="select"
+                className="input-height"
+                id="dosham"
+                name="dosham"
+                onBlur={handleBlur}
+                onChange={handleInputChange}
+                required
+                invalid={validation.dosham.invalid}
+                value={validation.dosham.value}
               >
-                Select
-              </option>
-              {Dosham.map((item, id) => (
-                <option key={id} value={item}>
-                  {item}
+                <option
+                  value={"Select"}
+                  selected
+                  disabled={validation.dosham.value !== ""}
+                >
+                  {addPreference.select}
                 </option>
-              ))}
-            </Input>
-            <FormFeedback>
-              {validation.dosham.invalid && errorMessage}
-            </FormFeedback>
-          </FormGroup>
+                {Dosham.map((item, id) => (
+                  <option key={id} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </Input>
+              <FormFeedback>
+                {validation.dosham.invalid && errorMessage}
+              </FormFeedback>
+            </FormGroup>
+          </div>
         </div>
-
         <FormGroup className="profile-field-input">
           <Label for="education">
-            <h5 className="profile">{addPreference. education}</h5>
+            <h5 className="profile">{addPreference.education}</h5>
           </Label>
           <Input
             style={
@@ -524,7 +509,7 @@ const AddPreference = () => {
               selected
               disabled={validation.education.value !== ""}
             >
-              Select
+              {addPreference.select}
             </option>
             {Education.map((item, id) => (
               <option key={id} value={item}>
@@ -562,7 +547,7 @@ const AddPreference = () => {
                 selected
                 disabled={validation.occupation.value !== ""}
               >
-                Select
+                {addPreference.select}
               </option>
               {Occupation.map((item, id) => (
                 <option key={id} value={item}>
@@ -577,7 +562,7 @@ const AddPreference = () => {
 
           <FormGroup className="religion-text">
             <Label for="employment">
-              <h5 className="profile">{addPreference.employment}</h5>
+              <h5 className="profile">{addPreference.employmentstatus}</h5>
             </Label>
             <Input
               style={
@@ -600,7 +585,7 @@ const AddPreference = () => {
                 selected
                 disabled={validation.employment.value !== ""}
               >
-                Select
+                {addPreference.select}
               </option>
               {Employeement.map((item, id) => (
                 <option key={id} value={item}>
@@ -614,10 +599,9 @@ const AddPreference = () => {
           </FormGroup>
         </div>
         <div className="religion">
-         
           <FormGroup className="religion-text">
             <Label for="annualIncome">
-              <h5 className="profile">{addPreference.annualIncome}</h5>
+              <h5 className="profile">{addPreference.annualincome}</h5>
             </Label>
             <Input
               style={
@@ -640,7 +624,7 @@ const AddPreference = () => {
                 selected
                 disabled={validation.annualIncome.value !== ""}
               >
-                Select
+                {addPreference.select}
               </option>
               {AnnualIncome.map((item, id) => (
                 <option key={id} value={item}>
@@ -717,7 +701,7 @@ const AddPreference = () => {
         </div>
         <FormGroup className="profile-field-input">
           <Label for="maritalStatus">
-            <h5 className="profile">{addPreference.maritalStatus}</h5>
+            <h5 className="profile">{addPreference.maritalstatus}</h5>
           </Label>
           <Input
             style={
@@ -740,7 +724,7 @@ const AddPreference = () => {
               selected
               disabled={validation.maritalStatus.value !== ""}
             >
-              Select
+              {addPreference.select}
             </option>
             {MaritalStatus.map((item, id) => (
               <option key={id} value={item}>
@@ -777,7 +761,7 @@ const AddPreference = () => {
               selected
               disabled={validation.disability.value !== ""}
             >
-              Select
+              {addPreference.select}
             </option>
             {Disability.map((item, id) => (
               <option key={id} value={item}>
@@ -791,7 +775,7 @@ const AddPreference = () => {
         </FormGroup>
         <FormGroup className="profile-field-input">
           <Label for="drinkingHabits">
-            <h5 className="profile">{addPreference.drinkingHabits}</h5>
+            <h5 className="profile">{addPreference.drinkinghabits}</h5>
           </Label>
           <Input
             style={
@@ -814,7 +798,7 @@ const AddPreference = () => {
               selected
               disabled={validation.drinkingHabits.value !== ""}
             >
-              Select
+              {addPreference.select}
             </option>
             {DrinkingHabits.map((item, id) => (
               <option key={id} value={item}>
@@ -823,12 +807,12 @@ const AddPreference = () => {
             ))}
           </Input>
           <FormFeedback>
-            {validation.disability.invalid && errorMessage}
+            {validation. drinkingHabits.invalid && errorMessage}
           </FormFeedback>
         </FormGroup>
         <FormGroup className="profile-field-input">
           <Label for="smokingHabits">
-            <h5 className="profile">{addPreference.smokingHabits}</h5>
+            <h5 className="profile">{addPreference.smokinghabits}</h5>
           </Label>
           <Input
             style={
@@ -851,7 +835,7 @@ const AddPreference = () => {
               selected
               disabled={validation.smokingHabits.value !== ""}
             >
-              Select
+              {addPreference.select}
             </option>
             {SmokingHabits.map((item, id) => (
               <option key={id} value={item}>
@@ -865,7 +849,7 @@ const AddPreference = () => {
         </FormGroup>
         <FormGroup className="profile-field-input">
           <Label for="eatingHabits">
-            <h5 className="profile">{addPreference.eatingHabits}</h5>
+            <h5 className="profile">{addPreference.eatinghabits}</h5>
           </Label>
           <Input
             style={
@@ -888,7 +872,7 @@ const AddPreference = () => {
               selected
               disabled={validation.eatingHabits.value !== ""}
             >
-              Select
+              {addPreference.select}
             </option>
             {EatingHabits.map((item, id) => (
               <option key={id} value={item}>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, fireEvent,screen } from '@testing-library/react';
 import AddPreference from './AddPreference';
-import { CgAddR } from 'react-icons/cg';
 
 
 describe('AddPreference Component', () => {
