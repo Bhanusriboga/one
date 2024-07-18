@@ -5,12 +5,9 @@ import { users } from '../shortlistedUsers/Data';
 import { FaArrowLeft } from "react-icons/fa6";
 import './Ignoreuser.css';
 import { ignoreUserText } from '../../utils/constants';
-
 import IgnoreCard from './IgnoreCard';
 import { toast } from 'react-toastify';
 import PaginationComponent from './PaginationComponent';
-import chat from '../../Assets/chat.svg'
-
 function IgnoreUsers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [shortList, setShortList] = useState([]);

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Router,Switch } from 'react-router-dom'
+import { Route,Switch } from 'react-router-dom'
 import LoginPage from './components/Login/LoginPage'
 import ForgotPage from './components/Forgot/ForgotPage'
 import SignUp from './components/Signup/SignUp'
@@ -9,6 +9,7 @@ import CustomSideBar from './components/custom-side-bar/CustomSideBar'
 import ShortListedUsers from './components/shortlistedUsers/ShortListedUsers'
 import IgnoreUsers from './components/ignoreUsers/IgnoreUsers'
 import RegisterMain from './components/register/RegisterMain'
+import Stepper from './components/register/Stepper'
 
 const Routes = () => {
     return (
@@ -38,7 +39,11 @@ const Routes = () => {
                 <Route path='/register'>
                 <RegisterMain />
                 </Route>
+                <Route path='/stepper'>
+                    <Stepper />
+                </Route>
                 <Redirect path='/' to="login"></Redirect>
+                
             </Switch>
         </>
     )

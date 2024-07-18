@@ -83,3 +83,8 @@ export const ignoreUserText={
   ViewProfileBtn:'View Profile',
   heading1:'Shortlisted'
 }
+export  const registerMain = {
+  imgHeading:'Welcome  back to',
+  textIlaic:'pellisambhadhalu',
+  imgtext:'Our expert team provides comprehensive planning and personalized services to ensure your special day is perfect. Trust us to turn your dream wedding into reality. Contact us today!'
+}
