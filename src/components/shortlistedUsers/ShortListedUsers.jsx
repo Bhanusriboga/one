@@ -5,17 +5,20 @@ import { users } from "./Data";
 import UsersCard from "./UsersCard";
 import { FaArrowLeft } from "react-icons/fa6";
 import { ignoreUserText } from "../../utils/constants";
-
+import {useDispatch} from "react-redux"
 import "./Usercard.css";
 import { toast } from "react-toastify";
 import PaginationComponent from "../ignoreUsers/PaginationComponent";
+import { shortlistedUsersPost } from "../../redux/slices/users";
 function ShortListedUsers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [ignoreList, setIgnoreList] = useState([]);
   const [pendingIgnoreList, setPendingIgnoreList] = useState([]);
   const [usersPerPage, setUsersPerPage] = useState(10);
   const [removeFromShortList, setRemoveFromShortList] = useState([]);
-  const removeUserFromShortList = (userId) => {
+  const dispatch=useDispatch();
+  const removeUserFromShortList = async (userId) => {
+    await dispatch(shortlistedUsersPost(userId))
     setRemoveFromShortList((prevList) => [...prevList, userId]);
     toast.error("User removedmoved from shortlist! added to main list", {
       position: "top-center",

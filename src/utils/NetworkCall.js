@@ -24,7 +24,9 @@ const networkCall = async (
 ) => {
 
   const makeCall = async () => {
-      const fullUrl = /(http(s?)):\/\//i.test(url) ? url : `${baseURL}/${url}`;
+    try{
+      const fullUrl = url.startsWith('http') ? url : `${baseURL}/${url}`;
+      console.log({fullUrl})
       const defaultHeaders = {
         'Content-Type':
           data instanceof FormData ? 'multipart/form-data' : 'application/json',
@@ -38,11 +40,14 @@ const networkCall = async (
         data,
         responseType,
       };
-
+      console.log({config})
       const response = await axiosInstance(config);
       console.log('network call response', response);
-      return response.data;
-
+      return response;
+    }catch(error){
+      console.log({error})// need to remove while deploy
+      return;
+    }
   };
   return await resolve(makeCall);
 };
