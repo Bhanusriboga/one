@@ -11,7 +11,7 @@ stages:
         steps:
           - task: NodeTool@0
             inputs:
-              versionSpec: '12.x'
+              versionSpec: '10.x'
             displayName: 'Install Node.js'
           
           - script: |
@@ -25,15 +25,55 @@ stages:
               ArtifactName: 'drop'
               publishLocation: 'Container'
             displayName: 'Publish Build Artifacts'
-          - task: AzureWebApp@1
-            inputs:
-              azureSubscription: 'Azure subscription_Accumenta (c85ec78d-8a5c-478e-abc8-8c32d9ae4e05)'
-              appType: 'webApp'
-              appName: 'pr-pelisambandalu-react-Development'
-              deployToSlotOrASE: true
-              resourceGroupName: 'Pr_pellisambandalu'
-              slotName: 'production'
-              package: '$(System.DefaultWorkingDirectory)/build'
-              deploymentMethod: 'auto'
   
+  - stage: Development
+    dependsOn: Build
+    jobs:
+      - job: DeployDevelopment
+        steps:
+          - download: current
+            artifact: drop
+          
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Azure subscription_Accumenta(1)(c85ec78d-8a5c-478e-abc8-8c32d9ae4e05)'
+              appType: 'webApp'
+              WebAppName: 'Pellisambandhalu-Dev'
+              packageForLinux: '$(Pipeline.Workspace)/drop/**/*.zip'
+            displayName: 'Deploy to Development'
+
+  - stage: Staging
+    dependsOn: Development
+    jobs:
+      - job: DeployStaging
+        steps:
+          - download: current
+            artifact: drop
+          
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Azure subscription_Accumenta(1)(c85ec78d-8a5c-478e-abc8-8c32d9ae4e05)'
+              appType: 'webApp'
+              WebAppName: 'Pellisambandhalu-Staging'
+              packageForLinux: '$(Pipeline.Workspace)/drop/**/*.zip'
+            displayName: 'Deploy to Staging'
+
+  - stage: Production
+    dependsOn: Staging
+    jobs:
+      - job: DeployProduction
+        steps:
+          - download: current
+            artifact: drop
+          
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Azure subscription_Accumenta(1)(c85ec78d-8a5c-478e-abc8-8c32d9ae4e05)'
+              appType: 'webApp'
+              WebAppName: 'Pellisambandhalu'
+              packageForLinux: '$(Pipeline.Workspace)/drop/**/*.zip'
+            displayName: 'Deploy to Production'
 
