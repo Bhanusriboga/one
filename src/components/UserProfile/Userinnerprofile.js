@@ -20,8 +20,8 @@ const Userprofiles = () => {
             <Col md="5" >
                 <Card>
                     <CardBody>
-                        {ReligionDetails.map((item) => (
-                            <CardTitle className="titles">{item.value}</CardTitle>))}
+                        {ReligionDetails.map((item ,ind) => (
+                            <CardTitle className="titles" key={ind}>{item.value}</CardTitle>))}
                         <div className="row">
                             {Personal.map((user) => {
                                 return (
@@ -36,8 +36,8 @@ const Userprofiles = () => {
                 </Card>
                 <Card>
                     <CardBody>
-                        {family.map((item) => (
-                            <CardTitle className="titles">{item.value}</CardTitle>))}
+                        {family.map((item ,ind) => (
+                            <CardTitle className="titles" key={ind}>{item.value}</CardTitle>))}
                         <div className="row">
                             {familyInformation.map((user) => {
                                 return (
@@ -52,8 +52,8 @@ const Userprofiles = () => {
                 </Card>
                 <Card>
                     <CardBody>
-                        {Personals.map((item) => (
-                            <CardTitle className="titles">{item.value}</CardTitle>))}
+                        {Personals.map((item,ind) => (
+                            <CardTitle className="titles" key={ind}>{item.value}</CardTitle>))}
                         <div className="row">
                             {PersonalInformation.map((user) => {
                                 return (
@@ -77,8 +77,8 @@ const Userprofiles = () => {
             <Col md="5">
                 <Card>
                     <CardBody>
-                        {professionals.map((item) => (
-                            <CardTitle className="titles" >{item.value}</CardTitle>))}
+                        {professionals.map((item,ind) => (
+                            <CardTitle className="titles" key={ind} >{item.value}</CardTitle>))}
                         <div className="row">
                             {ProfessionalDetails.map((user) => {
                                 return (

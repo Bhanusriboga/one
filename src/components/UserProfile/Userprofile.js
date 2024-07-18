@@ -68,9 +68,9 @@ const UserProfile = () => {
     const Datac = () => (
         <CardBody className='body'>
             <div className="row">
-                {personalData.map((user) => {
+                {personalData.map((user,ind) => {
                     return (
-                        <div className='d-flex justify-content-between'>
+                        <div className='d-flex justify-content-between' key={ind}>
                             <CardText className='mb-3 w-50'>{user.key}</CardText>
                             <CardText className='mb-3 w-50'>{user.value}</CardText>
                         </div>
@@ -86,8 +86,8 @@ const UserProfile = () => {
                 <>
                     <div className='d-flex align-items-center justify-content-left'>
                         <FaArrowLeft className='pt-1 title' />
-                        {userName.map((item) => (
-                            <div className="title">
+                        {userName.map((item ,ind) => (
+                            <div className="title" key={ind}>
                                 {item.value}
                             </div>))}
                     </div>
@@ -118,12 +118,12 @@ const UserProfile = () => {
 
                 <>
                     <div className="d-flex justify-content-between align-items-center">
-                        {userName.map((item) => (
-                            <span className='text title pt-5 m-1'>{item.value}</span>))}
+                        {userName.map((item,ind) => (
+                            <span className='text title pt-5 m-1' key={ind}>{item.value}</span>))}
                         <button className='back-button align-items-center rounded'>
                             <FaArrowLeft />
-                            {buttons.map((item) => (
-                                <span className='icon-text'>{item.value}</span>))}
+                            {buttons.map((item,ind) => (
+                                <span className='icon-text' key={ind}>{item.value}</span>))}
                         </button>
                     </div>
                     <div className="row">
