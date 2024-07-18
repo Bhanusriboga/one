@@ -1,17 +1,16 @@
+
 import React, { useState } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import './Details.css';
-import { MdEdit } from "react-icons/md";
+import { MdEdit } from 'react-icons/md';
 import { EditProfile } from '../../utils/constants';
-
-
 
 const Media = () => {
   const [media, setMedia] = useState([]);
 
-  const handleAddMedia = () => {
-    const newMedia = [...media, media.length + 1];
-    setMedia(newMedia);
+  const handleAddMedia = (e) => {
+    const files = Array.from(e.target.files); 
+    setMedia([...media, ...files]); 
   };
 
   const handleRemoveMedia = (index) => {
@@ -22,21 +21,33 @@ const Media = () => {
   return (
     <Container>
       <div className="basic-main-heading">
-        <h2 className='main-heading'>{EditProfile.media}</h2>
-        <button  className="edit-btn" onClick={handleAddMedia}>{EditProfile.add}<MdEdit className='edit-icon'/></button>
+        <h2 className="main-heading">{EditProfile.media}</h2>
+        <label htmlFor="media-input" className="edit-btn">
+          {EditProfile.add}<MdEdit className='edit-icon'/>
+        </label>
+        <input
+          id="media-input"
+          type="file"
+          accept="image/*" 
+          multiple 
+          style={{ display: 'none' }}
+          onChange={handleAddMedia}
+        />
       </div>
       <div className='media-image'>
-      {media.map((item, index) => (
-          <div className="media-item">
-            <div className="media-content">
-              <button className="close-button" onClick={() => handleRemoveMedia(index)}>x</button>
-            </div>
+        {media.map((file, index) => (
+          <div className="media-item" key={index}>
+            <img
+              src={URL.createObjectURL(file)}
+              alt={`Media ${index + 1}`}
+              className="media-content"
+            />
+            <button className="close-button" onClick={() => handleRemoveMedia(index)}>x</button>
           </div>
         ))}
-      </div>  
+      </div>
     </Container>
   );
 };
 
 export default Media;
-

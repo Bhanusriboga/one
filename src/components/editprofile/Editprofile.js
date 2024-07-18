@@ -5,14 +5,12 @@ import Professionaldetails from './Professionaldetails'
 import Mediadetails from './Mediadetails'
 import { FaArrowLeft } from "react-icons/fa6"
 import { EditProfile } from '../../utils/constants'
-// import Chatbot from './Assets/Chatbot.svg'
+
  
 const Editprofile = () => {
   return (
-    <div //+++++++className=' container'
-    >
-      {/* <img src={Chatbot}/> */}
-      <div className='editprofile-tittle mb-3 d-flex '>
+    <div> 
+      <div className='editprofile-tittle mb-2 mt-3 d-flex '>
       <FaArrowLeft className='leftarrow'/>
         <h1>{EditProfile.editprofile}</h1>
       </div>
