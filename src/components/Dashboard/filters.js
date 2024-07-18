@@ -16,12 +16,12 @@ import {
 import { religion } from '../../utils/constants';
 const Filters = props => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [basicfilers, setBasicfilters] = useState({religion:"",cast:"",subcast:""})
   const [marital, setMarital] = useState('');
   const [occupation, setOccupation] = useState('');
 
   const toggle = (e) => {
     e.preventDefault()
-    console.log(e, 'testig')
     setDropdownOpen(!dropdownOpen);
   }
   const toggleSearch = (e) => {
@@ -29,8 +29,18 @@ const Filters = props => {
     // props.handleFilters()
     setDropdownOpen(false)
   };
-  const handleSelect = (e) => {
-    console.log(e.target.value, 'testig')
+  const handleBasicSearch=(e)=>{
+    e.preventDefault()
+    props.handleBasic(basicfilers)
+  }
+  const handleSelect = (e,type) => {
+    if(type === 'religion'){
+      setBasicfilters({...basicfilers,religion:e.target.value})
+    } else if(type === 'cast'){
+      setBasicfilters({...basicfilers,cast:e.target.value})
+    } else if(type === 'subcast'){
+      setBasicfilters({...basicfilers,subcast:e.target.value})
+    }
   }
 
   return (
@@ -58,13 +68,13 @@ const Filters = props => {
             </FormGroup>
           </Col>
           <Col md={2}>
-            <FormGroup onChange={(e) => handleSelect(e, "caste")}>
-              <Label for="Caste" className='fontSie'>
+            <FormGroup onChange={(e) => handleSelect(e, "cast")}>
+              <Label for="Cast" className='fontSie'>
                 Caste
               </Label>
               <Input
-                id="Caste"
-                name="Caste"
+                id="Cast"
+                name="Cast"
                 placeholder="Enter Caste"
                 className='filterInput'
               />
@@ -84,7 +94,7 @@ const Filters = props => {
             </FormGroup>
           </Col>
           <Col md={2} className='d-flex align-items-center mt-4'>
-            <Button className='seatchButton' onClick={toggleSearch}>Search</Button>
+            <Button className='seatchButton' onClick={handleBasicSearch}>Search</Button>
           </Col>
           <Col md={3} className='d-flex align-items-center mt-5'>
             <FormGroup className='mb-4'>
@@ -94,7 +104,7 @@ const Filters = props => {
                   <DropdownItem header>Marital status</DropdownItem>
                   <Form>
                     <FormGroup check={true}
-                      onChange={(e) => { setMarital(e.target.value), console.log(e.target.value, "testing") }}
+                      onChange={(e) => { setMarital(e.target.value)}}
                       className='d-flex justify-content-between px-2 maritalstatuss'
                     >
 
@@ -146,7 +156,7 @@ const Filters = props => {
                   <DropdownItem header>Occupation</DropdownItem>
                   <Form>
                     <FormGroup check={true}
-                      onChange={(e) => { setOccupation(e.target.value), console.log(e.target.value, "testing") }}
+                      onChange={(e) => { setOccupation(e.target.value)}}
                       className='d-flex justify-content-between px-2 maritalstatuss'
                     >
                       <div>
