@@ -1,4 +1,3 @@
-
 .number-cont {
     display: flex;
     justify-content: space-between;
@@ -10,9 +9,7 @@
     height: 8vh !important;
     text-align: left;
     color: rgba(171, 171, 171, 1);
-
 }
-
 .form-control.genderss.country::placeholder {
     text-align: left;
     color: rgba(171, 171, 171, 1);
@@ -26,20 +23,16 @@
     top: 11vh;
     left: 3vw;
 }
-
 .main-img {
     min-height: 130vh;
     width: 100vw;
 }
-
 .main-cont {
     position: relative;
     height: 130vh;
     overflow-x: hidden;
     width: 100vw;
 }
-
-
 .star {
     font-family: Poppins;
     font-size: 44px;
@@ -65,19 +58,18 @@
     font-family: monospace;
     align-self: flex-start
 }
-
 .eye-icon-1 {
     top: 30%;
     transform: translateY(-35%);
 }
-.eye{
+.eye {
     position: absolute;
     right: 10px;
     background-color: transparent;
     border: none;
     cursor: pointer;
     outline: none;
-    top:32%
+    top: 32%
 }
 .eye-icon-2 {
     top: 45%;
@@ -102,15 +94,12 @@ input[type=checkbox] {
     font-size: 110%;
     display: inline;
 }
-
 .span-class {
     color: #117FFF;
 }
-
 .already-login {
     color: rgb(121, 1, 37)
 }
-
 .form-control.genderss {
     width: 38vw;
     height: 8vh;
@@ -118,7 +107,6 @@ input[type=checkbox] {
     color: rgb(22, 21, 21);
     font-weight: 500;
 }
-
 .form-control.genderss::placeholder {
     color: rgba(171, 171, 171, 1);
     font-family: Poppins;
@@ -127,7 +115,6 @@ input[type=checkbox] {
     line-height: 30px;
     text-align: left;
 }
-
 .form-control.genderss.select.option.place {
     width: 38vw;
     height: 8vh;
@@ -135,9 +122,7 @@ input[type=checkbox] {
     color: rgb(22, 21, 21);
     color: rgba(171, 171, 171, 1);
     font-weight: 500;
-
 }
-
 .form-control.genderss.select.option.place::placeholder {
     color: rgba(171, 171, 171, 1);
     font-family: Poppins;
@@ -146,8 +131,6 @@ input[type=checkbox] {
     line-height: 30px;
     text-align: left;
 }
-
-
 .select-tag::placeholder {
     color: rgba(171, 171, 171, 1);
     font-family: Poppins;
@@ -185,7 +168,6 @@ input[type=checkbox] {
     top: 0.5vh;
     left: 0.5vw
 }
-
 .form.otpbox::placeholder {
     font-size: 20px;
     font-weight: 500;
@@ -200,7 +182,6 @@ input[type=checkbox] {
     justify-content: flex-start;
     align-items: flex-start;
 }
-
 .right-bg-head {
     font-family: Poppins;
     font-size: 2.19vw;
@@ -209,7 +190,6 @@ input[type=checkbox] {
     margin-top: 5px;
     align-self: flex-end;
 }
-
 .right-bg-para {
     font-family: Poppins;
     font-size: 1.6vw;
@@ -219,19 +199,15 @@ input[type=checkbox] {
     padding-top: 0.5vw;
     width: 38vw;
 }
-
 .pellisambandalu {
     margin-left: -6px;
     width: 20vw;
     align-self: flex-start;
     justify-self: flex-start;
 }
-
-.para-terms{
-   width: 100vw;
+.para-terms {
+    width: 100vw;
 }
-
-
 @media (max-width:900px) {
     .main-img {
         display: none;
@@ -245,7 +221,6 @@ input[type=checkbox] {
     .main-cont {
         background-color: #F3F3F3;
     }
-
     .right-bg-head {
         display: none;
     }
@@ -263,7 +238,7 @@ input[type=checkbox] {
         font-weight: 500;
     }
     .pellisambandalu {
-        display:none;
+        display: none;
         margin-left: -6px;
         width: 20vw;
         align-self: flex-start;
@@ -276,28 +251,23 @@ input[type=checkbox] {
         color: rgb(22, 21, 21);
         font-weight: 500;
     }
-
     .form-control.genderss.country {
         width: 10vw;
         text-align: center;
     }
-
     .form-control.genderss.country::placeholder {
         text-align: left;
-        
-    }
 
+    }
     .form-control.genderss.number {
         width: 46vw;
-        position:relative
+        position: relative
     }
-
     .number-cont {
         display: flex;
         justify-content: space-between;
         width: 60vw;
     }
-
     .forms {
         margin-right: 5vw;
         position: absolute;
@@ -305,7 +275,6 @@ input[type=checkbox] {
         left: 22vw;
         width: 60vw;
     }
-
     .check {
         height: 10vh;
         width: auto;
@@ -324,7 +293,7 @@ input[type=checkbox] {
         background-color: rgb(121, 1, 37)
     }
     .right-bg-cont {
-        display:none;
+        display: none;
         position: absolute;
         top: 18%;
         left: 54%;
@@ -335,15 +304,16 @@ input[type=checkbox] {
     }
 }
 @media (min-width:300px) and (max-width:700px) {
-
     .form-control.genderss.country {
         width: 18vw;
         text-align: center;
     }
+
     .form-control.genderss.country::placeholder {
         text-align: left;
         font-size: medium
     }
+
     .form-control.genderss.number {
         width: 40vw;
         position: relative;
@@ -387,11 +357,9 @@ input[type=checkbox] {
     border-radius: 9px;
     opacity: 0px;
 }
-
 .otp-input::placeholder {
     text-align: center;
 }
-
 .didnt {
     font-family: Poppins;
     font-size: 14px;
@@ -399,7 +367,6 @@ input[type=checkbox] {
     line-height: 21px;
     text-align: left;
 }
-
 .verify-button {
     width: 9vw;
     height: 5vh;
@@ -415,7 +382,6 @@ input[type=checkbox] {
     line-height: 21px;
     text-align: center;
 }
-
 .verified-para {
     font-size: 14.58px;
     font-weight: 400;

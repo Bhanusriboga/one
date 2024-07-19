@@ -5,7 +5,6 @@ import "./signup.css";
 import { useHistory } from "react-router-dom";
 import { pelli, tick, backgroundImg } from "./assets";
 import { singnup } from "../../utils/constants copy"
-
 const styles = {
     eyeIcon: {
         position: "absolute",
@@ -23,7 +22,7 @@ const styles = {
 };
 
 const SignUp = () => {
-    const history=useHistory()
+    const history = useHistory()
     const [modal, setModal] = useState(false);
     const [successModal, setSuccessModal] = useState(false);
     const [displayerr, setDisplayErr] = useState(false);
@@ -41,7 +40,6 @@ const SignUp = () => {
         gender: "I am",
         otp: "",
     });
-
     const [emailIdError, setEmailIdError] = useState(false);
     const [repeatpassError, setRepeatPassError] = useState(false);
     const [passError, setPassError] = useState(false);
@@ -64,9 +62,7 @@ const SignUp = () => {
             setBtnCondition(false);
         }
     }, [formData]);
-
     const toggle = () => setModal(!modal);
-
     const closeBox = () => {
         setSuccessModal(false);
         setModal(false);
@@ -84,11 +80,8 @@ const SignUp = () => {
             setModal(true);
         }
     };
-
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
-
     const togglePasswordVisibilities = () => setRePassError(!rePassError);
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setDisplayOtp(true);
@@ -105,13 +98,10 @@ const SignUp = () => {
             setModal(true);
             setNumError("");
             setDisplayOtp(true);
-            
             toggle();
         }
     };
-
     const onCheck = (e) => setIsChecked(e.target.checked);
-
     const handleBlur = (e) => {
         switch (e.target.name) {
             case "userEmail":
@@ -136,21 +126,18 @@ const SignUp = () => {
                 break;
         }
     };
-
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
     };
-
     const closeBtn = (
         <button className="close" onClick={closeBox} type="button">
             &times;
         </button>
     );
-
     return (
         <div className='main-cont'>
-            <img src={backgroundImg} className='main-img' alt="Background"/>
+            <img src={backgroundImg} className='main-img' alt="Background" />
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalBody className="d-flex flex-column align-items-center justify-content-center">
                     <h5 className='otp-head'>{singnup.otpVerification}</h5>
@@ -176,12 +163,12 @@ const SignUp = () => {
             <Form onSubmit={handleSubmit} className="forms d-flex flex-column justify-content-center align-items-center">
                 <h1 className='star'>{singnup.title}</h1>
                 <div className='position-relative'>
-                    <Input placeholder={singnup.fullName} bsSize="lg" className={fullNameError?"form-control genderss":"form-control genderss mb-3"} type='singnup' onChange={handleChange} value={formData.fullname} name='fullname' onBlur={handleBlur} required title='full name is required' />
+                    <Input placeholder={singnup.fullName} bsSize="lg" className={fullNameError ? "form-control genderss" : "form-control genderss mb-3"} type='singnup' onChange={handleChange} value={formData.fullname} name='fullname' onBlur={handleBlur} required title='full name is required' />
                     {formData.fullname === "" ? <p className='req'>*</p> : null}
                 </div>
                 {fullNameError && <p className='fullname-error'>please enter your full name</p>}
                 {formData.fullname === "" && displayOtp && <p className='fullname-error'>please enter your full name</p>}
-                
+
                 <div className='position-relative'>
                     <Input type='select' className="form-control genderss select option place mb-3" value={formData.gender} onChange={handleChange} name="gender">
                         <option value="">{singnup.gender}</option>
@@ -192,19 +179,17 @@ const SignUp = () => {
                     {formData.gender === "I am" ? <p className='req'>*</p> : null}
                 </div>
                 {genderError && <p className='fullname-error'>please select a gender</p>}
-                
                 <div className='position-relative'>
-                    <Input bsSize="lg" type='email' className={!emailIdError?"form-control genderss mb-3":"form-control genderss"} onChange={handleChange} value={formData.userEmail} name='userEmail' onBlur={handleBlur} placeholder={singnup.emailId} required />
+                    <Input bsSize="lg" type='email' className={!emailIdError ? "form-control genderss mb-3" : "form-control genderss"} onChange={handleChange} value={formData.userEmail} name='userEmail' onBlur={handleBlur} placeholder={singnup.emailId} required />
                     {formData.userEmail === "" ? <p className='req'>*</p> : null}
                 </div>
                 {emailIdError && <p className='email-error'>please enter email id</p>}
-              
                 <div>
                     <div className='position-relative'>
                         <Input
                             bsSize="lg"
-                            className={passError?"form-control genderss":"form-control genderss mb-3"}
- type={showPassword ? 'singnup' : 'password'}
+                            className={passError ? "form-control genderss" : "form-control genderss mb-3"}
+                            type={showPassword ? 'singnup' : 'password'}
                             id="passwo" onChange={handleChange}
                             onBlur={handleBlur}
                             name='userPass'
@@ -222,21 +207,20 @@ const SignUp = () => {
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                     </div>
-                    
-                    {passError && <p className='email-error' >please enter a password</p>}
-                   
+
+                    {passError && <p className='email-error'>{singnup.passwordError}</p>}
+
                 </div>
                 <div className='position-relative'>
                     <div>
-                        <Input bsSize="lg" className={rePassError?"form-control genderss":"form-control genderss mb-3"} type={rePassError ? 'singnup' : 'password'} id="reenter" onChange={handleChange} onBlur={handleBlur} name='repeatPass' value={formData.repeatPass} placeholder={singnup.reenterPassword} required />
+                        <Input bsSize="lg" className={rePassError ? "form-control genderss" : "form-control genderss mb-3"} type={rePassError ? 'singnup' : 'password'} id="reenter" onChange={handleChange} onBlur={handleBlur} name='repeatPass' value={formData.repeatPass} placeholder={singnup.reenterPassword} required />
                         {formData.repeatPass === "" ? <p className='req'>*</p> : null}
                     </div>
-                    {repeatpassError && <p className='email-error'>please re-enter your password</p>}
-                  
+                    {repeatpassError && <p className='email-error'>{singnup.rePassErr}</p>}
                     <button
                         type="button"
                         onClick={togglePasswordVisibilities}
-                       className='eye eye-icon-2'
+                        className='eye eye-icon-2'
                     >
                         {rePassError ? <FaEyeSlash /> : <FaEye />}
                     </button>
@@ -244,30 +228,25 @@ const SignUp = () => {
                 {passwordError && <div className='pass-err'>{passwordError}</div>}
                 <div className='number-cont'>
                     <FormGroup>
-
                         <Input type="select" name="select" placeholder='+91' className="form-control genderss country" >
                             <option value="+91">
                                 +91
                             </option>
                         </Input>
                     </FormGroup>
-                    <Input bsSize="lg" className="form-control genderss number mb-2" type='number' onChange={handleChange} value={formData.mobile} name='mobile' onBlur={handleBlur} placeholder={singnup.enterNumber} required />
+                    <Input bsSize="lg" className="form-control genderss number mb-5" type='number' onChange={handleChange} value={formData.mobile} name='mobile' onBlur={handleBlur} placeholder={singnup.enterNumber} required />
                     {formData.mobile === "" ? <p className='req'>*</p> : null}
                 </div>
                 {numError && <div className='pass-err'>{numError}</div>}
-                <br />
-                <br />
-                <div className='check d-flex justify-content-space-between align-items-center align-self-start'>
+                <div className='check d-flex justify-content-space-between align-items-center align-self-start mb-2'>
                     <input type='checkbox' onChange={onCheck} value={isChecked} className="check-2-checkin" />
-                    <div className='ml-2 '>
+                    <div className='ml-2 mt-1'>
                         <p className='para-terms' >{singnup.agreeTerms}<span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span></p>
                     </div>
                 </div>
-                {displayOtp && <p> </p>}
-                <Button className='form next-button' type='submit' disabled={btnCondition}>
+                <Button className='form next-button mb-3' type='submit' disabled={btnCondition}>
                     {singnup.title}
                 </Button>
-                <p> </p>
                 <p className="already">{singnup.alreadyAccount}<span className='already already-login singnup-decoration-underline'>{singnup.login}</span></p>
             </Form>
             <div className='right-bg-cont'>
