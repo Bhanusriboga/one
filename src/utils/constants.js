@@ -88,3 +88,24 @@ export  const registerMain = {
   textIlaic:'pellisambhadhalu',
   imgtext:'Our expert team provides comprehensive planning and personalized services to ensure your special day is perfect. Trust us to turn your dream wedding into reality. Contact us today!'
 }
+export const registration1={
+  education:"Highest Education ",
+  field:"This field is required",
+  occupation:"Occupation*",
+  employment:"Employment Status ",
+  income:"Annual Income ",
+  year:"Year of Passing",
+  name:"Name of the institute",
+  employedinplaceholder:"EmployedIn",
+  locationplaceholder:"Work Location",
+  stateplaceholder:"State",
+  cityplaceholder:"City",
+  annualincome:" annual income field is  Required",
+  annualtext:"Annual Income",
+  date:"Date of Birth",
+  religion:"Religion",
+  mother:"Mother Tongue",
+  address:"Address",
+  link:"Skip & Register Later"
+ 
+};

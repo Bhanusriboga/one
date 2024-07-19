@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   currentStep: 1,
-  formData: {}
+  formData1: {}
 };
 
 const stepperSlice = createSlice({
@@ -20,7 +20,7 @@ const stepperSlice = createSlice({
       }
     },
     saveFormData: (state, action) => {
-      state.formData = { ...state.formData, ...action.payload };
+      state.formData1 = { ...state.formData1, ...action.payload };
     }
   },
 });
