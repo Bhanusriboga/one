@@ -3,19 +3,22 @@ import Header from './Header'
 import FooterBar from './FooterBar'
 import PageContainer from './PageContainer'
 import './Dashboard.scss'
+// import ComingSoon from '../ComingSoon/ComingSoon'
 
 const Dashboard = props => {
   return (
-    <div className='h-100'>
+    <div className='h-100 w-100 pgback'>
       <div className='pageHeader'>
         <Header/>
       </div>
-      <div className='pageContainer'>
+      <div className='pageContainer conwidth'>
+        {/* <ComingSoon/> */}
         <PageContainer/>
-      </div>
-      <div className='fixed-bottom'>
+        <div className='pageFooter'>
         <FooterBar/>
       </div>
+      </div>
+
 
     </div>
   )

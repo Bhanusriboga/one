@@ -1,0 +1,27 @@
+.pagination-custom .page-link {
+    width: 40px; /* Adjust the width as needed */
+    text-align: center;
+  }
+  
+  .pagination-custom .page-item.active .page-link {
+    background-color:#780024 ; /* Active background color */
+    color: #E0AA3E; /* Active text color */
+    border-color: #780024; /* Active border color */
+  }
+  
+  .pagination-custom .page-link:first-child,
+  .pagination-custom .page-link:last-child {
+    background-color: #f8f9fa; /* Default background color */
+  }
+  
+  .pagination-custom .page-item:first-child .page-link,
+  .pagination-custom .page-item:last-child .page-link {
+    border-radius: 5px; /* Make arrow buttons round */
+    width: 50px; /* Adjust the width as needed */
+  }
+  
+  .pagination-custom .page-item.active:first-child .page-link,
+  .pagination-custom .page-item.active:last-child .page-link {
+    background-color:#780024 ; /* Active arrow background color */
+    color: #E0AA3E; /* Active arrow text color */
+  }
