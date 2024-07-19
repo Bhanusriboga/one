@@ -51,7 +51,5 @@ export const singnup = {
   alreadyAccount: "Already have an account? ",
   welcomeBack: "Welcome back to",
   description: "Our expert team provides comprehensive planning and personalized services to ensure your special day is perfect. Trust us to turn your dream wedding into reality. Contact us today!",
-  login: "Login",
-  passwordError:"please enter a password",
-  repassErr:"please re-enter your password"
+  login: "Login"
 };

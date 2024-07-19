@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Button, Modal, ModalBody, ModalHeader, Form, FormGroup } from 'reactstrap';
+import { Input, Button, Modal, ModalBody, ModalHeader, Form, FormGroup,Container,Row,Col} from 'reactstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./signup.css";
 import { useHistory } from "react-router-dom";
 import { pelli, tick, backgroundImg } from "./assets";
-import { singnup } from "../../utils/constants copy"
+import { singnup } from "../../utils/constants"
 const styles = {
     eyeIcon: {
         position: "absolute",
@@ -34,7 +34,7 @@ const SignUp = () => {
     const [formData, setFormData] = useState({
         userEmail: "",
         userPass: "",
-        repeatPass: "",
+        repeatPass: "", 
         fullname: "",
         mobile: "",
         gender: "I am",
@@ -138,26 +138,39 @@ const SignUp = () => {
     return (
         <div className='main-cont'>
             <img src={backgroundImg} className='main-img' alt="Background" />
-            <Modal isOpen={modal} toggle={toggle}>
-                <ModalBody className="d-flex flex-column align-items-center justify-content-center">
-                    <h5 className='otp-head'>{singnup.otpVerification}</h5>
-                    <p className='otp-para'>{singnup.otpSent}</p>
-                    <input type='singnup' className='otp-input pb-2' value={formData.otp} name='otp' onChange={handleChange} placeholder={singnup.enterOtp} />
-                    {displayerr && <p className='pt-2' style={{ color: "red" }}>please enter received otp</p>}
-                    <p className='didnt'>{singnup.resendOtp}</p>
-                    <button className='verify-button' onClick={toggleSuccesfull}>
-                        {singnup.verify}
-                    </button>
-                </ModalBody>
-            </Modal>
-            <Modal isOpen={successModal} size='sm' toggle={toggle}>
-                <ModalHeader toggle={toggleSuccesfull} close={closeBtn}></ModalHeader>
+            
+            <div className='container-xl'>
+      <Modal isOpen={modal} toggle={toggle} >
+        <div className="modal-lg modal-xs">
+          <ModalBody className="d-flex flex-column align-items-center justify-content-center">
+            <h5 className='otp-head'>{singnup.otpVerification}</h5>
+            <p className='otp-para'>{singnup.otpSent}</p>
+            <Input
+              type='text'
+              className='otp-input pb-2'
+              value={formData.otp}
+              name='otp'
+              onChange={handleChange}
+              placeholder={singnup.enterOtp}
+            ></Input>
+            {displayerr && <p className='pt-2' style={{ color: "red" }}>Please enter received OTP</p>}
+            <p className='didnt'>{singnup.resendOtp}</p>
+            <Button className='verify-button' onClick={toggleSuccesfull}>
+              {singnup.verify}
+            </Button>
+          </ModalBody>
+        </div>
+      </Modal>
+    </div>
+            
+            <Modal isOpen={successModal} size='sm'   toggle={toggle}>
+                <ModalHeader toggle={toggleSuccesfull}  close={closeBtn}></ModalHeader>
                 <div className='d-flex flex-column align-items-center justify-content-center text-center'>
                     <div className='d-flex align-items-center justify-content-center rounded-circle align-self-center' style={styles.verifiedIcon}>
                         <img src={tick} alt="Verified" />
                     </div>
-                    <h5 className='verified-head singnup-center'>{singnup.verifiedSuccessfully}</h5>
-                    <p className='verified-para singnup-center'>{singnup.mobileVerified}</p>
+                    <h5 className='otp-head'>{singnup.verifiedSuccessfully}</h5>
+                    <p className='otp-para'>{singnup.mobileVerified}</p>
                 </div>
             </Modal>
             <Form onSubmit={handleSubmit} className="forms d-flex flex-column justify-content-center align-items-center">

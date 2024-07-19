@@ -327,29 +327,30 @@ input[type=checkbox] {
 }
 .otp-head {
     font-family: Poppins;
-    font-size: 36px;
+    font-size: 150%;
     font-weight: 500;
     line-height: 54px;
-    text-align: left;
+    text-align: center;
+    width: 70%;
 }
 .otp-para {
     font-family: Poppins;
-    font-size: 18px;
+    font-size: 100%;
     font-weight: 400;
     line-height: 30px;
     text-align: center;
-    width: 24vw;
+    width: 70%;
     color: rgba(82, 82, 82, 1);
 }
 .otp-input {
     text-align: center;
     border: 1px solid rgba(154, 154, 154, 1);
     font-family: Poppins;
-    font-size: 20px;
+    font-size: 100%;
     font-weight: 400;
     line-height: 30px;
     text-align: center;
-    width: 300px;
+    width: 60% !important;
     height: 50px;
     top: 343px;
     left: 491px;
@@ -362,22 +363,22 @@ input[type=checkbox] {
 }
 .didnt {
     font-family: Poppins;
-    font-size: 14px;
+    font-size: 100%;
     font-weight: 400;
     line-height: 21px;
-    text-align: left;
+    text-align: center;
+    width:70% ;
 }
 .verify-button {
-    width: 9vw;
-    height: 5vh;
+    width: 50%;
     border: none;
     gap: 0px;
     border-radius: 22.98px;
-    /* opacity: 0px; */
-    background-color: rgba(120, 0, 36, 1);
+
+    background-color: rgba(120, 0, 36, 1) !important;
     color: rgba(255, 255, 255, 1);
     font-family: Poppins;
-    font-size: 14px;
+    font-size: 100%;
     font-weight: 600;
     line-height: 21px;
     text-align: center;
