@@ -4,7 +4,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./signup.css";
 import { useHistory } from "react-router-dom";
 import { pelli, tick, backgroundImg } from "./assets";
-import { singnup } from "../../utils/constants"
+import { singnup } from "../../utils/constants copy"
 const styles = {
     eyeIcon: {
         position: "absolute",

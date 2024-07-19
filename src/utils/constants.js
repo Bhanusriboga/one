@@ -21,11 +21,13 @@ export const login={
   passwordPlaceholder:'Password',
   forgot:'Forgot password ?',
   noAccount:'Don\'t have an account? ',
-  signup:'Signup'
+  signup:'Signup',
+  otpPlaceHolder:'Please Enter OTP'
 }
 export const forgot={
   subbtn: 'Submit',
   emailPlaceholder:'Email',
+  verify:'Verify',
   passwordPlaceholder:'Password',
   forgot:'Forgot Password',
   forgotMsg:'Enter your email and we\'ll send you a link to reset your password',
@@ -51,7 +53,62 @@ export const singnup = {
   alreadyAccount: "Already have an account? ",
   welcomeBack: "Welcome back to",
   description: "Our expert team provides comprehensive planning and personalized services to ensure your special day is perfect. Trust us to turn your dream wedding into reality. Contact us today!",
+<<<<<<< HEAD
   login: "Login",
   passwordError:"please enter a password",
   repassErr:"please re-enter your password"
 };
+=======
+  login: "Login"
+};
+export const religion=[
+  'Hindu',
+  'Muslim',
+  'Cristian',
+  'Sikh',
+  'Jain',
+  'Buddist',
+  'Others'
+]
+
+export const settings={
+  settingsTitle: 'Settings',
+  changeEmailTitle: 'Change your email',
+  emailLabel: 'Email',
+  emailPlaceholder: 'Enter your email',
+  validEmailError: 'Please enter a valid email address',
+  otpPlaceholder: 'Enter OTP',
+  newMailPlaceholder: 'Enter New Mail',
+  verifyButton: 'Verify',
+  changePasswordTitle: 'Change Password',
+  currentPasswordPlaceholder: 'Enter Current Password',
+  newPasswordPlaceholder: 'Enter New Password',
+  confirmPasswordPlaceholder: 'Confirm Password',
+  passwordFieldsError: 'All password fields are required',
+  passwordMatchError: 'New Password and Confirm Password do not match',
+  savePasswordButton: 'Save Password',
+  profilePrivacyTitle: 'Your Profile Privacy',
+  profilePrivacyLabel: 'Let others know that I shortlisted their profile',
+  deleteProfileTitle: 'Delete Profile',
+  deleteProfileCheckboxLabel: 'Please choose a reason for profile deletion',
+  deleteReasonLabel: 'Reason for deletion',
+  marriedLabel: 'Married',
+  notInterestedLabel: 'Not interested',
+  logoutTitle: 'Log out',
+  logoutMessage: 'If you have any questions or need further assistance, please feel free to contact our support team',
+  logoutButton: 'Logout',
+  saveAllButton: 'Save All',
+  deleteTitle: 'Are you sure?',
+  deleteSubTitle: 'This action will permanently delete your profile data',
+  cancel: 'Cancel',
+  deleteBtn: 'Delete'
+}
+
+export const ignoreUserText={
+  heading:'Ignorelisted',
+  Age:'Age',
+  Religion:'Religion',
+  ViewProfileBtn:'View Profile',
+  heading1:'Shortlisted'
+}
+>>>>>>> 90b9f398be6d4171e435ab2c8e44e6a422fb7790
