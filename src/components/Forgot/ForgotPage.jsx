@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { Button, Modal, FormGroup,Col, ModalBody, ModalFooter,Input } from 'reactstrap';
-import { FaExclamationCircle,FaEnvelope } from "react-icons/fa";
+import { Button, Modal, FormGroup,Col, ModalBody,Input } from 'reactstrap';
+import { FaEnvelope } from "react-icons/fa";
 import { forgot,login } from '../../utils/constants';
 import '../Login/Login.scss'
 import { RxCross2 } from "react-icons/rx";
 import fogIcon from '../../Assets/forgotIcon.svg'
 import { useHistory } from "react-router-dom";
+import PropTypes from 'prop-types';
+
 const ForgotPage=(props)=> {
     const history = useHistory();
     const [submitClicked, setSubmitClicked] = useState(false)
@@ -19,7 +21,7 @@ const ForgotPage=(props)=> {
 
     }
   return (
-    <div class="d-flex justify-content-center align-items-center h-100">
+    <div className="d-flex justify-content-center align-items-center h-100">
       <Modal isOpen={props.modal} toggle={props.toggle} {...props} centered>
         <ModalBody className='fogbck'>
             <div className='d-flex justify-content-end'>
@@ -86,5 +88,8 @@ const ForgotPage=(props)=> {
      </div>
   )
 }
-
+ForgotPage.propTypes = {
+    toggle: PropTypes.func.isRequired,
+    modal: PropTypes.bool.isRequired,
+};
 export default ForgotPage
