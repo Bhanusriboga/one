@@ -5,7 +5,7 @@ import PageContainer from './PageContainer'
 import './Dashboard.scss'
 // import ComingSoon from '../ComingSoon/ComingSoon'
 
-const Dashboard = () => {
+const Dashboard = props => {
   return (
     <div className='h-100 w-100 pgback'>
       <div className='pageHeader'>

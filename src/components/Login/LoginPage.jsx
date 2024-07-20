@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import './Login.scss'
-import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
+import { Button, Input, Form, FormFeedback, InputGroup, FormGroup, Row, Col } from 'reactstrap';
 import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
 import { login } from '../../utils/constants';
 import ForgotPage from '../Forgot/ForgotPage';
 import { useHistory } from "react-router-dom";
-import {validateEmail} from "../../utils/validation"
-const LoginPage = () => {
+const LoginPage = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const history = useHistory();
     const [modal, setModal] = useState(false);
     const [emailValid, setEmailValid]= useState(true)
+    const emailreg=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     const handleeyebtn = (e) => {
         e.preventDefault()
         setShowPassword(!showPassword);
@@ -20,7 +20,7 @@ const LoginPage = () => {
         history.push('/dashboard');
     }
     const handleemail=(e)=>{
-        if(validateEmail(e.target.value)){
+        if(e.target.value.match(emailreg)){
             setEmailValid(true)
         } else{
             setEmailValid(false)
@@ -30,7 +30,7 @@ const LoginPage = () => {
     return (
         <div className='bcgimg'>
             <Form className='loginContent'>
-                <h3 className="d-flex justify-content-center align-items-center loginhead">{login.login}</h3>
+                <h3 class="d-flex justify-content-center align-items-center loginhead">{login.login}</h3>
                 <FormGroup className='mt-4 d-flex justify-content-center align-items-center '>
                     <Col sm={9} className='letterIconplace'>
                         <Input

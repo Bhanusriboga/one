@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card,CardTitle,CardText, Button} from 'reactstrap';
+import { Card,CardTitle,CardText, Button, Row,Col,Form} from 'reactstrap';
 import './ProfileList.scss'
 import { CiSquareMinus } from "react-icons/ci";
 import testjson from '../../utils/test.json'
@@ -8,7 +8,7 @@ import Filters from './filters';
 
 const ProfileList = () => {
   const [filterdata, setfilterData]=useState()
-   const handleFilters=()=>{
+   const handleFilters=(data)=>{
     
    }
    useEffect(()=>{
@@ -42,8 +42,8 @@ let updatedfilteredData=[]
       <Filters handlefilters={handleFilters} handleBasic={handleBasic}/>
       <div className="row d-flex justify-content-center align-items-center w-100 bcg">
 
-    {filterdata?.map((val,index)=>(
-         <div className="col-md-3 mr-2 cardwidth" key={index}>
+    {filterdata?.map(val=>(
+         <div className="col-md-3 mr-2 cardwidth">
         <Card
         body
         className={val?.color==='red'?"my-2 cardColorredDash":"my-2 cardColorDash"}
