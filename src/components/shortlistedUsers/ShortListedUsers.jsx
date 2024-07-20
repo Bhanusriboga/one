@@ -11,7 +11,6 @@ import { toast } from 'react-toastify';
 import PaginationComponent from '../ignoreUsers/PaginationComponent';
 
 
-
 function ShortListedUsers() {
   
   const [currentPage, setCurrentPage] = useState(1);

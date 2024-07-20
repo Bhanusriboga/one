@@ -1,9 +1,7 @@
 import React from 'react'
-import ProfileList from './ProfileList'
 import './Dashboard.scss'
-import Filters from './filters'
 import CustomSideBar from '../custom-side-bar/CustomSideBar'
-const PageContainer = props => {
+const PageContainer = () => {
   return (
     <div className='dashbcg'>
       <div className='d-flex justify-content-center'>

@@ -15,9 +15,9 @@ const SignUp = () => {
 
   })
 
-  const [token, setToken] = useState('')
+  // const [token, setToken] = useState('')
   const onSignUp = async () => {
-    const { userEmail, userPass, username } = formData
+    // const { userEmail, userPass, username } = formData
     // try {
     //     const response = await axios.post('http://192.168.29.191:8080/register', {
     //         email: { userEmail },
@@ -45,7 +45,7 @@ const SignUp = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(localStorage.getItem(token))
+    // console.log(localStorage.getItem(token))
     if (formData.userPass !== formData.repeatPass) {
       setPasswordError('Passwords do not match');
 

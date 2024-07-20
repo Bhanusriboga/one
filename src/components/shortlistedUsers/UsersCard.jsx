@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom'
-
 import './Usercard.css'
 import { Card } from 'react-bootstrap';
 import { ignoreUserText } from '../../utils/constants';

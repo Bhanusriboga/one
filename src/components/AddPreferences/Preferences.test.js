@@ -147,7 +147,6 @@ describe('AddPreference Component', () => {
 
     fireEvent.submit(getByRole('button'));
 
-    // expect(getByText(/Form submitted successfully/i)).toBeInTheDocument();
   });
 
   test('shows validation messages on submit with invalid data', () => {
