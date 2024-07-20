@@ -53,14 +53,11 @@ export const singnup = {
   alreadyAccount: "Already have an account? ",
   welcomeBack: "Welcome back to",
   description: "Our expert team provides comprehensive planning and personalized services to ensure your special day is perfect. Trust us to turn your dream wedding into reality. Contact us today!",
-<<<<<<< HEAD
   login: "Login",
   passwordError:"please enter a password",
   repassErr:"please re-enter your password"
 };
-=======
-  login: "Login"
-};
+ 
 export const religion=[
   'Hindu',
   'Muslim',
@@ -111,4 +108,3 @@ export const ignoreUserText={
   ViewProfileBtn:'View Profile',
   heading1:'Shortlisted'
 }
->>>>>>> 90b9f398be6d4171e435ab2c8e44e6a422fb7790
