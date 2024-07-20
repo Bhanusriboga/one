@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Input, Button, Modal, ModalBody, ModalHeader, Form, FormGroup} from 'reactstrap';
+import React, { useState } from 'react'
+import { Input, Button, Label } from 'reactstrap'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./signup.css";
 import { useHistory } from "react-router-dom";
@@ -231,7 +231,6 @@ const SignUp = () => {
                         </button>
                     </div>
 
-                    {passError && <p className='email-error'>{singnup.passwordError}</p>}
 
                 </div>
                 <div className='position-relative'>
