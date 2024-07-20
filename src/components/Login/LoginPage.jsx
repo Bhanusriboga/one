@@ -6,7 +6,7 @@ import { login } from '../../utils/constants';
 import ForgotPage from '../Forgot/ForgotPage';
 import { useHistory } from "react-router-dom";
 import {validateEmail} from "../../utils/validation"
-const LoginPage = () => {
+const LoginPage = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const history = useHistory();
     const [modal, setModal] = useState(false);
