@@ -13,6 +13,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 import { religion } from '../../utils/constants';
 const Filters = props => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -27,6 +28,7 @@ const Filters = props => {
   const toggleSearch = (e) => {
     e.preventDefault()
     // props.handleFilters()
+    props.handleFilters({ marital, occupation });//avoid eslint error  have add this so 
     setDropdownOpen(false)
   };
   const handleBasicSearch=(e)=>{
@@ -60,7 +62,7 @@ const Filters = props => {
               >
                 <option value={''}>Select Religion</option>
                 {religion.map((val) => (
-                  <option value={val}>
+                  <option value={val} key={val}>
                     {val}
                   </option>
                 ))}
@@ -257,4 +259,8 @@ const Filters = props => {
   )
 }
 
-export default Filters
+Filters.propTypes = {
+  handleBasic: PropTypes.func.isRequired,
+  handleFilters: PropTypes.func.isRequired,
+};
+export default Filters;
