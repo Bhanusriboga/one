@@ -88,7 +88,6 @@ input[type=checkbox] {
     -webkit-transform: scale(1.2);
 }
 .check-2-checkin {
-    margin-top: -12px;
     border-radius: 15px;
     height: 15vh;
     font-size: 110%;

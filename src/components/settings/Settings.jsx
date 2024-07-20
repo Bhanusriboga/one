@@ -46,7 +46,6 @@ const Settings = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let isValid = true;
 
     if(deleteProfile){
       setShowAlert(true);
@@ -54,7 +53,6 @@ const Settings = () => {
     else if (email) {
       if (showOtp && !/^\d{6}$/.test(otp)) {
         setEmailError(settings.otpError);
-        isValid = false;
       } else {
         setEmailError('');
       }
@@ -62,10 +60,8 @@ const Settings = () => {
     if (currentPassword !== "") {
       if (!currentPassword || !newPassword || !confirmPassword) {
         setPasswordError(settings.passwordFieldsError);
-        isValid = false;
       } else if (newPassword !== confirmPassword) {
         setPasswordError(settings.passwordMatchError);
-        isValid = false;
       } else {
         setPasswordError('');
       }

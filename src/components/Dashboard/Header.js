@@ -1,11 +1,11 @@
-import React,{useState} from 'react'
+import React from 'react'
 import {
   Navbar,
   NavbarBrand } from 'reactstrap';
 import './Dashboard.scss'
 import logo from '../../Assets/Logo.png'
 
-const Header = props => {
+const Header = () => {
 
   return (
     <Navbar className='navbck' light expand="md" >
