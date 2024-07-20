@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Button, Modal, ModalBody, ModalHeader, Form, FormGroup,Container,Row,Col} from 'reactstrap';
+import { Input, Button, Modal, ModalBody, ModalHeader, Form, FormGroup} from 'reactstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./signup.css";
 import { useHistory } from "react-router-dom";
 import { pelli, tick, backgroundImg } from "./assets";
-import { singnup } from "../../utils/constants copy"
+import { singnup } from "../home/Assests/constants copy"
 const styles = {
     eyeIcon: {
         position: "absolute",
@@ -138,11 +138,10 @@ const SignUp = () => {
     return (
         <div className='main-cont'>
             <img src={backgroundImg} className='main-img' alt="Background" />
-            
             <div className='container-xl'>
       <Modal isOpen={modal} toggle={toggle} >
         <div className="modal-lg modal-xs">
-          <ModalBody className="d-flex flex-column align-items-center justify-content-center">
+          <ModalBody className="d-flex flex-column align-items-center justify-content-evenly ">
             <h5 className='otp-head'>{singnup.otpVerification}</h5>
             <p className='otp-para'>{singnup.otpSent}</p>
             <Input
@@ -163,9 +162,9 @@ const SignUp = () => {
       </Modal>
     </div>
             
-            <Modal isOpen={successModal} size='sm'   toggle={toggle}>
+            <Modal isOpen={successModal} size='md'   toggle={toggle}>
                 <ModalHeader toggle={toggleSuccesfull}  close={closeBtn}></ModalHeader>
-                <div className='d-flex flex-column align-items-center justify-content-center text-center'>
+                <div className='d-flex flex-column align-items-center justify-content-center text-center p-3'>
                     <div className='d-flex align-items-center justify-content-center rounded-circle align-self-center' style={styles.verifiedIcon}>
                         <img src={tick} alt="Verified" />
                     </div>
@@ -173,13 +172,13 @@ const SignUp = () => {
                     <p className='otp-para'>{singnup.mobileVerified}</p>
                 </div>
             </Modal>
-            <Form onSubmit={handleSubmit} className="forms d-flex flex-column justify-content-center align-items-center">
+            <Form onSubmit={handleSubmit} className="forms d-flex flex-column justify-content-evenly align-items-center">
                 <h1 className='star'>{singnup.title}</h1>
                 <div className='position-relative'>
                     <Input placeholder={singnup.fullName} bsSize="lg" className={fullNameError ? "form-control genderss" : "form-control genderss mb-3"} type='singnup' onChange={handleChange} value={formData.fullname} name='fullname' onBlur={handleBlur} required title='full name is required' />
                     {formData.fullname === "" ? <p className='req'>*</p> : null}
                 </div>
-                {fullNameError && <p className='fullname-error'>please enter your full name</p>}
+                {fullNameError && <p className='fullname-error mb-3'>please enter your full name</p>}
                 {formData.fullname === "" && displayOtp && <p className='fullname-error'>please enter your full name</p>}
 
                 <div className='position-relative'>
@@ -196,12 +195,12 @@ const SignUp = () => {
                     <Input bsSize="lg" type='email' className={!emailIdError ? "form-control genderss mb-3" : "form-control genderss"} onChange={handleChange} value={formData.userEmail} name='userEmail' onBlur={handleBlur} placeholder={singnup.emailId} required />
                     {formData.userEmail === "" ? <p className='req'>*</p> : null}
                 </div>
-                {emailIdError && <p className='email-error'>please enter email id</p>}
+                {emailIdError && <p className='email-error mb-3'>please enter email id</p>}
                 <div>
                     <div className='position-relative'>
                         <Input
                             bsSize="lg"
-                            className={passError ? "form-control genderss" : "form-control genderss mb-3"}
+                            className={passError ? "form-control genderss mb-3" : "form-control genderss mb-3"}
                             type={showPassword ? 'singnup' : 'password'}
                             id="passwo" onChange={handleChange}
                             onBlur={handleBlur}
@@ -226,7 +225,7 @@ const SignUp = () => {
                 </div>
                 <div className='position-relative'>
                     <div>
-                        <Input bsSize="lg" className={rePassError ? "form-control genderss" : "form-control genderss mb-3"} type={rePassError ? 'singnup' : 'password'} id="reenter" onChange={handleChange} onBlur={handleBlur} name='repeatPass' value={formData.repeatPass} placeholder={singnup.reenterPassword} required />
+                        <Input bsSize="lg" className={rePassError ? "form-control genderss mb-3" : "form-control genderss mb-3"} type={rePassError ? 'singnup' : 'password'} id="reenter" onChange={handleChange} onBlur={handleBlur} name='repeatPass' value={formData.repeatPass} placeholder={singnup.reenterPassword} required />
                         {formData.repeatPass === "" ? <p className='req'>*</p> : null}
                     </div>
                     {repeatpassError && <p className='email-error'>{singnup.rePassErr}</p>}
@@ -253,8 +252,8 @@ const SignUp = () => {
                 {numError && <div className='pass-err'>{numError}</div>}
                 <div className='check d-flex justify-content-space-between align-items-center align-self-start mb-2'>
                     <input type='checkbox' onChange={onCheck} value={isChecked} className="check-2-checkin" />
-                    <div className='ml-2 mt-1'>
-                        <p className='para-terms' >{singnup.agreeTerms}<span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span></p>
+                    <div className='ml-1 '>
+                        <p className='para-terms mb-1 ml-1' >{singnup.agreeTerms}<span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span></p>
                     </div>
                 </div>
                 <Button className='form next-button mb-3' type='submit' disabled={btnCondition}>
