@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import {useHistory} from "react-router-dom"
 import animation from "../../utils/Animation - 1720516602656.json"
 import Lottie from "react-lottie"
-import { RiArrowDropUpLine } from "react-icons/ri";
+// import { RiArrowDropUpLine } from "react-icons/ri";
 import logo from "../../utils/Logo01 1.svg"
 import "./home.css"
 import playstore from "../../utils/Rectangle 4453.png"
@@ -34,7 +34,7 @@ import horizontalline from "../../utils/Line 47.png"
 import rightbottomimgside from "../../utils/394317-PCMJUW-273-Photoroom 7.png"
 function Home() {
   const [scrolled,setScrolled]=useState(false)
-  const [dropDown,setDropDown]=useState(false)
+  // const [dropDown,setDropDown]=useState(false)
   const [width,setWidth]=useState(window.innerWidth)
   const defaultOptions = {
     loop: true,
@@ -62,30 +62,30 @@ function Home() {
     window.addEventListener("resize",handleResize)
     return () => window.removeEventListener('resize', handleResize);
   },[])
-  const onNavBtn=()=>{
-       setDropDown(true)
-  }
+  // const onNavBtn=()=>{
+  //      setDropDown(true)
+  // }
   const navigator=useHistory()
   return (
   <div className='home-page-div d-flex flex-column justify-content-space-between align-items-center position-relative' >
      <nav className={`custom-nav navbar-expand-lg fixed-top ${scrolled&&"navbar-blur"}`}>
       <img src={logo} className='nav-logo'/>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
   </button>
       {/* {dropDown?<div>
         <div className='ml-5 mr-5' onClick={onNavBtn}>
          <p>Login ^</p>
       </div>
-      <ul class="navbar-nav ml-auto mr-5 dropDown2" >
-      <li class="nav-item">
+      <ul className="navbar-nav ml-auto mr-5 dropDown2" >
+      <li className="nav-item">
         <a className="nav-link" href="#">About us</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/signUp">Signup</a>
+      <li className="nav-item">
+        <a className="nav-link" href="/signUp">Signup</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
+      <li className="nav-item">
+        <a className="nav-link" href="/login">Login</a>
       </li>
     </ul>
       </div>:<div className='ml-auto mr-5' onClick={onNavBtn}>
@@ -93,15 +93,15 @@ function Home() {
       </div>} */}
       
   <div className="collapse navbar-collapse navbar-cont" id="navbarNav" >
-    <ul class="navbar-nav ml-auto mr-5">
-      <li class="nav-item">
+    <ul className="navbar-nav ml-auto mr-5">
+      <li className="nav-item">
         <a className="nav-link" href="#">About us</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/signUp">Signup</a>
+      <li className="nav-item">
+        <a className="nav-link" href="/signUp">Signup</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
+      <li className="nav-item">
+        <a className="nav-link" href="/login">Login</a>
       </li>
     </ul>
   </div>
@@ -208,7 +208,7 @@ function Home() {
           
           <div className='first-bottom'>
            <div className='first-row'>
-           <h3 className='heading'>Let's write our own love story together : Download Our App For Any Queries</h3>
+           <h3 className='heading'>Let&apos;s write our own love story together : Download Our App For Any Queries</h3>
       
             <p className='paragraph'>Our platform is dedicated to helping you find a lifelong partner who shares your values, dreams, and aspirations. </p>
             <div className="connect">
