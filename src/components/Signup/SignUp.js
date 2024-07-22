@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Input, Button, Modal, ModalBody, ModalHeader, Form, FormGroup} from 'reactstrap';
+import React, { useState,useEffect } from 'react'
+import { Input, Button,Modal,ModalBody,ModalHeader,Form,FormGroup } from 'reactstrap'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./signup.css";
 import { useHistory } from "react-router-dom";
 import { pelli, tick, backgroundImg } from "./assets";
 import { singnup } from "../../utils/constants"
+import {validateEmail} from "../../utils/validation"
+import {useDispatch} from "react-redux"
+import {userSignup} from "../../redux/slices/AuthSlice"
 const styles = {
     eyeIcon: {
         position: "absolute",
@@ -22,6 +25,7 @@ const styles = {
 };
 
 const SignUp = () => {
+    const dispatch = useDispatch();
     const history = useHistory()
     const [modal, setModal] = useState(false);
     const [successModal, setSuccessModal] = useState(false);
@@ -82,9 +86,12 @@ const SignUp = () => {
     };
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
     const togglePasswordVisibilities = () => setRePassError(!rePassError);
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) => {
         e.preventDefault();
         setDisplayOtp(true);
+        if(validateEmail(formData.userEmail)){
+            setEmailIdError(true)
+        }
         if (formData.userPass !== formData.repeatPass) {
             setPasswordError('Passwords do not match');
             setDisplayOtp(false);
@@ -94,6 +101,7 @@ const SignUp = () => {
             setNumError("please enter valid 10 digit mobile number");
             setDisplayOtp(false);
         } else {
+              await dispatch(userSignup(formData))
             setPasswordError('');
             setModal(true);
             setNumError("");
@@ -135,8 +143,11 @@ const SignUp = () => {
             &times;
         </button>
     );
+    const navtoLogin=()=>{
+        history.push("/login")
+    }
     return (
-        <div className='main-cont'>
+       <div className='main-cont'>
             <img src={backgroundImg} className='main-img' alt="Background" />
             <div className='container-xl'>
       <Modal isOpen={modal} toggle={toggle} >
@@ -184,9 +195,9 @@ const SignUp = () => {
                 <div className='position-relative'>
                     <Input type='select' className="form-control genderss select option place mb-3" value={formData.gender} onChange={handleChange} name="gender">
                         <option value="">{singnup.gender}</option>
-                        <option value="male" className="opt-color">male</option>
-                        <option value="female" className="opt-color">female</option>
-                        <option value="others" className="opt-color">others</option>
+                        <option value="MALE" className="opt-color">male</option>
+                        <option value="Female" className="opt-color">female</option>
+                        <option value="Others" className="opt-color">others</option>
                     </Input>
                     {formData.gender === "I am" ? <p className='req'>*</p> : null}
                 </div>
@@ -195,7 +206,7 @@ const SignUp = () => {
                     <Input bsSize="lg" type='email' className={!emailIdError ? "form-control genderss mb-3" : "form-control genderss"} onChange={handleChange} value={formData.userEmail} name='userEmail' onBlur={handleBlur} placeholder={singnup.emailId} required />
                     {formData.userEmail === "" ? <p className='req'>*</p> : null}
                 </div>
-                {emailIdError && <p className='email-error mb-3'>please enter email id</p>}
+                {emailIdError && <p className='email-error'>please enter a valid email</p>}
                 <div>
                     <div className='position-relative'>
                         <Input
@@ -220,7 +231,6 @@ const SignUp = () => {
                         </button>
                     </div>
 
-                    {passError && <p className='email-error'>{singnup.passwordError}</p>}
 
                 </div>
                 <div className='position-relative'>
@@ -250,16 +260,18 @@ const SignUp = () => {
                     {formData.mobile === "" ? <p className='req'>*</p> : null}
                 </div>
                 {numError && <div className='pass-err'>{numError}</div>}
-                <div className='check d-flex justify-content-space-between align-items-center align-self-start mb-2'>
+                <div className='check d-flex justify-content-space-between align-items-center align-self-start mb-2 gap-2'>
                     <input type='checkbox' onChange={onCheck} value={isChecked} className="check-2-checkin" />
-                    <div className='ml-1 '>
-                        <p className='para-terms mb-1 ml-1' >{singnup.agreeTerms}<span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span></p>
-                    </div>
+                        <p className='para-terms' >{singnup.agreeTerms}<span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span></p>
                 </div>
                 <Button className='form next-button mb-3' type='submit' disabled={btnCondition}>
                     {singnup.title}
                 </Button>
-                <p className="already">{singnup.alreadyAccount}<span className='already already-login singnup-decoration-underline'>{singnup.login}</span></p>
+                <p className="already d-flex align-item-center gap-1">{singnup.alreadyAccount}
+                    <Button onClick={navtoLogin} className='btn btn-link text-decoration-none p-0'>
+                        <span className='already already-login'>{singnup.login}</span>
+                    </Button>
+                </p>
             </Form>
             <div className='right-bg-cont'>
                 <div className="d-flex align-items-center justify-content-space-around">
