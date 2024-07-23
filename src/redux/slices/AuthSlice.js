@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import networkCall from '../../utils/NetworkCall';
 import { endPoints } from '../../config/config';
-import { saveToLocalStorage } from "../../utils/Storage"
-import { getFromLocalStorage } from '../../utils/Storage'
+import Storage from '../../utils/Storage'
 
 export const userSignup = createAsyncThunk(
   "auth/signup",
@@ -27,7 +26,7 @@ export const userSignup = createAsyncThunk(
 export const userLogin = createAsyncThunk(
   "auth/login",
   async (props, thunkAPI) => {
-    const { response } = await networkCall(endPoints.login, "POST", JSON.stringify(props));
+    const { response } = await networkCall(endPoints.login, "POST", JSON.stringify(props.payload));
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
@@ -43,7 +42,7 @@ const AuthSlice = createSlice({
     loading: false,
     error: "",
     data: null,
-    token: getFromLocalStorage("token")|null
+    token: Storage.get("token")|null
   },
   reducers: {
 
@@ -57,7 +56,7 @@ const AuthSlice = createSlice({
         state.loading = false;
         state.data = action.payload;
         state.token = action.payload.jwt
-        saveToLocalStorage("token", action.payload.jwt);
+        Storage.set("token", action.payload.jwt);
       })
       .addCase(userSignup.rejected, (state, action) => {
         state.loading = false;
@@ -72,7 +71,7 @@ const AuthSlice = createSlice({
         state.loading = false;
         state.data = action.payload;
         state.token = action.payload.jwt
-        saveToLocalStorage("token", action.payload.jwt);
+        Storage.set("token", action.payload.jwt);
       })
       .addCase(userLogin.rejected, (state, action) => {
         state.loading = false;

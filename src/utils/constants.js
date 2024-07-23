@@ -22,7 +22,8 @@ export const login={
   forgot:'Forgot password ?',
   noAccount:'Don\'t have an account? ',
   signup:'Signup',
-  otpPlaceHolder:'Please Enter OTP'
+  otpPlaceHolder:'Please Enter OTP',
+  mobilePlaceholder:"Mobile Number"
 }
 export const forgot={
   subbtn: 'Submit',
