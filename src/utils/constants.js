@@ -73,7 +73,8 @@ export const settings={
   deleteTitle: 'Are you sure?',
   deleteSubTitle: 'This action will permanently delete your profile data',
   cancel: 'Cancel',
-  deleteBtn: 'Delete'
+  deleteBtn: 'Delete',
+  phonePlaceholder: 'Enter your phone number',
 }
 
 export const ignoreUserText={

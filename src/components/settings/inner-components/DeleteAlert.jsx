@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card, CardBody, CardText, CardTitle, CardSubtitle } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { PiWarningCircle } from "react-icons/pi";
+import { PiWarningCircleBold } from "react-icons/pi";
 import {settings} from "../../../utils/constants"
 const DeleteAlert = (props) => {
     const { onCancel, onDelete } = props

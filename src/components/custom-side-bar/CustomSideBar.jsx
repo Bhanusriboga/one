@@ -74,7 +74,7 @@ const CustomSideBar = () => {
           ))}
         </Col>
         <Col xs="12" md="9" className="content ml-4 pt-0" data-testid="content">
-        {activeContent !== ''?<button onClick={() => setActiveContent('')}>back</button>:null}
+        {activeContent !== ''?<button onClick={() => setActiveContent('')} className='back-button'>back</button>:null}
           <RenderContent/>
         </Col>  
       </Row>

@@ -1,29 +1,35 @@
 import React, { useState } from 'react';
 import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import { validateEmail } from "../../utils/validation";
+import { validateEmail,validatePhoneNumber } from "../../utils/validation";
 import { settings } from '../../utils/constants';
 import "./Settings.scss"
 import DeleteAlert from './inner-components/DeleteAlert';
+
 const Settings = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [newMail, setNewMail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [otpPhone, setOtpPhone] = useState('');
+  const [newPhone, setNewPhone] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showOtp, setShowOtp] = useState(false);
+  const [showOtpPhone, setShowOtpPhone] = useState(false);
   const [profilePrivacy, setProfilePrivacy] = useState(false);
   const [deleteReason, setDeleteReason] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [showAlert, setShowAlert] = useState(false);
 
   const handleCancel = () => {
     setShowAlert(false);
   };
-  const handleDelete=()=>{
-      setShowAlert(true);
-      // need to call delete api
+  const handleDelete = () => {
+    setShowAlert(true);
+    // need to call delete api
   }
   const handleDeleteConfirm = () => { 
     setShowAlert(false);
@@ -42,23 +48,44 @@ const Settings = () => {
     }
   };
 
+  const handlePhoneVerify = (event) => {
+    event.preventDefault();
+    if (validatePhoneNumber(phone)) { 
+      setPhoneError('');
+      setShowOtpPhone(true);
+      sendOtpPhone();
+    } else {
+      setPhoneError(settings.validPhoneError);
+    }
+  };
+
   const sendOtp = () => {
+    // Add OTP sending logic here
+  };
+
+  const sendOtpPhone = () => {
     // Add OTP sending logic here
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if(deleteProfile){
-      setShowAlert(true);
-    }
-    else if (email) {
+    if (email) {
       if (showOtp && !/^\d{6}$/.test(otp)) {
         setEmailError(settings.otpError);
       } else {
         setEmailError('');
       }
     }
+
+    if (phone) {
+      if (showOtpPhone && !/^\d{6}$/.test(otpPhone)) {
+        setPhoneError(settings.otpError);
+      } else {
+        setPhoneError('');
+      }
+    }
+
     if (currentPassword !== "") {
       if (!currentPassword || !newPassword || !confirmPassword) {
         setPasswordError(settings.passwordFieldsError);
@@ -100,6 +127,32 @@ const Settings = () => {
     }
   ].filter(Boolean);
 
+  const phoneFields = [
+    {
+      id: 'phone',
+      type: 'text',
+      placeholder: settings.phonePlaceholder,
+      value: phone,
+      onChange: handleInputChange(setPhone),
+      label: settings.phoneLabel
+    },
+    showOtpPhone && {
+      id: 'otpPhone',
+      type: 'text',
+      placeholder: settings.otpPlaceholder,
+      value: otpPhone,
+      onChange: handleInputChange(setOtpPhone),
+      maxLength: 6
+    },
+    showOtpPhone && {
+      id: 'new-phone',
+      type: 'text',
+      placeholder: settings.newPhonePlaceholder,
+      value: newPhone,
+      onChange: handleInputChange(setNewPhone),
+    }
+  ].filter(Boolean);
+
   const passwordFields = [
     { id: 'currentPassword', type: 'password', placeholder: settings.currentPasswordPlaceholder, value: currentPassword, onChange: handleInputChange(setCurrentPassword) },
     { id: 'newPassword', type: 'password', placeholder: settings.newPasswordPlaceholder, value: newPassword, onChange: handleInputChange(setNewPassword) },
@@ -108,8 +161,8 @@ const Settings = () => {
 
   return (
     <>
-    {showAlert&&<DeleteAlert onCancel={handleCancel} onDelete={handleDeleteConfirm} />}
-    <Container fluid className={showAlert?'blur':''}>
+    {showAlert && <DeleteAlert onCancel={handleCancel} onDelete={handleDeleteConfirm} />}
+    <Container fluid className={showAlert ? 'blur' : ''}>
       <h1 className="title" data-testid="settings">{settings.settingsTitle}</h1>
       <Form onSubmit={handleSubmit}>
         <section>
@@ -137,6 +190,7 @@ const Settings = () => {
             </FormGroup>
           ))}
         </section>
+       
         <section>
           <h2 className="subTitle">{settings.changePasswordTitle}</h2>
           {passwordFields.map(({ id, type, placeholder, value, onChange }) => (
@@ -155,6 +209,31 @@ const Settings = () => {
           <Button className='save-button' onClick={handleSubmit}>
             {settings.savePasswordButton}
           </Button>
+        </section>
+        <section>
+          <h2 className="subTitle">{settings.changePhoneTitle}</h2>
+          {phoneFields.map(({ id, type, placeholder, value, onChange, label, maxLength }) => (
+            <FormGroup key={id}>
+              {label && <Label for={id}>{label}</Label>}
+              <div className='email-parent'>
+                <input
+                  type={type}
+                  id={id}
+                  placeholder={placeholder}
+                  value={value}
+                  onChange={onChange}
+                  className={`${id !== 'phone' ? 'input-otp' : 'input-email'} ${phoneError && 'error'}`}
+                  maxLength={maxLength}
+                />
+                {id === 'phone' && (
+                  <Button onClick={handlePhoneVerify} className='verify bg-transparent h-75 d-flex align-items-center justify-content-center'>
+                    {settings.verifyButton}
+                  </Button>
+                )}
+              </div>
+              {id === 'phone' && phoneError && <div className="error-message">{phoneError}</div>}
+            </FormGroup>
+          ))}
         </section>
         <section>
           <h2 className="subTitle">{settings.profilePrivacyTitle}</h2>
@@ -194,7 +273,7 @@ const Settings = () => {
                 </Label>
               </div>
             </FormGroup>
-              {deleteReason&&<button onClick={handleDelete} className='logout logout-design'>
+              {deleteReason && <button onClick={handleDelete} className='logout logout-design'>
                 {settings.deleteBtn}
               </button>}
           <h2 className="subTitle">{settings.logoutTitle}</h2>
