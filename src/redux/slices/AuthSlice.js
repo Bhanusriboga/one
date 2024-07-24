@@ -73,7 +73,8 @@ const AuthSlice = createSlice({
       .addCase(userLogin.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
-        state.token = action.payload.jwt
+        state.token = action.payload.jwt;
+        //for temparery we are directly storing token in local storage after signup but after implementing otp verification we need to store token in session storage
         Storage.set("token", action.payload.jwt);
       })
       .addCase(userLogin.rejected, (state, action) => {

@@ -199,7 +199,7 @@ const Settings = (props) => {
                   maxLength={maxLength}
                 />
                 {id === 'email' && (
-                  <Button onClick={handleEmailVerify} className='verify bg-transparent h-75 d-flex align-items-center justify-content-center'>
+                  <Button onClick={handleEmailVerify} className='verify bg-transparent h-75 d-flex align-items-center justify-content-center' data-testid="email-verify">
                     {settings.verifyButton}
                   </Button>
                 )}
@@ -244,7 +244,7 @@ const Settings = (props) => {
                   maxLength={maxLength}
                 />
                 {id === 'phone' && (
-                  <Button onClick={handlePhoneVerify} className='verify bg-transparent h-75 d-flex align-items-center justify-content-center'>
+                  <Button onClick={handlePhoneVerify} className='verify bg-transparent h-75 d-flex align-items-center justify-content-center' data-testid="phone-verify">
                     {settings.verifyButton}
                   </Button>
                 )}
