@@ -5,12 +5,12 @@ import { RxCross2 } from "react-icons/rx";
 import { MdEdit } from "react-icons/md";
 import { FaArrowLeft } from "react-icons/fa6";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './CustomSideBar.scss';
 import Settings from '../settings/Settings';
 import IgnoreUsers from '../ignoreUsers/IgnoreUsers';
 import ShortListedUsers from '../shortlistedUsers/ShortListedUsers';
 import ProfileList from '../Dashboard/ProfileList';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './CustomSideBar.scss';
 
 const CustomSideBar = () => {
   const [activeContent, setActiveContent] = useState('');

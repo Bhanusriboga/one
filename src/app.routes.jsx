@@ -1,12 +1,12 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom/cjs/react-router-dom'
 import LoginPage from './components/Login/LoginPage'
 import ForgotPage from './components/Forgot/ForgotPage'
 import SignUp from './components/Signup/SignUp'
 import Dashboard from './components/Dashboard/Dashboard'
-import { Redirect } from 'react-router-dom/cjs/react-router-dom'
 import RegisterMain from './components/register/RegisterMain'
-import { useSelector } from 'react-redux'
 
 // Main Routes don't change any thing
 const Routes = () => {
