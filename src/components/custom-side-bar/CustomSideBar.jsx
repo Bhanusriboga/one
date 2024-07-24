@@ -72,8 +72,8 @@ const CustomSideBar = () => {
           ))}
         </Col>
         <Col xs="12" md="9" className="content ml-4 pt-0" data-testid="content">
-          {activeContent !== '' ? <button onClick={() => setActiveContent('')} className='back-button'>
-            <FaArrowLeft color='#B8B8B8' size={15} />
+          {activeContent !== '' ? <button onClick={() => setActiveContent('')} className='back-button bg-white gap-1'>
+            <FaArrowLeft color='#B8B8B8' size={15} className=',t-1' />
             <span className='text-lightBlack'>
               Back
             </span>
