@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import { FaBarsStaggered } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { MdEdit } from "react-icons/md";
+import { FaArrowLeft } from "react-icons/fa6";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './CustomSideBar.scss';
@@ -16,9 +17,8 @@ const CustomSideBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
  
   const buttonData = [
-    { id: 'editImage', label: 'Edit Image' },
-    { id: 'addPreferences', label: 'Add Preferences' },
     { id: 'editProfile', label: 'Edit Profile' },
+    { id: 'addPreferences', label: 'Add Preferences' },
     { id: 'ignoredUsers', label: 'Ignored Users' },
     { id: 'shortlisted', label: 'Shortlisted' },
     { id: 'settings', label: 'Settings' },
@@ -27,8 +27,6 @@ const CustomSideBar = () => {
   const RenderContent = () => {
     // Replace all the items with component which we going to develop
     switch (activeContent) {
-      case 'editImage':
-        return <div>Edit Image Content</div>;
       case 'addPreferences':
         return <div>Add Preferences Content</div>;
       case 'editProfile':
@@ -38,7 +36,7 @@ const CustomSideBar = () => {
       case 'shortlisted':
         return <ShortListedUsers />
       case 'settings':
-        return <Settings />;
+        return <Settings setActiveContent={setActiveContent}/>;
       default:
         return <ProfileList />
     }
@@ -59,14 +57,14 @@ const CustomSideBar = () => {
         </Col>
         <Col xs={isSidebarOpen?"12":"3"} className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
           <div className='image-container1'>
-            <Button className='d-flex align-item-center justify-content-center border-0 position-absolute bottom-0 add'>
+            <Button className='d-flex align-item-center justify-content-center border-0 position-absolute bottom-0 gap-1 add'>
               Add
-               <MdEdit size={'10px'} className='mt-1'/>
+               <MdEdit size={'15px'} className='mt-1'/>
             </Button>
           </div>
           {buttonData.map((button, index) => (
             <div key={button.id} className='button-parent'>
-              <Button block="true" className="bg-transparent border-0 text-warning" onClick={() => setActiveContent(button.id)}>
+              <Button block="true" className="bg-transparent border-0 text-color" onClick={() => setActiveContent(button.id)}>
                 {button.label}
               </Button> 
               {index !== buttonData.length - 1 && <hr className='hr' />}
@@ -74,8 +72,13 @@ const CustomSideBar = () => {
           ))}
         </Col>
         <Col xs="12" md="9" className="content ml-4 pt-0" data-testid="content">
-        {activeContent !== ''?<button onClick={() => setActiveContent('')} className='back-button'>back</button>:null}
-          <RenderContent/>
+          {activeContent !== '' ? <button onClick={() => setActiveContent('')} className='back-button'>
+            <FaArrowLeft color='#B8B8B8' size={15} />
+            <span className='text-lightBlack'>
+              Back
+            </span>
+          </button> : null}
+          <RenderContent />
         </Col>  
       </Row>
     </Container>

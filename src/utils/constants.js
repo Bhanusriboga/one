@@ -95,12 +95,16 @@ export const settings={
   logoutTitle: 'Log out',
   logoutMessage: 'If you have any questions or need further assistance, please feel free to contact our support team',
   logoutButton: 'Logout',
-  saveAllButton: 'Save All',
+  saveAllButton: 'Save',
   deleteTitle: 'Are you sure?',
   deleteSubTitle: 'This action will permanently delete your profile data',
   cancel: 'Cancel',
   deleteBtn: 'Delete',
   phonePlaceholder: 'Enter your phone number',
+  foundAMatch:"Found a Match",
+  financeIssue:"Finance issue",
+  trustIssue:"Trust issue",
+  validPhoneError:"Please enter a valid phone number"
 }
 
 export const ignoreUserText={

@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
 import ForgotPage from '../Forgot/ForgotPage';
 import { login } from '../../utils/constants';
 import { validatePhoneNumber } from "../../utils/validation"
+import { userLogin } from '../../redux/slices/AuthSlice';
+import  Storage  from '../../utils/Storage'
 import './Login.scss'
 
 const LoginPage = () => {
@@ -16,7 +18,6 @@ const LoginPage = () => {
     const [mobileValid, setMobileValid] = useState(true)
     const [password, setPassword] = useState("")
     const [mobile, setMobile] = useState("")
-    const { token } = useSelector(state => state.auth)
     const dispatch = useDispatch()
 
     const handleeyebtn = (e) => {
@@ -27,8 +28,19 @@ const LoginPage = () => {
     const toggle = () => setModal(!modal);
 
     const handleLogin = async () => {
-        await dispatch({ mobileNumber:mobile, password })
+        await dispatch(userLogin({ mobileNumber:mobile, password }))
+        const token=Storage.get("token");
+        
         if (token) {
+            toast.success('login successfully', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
             history.push('/dashboard');
         } else {
             toast.error('Invalid Credentials', {

@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { FaArrowLeft } from "react-icons/fa6";
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { validateEmail,validatePhoneNumber } from "../../utils/validation";
+import {logout as logoutAction} from "../../redux/slices/AuthSlice";
 import { settings } from '../../utils/constants';
-import "./Settings.scss"
 import DeleteAlert from './inner-components/DeleteAlert';
+import "./Settings.scss"
 
-const Settings = () => {
+const Settings = (props) => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [newMail, setNewMail] = useState('');
@@ -23,7 +27,7 @@ const Settings = () => {
   const [phoneError, setPhoneError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [showAlert, setShowAlert] = useState(false);
-
+  const dispatch=useDispatch() ;
   const handleCancel = () => {
     setShowAlert(false);
   };
@@ -71,17 +75,25 @@ const Settings = () => {
     event.preventDefault();
 
     if (email) {
-      if (showOtp && !/^\d{6}$/.test(otp)) {
+      if(validateEmail(email)) {
+        setEmailError('Invalid Email');
+      }
+      else if (showOtp && !/^\d{6}$/.test(otp)) {
         setEmailError(settings.otpError);
       } else {
+        //api call for email change
         setEmailError('');
       }
     }
 
     if (phone) {
-      if (showOtpPhone && !/^\d{6}$/.test(otpPhone)) {
+      if(validatePhoneNumber(phone)) {
+        setPhoneError('Invalid Phone Number');
+      }
+      else if (showOtpPhone && !/^\d{6}$/.test(otpPhone)) {
         setPhoneError(settings.otpError);
       } else {
+        //api call for phone number change
         setPhoneError('');
       }
     }
@@ -92,13 +104,14 @@ const Settings = () => {
       } else if (newPassword !== confirmPassword) {
         setPasswordError(settings.passwordMatchError);
       } else {
+        //api call for password change
         setPasswordError('');
       }
     }
   };
 
-  const logout = () => {
-    // Add logout logic here
+  const logout = async() => {
+   await dispatch(logoutAction());
   };
 
   const emailFields = [
@@ -134,7 +147,8 @@ const Settings = () => {
       placeholder: settings.phonePlaceholder,
       value: phone,
       onChange: handleInputChange(setPhone),
-      label: settings.phoneLabel
+      label: settings.phoneLabel,
+      maxLength: 10
     },
     showOtpPhone && {
       id: 'otpPhone',
@@ -150,6 +164,7 @@ const Settings = () => {
       placeholder: settings.newPhonePlaceholder,
       value: newPhone,
       onChange: handleInputChange(setNewPhone),
+      maxLength: 10
     }
   ].filter(Boolean);
 
@@ -162,8 +177,11 @@ const Settings = () => {
   return (
     <>
     {showAlert && <DeleteAlert onCancel={handleCancel} onDelete={handleDeleteConfirm} />}
-    <Container fluid className={showAlert ? 'blur' : ''}>
-      <h1 className="title" data-testid="settings">{settings.settingsTitle}</h1>
+      <Container fluid className={showAlert ? 'blur' : ''}>
+        <div className='d-flex justify-content-left align-items-center gap-1'>
+          <FaArrowLeft color='#780024' onClick={() => props.setActiveContent('')} size={20} className='arrow'/>
+          <h1 className="title" data-testid="settings">{settings.settingsTitle}</h1>
+        </div>
       <Form onSubmit={handleSubmit}>
         <section>
           <h2 className="subTitle">{settings.changeEmailTitle}</h2>
@@ -210,7 +228,7 @@ const Settings = () => {
             {settings.savePasswordButton}
           </Button>
         </section>
-        <section>
+        <section className="mt-2">
           <h2 className="subTitle">{settings.changePhoneTitle}</h2>
           {phoneFields.map(({ id, type, placeholder, value, onChange, label, maxLength }) => (
             <FormGroup key={id}>
@@ -253,24 +271,35 @@ const Settings = () => {
                   type="radio"
                   id="married"
                   name="deleteReason"
-                  value="married"
-                  checked={deleteReason === 'married'}
+                  value={settings.foundAMatch}
+                  checked={deleteReason === settings.foundAMatch}
                   onChange={handleInputChange(setDeleteReason)}
                 />
-                <Label for="married" className='radio-label'>{settings.marriedLabel}</Label>
+                <Label for="married" className='radio-label'>{settings.foundAMatch}</Label>
               </div>
               <div className="radio-container">
                 <Input
                   type="radio"
                   id="notInterested"
                   name="deleteReason"
-                  value="notInterested"
-                  checked={deleteReason === 'notInterested'}
+                  value={settings.financeIssue}
+                  checked={deleteReason === settings.financeIssue}
                   onChange={handleInputChange(setDeleteReason)}
                 />
                 <Label for="notInterested" className='radio-label'>
                   {settings.notInterestedLabel}
                 </Label>
+              </div>
+              <div className="radio-container">
+                <Input
+                  type="radio"
+                  id="trustIssues"
+                  name="deleteReason"
+                  value={settings.trustIssue}
+                  checked={deleteReason === settings.trustIssue}
+                  onChange={handleInputChange(setDeleteReason)}
+                />
+                <Label for="trustIssues" className='radio-label'>{settings.trustIssue}</Label>
               </div>
             </FormGroup>
               {deleteReason && <button onClick={handleDelete} className='logout logout-design'>
@@ -295,4 +324,7 @@ const Settings = () => {
   );
 };
 
+Settings.propTypes = {
+  setActiveContent: PropTypes.func.isRequired,
+}
 export default Settings;

@@ -26,7 +26,7 @@ export const userSignup = createAsyncThunk(
 export const userLogin = createAsyncThunk(
   "auth/login",
   async (props, thunkAPI) => {
-    const { response } = await networkCall(endPoints.login, "POST", JSON.stringify(props.payload));
+    const { response } = await networkCall(endPoints.login, "POST", JSON.stringify(props));
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
@@ -42,10 +42,13 @@ const AuthSlice = createSlice({
     loading: false,
     error: "",
     data: null,
-    token: Storage.get("token")|null
+    token: Storage.get("token")||null
   },
   reducers: {
-
+    logout: (state) => {
+      Storage.clearAll();
+      state.token = null;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -80,5 +83,5 @@ const AuthSlice = createSlice({
   }
 });
 
-// export const { } = AuthSlice.actions;
+export const { logout } = AuthSlice.actions;
 export default AuthSlice.reducer;

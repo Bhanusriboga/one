@@ -47,8 +47,12 @@
   align-items: center;
   padding: 0;
   margin: 0;
+  height: max-content;
 }
-
+.text-color{
+  color: #e0aa3e !important;
+  font-family: 'Poppins';
+}
 .user-image-container {
   display: flex;
   justify-content: center;
@@ -126,7 +130,7 @@
   }
 }
 .back-button{
-  display: none;
+  display: none !important;
 }
 /* Ensure sidebar is always visible on larger screens */
 @media (min-width: 768px) {
@@ -144,7 +148,14 @@
     display: flex;
   }
   .back-button{
-  align-self: flex-end;
-  display: block;
+    display: flex!important;
+    float: right;
+    align-items: center;
+    border: #B8B8B8 1px solid;
+    justify-content: center;
+    &.text-lightBlack{
+      color: #616161 !important;
+      font-size: 40px;
+    }
   }
 }
