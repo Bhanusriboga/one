@@ -7,7 +7,7 @@ import Userinnerpeofile from './Userinnerprofile'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Userprofile.css'
 
-const UserProfile = () => {
+const Userprofile = () => {
     const [imageSrc, setImageSrc] = useState('Image1.jpeg');
     const image = ['Image2.jpeg', 'Image3.jpeg', 'Image4.jpeg', 'Image5.jpeg'];
     const [isMobileView, setIsMobileView] = useState(false);
@@ -59,7 +59,7 @@ const UserProfile = () => {
                     />
                 ) : (
                     <CiHeart className="icons fs-1"
-
+                        data-testid="clickheart"
                         onClick={handleHeartClick}
                     />
                 )}
@@ -82,7 +82,7 @@ const UserProfile = () => {
     )
     return (
         <Container className='main'>
-            {isMobileView ? (
+            {isMobileView ? (     
                 <>
                     <div className='d-flex align-items-center justify-content-left'>
                         <FaArrowLeft className='pt-1 title' />
@@ -153,4 +153,5 @@ const UserProfile = () => {
     );
 };
 
-export default UserProfile;
+export default Userprofile;
+                            

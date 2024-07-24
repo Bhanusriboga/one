@@ -14,7 +14,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Userprofile.css'
 
-const Userprofiles = () => {
+const Userinnerprofile = () => {
     return (
         <Row className='mt-1'>
             <Col md="5" >
@@ -96,4 +96,4 @@ const Userprofiles = () => {
     );
 };
 
-export default Userprofiles;
+export default Userinnerprofile;

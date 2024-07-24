@@ -9,6 +9,8 @@ import CustomSideBar from './components/custom-side-bar/CustomSideBar'
 import ShortListedUsers from './components/shortlistedUsers/ShortListedUsers'
 import IgnoreUsers from './components/ignoreUsers/IgnoreUsers'
 import RegisterMain from './components/register/RegisterMain'
+import UserProfile from './components/Userprofile/Userprofile'
+
 
 const Routes = () => {
     return (
@@ -28,6 +30,9 @@ const Routes = () => {
                 </Route>
                 <Route path="/profile">
                     <CustomSideBar/>
+                </Route>
+                <Route path='/userprofile'>
+              <UserProfile/>
                 </Route>
                 <Redirect path='/' to="login"></Redirect>
             </Switch>
