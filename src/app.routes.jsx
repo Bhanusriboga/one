@@ -9,7 +9,6 @@ import CustomSideBar from './components/custom-side-bar/CustomSideBar'
 import ShortListedUsers from './components/shortlistedUsers/ShortListedUsers'
 import IgnoreUsers from './components/ignoreUsers/IgnoreUsers'
 import RegisterMain from './components/register/RegisterMain'
-import AddPreference from './components/AddPreferences/AddPreference'
 const Routes = () => {
     return (
         <>
