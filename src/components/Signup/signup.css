@@ -1,0 +1,432 @@
+.number-cont {
+    display: flex;
+    justify-content: space-between;
+    width: 38vw;
+    position: relative;
+}
+.form-control.genderss.country {
+    width: 6.5vw;
+    height: 8vh !important;
+    text-align: left;
+    color: rgba(171, 171, 171, 1);
+}
+.form-control.genderss.country::placeholder {
+    text-align: left;   
+    color: rgba(171, 171, 171, 1);
+}
+.form-control.genderss.number {
+    width: 30vw;
+}
+.forms {
+    margin-right: 10vw;
+    position: absolute;
+    top:15vh;
+    left: 4vw;
+}
+.main-img {
+    min-height: 130vh;
+    width: 100vw;
+}
+.main-cont {
+    position: relative;
+    height: 130vh;
+    overflow-x: hidden;
+    width: 100vw;
+}
+.star {
+    font-family: Poppins;
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 66px;
+    text-align: left;
+    font-size: 44px;
+    color: rgba(120, 0, 36, 1);
+    padding-bottom: 20px;
+}
+.fullname-error {
+    color: red;
+    align-self: flex-start
+}
+.pass-err {
+    color: red;
+}
+.opt-color {
+    color: black;
+}
+.email-error {
+    color: red;
+    font-family: monospace;
+    align-self: flex-start
+}
+.eye-icon-1 {
+    top: 50%;
+    transform: translateY(-35%);
+}
+.eye {
+    position: absolute;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    top: 32%
+}
+.eye-icon-2 {
+    top: 50%;
+    transform: translateY(-100%);
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.check-1 {
+    margin-top: -5px;
+    border-radius: 10px;
+}
+input[type=checkbox] {
+    -webkit-transform: scale(1.2);
+}
+.check-2-checkin {
+    border-radius: 15px;
+    height: 15vh;
+    font-size: 110%;
+    display: inline;
+}
+.span-class {
+    color: #117FFF;
+}
+.already-login {
+    color: rgb(121, 1, 37)
+}
+.form-control.genderss {
+    width: 38vw;
+    height: 8vh;
+    border: 1.4px solid grey;
+    color: rgb(22, 21, 21);
+    font-weight: 500;
+}
+.form-control.genderss::placeholder {
+    color: rgba(171, 171, 171, 1);
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: left;
+}
+.form-control.genderss.select.option.place {
+    width: 38vw;
+    height: 8vh;
+    border: 1.4px solid grey;
+    color: rgba(171, 171, 171, 1);
+    font-weight: 500;
+}
+.form-control.genderss.select.option.place::placeholder {
+    color: rgba(171, 171, 171, 1);
+    font-family: Poppins;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: left;
+}
+.select-tag::placeholder {
+    color: rgba(171, 171, 171, 1);
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: left;
+}
+.check {
+    height: 10vh;
+    width: 20vw;
+    margin-top: -8vh;
+}
+.form.next-button {
+    width: 12vw;
+    height: 7vh;
+    border-radius: 25px;
+    font-size: large;
+    font-weight: bold;
+    background-color: rgb(121, 1, 37)
+}
+.already {
+    text-align: center;
+    font-weight: 600;
+}
+.req {
+    color: rgba(253, 89, 89, 1);
+    position: absolute;
+    top: 0.5vh;
+    left: 0.7vw
+}
+.req-iam {
+    color: rgba(253, 89, 89, 1);
+    position: absolute;
+    top: 0.5vh;
+    left: 0.5vw
+}
+.form.otpbox::placeholder {
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(174, 172, 172);
+}
+.right-bg-cont {
+    position: absolute;
+    top: 18%;
+    left: 54%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.right-bg-head {
+    font-family: Poppins;
+    font-size: 2.19vw;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 1);
+    margin-top: 5px;
+    align-self: flex-end;
+}
+.right-bg-para {
+    font-family: Poppins;
+    font-size: 1.6vw;
+    align-self: flex-start;
+    font-weight: lighter;
+    color: #bbb9b9;
+    padding-top: 0.5vw;
+    width: 38vw;
+}
+.pellisambandalu {
+    margin-left: -6px;
+    width: 20vw;
+    align-self: flex-start;
+    justify-self: flex-start;
+}
+.para-terms {
+    width: 100vw;
+}
+.otp-head {
+    font-family: Poppins;
+    font-size: 130% !important;
+    font-weight: 500;
+    text-align: center;
+    width: 100% !important;
+}
+.otp-para {
+    font-family: Poppins;
+    font-size: 100%;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    width: 70%;
+    color: rgba(82, 82, 82, 1);
+}
+@media (max-width:900px) {
+    .main-img {
+        display: none;
+    }
+    .req {
+        color: rgba(253, 89, 89, 1);
+        position: absolute;
+        top: 0.8vh;
+        left: 1vw
+    }
+    .main-cont {
+        background-color: #F3F3F3;
+    }
+    .right-bg-head {
+        display: none;
+    }
+    .right-bg-row {
+        display: none;
+    }
+    .right-bg-para {
+        display: none;
+    }
+    .form-control.genderss {
+        width: 60vw;
+        height: 8vh;
+        border: 1.4px solid grey;
+        color: rgb(22, 21, 21);
+        font-weight: 500;
+    }
+    .pellisambandalu {
+        display: none;
+        margin-left: -6px;
+        width: 20vw;
+        align-self: flex-start;
+        justify-self: flex-start;
+    }
+    .form-control.genderss.select.option.place {
+        width: 60vw;
+        height: 8vh;
+        border: 1.4px solid grey;
+        color: rgba(171, 171, 171, 1);
+        font-weight: 500;
+    }
+    .form-control.genderss.country {
+        width: 10vw;
+        text-align: center;
+        height: 8.0vh !important;
+    }
+    .form-control.genderss.country::placeholder {
+        text-align: left;
+
+    }
+    .form-control.genderss.number {
+        width: 46vw;
+        position: relative
+    }
+    .number-cont {
+        display: flex;
+        justify-content: space-between;
+        width: 60vw;
+    }
+    .forms {
+        margin-right: 5vw;
+        position: absolute;
+        top: 3vh;
+        left: 22vw;
+        width: 60vw;
+    }
+    .check {
+        height: 10vh;
+        width: auto;
+    }
+    .check-2 {
+        margin-top: -12px;
+        border-radius: 10px;
+        height: 10vh
+    }
+    .form.next-button {
+        width: 30vw;
+        height: 7vh;
+        border-radius: 25px;
+        font-size: large;
+        font-weight: bold;
+        background-color: rgb(121, 1, 37)
+    }
+    .right-bg-cont {
+        display: none;
+        position: absolute;
+        top: 18%;
+        left: 54%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}
+@media (min-width:200px) and (max-width:700px) {
+    .form-control.genderss.country {
+        width: 17vw;
+        text-align: center;
+        height: 8vh !important;
+    }
+    .form-control.genderss::placeholder {
+        font-size: 15px;   
+    }
+    .form-control.genderss.country::placeholder {
+        text-align: left;
+        font-size: 15px;
+        width: 1vw !important;
+    }
+    .check{
+        display: flex;
+        width: 60vw;
+        justify-content:flex-start;
+        align-items:center;
+    }
+
+    .form-control.genderss.number {
+        width: 40vw;
+        position: relative;
+    }
+    .para-terms {
+        width: auto;
+        text-align: center;
+        font-size: 55%;
+        align-self: flex-end;
+    }
+    
+    .form.next-button {
+        width: 30vw;
+        height: 8vh;
+        border-radius: 25px;
+        font-size: medium;
+        font-weight: bold;
+        background-color: rgb(121, 1, 37);
+        margin-top:5vh
+    }
+    
+
+}
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: var(--bs-modal-padding);
+    height: 55vh;
+}
+.otp-head {
+    font-family: Poppins;
+    font-size: 150%;
+    font-weight: 500;
+    line-height: 54px;
+    text-align: center;
+    width: 70%;
+}
+.otp-para {
+    font-family: Poppins;
+    font-size: 100%;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    width: 70%;
+    color: rgba(82, 82, 82, 1);
+}
+.otp-input {
+    text-align: center;
+    border: 1px solid rgba(154, 154, 154, 1);
+    font-family: Poppins;
+    font-size: 100%;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    width: 60% !important;
+    height: 50px;
+    top: 343px;
+    left: 491px;
+    gap: 0px;
+    border-radius: 9px;
+    opacity: 0px;
+}
+.otp-input::placeholder {
+    text-align: center;
+}
+.didnt {
+    font-family: Poppins;
+    font-size: 100%;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: center;
+    width:70% ;
+}
+.verify-button {
+    width: 50%;
+    border: none;
+    gap: 0px;
+    border-radius: 22.98px;
+    background-color: rgba(120, 0, 36, 1) !important;
+    color: rgba(255, 255, 255, 1);
+    font-family: Poppins;
+    font-size: 100%;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: center;
+}
+.verified-para {
+    font-size: 14.58px;
+    font-weight: 400;
+    line-height: 21.88px;
+}
