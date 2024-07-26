@@ -114,6 +114,20 @@ export const ignoreUserText={
   ViewProfileBtn:'View Profile',
   heading1:'Shortlisted'
 }
+
+export const userProfile ={
+  Religion: "Religion",
+  Family: {
+      FamilyInformation: "Family Informaton",
+  },
+  personal: {
+      PersonalInformation: "Personal Information",
+  },
+  Professional: {
+      ProfessionalDetail: "Perofessional Details",
+  },
+
+}
 export const CustomSideBar = {
   title: "Add / Edit your profile photo",
   fromGallery: "From Gallery",
