@@ -7,7 +7,6 @@ import ForgotPage from './components/Forgot/ForgotPage'
 import SignUp from './components/Signup/SignUp'
 import Dashboard from './components/Dashboard/Dashboard'
 import RegisterMain from './components/register/RegisterMain'
-import UserProfile from './components/Userprofile/Userprofile'
 
 
 // Main Routes don't change any thing
