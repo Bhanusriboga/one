@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
 import { useHistory } from "react-router-dom";
-import {  useDispatch } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
 import ForgotPage from '../Forgot/ForgotPage';
 import { login } from '../../utils/constants';
 import { validatePhoneNumber } from "../../utils/validation"
 import { userLogin } from '../../redux/slices/AuthSlice';
-import  Storage  from '../../utils/Storage'
 import './Login.scss'
 
 const LoginPage = () => {
@@ -29,8 +28,7 @@ const LoginPage = () => {
 
     const handleLogin = async () => {
         await dispatch(userLogin({ mobileNumber:mobile, password }))
-        const token=Storage.get("token");
-        
+        const token=useSelector(state=>state.auth.token);
         if (token) {
             toast.success('login successfully', {
                 position: "top-center",
