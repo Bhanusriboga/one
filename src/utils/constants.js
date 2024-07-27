@@ -1,6 +1,13 @@
 export const footerContent={
-  registrationlabel: 'Pellisambandlu © 2023 - All rights reserved | Designed by Accumenta services Pvt Ltd'
-
+  registrationlabel: 'Pellisambandlu © 2023 - All rights reserved | Designed by Accumenta services Pvt Ltd',
+  infoText: 'Selecting a life partner is like adding a pecious melody to the song of your life, forever altering its tune. the sweetest symphony is found in choosing the perfect harmony. How delightful it would be to have a trusted companion to join in this heartarming duet of choice.',
+  Mobile: 'Mobile: 1234567890',
+  Email: 'Email: xyz@gmail.com',
+  contactLabel: 'Contact Us',
+  privacyLabel: 'Privacy & You',
+  pp: 'Privacy policy',
+  TermsC: 'Terms & Condition',
+  copyright: 'Copyright@2024 All rights reserved'
 }
 
 export const headerContent={
