@@ -13,6 +13,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 import { religion } from '../../utils/constants';
 const Filters = props => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -27,6 +28,7 @@ const Filters = props => {
   const toggleSearch = (e) => {
     e.preventDefault()
     // props.handleFilters()
+    props.handleFilters({ marital, occupation });//avoid eslint error  have add this so 
     setDropdownOpen(false)
   };
   const handleBasicSearch=(e)=>{
@@ -60,7 +62,7 @@ const Filters = props => {
               >
                 <option value={''}>Select Religion</option>
                 {religion.map((val) => (
-                  <option value={val}>
+                  <option value={val} key={val}>
                     {val}
                   </option>
                 ))}
@@ -98,7 +100,7 @@ const Filters = props => {
           </Col>
           <Col md={3} className='d-flex align-items-center mt-5'>
             <FormGroup className='mb-4'>
-              <Dropdown isOpen={dropdownOpen} toggle={(e) => toggle(e)}>
+              <Dropdown isOpen={dropdownOpen} toggle={(e) => toggle(e)} className='advancedfilters'>
                 <DropdownToggle caret outline color="dark">Advanced Filters</DropdownToggle>
                 <DropdownMenu className='dropDownBack' color='beige'>
                   <DropdownItem header>Marital status</DropdownItem>
@@ -220,17 +222,23 @@ const Filters = props => {
                   <div className='d-flex'>
                     <div className='p-2'>
                       <Input
+                      type='number'
+                      step="0.01"
                         placeholder='Min'
                       />
                     </div>
                     <div className='p-2'>
                       <Input
+                       type='number'
+                       step="0.01"
                         placeholder='Max'
                       />
                     </div>
                   </div>
                   <div className='p-2'>
                     <Input
+                     type='number'
+                     step="0.01"
                       placeholder='annual income'
                     />
                   </div>
@@ -257,4 +265,8 @@ const Filters = props => {
   )
 }
 
-export default Filters
+Filters.propTypes = {
+  handleBasic: PropTypes.func.isRequired,
+  handleFilters: PropTypes.func.isRequired,
+};
+export default Filters;
