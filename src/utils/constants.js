@@ -9,7 +9,100 @@ export const footerContent={
   TermsC: 'Terms & Condition',
   copyright: 'Copyright@2024 All rights reserved'
 }
+export const addPreference = {
+  hedding: "Add Preferences",
+  ProfileCreatedFor: "Profile is required.",
 
+  MinAge: "Min Age is required.",
+
+  MaxAge: "Max Age is required.",
+
+  MinHeight: "Min Height is required.",
+
+  MaxHeight: "Max height is required.",
+
+  MotherTongue: "Mother tongue is required.",
+
+  Religion: "Religion is required.",
+
+  Caste: "Caste is required.",
+
+  Star: "Star is required.",
+
+  Dosham: "Dhosam is required.",
+
+  Education: "Education is required.",
+
+  Occupation: "Occupation is required.",
+
+  Employment: "Employment is required.",
+
+  AnnualIncome: "Annual Income is required.",
+
+  City: "City is required.",
+
+  State: "State is required.",
+
+  Country: "Country is required.",
+
+  MaritalStatus: "Marital Status is required.",
+
+  Disability: "Disability is required.",
+
+  DrinkingHabits: "Drinking Habits is required.",
+
+  SmokingHabits: "Smoking Habits is required.",
+
+  EatingHabits: "Eating Habits is required.",
+
+  profile: "ProfileCreatedFor",
+
+  minage: "MinAge",
+
+  maxage: "MaxAge",
+
+  minheight: "MinHeight",
+
+  maxheight: "MaxHeight",
+
+  mothertongue: "Mother Tongue",
+
+  religion: "Religion",
+
+  caste: "Caste",
+
+  star: "Star",
+
+  dosham: "Dosham",
+
+  education: "Education",
+
+  occupation: "Occupation",
+
+  employmentstatus: "Employment Status",
+
+  annualincome: "Annual Income",
+
+  city: "City",
+
+  state: "State",
+
+  country: "Country",
+
+  maritalstatus: "Marital Status",
+
+  disability: "Disability",
+
+  drinkinghabits: "Drinking Habits",
+
+  smokinghabits: "Smoking Habits",
+
+  eatinghabits: "Eating Habits",
+
+  submit: "Submit",
+  select:"Select",
+
+};
 export const headerContent={
   logo: 'Pellisambandlu',
   home:'Home',

@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './CustomSideBar.scss';
 import Editprofile from '../editprofile/Editprofile';
 
+import AddPreferences from '../AddPreferences/AddPreference';
 const CustomSideBar = () => {
   const [activeContent, setActiveContent] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -29,7 +30,7 @@ const CustomSideBar = () => {
     // Replace all the items with component which we going to develop
     switch (activeContent) {
       case 'addPreferences':
-        return <div>Add Preferences Content</div>;
+        return <AddPreferences />;
       case 'editProfile':
         return <Editprofile />
       case 'ignoredUsers':
