@@ -1,67 +1,46 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { Col, Row } from "reactstrap";
-import { users } from "./Data";
-import UsersCard from "./UsersCard";
+import React, { useEffect, useState } from 'react';
+import { Col, Row } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaArrowLeft } from "react-icons/fa6";
-import { ignoreUserText } from "../../utils/constants";
-import {useDispatch} from "react-redux"
-import "./Usercard.css";
-import { toast } from "react-toastify";
-import PaginationComponent from "../ignoreUsers/PaginationComponent";
-import { shortlistedUsersPost } from "../../redux/slices/users";
+import { ignoreUserText } from '../../utils/constants';
+import { toast } from 'react-toastify';
+import PaginationComponent from '../../common-components/pagination/PaginationComponent';
+import UsersCard from '../../common-components/UserCard';
+import { getShortListedUsers, getIgnoredUsers } from '../../redux/slices/Users';
+
+import './Usercard.css';
+
 function ShortListedUsers() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [ignoreList, setIgnoreList] = useState([]);
-  const [pendingIgnoreList, setPendingIgnoreList] = useState([]);
-  const [usersPerPage, setUsersPerPage] = useState(10);
-  const [removeFromShortList, setRemoveFromShortList] = useState([]);
-  const dispatch=useDispatch();
-  const removeUserFromShortList = async (userId) => {
-    await dispatch(shortlistedUsersPost(userId))
-    setRemoveFromShortList((prevList) => [...prevList, userId]);
-    toast.error("User removedmoved from shortlist! added to main list", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
+  const [totalpages, setTotalpages] = useState(10);
+  const dispatch = useDispatch();
+
+  const { shortlisted } = useSelector((state) => state.users);
+
+  useEffect(() => {
+    dispatch(getShortListedUsers());
+    setTotalpages(Math.ceil(shortlisted.length / 10));
+    setCurrentPage(1);
+  }, [dispatch]);
+
   const handleMoveToIgnoreList = (userId) => {
-    if (ignoreList.includes(userId) || pendingIgnoreList.includes(userId)) {
-      toast.error("User already in shortlist", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      return;
-    }
-
-    const userExists = users.some((user) => user.id === userId);
+    const userExists = shortlisted.some((user) => user.userId === userId);
     if (userExists) {
-      setPendingIgnoreList((prevList) => [...prevList, userId]);
-
       const toastId = toast.success(
         <div>
-          User will be moved to ignorelist.
+          User will be moved to ignore list.
           <button
             style={{
-              border: "5px",
-              borderRadius: "5px",
-              float: "right",
-              backgroundColor: "olive",
-              fontSize: "12px",
-              padding: "8px",
-              color: "white",
+              border: '5px',
+              borderRadius: '5px',
+              float: 'right',
+              backgroundColor: 'olive',
+              fontSize: '12px',
+              padding: '8px',
+              color: 'white'
             }}
-            onClick={() => undoMoveToIgnoreList(userId, toastId)}>
+            onClick={() => undoMoveToIgnoreList(userId, toastId)}
+          >
             Undo
           </button>
         </div>,
@@ -77,21 +56,15 @@ function ShortListedUsers() {
       );
 
       setTimeout(() => {
-        setPendingIgnoreList((prevList) => {
-          if (prevList.includes(userId)) {
-            setIgnoreList((shortList) => [...shortList, userId]);
-            toast.success("User moved to ignorelist", {
-              position: "top-center",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            return prevList.filter((id) => id !== userId);
-          }
-          return prevList;
+        dispatch(getIgnoredUsers("shortlisted"));
+        toast.success('User moved to ignore list', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
         });
       }, 8000);
     } else {
@@ -106,11 +79,11 @@ function ShortListedUsers() {
       });
     }
   };
+
   const undoMoveToIgnoreList = (userId, toastId) => {
-    setPendingIgnoreList((prevList) => prevList.filter((id) => id !== userId));
+    dispatch(getShortListedUsers("shortlisted"));
     toast.update(toastId, {
-      render: "User move to ignorelist cancelled",
-      // type: toast.TYPE.INFO,
+      render: 'User move to ignore list cancelled',
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -119,94 +92,84 @@ function ShortListedUsers() {
       progress: undefined,
     });
   };
-  const filteredUsers = users.filter(
-    (user) =>
-      !ignoreList.includes(user.id) && !removeFromShortList.includes(user.id)
-  );
-  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
-
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+  const removeUserFromShortList = () => {
+    dispatch(getIgnoredUsers("Shortlisted"));
+    toast.error('User removed from short list!', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (window.innerWidth < 576) {
+  //       setUsersPerPage(4);
+  //     } else if (window.innerWidth < 768) {
+  //       setUsersPerPage(6);
+  //     } else {
+  //       setUsersPerPage(10);
+  //     }
+  //   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 576) {
-        setUsersPerPage(4);
-      } else if (window.innerWidth < 768) {
-        setUsersPerPage(6);
-      } else {
-        setUsersPerPage(10);
-      }
-    };
+  //   handleResize();
+  //   window.addEventListener('resize', handleResize);
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, []);
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
-  useEffect(() => {
-    if (currentUsers.length === 0 && currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  }, [ignoreList, currentPage, currentUsers.length]);
   return (
     <div style={{ position: "relative" }}>
       <div className="shortlist-container">
-        <div className="shortlist-mobile-back-arrow-container">
-          <FaArrowLeft className="shortlist-back-mobile" />
-          <h4 className="shortlist-heading">{ignoreUserText.heading1}</h4>
+        <div className='shortlist-mobile-back-arrow-container'>
+          <FaArrowLeft className='shortlist-back-mobile' />
+          <h4 className='shortlist-heading'>{ignoreUserText.heading1}</h4>
         </div>
-
         <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3">
-          {currentUsers.map((user, index) => {
-            if (ignoreList.includes(user.id)) {
-              return null;
-            }
+          {shortlisted.map((user, index) => {
             let background;
             let color;
             let buttonBackgroundColor;
             let viewButtonColor;
 
             if (index % 2 === 0) {
-              background =
-                "linear-gradient(#B88A44 0%,#E0AA3E 31%, #F9F295 55% ,#E0AA3E 71%,#B88A44 100%)";
-              color = "#780024";
-              buttonBackgroundColor = "#780024";
-              viewButtonColor = "#FFFFFF";
+              background = 'linear-gradient(#B88A44 0%,#E0AA3E 31%, #F9F295 55% ,#E0AA3E 71%,#B88A44 100%)';
+              color = '#780024';
+              buttonBackgroundColor = '#780024';
+              viewButtonColor = '#FFFFFF';
             } else {
-              background = "#780024";
-              color = "#FFFFFF";
-              buttonBackgroundColor = "#E0AA3E";
-              viewButtonColor = "#780024";
+              background = '#780024';
+              color = '#FFFFFF';
+              buttonBackgroundColor = '#E0AA3E';
+              viewButtonColor = '#780024';
             }
 
             return (
-              <Col key={user.id}>
+              <Col key={user.userId}>
                 <UsersCard
                   user={user}
                   background={background}
                   color={color}
                   buttonBackgroundColor={buttonBackgroundColor}
                   viewButtonColor={viewButtonColor}
-                  onMoveToIgnoreList={() => handleMoveToIgnoreList(user.id)}
-                  removeUserFromShortList={() =>
-                    removeUserFromShortList(user.id)
-                  }
+                  onMoveToIgnoreList={() => handleMoveToIgnoreList(user.userId)}
+                  removeUserFromShortList={() => removeUserFromShortList(user.userId)}
                 />
               </Col>
             );
           })}
         </Row>
-
-        <div className="shortlisted-pagination">
-          <PaginationComponent
-            totalPages={totalPages}
+        <div className='shortlisted-pagination'>
+         {totalpages>1&& <PaginationComponent
+            totalPages={totalpages}
             currentPage={currentPage}
             onPageChange={handlePageChange}
-          />
+          />}
         </div>
       </div>
     </div>

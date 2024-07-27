@@ -23,7 +23,6 @@ const navigate=useNavigate()
     options.push(index)
   
  }
- console.log(options)
 
  
   return (

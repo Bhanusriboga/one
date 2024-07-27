@@ -13,24 +13,36 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 import { religion } from '../../utils/constants';
 const Filters = props => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [basicfilers, setBasicfilters] = useState({religion:"",cast:"",subcast:""})
   const [marital, setMarital] = useState('');
   const [occupation, setOccupation] = useState('');
 
   const toggle = (e) => {
     e.preventDefault()
-    console.log(e, 'testig')
     setDropdownOpen(!dropdownOpen);
   }
   const toggleSearch = (e) => {
     e.preventDefault()
     // props.handleFilters()
+    props.handleFilters({ marital, occupation });//avoid eslint error  have add this so 
     setDropdownOpen(false)
   };
-  const handleSelect = (e) => {
-    console.log(e.target.value, 'testig')
+  const handleBasicSearch=(e)=>{
+    e.preventDefault()
+    props.handleBasic(basicfilers)
+  }
+  const handleSelect = (e,type) => {
+    if(type === 'religion'){
+      setBasicfilters({...basicfilers,religion:e.target.value})
+    } else if(type === 'cast'){
+      setBasicfilters({...basicfilers,cast:e.target.value})
+    } else if(type === 'subcast'){
+      setBasicfilters({...basicfilers,subcast:e.target.value})
+    }
   }
 
   return (
@@ -50,7 +62,7 @@ const Filters = props => {
               >
                 <option value={''}>Select Religion</option>
                 {religion.map((val) => (
-                  <option value={val}>
+                  <option value={val} key={val}>
                     {val}
                   </option>
                 ))}
@@ -58,13 +70,13 @@ const Filters = props => {
             </FormGroup>
           </Col>
           <Col md={2}>
-            <FormGroup onChange={(e) => handleSelect(e, "caste")}>
-              <Label for="Caste" className='fontSie'>
+            <FormGroup onChange={(e) => handleSelect(e, "cast")}>
+              <Label for="Cast" className='fontSie'>
                 Caste
               </Label>
               <Input
-                id="Caste"
-                name="Caste"
+                id="Cast"
+                name="Cast"
                 placeholder="Enter Caste"
                 className='filterInput'
               />
@@ -84,17 +96,17 @@ const Filters = props => {
             </FormGroup>
           </Col>
           <Col md={2} className='d-flex align-items-center mt-4'>
-            <Button className='seatchButton' onClick={toggleSearch}>Search</Button>
+            <Button className='seatchButton' onClick={handleBasicSearch}>Search</Button>
           </Col>
           <Col md={3} className='d-flex align-items-center mt-5'>
             <FormGroup className='mb-4'>
-              <Dropdown isOpen={dropdownOpen} toggle={(e) => toggle(e)}>
+              <Dropdown isOpen={dropdownOpen} toggle={(e) => toggle(e)} className='advancedfilters'>
                 <DropdownToggle caret outline color="dark">Advanced Filters</DropdownToggle>
                 <DropdownMenu className='dropDownBack' color='beige'>
                   <DropdownItem header>Marital status</DropdownItem>
                   <Form>
                     <FormGroup check={true}
-                      onChange={(e) => { setMarital(e.target.value), console.log(e.target.value, "testing") }}
+                      onChange={(e) => { setMarital(e.target.value)}}
                       className='d-flex justify-content-between px-2 maritalstatuss'
                     >
 
@@ -146,7 +158,7 @@ const Filters = props => {
                   <DropdownItem header>Occupation</DropdownItem>
                   <Form>
                     <FormGroup check={true}
-                      onChange={(e) => { setOccupation(e.target.value), console.log(e.target.value, "testing") }}
+                      onChange={(e) => { setOccupation(e.target.value)}}
                       className='d-flex justify-content-between px-2 maritalstatuss'
                     >
                       <div>
@@ -210,17 +222,23 @@ const Filters = props => {
                   <div className='d-flex'>
                     <div className='p-2'>
                       <Input
+                      type='number'
+                      step="0.01"
                         placeholder='Min'
                       />
                     </div>
                     <div className='p-2'>
                       <Input
+                       type='number'
+                       step="0.01"
                         placeholder='Max'
                       />
                     </div>
                   </div>
                   <div className='p-2'>
                     <Input
+                     type='number'
+                     step="0.01"
                       placeholder='annual income'
                     />
                   </div>
@@ -247,4 +265,8 @@ const Filters = props => {
   )
 }
 
-export default Filters
+Filters.propTypes = {
+  handleBasic: PropTypes.func.isRequired,
+  handleFilters: PropTypes.func.isRequired,
+};
+export default Filters;

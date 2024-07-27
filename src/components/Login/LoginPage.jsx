@@ -1,66 +1,93 @@
-import React, { useState } from 'react'
-import './Login.scss'
-import { Button, Input, Form, FormFeedback, InputGroup, FormGroup, Row, Col } from 'reactstrap';
-import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
-import { login } from '../../utils/constants';
+import React, { useEffect, useState } from 'react'
+import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
+import {  useDispatch, useSelector } from 'react-redux';
+import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
 import ForgotPage from '../Forgot/ForgotPage';
-import { useHistory } from "react-router-dom";
-const LoginPage = (props) => {
+import { login } from '../../utils/constants';
+import {toast} from "react-toastify"
+import { validatePhoneNumber } from "../../utils/validation"
+import { userLogin } from '../../redux/slices/AuthSlice';
+import './Login.scss'
+
+const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const history = useHistory();
     const [modal, setModal] = useState(false);
-    const [emailValid, setEmailValid]= useState(true)
-    const emailreg=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const [mobileValid, setMobileValid] = useState(true)
+    const [password, setPassword] = useState("")
+    const [mobile, setMobile] = useState("")
+    const dispatch = useDispatch()
+    const {error}=useSelector(state=>state.auth)
     const handleeyebtn = (e) => {
         e.preventDefault()
         setShowPassword(!showPassword);
     }
-    const toggle = () => setModal(!modal);
-    const handleLogin = () => {
-        history.push('/dashboard');
-    }
-    const handleemail=(e)=>{
-        if(e.target.value.match(emailreg)){
-            setEmailValid(true)
-        } else{
-            setEmailValid(false)
+    useEffect(() => {
+        if(error!==""){
+            toast.error("Invalid Credentials",
+                {
+                    position:"top-center",
+                    autoClose:2000,
+                    hideProgressBar:false,
+                    closeOnClick:true,
+                    pauseOnHover:true,
+                    draggable:false,
+                });
         }
+    }, [error])
+    const toggle = () => setModal(!modal);
 
+    const handleLogin = async () => {
+        await dispatch(userLogin({ mobileNumber:mobile, password }));
     }
+
+    const handleMobile = (event) => {
+        if (validatePhoneNumber(event.target.value)) {
+            setMobileValid(true)
+        } else {
+            setMobileValid(false)
+        }
+        setMobile(event.target.value)
+    }
+
+    const handlePassword = (event) => {
+        setPassword(event.target.value)
+    }
+
     return (
         <div className='bcgimg'>
             <Form className='loginContent'>
-                <h3 class="d-flex justify-content-center align-items-center loginhead">{login.login}</h3>
+                <h3 className="d-flex justify-content-center align-items-center loginhead">{login.login}</h3>
                 <FormGroup className='mt-4 d-flex justify-content-center align-items-center '>
                     <Col sm={9} className='letterIconplace'>
                         <Input
-                            id="exampleEmail"
-                            name="email"
-                            placeholder={login.emailPlaceholder}
-                            onChange={handleemail}
-                            type="email"
-                            className='emailinput'
-                            invalid = {!emailValid}
+                            id="exampleMobile"
+                            name="mobile"
+                            placeholder={login.mobilePlaceholder}
+                            onChange={handleMobile}
+                            value={mobile}
+                            type="number"
+                            className='mobileinput'
+                            invalid={!mobileValid}
                         />
-                        {emailValid? <FaEnvelope color='#d3d3d3' className='emailicon' /> :   <FormFeedback>
-                            Please Enter a Valid Email
+                        <FaPhone color='#d3d3d3' className='emailicon' />
+                        {mobileValid && <FormFeedback>
+                            Please Enter a Valid Mobile Number
                         </FormFeedback>}
                     </Col>
-
                 </FormGroup>
                 <div className='d-flex justify-content-center mb-0'>
                     <Col sm={9} className='letterIconplace'>
-
                         <Input
                             id="Password"
                             name="password"
                             placeholder={login.passwordPlaceholder}
                             type={showPassword ? 'text' : 'password'}
-                            className='emailinput'
+                            className='mobileinput'
                             required
+                            onChange={handlePassword}
+                            value={password}
                         />
                         <button className='eyebutton' onClick={handleeyebtn}>{showPassword ? <FaEye color='#d3d3d3' /> : <FaEyeSlash color='#d3d3d3' />}</button>
-
                     </Col>
                 </div>
                 <FormGroup
@@ -71,7 +98,7 @@ const LoginPage = (props) => {
                         <Button
                             color='link'
                             onClick={toggle}
-                            className=' text-decoration-none pl-1 cButton loginhead'
+                            className='text-decoration-none pl-1 cButton loginhead'
                         >
                             {login.forgot}
                         </Button>
@@ -93,7 +120,7 @@ const LoginPage = (props) => {
                 </FormGroup>
                 <FormGroup
                     className='d-flex justify-content-center align-items-center p-4 loginhead'
-                > <span className='fitWidth'> {login.noAccount}</span>
+                > <span className='fitWidth text-black'> {login.noAccount}</span>
                     <Button
                         color='link'
                         href="/signUp"
@@ -111,4 +138,5 @@ const LoginPage = (props) => {
         </div>
     )
 }
+
 export default LoginPage
