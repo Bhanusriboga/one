@@ -11,6 +11,7 @@ import ShortListedUsers from '../shortlistedUsers/ShortListedUsers';
 import ProfileList from '../Dashboard/ProfileList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './CustomSideBar.scss';
+import Editprofile from '../editprofile/Editprofile';
 
 const CustomSideBar = () => {
   const [activeContent, setActiveContent] = useState('');
@@ -30,7 +31,7 @@ const CustomSideBar = () => {
       case 'addPreferences':
         return <div>Add Preferences Content</div>;
       case 'editProfile':
-        return <div>Edit Profile Content</div>;
+        return <Editprofile />
       case 'ignoredUsers':
         return <IgnoreUsers/>;
       case 'shortlisted':

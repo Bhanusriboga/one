@@ -106,7 +106,16 @@ export const settings={
   trustIssue:"Trust issue",
   validPhoneError:"Please enter a valid phone number"
 }
-
+export const EditProfile={
+  editprofile:"Edit Profile",
+  save:"Save",
+  basicdetails:"Basic Details",
+  personaldetails:"Personal Details",
+  edit:"Edit",
+  professionaldetails:"Professional Details",
+  media:"Media",
+  add:"Add",
+}
 export const ignoreUserText={
   heading:'Ignorelisted',
   Age:'Age',
