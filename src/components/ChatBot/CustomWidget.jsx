@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import Icon from "./Assets/Icon.png";
 import ChatBotIcon from "./Assets/ChatBotIcon.png"
 import ChatBotCloseButton from "./Assets/ChatBotCloseButton.png";
-
+import './CustomWidget.css';
 const CustomWidget = () => {
   const [key, setKey] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
