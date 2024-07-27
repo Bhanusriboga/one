@@ -1,0 +1,260 @@
+.shortlist-container{
+    margin: auto;
+    padding-top: 3%;
+    padding-left: 8px;
+    padding-right: 10px;
+    
+}
+.back-button{    
+color:  #616161;
+ 
+right:0;
+    margin-bottom: 20px;
+    margin-right: 8%;
+    cursor: pointer
+}
+.back-btn-arrow{
+    padding-right:10px ;
+    color:#616161;
+    font-size:28px;
+    margin-left: 8px;
+
+}
+.shortlist-heading{
+    padding-top: 30px;
+    padding-bottom: 16px;
+    color:#780024;
+    font-size: 34px;
+    font-weight: 500;
+    
+}
+.shortlist-back-mobile{
+    display:none
+}
+.shortlist-rightsize-image{
+    position: absolute; right: 0; width: 110px 
+}
+.usercard{
+    width:100%;
+    color:white;
+    padding-top:8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 9px;
+    padding-bottom: 7px;
+}
+.user-card-icons-container{
+    display:flex;
+    align-items:center;justify-Content:space-between
+}
+.usercard-ignoresymbol{
+    width:22px;
+    height:22px;
+    border:2px solid white;
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer
+}
+.usercard-ignoretext{
+font-size:20px;
+display:flex;
+align-items:center;
+
+}
+.usercard-hearticon{
+    width: 26px;
+    height: 26px;
+    cursor: none;
+}
+.shortlist-mobile{
+    display: flex;
+    flex-direction: column;
+}
+.usercard-image-container{
+    width:105px;
+    height:105px;
+    background-color:#D9D9D9;
+    border-radius:50%;
+   display: flex;
+   align-self: center;
+}
+.usercard-name{
+    font-size: 18px;
+    font-family:sans-serif;
+    display:flex;
+    font-weight: 510;
+   justify-content: center;
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+.usercard-text{
+    font-size: 15px;
+    font-weight: 400;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+justify-content: space-between;
+    padding-left: 8px;
+    line-height: 1.8;
+   
+}
+.usercard-button{
+    width:100%;
+    font-size: 15px;
+    font-weight:600;
+    font-family: sans-serif;
+    border:none;
+    border-radius: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 8px;
+   
+}
+.age{
+    /* width: 50%; */
+    text-align: left; 
+    line-height: 1.5;
+
+}
+/* Usercard.css */
+.shortlisted-pagination{
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 25px;
+}
+.usercard-button-mobile{
+    display:none
+}
+
+  .chat-image{
+    width:56px;height:56px;
+    align-self: flex-end;
+  }
+  .user-age{
+    width:50%;
+    text-align: left;
+    line-height: 1.8;
+  }
+ 
+  @media(min-width:768px)and (max-width:1150px){
+    .shortlist-container{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .usercard-text {
+        gap:0px;
+        padding-left: 0px;
+    }
+    .user-age{
+        font-size: 13px;
+    }
+  }
+  @media(min-width:0px)and (max-width:575px){ 
+    .usercard{
+        width:100%;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .usercard-image-container{
+        width :125px;
+        height :125px
+    }
+    .user-age{
+        width:100%;
+
+    }
+     .user-card-maincontainer{
+        max-width: 360px;
+        margin: auto;
+     }
+     .shortlist-mobile{
+        display:flex;
+        flex-direction: row;
+        /* align-items: center; */
+        gap:20px
+     }
+     .usercard-button-mobile{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        width:143px;
+        height:30px;
+        font-size: 15px;
+        font-weight:600;
+       
+        border:none;
+        border-radius: 4px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+     }
+     .usercard-button{
+        display:none
+     }
+    .usercard-text{
+        justify-content: space-between;
+        line-height: 2;
+        font-size: 15px;
+    }
+    .usercard-only-mobileview{
+        padding-top: 10px;
+        padding-bottom: 13px;
+    }
+    .usercard-name{
+        font-size: 21px;
+        font-weight: 600;
+    }
+    .shortlist-mobile-back-arrow-container{
+        max-width: 365px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin: auto;
+    }
+    .shortlist-back-mobile{
+        font-size: 22px;
+        display:flex;
+        color: #780024;
+        align-self: center;
+        margin-top: 15px;
+        margin-right: 15px;
+    }
+    .shortlist-rightsize-image{
+        width: 40px !important;
+    }
+    .back-button{
+        display:none
+    }
+    .shortlist-heading{
+        font-size: 24px;
+    }
+    .shortlist-container{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+  }
+  @media(min-width:576px)and (max-width:767px){
+   
+    .shortlist-container{
+    max-width: 500px;
+    }
+    
+
+  }
+  @media(min-width:0px)and (max-width:338px){
+    .usercard{
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    .shortlist-mobile{
+        gap :3px
+    }
+    .usercard-name{
+        font-size: 20px;
+    }
+  }
+

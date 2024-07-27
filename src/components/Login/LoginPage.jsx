@@ -1,58 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
-import { useHistory } from "react-router-dom";
-import {  useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
+import {  useDispatch, useSelector } from 'react-redux';
 import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
 import ForgotPage from '../Forgot/ForgotPage';
 import { login } from '../../utils/constants';
+import {toast} from "react-toastify"
 import { validatePhoneNumber } from "../../utils/validation"
 import { userLogin } from '../../redux/slices/AuthSlice';
-import  Storage  from '../../utils/Storage'
 import './Login.scss'
 
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const history = useHistory();
     const [modal, setModal] = useState(false);
     const [mobileValid, setMobileValid] = useState(true)
     const [password, setPassword] = useState("")
     const [mobile, setMobile] = useState("")
     const dispatch = useDispatch()
-
+    const {error}=useSelector(state=>state.auth)
     const handleeyebtn = (e) => {
         e.preventDefault()
         setShowPassword(!showPassword);
     }
-
+    useEffect(() => {
+        if(error!==""){
+            toast.error("Invalid Credentials",
+                {
+                    position:"top-center",
+                    autoClose:2000,
+                    hideProgressBar:false,
+                    closeOnClick:true,
+                    pauseOnHover:true,
+                    draggable:false,
+                });
+        }
+    }, [error])
     const toggle = () => setModal(!modal);
 
     const handleLogin = async () => {
-        await dispatch(userLogin({ mobileNumber:mobile, password }))
-        const token=Storage.get("token");
-        
-        if (token) {
-            toast.success('login successfully', {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            })
-            history.push('/dashboard');
-        } else {
-            toast.error('Invalid Credentials', {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-        }
+        await dispatch(userLogin({ mobileNumber:mobile, password }));
     }
 
     const handleMobile = (event) => {
