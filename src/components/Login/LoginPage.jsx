@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
-import { useHistory } from "react-router-dom";
-import {  useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import {  useDispatch } from 'react-redux';
 import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
 import ForgotPage from '../Forgot/ForgotPage';
 import { login } from '../../utils/constants';
@@ -12,7 +10,6 @@ import './Login.scss'
 
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const history = useHistory();
     const [modal, setModal] = useState(false);
     const [mobileValid, setMobileValid] = useState(true)
     const [password, setPassword] = useState("")
@@ -28,29 +25,6 @@ const LoginPage = () => {
 
     const handleLogin = async () => {
         await dispatch(userLogin({ mobileNumber:mobile, password }))
-        const token=useSelector(state=>state.auth.token);
-        if (token) {
-            toast.success('login successfully', {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            })
-            history.push('/dashboard');
-        } else {
-            toast.error('Invalid Credentials', {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-        }
     }
 
     const handleMobile = (event) => {
