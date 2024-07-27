@@ -85,3 +85,10 @@ export const EditProfile={
   media:"Media",
   add:"Add",
 }
+export const ignoreUserText={
+  heading:'Ignorelisted',
+  Age:'Age',
+  Religion:'Religion',
+  ViewProfileBtn:'View Profile',
+  heading1:'Shortlisted'
+}
