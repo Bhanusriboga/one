@@ -487,7 +487,6 @@ const PersonalDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form Data:", formData);
       toast.success("User personal Registered Successfully", {
         position: "top-center",
         autoClose: 2000,

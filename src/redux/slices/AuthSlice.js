@@ -15,7 +15,7 @@ export const userSignup = createAsyncThunk(
     }
     const { response,error } = await networkCall(endPoints.signup, "POST", JSON.stringify(data));
     if (response) {
-      return thunkAPI.fulfillWithValue(response);
+      return thunkAPI.fulfillWithValue(response.data);
     }
     else {
       return thunkAPI.rejectWithValue(error||"Something went wrong..!")
@@ -29,7 +29,7 @@ export const userLogin = createAsyncThunk(
   async (props, thunkAPI) => {
     const { response, error } = await networkCall(endPoints.login, "POST", JSON.stringify(props));
     if (response) {
-      return thunkAPI.fulfillWithValue(response);
+      return thunkAPI.fulfillWithValue(response.data);
     }
     else {
       return thunkAPI.rejectWithValue(error||"Something went wrong..!")
@@ -48,7 +48,7 @@ export const fetchUserInfo = createAsyncThunk(
       }
       const { response, error } = await networkCall(endPoints.userInfo+userId, 'GET',header);
       if (response) {
-        return thunkAPI.fulfillWithValue(response);
+        return thunkAPI.fulfillWithValue(response.data);
       } else {
         return thunkAPI.rejectWithValue(error || 'Something went wrong..!');
       }

@@ -123,7 +123,6 @@ function BasicsDetails() {
     e.preventDefault();
 
     if (validateAllFields()) {
-      console.log("Form Data:", formData);
 
       toast.success("User Basic Details Registered Successfully", {
         position: "top-center",
