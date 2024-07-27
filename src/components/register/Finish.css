@@ -1,0 +1,91 @@
+.registration5-container {
+  width: 100%;
+}
+.registration5-textarea {
+  width: 96% !important;
+  height: 294px;
+  border: 1px solid #777676 !important;
+  font-size: 25px !important;
+ 
+}
+.registration5-heading {
+  font-size: 24px;
+  font-weight: 500;
+  color: #780024;
+  padding-bottom: 20px;
+}
+
+.modal-content {
+  background-image: url('../../Assets/register_pg5.png') !important;
+  background-size: cover;
+  background-position: center;
+}
+
+.text-center h3 {
+  font-size: 1.5rem;
+  font-family: Poppins;
+font-size: 33px;
+font-weight: 700;
+line-height: 49.5px;
+text-align: left;
+color: rgba(255, 255, 255, 1);
+}
+
+.text-center p{
+  color:rgba(201, 201, 201, 1);
+  font-family: Poppins;
+font-size: 18px;
+font-weight: 400;
+line-height: 27px;
+text-align: center;
+
+}
+.linktodashboard{
+  font-family: Poppins;
+font-size: 20px;
+font-weight: 500;
+line-height: 30px;
+text-align: left;
+color: rgba(209, 209, 209, 1);
+}
+
+@media (min-width: 768px) {
+  .text-center h3 {
+    font-size: 2rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .registration5-textarea {
+    width: 100% !important;
+    height: 160px;
+    border: 1px solid #777676;
+  }
+}
+
+
+.save-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 33px;
+  font-size: 22px;
+  height: 47px;
+  background-color: #800020;
+  color: #FFFFFF;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 108px;
+}

@@ -84,7 +84,43 @@ export const ignoreUserText={
   heading1:'Shortlisted'
 }
 export  const registerMain = {
-  imgHeading:'Welcome  back to',
-  textIlaic:'pellisambhadhalu',
+  imgHeading:'Welcome to',
+  textIlaic:'pellisambandalu',
   imgtext:'Our expert team provides comprehensive planning and personalized services to ensure your special day is perfect. Trust us to turn your dream wedding into reality. Contact us today!'
 }
+
+export const registration1={
+  education:"Highest Education ",
+  field:"This field is required",
+  occupation:"Occupation*",
+  employment:"Employment Status ",
+  income:"Annual Income ",
+  year:"Year of Passing",
+  place:"Place of Birth ",
+  time:"Time of Birth",
+  city:"Citizenship",
+  language :"Language Proficiency",
+  instagram:"Instagram ID",
+  linkedIn:"LinkedIn ID",
+  address:"Address",
+  state:"State",
+  country:"Country",
+  postal:"Postal Code",
+  door:"Door No/Building No/Building Name",
+  street:"Street Name",
+  cityName:"City Name",
+  name:"Name of the institute",
+  employedinplaceholder:"EmployedIn",
+  locationplaceholder:"Work Location",
+  stateplaceholder:"State",
+  cityplaceholder:"City",
+  annualincome:" annual income field is  Required",
+  annualtext:"Annual Income",
+  date:"Date of Birth",
+  religion:"Religion",
+  mother:"Mother Tongue",
+  link:"Skip & Register Later",
+
+  caste:"caste"
+
+};
