@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
-import {  useDispatch } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
 import ForgotPage from '../Forgot/ForgotPage';
 import { login } from '../../utils/constants';
+import {toast} from "react-toastify"
 import { validatePhoneNumber } from "../../utils/validation"
 import { userLogin } from '../../redux/slices/AuthSlice';
 import './Login.scss'
@@ -15,16 +16,28 @@ const LoginPage = () => {
     const [password, setPassword] = useState("")
     const [mobile, setMobile] = useState("")
     const dispatch = useDispatch()
-
+    const {error}=useSelector(state=>state.auth)
     const handleeyebtn = (e) => {
         e.preventDefault()
         setShowPassword(!showPassword);
     }
-
+    useEffect(() => {
+        if(error!==""){
+            toast.error("Invalid Credentials",
+                {
+                    position:"top-center",
+                    autoClose:2000,
+                    hideProgressBar:false,
+                    closeOnClick:true,
+                    pauseOnHover:true,
+                    draggable:true,
+                });
+        }
+    }, [error])
     const toggle = () => setModal(!modal);
 
     const handleLogin = async () => {
-        await dispatch(userLogin({ mobileNumber:mobile, password }))
+        await dispatch(userLogin({ mobileNumber:mobile, password }));
     }
 
     const handleMobile = (event) => {
