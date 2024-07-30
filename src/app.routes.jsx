@@ -9,7 +9,7 @@ import CustomSideBar from './components/custom-side-bar/CustomSideBar'
 import ShortListedUsers from './components/shortlistedUsers/ShortListedUsers'
 import IgnoreUsers from './components/ignoreUsers/IgnoreUsers'
 import RegisterMain from './components/register/RegisterMain'
-
+import Home from './components/home/Home'
 const Routes = () => {
     return (
         <>
@@ -37,6 +37,9 @@ const Routes = () => {
                     </Route>
                     <Route path="/signUp">
                         <SignUp />
+                    </Route>
+                    <Route path="/home">
+                        <Home />
                     </Route>
                     <Redirect path='/' to="login"></Redirect>
                 </Switch>

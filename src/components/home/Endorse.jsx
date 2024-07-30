@@ -63,7 +63,7 @@ function Endorse() {
             </div>
           ))}
         </div>
-        <div onClick={() => scroll(980)} className='right-arrow mb-5' >
+        <div onClick={() => scroll(980)} className='right-arrow mb-1 mt-5' >
 
           <Lottie className="animate-arrow " options={defaultOptions}
             height={100}
