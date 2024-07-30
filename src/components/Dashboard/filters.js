@@ -13,8 +13,8 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import { religion } from '../../utils/constants';
 import PropTypes from 'prop-types';
+import { religion } from '../../utils/constants';
 const Filters = props => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [basicfilers, setBasicfilters] = useState({religion:"",cast:"",subcast:""})
@@ -100,7 +100,7 @@ const Filters = props => {
           </Col>
           <Col md={3} className='d-flex align-items-center mt-5'>
             <FormGroup className='mb-4'>
-              <Dropdown isOpen={dropdownOpen} toggle={(e) => toggle(e)}>
+              <Dropdown isOpen={dropdownOpen} toggle={(e) => toggle(e)} className='advancedfilters'>
                 <DropdownToggle caret outline color="dark">Advanced Filters</DropdownToggle>
                 <DropdownMenu className='dropDownBack' color='beige'>
                   <DropdownItem header>Marital status</DropdownItem>
@@ -222,17 +222,23 @@ const Filters = props => {
                   <div className='d-flex'>
                     <div className='p-2'>
                       <Input
+                      type='number'
+                      step="0.01"
                         placeholder='Min'
                       />
                     </div>
                     <div className='p-2'>
                       <Input
+                       type='number'
+                       step="0.01"
                         placeholder='Max'
                       />
                     </div>
                   </div>
                   <div className='p-2'>
                     <Input
+                     type='number'
+                     step="0.01"
                       placeholder='annual income'
                     />
                   </div>

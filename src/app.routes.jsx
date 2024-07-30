@@ -1,49 +1,45 @@
 import React from 'react'
-import { Route,Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import LoginPage from './components/Login/LoginPage'
 import ForgotPage from './components/Forgot/ForgotPage'
 import SignUp from './components/Signup/SignUp'
-import Home from './components/home/Home'
 import Dashboard from './components/Dashboard/Dashboard'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom'
 import CustomSideBar from './components/custom-side-bar/CustomSideBar'
 import ShortListedUsers from './components/shortlistedUsers/ShortListedUsers'
 import IgnoreUsers from './components/ignoreUsers/IgnoreUsers'
 import RegisterMain from './components/register/RegisterMain'
-const Routes = () => {
 
+const Routes = () => {
     return (
         <>
-            <Switch>
-                <Route exact path="/">
-                  <Home/>
-                </Route>
-                <Route path="/login">
-                    <LoginPage />
-                </Route>
-                <Route path="/forget">
-                    <ForgotPage />
-                </Route>
-                <Route path="/signUp">
-                    <SignUp />
-                </Route>
-                <Route path="/dashboard">
-                    <Dashboard/>
-                </Route>
-                <Route path="/profile">
-                    <CustomSideBar/>
-                </Route>
-                <Route path="/shortlistusers">
-                    <ShortListedUsers/>
-                </Route>
-                <Route path="/ignoreusers">
-                <IgnoreUsers/>
-                </Route>
-                <Route path='/register'>
-                <RegisterMain />
-                </Route>
-                <Redirect path='/' to="login"></Redirect>
-            </Switch>
+                <Switch>
+                    <Route path="/dashboard">
+                        <Dashboard />
+                    </Route>
+                    <Route path="/profile">
+                        <CustomSideBar />
+                    </Route>
+                    <Route path="/shortlistusers">
+                        <ShortListedUsers />
+                    </Route>
+                    <Route path="/ignoreusers">
+                        <IgnoreUsers />
+                    </Route>
+                    <Route path="/register">
+                        <RegisterMain />
+                    </Route>
+                    <Route path="/login">
+                        <LoginPage />
+                    </Route>
+                    <Route path="/forget">
+                        <ForgotPage />
+                    </Route>
+                    <Route path="/signUp">
+                        <SignUp />
+                    </Route>
+                    <Redirect path='/' to="login"></Redirect>
+                </Switch>
         </>
     )
 }
