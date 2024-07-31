@@ -9,7 +9,7 @@ import { prevStep ,saveUploadedFiles, nextStep } from "../../redux/slices/Regist
 
 function Media() {
   const dispatch = useDispatch();
-  const { uploadedFiles } = useSelector((store) => store.stepper);
+  const { uploadedFiles } = useSelector((store) => store.RegistrationDetails);
 
   const [fileInputs, setFileInputs] = useState(
     uploadedFiles.length > 0

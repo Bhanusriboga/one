@@ -39,9 +39,8 @@ function BasicsDetails() {
 
   const [selectedTime, setSelectedTime] = useState(null);
   const [errors, setErrors] = useState({});
-  const dispatch = useDispatch();
-  const { formData1 } = useSelector((store) => store.stepper);
-
+  const  formData1  = useSelector((store) => store.RegistrationDetails.formData1);
+const dispatch = useDispatch()
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -123,7 +122,6 @@ function BasicsDetails() {
     e.preventDefault();
 
     if (validateAllFields()) {
-
       toast.success("User Basic Details Registered Successfully", {
         position: "top-center",
         autoClose: 2000,

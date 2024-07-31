@@ -386,8 +386,9 @@ const PersonalDetails = () => {
     aboutYourself: "",
     eatingHabits: "",
   });
+  const personalData = useSelector((store)=>store.RegistrationDetails.personalData)
   const dispatch = useDispatch();
-  const { formData1 } = useSelector((store) => store.stepper);
+
   const [errors, setErrors] = useState({
     caste: "",
     subCaste: "",
@@ -600,12 +601,12 @@ const PersonalDetails = () => {
     { value: "Vegan", label: "Vegan" },
   ];
   useEffect(() => {
-    if (formData1 && Object.keys(formData1).length > 0) {
-      setFormData(formData1);
+    if (personalData && Object.keys(personalData).length > 0) {
+      setFormData(personalData);
 
       
     }
-  }, [formData1]);
+  }, [personalData]);
   return (
     <>
       <Form>

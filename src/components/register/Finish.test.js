@@ -1,82 +1,194 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import configureStore from "redux-mock-store"
-import Finish from './Finish'; // Adjust the import path as needed
-import rootReducer from '../../redux/reducers'; // Adjust the import path as needed
-import { saveTextArea, prevStep } from '../../redux/slices/RegistrationDetails'; // Adjust the import path as needed
-import '@testing-library/jest-dom';
+import React from "react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
+import { BrowserRouter as Router } from "react-router-dom";
+import Finish from "./Finish";
+import { saveTextArea, prevStep } from "../../redux/slices/RegistrationDetails";
+
 const mockStore = configureStore([]);
-const store = mockStore({
-    
-});
- 
-const renderWithProvider = (component) => {
-  return render(
-    <Provider store={store}>
-      {component}
+const initialState = {
+  registration: {
+    textArea: "",
+  },
+};
+const store = mockStore(initialState);
+store.dispatch = jest.fn();
+
+const renderComponent = (storeOverride = store) =>
+  render(
+    <Provider store={storeOverride}>
+      <Router>
+        <Finish />
+      </Router>
     </Provider>
   );
-};
-jest.mock('react-redux', () => ({
-  useDispatch: () => jest.fn(),
-  useSelector: jest.fn(fn => fn()),
-}));
 
-jest.mock('../../redux/slices/FinishSlice', () => ({
-  saveTextArea: jest.fn(),
-  prevStep: jest.fn(),
-}));
-
-const renderWithRedux = (component) => {
-  const store = createStore(rootReducer);
-  return renderWithProvider(<Provider store={store}>{component}</Provider>);
-};
-
-describe('Finish Component', () => {
+describe("Finish Component", () => {
   beforeEach(() => {
-    renderWithRedux(<Finish />);
+    store.dispatch.mockClear();
   });
 
-  test('renders the text area and initial elements', () => {
-    expect(screen.getByText('Describe Yourself')).toBeInTheDocument();
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
-    expect(screen.getByText('Save')).toBeInTheDocument();
-    expect(screen.getByText('previous')).toBeInTheDocument();
-    expect(screen.getByText('Skip & Register later')).toBeInTheDocument();
+  test("renders text area, buttons, and links", () => {
+    renderComponent();
+    expect(screen.getByText("Describe Yourself")).toBeInTheDocument();
+    expect(screen.getByRole("textbox")).toBeInTheDocument();
+    expect(screen.getByText("Save")).toBeInTheDocument();
+    expect(screen.getByText("previous")).toBeInTheDocument();
+    expect(screen.getByText("Skip & Register later")).toBeInTheDocument();
   });
 
-  test('shows error message for less than 10 characters', () => {
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'short' } });
-    fireEvent.click(screen.getByText('Save'));
-    expect(screen.getByText('Please describe yourself in at least 10 characters.')).toBeInTheDocument();
+  test("handles text area input changes", () => {
+    renderComponent();
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "New text" } });
+    expect(screen.getByRole("textbox").value).toBe("New text");
   });
 
-  test('saves text and shows modal for valid input', () => {
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'This is a valid description.' } });
-    fireEvent.click(screen.getByText('Save'));
-
-    expect(saveTextArea).toHaveBeenCalledWith('This is a valid description.');
-    expect(screen.getByText('Registered Successfully')).toBeInTheDocument();
+  test("shows error message for less than 10 characters on submit", () => {
+    renderComponent();
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "Short" } });
+    fireEvent.click(screen.getByText("Save"));
+    expect(screen.getByText("Please describe yourself in at least 10 characters.")).toBeInTheDocument();
   });
 
-  test('modal can be toggled', () => {
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'This is a valid description.' } });
-    fireEvent.click(screen.getByText('Save'));
-
-    const cancelButton = screen.getByText('Cancel');
-    fireEvent.click(cancelButton);
-    expect(screen.queryByText('Registered Successfully')).not.toBeInTheDocument();
+  test("dispatches saveTextArea and shows modal on valid submit", async () => {
+    renderComponent();
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "Valid text more than 10 characters" } });
+    fireEvent.click(screen.getByText("Save"));
+    await waitFor(() => {
+      expect(store.dispatch).toHaveBeenCalledWith(saveTextArea("Valid text more than 10 characters"));
+      expect(screen.getByText("Registered Successfully")).toBeInTheDocument();
+    });
   });
 
-  test('previous button dispatches prevStep action', () => {
-    fireEvent.click(screen.getByText('previous'));
-    expect(prevStep).toHaveBeenCalled();
+  test("toggles modal visibility on Cancel click", () => {
+    renderComponent();
+    fireEvent.click(screen.getByText("Save"));
+    fireEvent.click(screen.getByText("Cancel"));
+    expect(screen.queryByText("Registered Successfully")).not.toBeInTheDocument();
   });
 
-  test('skip link is rendered', () => {
-    const skipLink = screen.getByText('Skip & Register later');
-    expect(skipLink).toBeInTheDocument();
+  test("dispatches prevStep on previous button click", () => {
+    renderComponent();
+    fireEvent.click(screen.getByText("previous"));
+    expect(store.dispatch).toHaveBeenCalledWith(prevStep());
+  });
+
+  test("navigates to dashboard on link click", () => {
+    renderComponent();
+    const dashboardLink = screen.getByText("Go to Dashboard");
+    expect(dashboardLink).toHaveAttribute("href", "/dashboard");
+  });
+
+  test("does not dispatch saveTextArea or prevStep on Skip button click", () => {
+    renderComponent();
+    fireEvent.click(screen.getByText("Skip & Register later"));
+    expect(store.dispatch).not.toHaveBeenCalledWith(saveTextArea(expect.any(String)));
+    expect(store.dispatch).not.toHaveBeenCalledWith(prevStep());
   });
 });
+
+
+
+
+// import React from "react";
+// import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+// import { Provider } from "react-redux";
+// import configureStore from "redux-mock-store";
+// import { BrowserRouter as Router } from "react-router-dom";
+// import Finish from "./Finish";
+// import { saveTextArea, prevStep } from "../../redux/slices/RegistrationDetails";
+
+// const mockStore = configureStore([]);
+// const initialState = {
+//   registration: {
+//     textArea: "",
+//   },
+// };
+// const store = mockStore(initialState);
+// store.dispatch = jest.fn();
+
+// const renderComponent = (storeOverride = store) =>
+//   render(
+//     <Provider store={storeOverride}>
+//       <Router>
+//         <Finish />
+//       </Router>
+//     </Provider>
+//   );
+
+// describe("Finish Component", () => {
+//   beforeEach(() => {
+//     store.dispatch.mockClear();
+//   });
+
+//   test("renders text area, buttons, and links", () => {
+//     renderComponent();
+//     expect(screen.getByText("Describe Yourself")).toBeInTheDocument();
+//     expect(screen.getByRole("textbox")).toBeInTheDocument();
+//     expect(screen.getByText("Save")).toBeInTheDocument();
+//     expect(screen.getByText("previous")).toBeInTheDocument();
+//     expect(screen.getByText("Skip & Register later")).toBeInTheDocument();
+//   });
+
+//   test("handles text area input changes", () => {
+//     renderComponent();
+//     fireEvent.change(screen.getByRole("textbox"), { target: { value: "New text" } });
+//     expect(screen.getByRole("textbox").value).toBe("New text");
+//   });
+
+//   test("shows error message for less than 10 characters on submit", () => {
+//     renderComponent();
+//     fireEvent.change(screen.getByRole("textbox"), { target: { value: "Short" } });
+//     fireEvent.click(screen.getByText("Save"));
+//     expect(screen.getByText("Please describe yourself in at least 10 characters.")).toBeInTheDocument();
+//   });
+
+//   test("dispatches saveTextArea and shows modal on valid submit", async () => {
+//     renderComponent();
+//     fireEvent.change(screen.getByRole("textbox"), { target: { value: "Valid text more than 10 characters" } });
+//     fireEvent.click(screen.getByText("Save"));
+//     await waitFor(() => {
+//       expect(store.dispatch).toHaveBeenCalledWith(saveTextArea("Valid text more than 10 characters"));
+//     });
+//     await waitFor(() => {
+//       expect(screen.queryByText("Registered Successfully")).toBeInTheDocument();
+//     });
+//   });
+
+//   test("toggles modal visibility on Cancel click", async () => {
+//     renderComponent();
+//     fireEvent.change(screen.getByRole("textbox"), { target: { value: "Valid text more than 10 characters" } });
+//     fireEvent.click(screen.getByText("Save"));
+//     await waitFor(() => {
+//       expect(screen.queryByText("Registered Successfully")).toBeInTheDocument();
+//     });
+//     fireEvent.click(screen.getByText("Cancel"));
+//     await waitFor(() => {
+//       expect(screen.queryByText("Registered Successfully")).not.toBeInTheDocument();
+//     });
+//   });
+
+//   test("dispatches prevStep on previous button click", () => {
+//     renderComponent();
+//     fireEvent.click(screen.getByText("previous"));
+//     expect(store.dispatch).toHaveBeenCalledWith(prevStep());
+//   });
+
+//   test("navigates to dashboard on link click", () => {
+//     renderComponent();
+//     const dashboardLink = screen.queryByText("Go to Dashboard");
+//     if (dashboardLink) {
+//       expect(dashboardLink).toHaveAttribute("href", "/dashboard");
+//     } else {
+//       console.error("Link to Dashboard not found.");
+//     }
+//   });
+
+//   test("does not dispatch saveTextArea or prevStep on Skip button click", () => {
+//     renderComponent();
+//     fireEvent.click(screen.getByText("Skip & Register later"));
+//     expect(store.dispatch).not.toHaveBeenCalledWith(saveTextArea(expect.any(String)));
+//     expect(store.dispatch).not.toHaveBeenCalledWith(prevStep());
+//   });
+// });

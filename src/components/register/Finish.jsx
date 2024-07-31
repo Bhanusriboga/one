@@ -10,9 +10,10 @@ import { Link } from "react-router-dom";
 
 function Finish() {
   const dispatch = useDispatch();
-  
-  const savedText = useSelector((state) => state.registration.textArea || "");
 
+  const savedText = useSelector(
+    (state) => state.RegistrationDetails.textArea || ""
+  );
 
   const [textarea, setTextarea] = useState(savedText);
   const [errorMsg, setErrorMsg] = useState("");
@@ -35,7 +36,6 @@ function Finish() {
     }
   };
 
-  
   const prev = () => {
     dispatch(prevStep());
   };
@@ -52,30 +52,29 @@ function Finish() {
       />
       {errorMsg && <span className="error-message">{errorMsg}</span>}
 
-      
-<Modal isOpen={false} toggle={toggle} className="p-0 m-">
-  <ModalBody className="modal-with-bg w-100 h-100 m-0">
-    <div className="text-center">
-      <h3 className="pt-4">Registered Successfully</h3>
-      <p className="py-3 text-muted mx-4">
-        Start by exploring your personalized dashboard where you can manage your profile, settings, and access our features.
-      </p>
-      <Link to="/dashboard" className="linktodashboard">
-        Go to Dashboard
-      </Link>
-      <p
-        className="pt-3 pt-md-4 text-danger cursor-pointer"
-        onClick={toggle}>
-        Cancel
-      </p>
-    </div>
-  </ModalBody>
-</Modal>
-
+      <Modal isOpen={modal} toggle={toggle} className="modal-with-bgp-0 m-">
+        <ModalBody className=" w-100 h-100 m-0">
+          <div className="text-center">
+            <h3 className="pt-4">Registered Successfully</h3>
+            <p className="py-3 text-muted mx-4">
+              Start by exploring your personalized dashboard where you can
+              manage your profile, settings, and access our features.
+            </p>
+            <Link to="/dashboard" className="linktodashboard">
+              Go to Dashboard
+            </Link>
+            <p
+              className="pt-3 pt-md-4 text-danger cursor-pointer"
+              onClick={toggle}>
+              Cancel
+            </p>
+          </div>
+        </ModalBody>
+      </Modal>
 
       <div className="back-next-btn-container">
         <button className="previous-btn" onClick={prev}>
-          {" "}
+        
           <FaArrowLeft
             style={{
               paddingRight: "5px",
