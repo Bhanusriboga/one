@@ -6,7 +6,7 @@ const rootReducer = combineReducers({
   auth: AuthReducer,
   // Add other reducers here
   users:UserReducer,
-  registration:RegistrationDetails,
+  RegistrationDetails:RegistrationDetails,
 });
 
 export default rootReducer;

@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const PersonalDetailsSlice = createSlice({
+const RegistrationDetails = createSlice({
   name: "registrationDetails",
   initialState: {
+    formData1: {},
     personalData: {},
     ProfessionalData: {},
     textArea: "",
     currentStep: 1,
-    formData1: {},
     uploadedFiles: [],
   },
   reducers: {
@@ -47,5 +47,5 @@ export const {
   prevStep,
   saveFormData,
   saveUploadedFiles,
-} = PersonalDetailsSlice.actions;
-export default PersonalDetailsSlice.reducer;
+} = RegistrationDetails.actions;
+export default RegistrationDetails.reducer;

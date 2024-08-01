@@ -62,7 +62,7 @@ function Professional() {
     "1 Crore & Above",
   ];
 
-  const { ProfessionalData } = useSelector((state)=>state.registration)
+  const { ProfessionalData } = useSelector((state)=>state.RegistrationDetails)
   const dispatch = useDispatch();
 
   useEffect(() => {
