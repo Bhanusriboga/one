@@ -1,22 +1,20 @@
 import React,{useRef} from 'react'
 import "./home.css"
 import arrow from "./assets/Group 29.png"
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory } from 'react-router-dom'
 function Explore() {
   const myRef=useRef()
+  const navigator=useHistory()
 const list=[]
-
 
 for (let index = 0; index < 101; index++) {
   list.push(index)
   
 }
-
-
-  const getDivs=()=>{
+const getDivs=()=>{
     const items=[]
     for(let i=0;i<list.length;i++){
-        items.push( <div className='scr d-flex'>
+        items.push( <div className='scr d-flex' key={`item-${i}`}>
           <div className='card-bg'>
           <p className='card-text'>RELIGION</p>
           <div className='para-div'>
@@ -58,14 +56,13 @@ for (let index = 0; index < 101; index++) {
     return items
   }
  
-  const navigator = useHistory()
   return (
-    <div className="explore d-flex flex-column justify-content-between align-items-center">
+    <div className="explore d-flex flex-column justify-content-between align-items-center ml-5" data-testid="explore-component">
       <p className='choose-us'>Explore matrimonial profiles</p>
 
 
     
-    <div className='scroll-container d-flex justify-content-evenly' ref={myRef} >
+    <div className='scroll-container  d-flex  justify-content-evenly' ref={myRef} >
   <div className='scroll-div'>
      {getDivs()}
                
@@ -106,7 +103,7 @@ for (let index = 0; index < 101; index++) {
           <p></p>
           <div className='expore-btn d-flex justify-content-evenly align-items-center' onClick={() => navigator.push("/signup")}>
             <p className="btn-text"> Explore</p>
-            <img src={arrow} className='btn-arrow' />
+            <img src={arrow} className='btn-arrow'alt='arrow' />
           </div>
         </div>
       </div>

@@ -317,6 +317,9 @@ input[type=checkbox] {
         justify-content: flex-start;
         align-items: flex-start;
     }
+    .para-terms{
+        margin-bottom: 120px;
+    }
 }
 @media (min-width:200px) and (max-width:700px) {
     .form-control.genderss.country {
