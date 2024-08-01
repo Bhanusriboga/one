@@ -5,7 +5,7 @@ const endPoints = {
   //simularly add other end points
   signup:"user-signup",
   login:"user-login",
-  getAllUsers:"users",
+  getAllUsers:"users/users-active",
   userByStatus:"users-by-status",
   userStatus:"user-status",
   userInfo:"user-info?userId="
