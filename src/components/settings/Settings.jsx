@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import './Settings.css';
+import CustomWidget from '../ChatBot/CustomWidget';
 
 const Settings = () => {
   const [email, setEmail] = useState('');
@@ -208,6 +209,7 @@ const Settings = () => {
           </div>
         </section>
       </Form>
+      <CustomWidget />
     </Container>
   );
 };

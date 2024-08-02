@@ -2,16 +2,24 @@ import React, { useState } from 'react';
 import Chatbot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 import Icon from "./Assets/Icon.png";
-import ChatBotIcon from "./Assets/ChatBotIcon.png"
+import ChatBotIcon from "./Assets/ChatBotIcon.png";
 import ChatBotCloseButton from "./Assets/ChatBotCloseButton.png";
+import mobileCloseButton from "./Assets/mobileClosebutton.png";
 import './CustomWidget.css';
+
 const CustomWidget = () => {
   const [key, setKey] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [isChatBotOpen, setIsChatBotOpen] = useState(false);
+  const [isButtonVisible, setIsButtonVisible] = useState(true);
 
   const toggleChatbot = () => {
-    if (isOpen) {
-      setKey(prevKey => prevKey + 1);
+    setIsChatBotOpen(!isChatBotOpen);
+    if (!isOpen) {
+      setIsButtonVisible(false); 
+    } else {
+      setIsButtonVisible(true);
+      setKey(prevKey => prevKey + 1); 
     }
     setIsOpen(prevState => !prevState);
   };
@@ -98,11 +106,19 @@ const CustomWidget = () => {
   return (
     <ThemeProvider theme={theme}>
       <div style={chatbotContainerStyle}>
-        <button onClick={toggleChatbot} style={floatingButtonStyle}>
-          <img src={isOpen ? ChatBotCloseButton : ChatBotIcon} alt="Chat Button" style={iconStyle} />
+        <button onClick={toggleChatbot} style={floatingButtonStyle} className='d-none d-md-block' data-testid="chat-button-md">
+          <img src={isOpen ? ChatBotCloseButton : ChatBotIcon} alt="Chat Button" style={iconStyle}/>
         </button>
-        {isOpen && (
+        {isButtonVisible && (
+          <button onClick={toggleChatbot} style={floatingButtonStyle} className='d-md-none' data-testid="chat-button-sm">
+            <img src={ChatBotIcon} alt="Chat Button" style={iconStyle} />
+          </button>
+        )}
+        {isOpen && ( 
           <div style={chatbotStyle}>
+            <button onClick={toggleChatbot} style={mobileStyle} className='d-md-none' >
+              <img src={mobileCloseButton} alt="Chat Button" style={iconStyle} />
+            </button>
             <Chatbot
               key={key}
               steps={steps}
@@ -145,6 +161,21 @@ const iconStyle = {
   width: '100%',
   height: '100%',
   objectFit: 'contain',
+};
+
+const mobileStyle = {
+  position: 'fixed',
+  top: '5rem',
+  right: '3rem',
+  background: 'transparent',
+  border: 'none',
+  borderRadius: '50%',
+  width: '30px',
+  height: '60px',
+  cursor: 'pointer',
+  textAlign: 'right',
+  padding: 0,
+  zIndex: 1000,
 };
 
 const chatbotContainerStyle = {
