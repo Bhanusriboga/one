@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
-import {  useDispatch, useSelector } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
 import ForgotPage from '../Forgot/ForgotPage';
 import { login } from '../../utils/constants';
@@ -16,28 +16,36 @@ const LoginPage = () => {
     const [password, setPassword] = useState("")
     const [mobile, setMobile] = useState("")
     const dispatch = useDispatch()
-    const {error}=useSelector(state=>state.auth)
     const handleeyebtn = (e) => {
         e.preventDefault()
         setShowPassword(!showPassword);
     }
-    useEffect(() => {
-        if(error!==""){
-            toast.error("Invalid Credentials",
-                {
-                    position:"top-center",
-                    autoClose:2000,
-                    hideProgressBar:false,
-                    closeOnClick:true,
-                    pauseOnHover:true,
-                    draggable:false,
-                });
-        }
-    }, [error])
+
     const toggle = () => setModal(!modal);
 
     const handleLogin = async () => {
-        await dispatch(userLogin({ mobileNumber:mobile, password }));
+       const logindata= await dispatch(userLogin({ mobileNumber:mobile, password }));
+       if(logindata?.payload.jwt === "" || logindata?.payload.jwt === null || logindata?.payload.jwt === undefined){
+        toast.error("Invalid Credentials",
+            {
+                position:"top-center",
+                autoClose:2000,
+                hideProgressBar:false,
+                closeOnClick:true,
+                pauseOnHover:true,
+                draggable:false,
+            });
+       }else{
+        toast.success("Login Successful",
+            {
+                position:"top-center",
+                autoClose:2000,
+                hideProgressBar:false,
+                closeOnClick:true,
+                pauseOnHover:true,
+                draggable:false,
+            });
+       }
     }
 
     const handleMobile = (event) => {
@@ -70,7 +78,7 @@ const LoginPage = () => {
                             invalid={!mobileValid}
                         />
                         <FaPhone color='#d3d3d3' className='emailicon' />
-                        {mobileValid && <FormFeedback>
+                        {!mobileValid && <FormFeedback>
                             Please Enter a Valid Mobile Number
                         </FormFeedback>}
                     </Col>

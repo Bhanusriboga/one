@@ -18,7 +18,7 @@ const Header = () => {
       </div>
       <Nav className="me-auto w-100 d-flex justify-content-end" navbar >
         <NavItem>
-          <NavLink href="/components" className='navBtn'>Pricing</NavLink>
+          <NavLink href="/payment" className='navBtn'>Pricing</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="/components" className='navBtn'>Chat with Us</NavLink>

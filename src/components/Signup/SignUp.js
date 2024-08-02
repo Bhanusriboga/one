@@ -1,13 +1,14 @@
-import React, { useState,useEffect } from 'react'
-import { Input, Button,Modal,ModalBody,ModalHeader,Form,FormGroup } from 'reactstrap'
+import React, { useState, useEffect } from 'react'
+import { Input, Button, Modal, ModalBody, ModalHeader, Form, FormGroup } from 'reactstrap'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./signup.css";
 import { useHistory } from "react-router-dom";
 import { pelli, tick, backgroundImg } from "./assets";
 import { singnup } from "../../utils/constants"
-import {validateEmail} from "../../utils/validation"
-import {useDispatch} from "react-redux"
-import {userSignup} from "../../redux/slices/AuthSlice"
+import { validateEmail } from "../../utils/validation"
+import { useDispatch } from "react-redux"
+import { userSignup, otpverify, setToken, reSendOtp } from "../../redux/slices/AuthSlice"
+import { toast } from 'react-toastify';
 const styles = {
     eyeIcon: {
         position: "absolute",
@@ -38,7 +39,7 @@ const SignUp = () => {
     const [formData, setFormData] = useState({
         userEmail: "",
         userPass: "",
-        repeatPass: "", 
+        repeatPass: "",
         fullname: "",
         mobile: "",
         gender: "I am",
@@ -51,7 +52,6 @@ const SignUp = () => {
     const [numError, setNumError] = useState(false);
     const [genderError, setGenderError] = useState("");
     const [displayOtp, setDisplayOtp] = useState(false);
-
     useEffect(() => {
         if (
             formData.userEmail === "" ||
@@ -66,18 +66,27 @@ const SignUp = () => {
             setBtnCondition(false);
         }
     }, [formData]);
-    const toggle = () => setModal(!modal);
-    const closeBox = () => {
+    const toggle = async () => {
+        setModal(!modal)
+    };
+    const closeBox = async () => {
         setSuccessModal(false);
         setModal(false);
-        history.push("/dashboard")
+        await dispatch(setToken())
     };
-    const toggleSuccesfull = () => {
+    const toggleSuccesfull = async () => {
         if (formData.otp !== "") {
-            setDisplayErr(false);
-            setSuccessModal(!successModal);
-            setModal(false);
-            setFormData({ ...formData, otp: "" });
+            const data = await dispatch(otpverify({ mobile: formData.mobile, otp: formData.otp }));
+            if (data?.payload.message == "User registered successfully") {
+                setDisplayErr(false);
+                setSuccessModal(!successModal);
+                setModal(false);
+                setFormData({ ...formData, otp: "" });
+            } else {
+                setDisplayErr(true);
+                setSuccessModal(false);
+                setModal(true);
+            }
         } else {
             setDisplayErr(true);
             setSuccessModal(false);
@@ -86,10 +95,10 @@ const SignUp = () => {
     };
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
     const togglePasswordVisibilities = () => setRePassError(!rePassError);
-    const handleSubmit =async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setDisplayOtp(true);
-        if(validateEmail(formData.userEmail)){
+        if (!validateEmail(formData.userEmail)) {
             setEmailIdError(true)
         }
         if (formData.userPass !== formData.repeatPass) {
@@ -101,14 +110,24 @@ const SignUp = () => {
             setNumError("please enter valid 10 digit mobile number");
             setDisplayOtp(false);
         } else {
-              await dispatch(userSignup(formData))
-            setPasswordError('');
-            setModal(true);
-            setNumError("");
-            setDisplayOtp(true);
-            toggle();
+             const data=await dispatch(userSignup(formData))
+             if(data?.payload.message == "User Already Exists with MobileNumber Please Login"){
+                toast.error("User Already Exists with MobileNumber Please Login")
+             }
+             else if (data?.payload.message == "OTP Verification Is Pending") {
+                setPasswordError('');
+                setModal(true);
+                setNumError("");
+                setDisplayOtp(true);
+                toggle();
+            }else {
+                toast.error("Something went wrong")
+            }
         }
     };
+    const resendotp = async () => {
+        await dispatch(reSendOtp({ mobile: formData.mobile }))
+    }
     const onCheck = (e) => setIsChecked(e.target.checked);
     const handleBlur = (e) => {
         switch (e.target.name) {
@@ -143,38 +162,43 @@ const SignUp = () => {
             &times;
         </button>
     );
-    const navtoLogin=()=>{
+    const navtoLogin = () => {
         history.push("/login")
     }
     return (
-       <div className='main-cont'>
+        <div className='main-cont'>
             <img src={backgroundImg} className='main-img' alt="Background" />
             <div className='container-xl'>
-      <Modal isOpen={modal} toggle={toggle} >
-        <div className="modal-lg modal-xs">
-          <ModalBody className="d-flex flex-column align-items-center justify-content-evenly ">
-            <h5 className='otp-head'>{singnup.otpVerification}</h5>
-            <p className='otp-para'>{singnup.otpSent}</p>
-            <Input
-              type='text'
-              className='otp-input pb-2'
-              value={formData.otp}
-              name='otp'
-              onChange={handleChange}
-              placeholder={singnup.enterOtp}
-            ></Input>
-            {displayerr && <p className='pt-2' style={{ color: "red" }}>Please enter received OTP</p>}
-            <p className='didnt'>{singnup.resendOtp}</p>
-            <Button className='verify-button' onClick={toggleSuccesfull}>
-              {singnup.verify}
-            </Button>
-          </ModalBody>
-        </div>
-      </Modal>
-    </div>
-            
-            <Modal isOpen={successModal} size='md'   toggle={toggle}>
-                <ModalHeader toggle={toggleSuccesfull}  close={closeBtn}></ModalHeader>
+                <Modal isOpen={modal} toggle={toggle} >
+                    <div className="modal-lg modal-xs">
+                        <ModalBody className="d-flex flex-column align-items-center justify-content-evenly ">
+                            <h5 className='otp-head'>{singnup.otpVerification}</h5>
+                            <p className='otp-para'>{singnup.otpSent}</p>
+                            <Input
+                                type='text'
+                                className='otp-input pb-2'
+                                value={formData.otp}
+                                name='otp'
+                                onChange={handleChange}
+                                placeholder={singnup.enterOtp}
+                            ></Input>
+                            {displayerr && <p className='pt-2' style={{ color: "red" }}>Please enter received OTP</p>}
+                            <p className='didnt'>
+                                {singnup.resendOtp}
+                                <button onClick={resendotp} className='resend-otp bg-transparent border-0'>
+                                    {singnup.resend}
+                                </button>
+                            </p>
+                            <Button className='verify-button' onClick={toggleSuccesfull}>
+                                {singnup.verify}
+                            </Button>
+                        </ModalBody>
+                    </div>
+                </Modal>
+            </div>
+
+            <Modal isOpen={successModal} size='md' toggle={toggle}>
+                <ModalHeader toggle={toggleSuccesfull} close={closeBtn}></ModalHeader>
                 <div className='d-flex flex-column align-items-center justify-content-center text-center p-3'>
                     <div className='d-flex align-items-center justify-content-center rounded-circle align-self-center' style={styles.verifiedIcon}>
                         <img src={tick} alt="Verified" />
@@ -191,7 +215,6 @@ const SignUp = () => {
                 </div>
                 {fullNameError && <p className='fullname-error mb-3'>please enter your full name</p>}
                 {formData.fullname === "" && displayOtp && <p className='fullname-error'>please enter your full name</p>}
-
                 <div className='position-relative'>
                     <Input type='select' className="form-control genderss select option place mb-3" value={formData.gender} onChange={handleChange} name="gender">
                         <option value="">{singnup.gender}</option>
@@ -230,8 +253,6 @@ const SignUp = () => {
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                     </div>
-
-
                 </div>
                 <div className='position-relative'>
                     <div>
@@ -262,7 +283,7 @@ const SignUp = () => {
                 {numError && <div className='pass-err'>{numError}</div>}
                 <div className='check d-flex justify-content-space-between align-items-center align-self-start mb-2 gap-2'>
                     <input type='checkbox' onChange={onCheck} value={isChecked} className="check-2-checkin" />
-                        <p className='para-terms' >{singnup.agreeTerms}<span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span></p>
+                    <p className='para-terms' >{singnup.agreeTerms}<span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span></p>
                 </div>
                 <Button className='form next-button mb-3' type='submit' disabled={btnCondition}>
                     {singnup.title}

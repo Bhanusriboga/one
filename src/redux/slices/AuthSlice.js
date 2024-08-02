@@ -57,7 +57,32 @@ export const fetchUserInfo = createAsyncThunk(
     }
   }
 );
-
+export const otpverify=createAsyncThunk(
+  "auth/otpverify",
+  async (props, thunkAPI) => {
+    const url=`${endPoints.otpverify}?mobile=${props.mobile}&otp=${props.otp}`
+    const { response, error } = await networkCall(url, "POST");
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue(error||"Something went wrong..!")
+    }
+  }
+)
+export const reSendOtp=createAsyncThunk(
+  "auth/reSendOtp",
+  async (props, thunkAPI) => {
+    const url=`${endPoints.reSendOtp}?mobile=${props.mobile}`
+    const { response, error } = await networkCall(url, "POST");
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue(error||"Something went wrong..!")
+    }
+  }
+)
 const AuthSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -65,13 +90,18 @@ const AuthSlice = createSlice({
     error: "",
     Mydata: {},
     userId: Storage.get("userId")||null,
-    token: Storage.get("token")||null
+    token: Storage.get("token")||null,
+    message: null
   },
   reducers: {
      logout: (state) => {
       Storage.clearAll();
       state.token = null;
       state.userId = null;
+    },
+    setToken: (state) => {
+      state.token = Storage.get("token")
+      state.userId = Storage.get("userId")
     }
   },
   extraReducers: (builder) => {
@@ -81,10 +111,10 @@ const AuthSlice = createSlice({
       })
       builder.addCase(userSignup.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
-        state.token = action.payload.jwt
-        Storage.set("token", action.payload.jwt);
-        Storage.set("userId", action.payload.userId);
+        state.message = action.payload?.message;
+        if(action.error){
+          state.error = action.payload.message;
+        }
       })
       .addCase(userSignup.rejected, (state, action) => {
         state.loading = false;
@@ -98,8 +128,7 @@ const AuthSlice = createSlice({
       .addCase(userLogin.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
-        state.token = action.payload.jwt;
-        //for temparery we are directly storing token in local storage after signup but after implementing otp verification we need to store token in session storage
+        state.token = action.payload.jwt
         Storage.set("token", action.payload.jwt);
         Storage.set("userId", action.payload.userId);
       })
@@ -121,8 +150,33 @@ const AuthSlice = createSlice({
         state.error = action.error.message;
         logout(state)
       });
+      builder.addCase(otpverify.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(otpverify.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+        Storage.set("token", action.payload.jwt);
+        Storage.set("userId", action.payload.userId);
+      })
+      .addCase(otpverify.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+      builder
+      .addCase(reSendOtp.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(reSendOtp.fulfilled, (state, action) => {
+        state.loading = false;
+        state.message=action.payload?.message
+      })
+      .addCase(reSendOtp.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   }
 });
 
-export const { logout } = AuthSlice.actions;
+export const { logout,setToken } = AuthSlice.actions;
 export default AuthSlice.reducer;

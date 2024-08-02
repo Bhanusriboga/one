@@ -61,16 +61,6 @@ line-height: 76px;
   padding-right: 20%;
   background: #fff;
 }
-.input-style {
-  width: 588px;
-  height: 45px;
-  border-radius: 9px;
-  border: 1px solid #D2D2D2;
-  opacity: 1;
-  background: #fff;
-  border: none;
-  padding-left: 2%;
-}
 
 .radio-container {
   display: inline-flex;
@@ -141,9 +131,6 @@ line-height: 76px;
 }
 @media only screen and (max-width: 598px) {
   .input-email{
-    width: 90%;
-  }
-  .input-style{
     width: 90%;
   }
  

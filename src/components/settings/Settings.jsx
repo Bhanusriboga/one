@@ -212,14 +212,14 @@ const Settings = (props) => {
         <section>
           <h2 className="subTitle">{settings.changePasswordTitle}</h2>
           {passwordFields.map(({ id, type, placeholder, value, onChange }) => (
-            <FormGroup key={id}>
-              <Input
+            <FormGroup key={id} className='email-parent'>
+              <input
                 type={type}
                 id={id}
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
-                className={`input-style ${passwordError && 'error'}`}
+                className={`input-email input-style ${passwordError && 'error'}`}
               />
             </FormGroup>
           ))}
