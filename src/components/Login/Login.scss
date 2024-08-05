@@ -6,6 +6,24 @@
   flex-direction: column;
 }
 
+.pelli-img{
+  position: absolute;
+  top: 8vw;
+  left: 77vw;
+}
+.bcg-text-1{
+  font-family: Poppins;
+font-size: 33px;
+font-weight: 700;
+line-height: 52.5px;
+text-align: left;
+position: absolute;
+top: 17.3vh;
+left: 59vw;
+width: 70vw;
+color: #FFFFFF;
+
+}
 
 
 
@@ -23,13 +41,14 @@
   background-repeat: no-repeat;
 }
 .bcgimg {
-  background-image: url('../../Assets/Login.png');
+  background-image: url('../../Assets/background.png');
   background-size: 1445px 100%;
   height: 100%;
   width: 100%;
   display: flex;
   align-items: flex-end;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 .pagehw {

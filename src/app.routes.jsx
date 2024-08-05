@@ -1,20 +1,25 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+// import { useSelector } from 'react-redux'
+// import { Redirect } from 'react-router-dom/cjs/react-router-dom'
 import LoginPage from './components/Login/LoginPage'
-import ForgotPage from './components/Forgot/ForgotPage'
+// import ForgotPage from './components/Forgot/ForgotPage'
 import SignUp from './components/Signup/SignUp'
-import Dashboard from './components/Dashboard/Dashboard'
-import { Redirect } from 'react-router-dom/cjs/react-router-dom'
-import CustomSideBar from './components/custom-side-bar/CustomSideBar'
-import ShortListedUsers from './components/shortlistedUsers/ShortListedUsers'
-import IgnoreUsers from './components/ignoreUsers/IgnoreUsers'
-import RegisterMain from './components/register/RegisterMain'
+// import Dashboard from './components/Dashboard/Dashboard'
+// import RegisterMain from './components/register/RegisterMain'
 import Home from './components/home/Home'
+// const Routes = () => {
+//     const {token}=useSelector(state=>state.auth)
+//     return (
+//      token ? <AppRoutes /> : <UnAuthorizedRoutes />
+//     )
+// }
+// Mention Authorized Routes
 const Routes = () => {
     return (
         <>
                 <Switch>
-                    <Route path="/dashboard">
+                    {/* <Route path="/dashboard">
                         <Dashboard />
                     </Route>
                     <Route path="/profile">
@@ -28,23 +33,22 @@ const Routes = () => {
                     </Route>
                     <Route path="/register">
                         <RegisterMain />
-                    </Route>
+                    </Route> */}
                     <Route path="/login">
                         <LoginPage />
                     </Route>
-                    <Route path="/forget">
+                    {/* <Route path="/forget">
                         <ForgotPage />
-                    </Route>
+                    </Route> */}
                     <Route path="/signUp">
                         <SignUp />
                     </Route>
                     <Route path="/home">
                         <Home />
                     </Route>
-                    <Redirect path='/' to="login"></Redirect>
+                    {/* <Redirect path='/' to="login"></Redirect> */}
                 </Switch>
         </>
     )
 }
-
 export default Routes

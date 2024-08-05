@@ -7,8 +7,6 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@reduxjs/toolkit": "^2.2.6",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
@@ -26,6 +24,7 @@
     "react-star-ratings": "^2.3.0",
     "react-toastify": "^10.0.5",
     "reactstrap": "^9.2.2",
+    "redux-mock-store": "^1.5.4",
     "sass": "^1.77.2",
     "web-vitals": "^2.1.4"
   },
@@ -35,7 +34,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "test": "jest"
+    "test": "jest",
+     "test": "node --max_old_space_size=4096 ./node_modules/.bin/jest"
   },
   "eslintConfig": {
     "extends": [
@@ -106,6 +106,8 @@
     "@babel/preset-env": "^7.24.8",
     "@eslint/compat": "^1.0.3",
     "@eslint/js": "^9.4.0",
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^16.0.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",

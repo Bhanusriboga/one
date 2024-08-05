@@ -1,31 +1,75 @@
-import CryptoJS from 'crypto-js';
-const SECRET_KEY = 'mysecretkey'; 
+import { encryptionSalt } from "../config/config";
 
-const encryptData =(data)=> {
-  return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
-}
-const decryptData = (data) => {
-  const encrypted = localStorage.getItem(data);
-  const decrypted = CryptoJS.AES.decrypt(encrypted, SECRET_KEY).toString(CryptoJS.enc.Utf8);
-  return JSON.parse(decrypted);
+const encryption = (text) => {
+  const textToChars = (text) =>
+    text.split("").map((c) => c.charCodeAt(0));
+  const byteHex = (n) => ("0" + Number(n).toString(16)).substr(-2);
+  const applySaltToChar = (code) =>
+    textToChars(encryptionSalt).reduce((a, b) => a ^ b, code);
+
+  return text
+    .split("")
+    .map(textToChars)
+    .map(applySaltToChar)
+    .map(byteHex)
+    .join("");
 };
 
-// Save data to local storage securely
-export const saveToLocalStorage = (key, value) => {
-  const encryptedValue = encryptData(JSON.stringify(value), SECRET_KEY);
-  localStorage.setItem(key, encryptedValue);
+const decryption = (encoded) => {
+  const textToChars = (text) =>
+    text.split("").map((c) => c.charCodeAt(0));
+  const applySaltToChar = (code) =>
+    textToChars(encryptionSalt).reduce((a, b) => a ^ b, code);
+  return encoded
+    .match(/.{1,2}/g)
+    ?.map((hex) => parseInt(hex, 16))
+    .map(applySaltToChar)
+    .map((charCode) => String.fromCharCode(charCode))
+    .join("");
 };
 
-// Retrieve data from local storage securely
-export const getFromLocalStorage = (key) => {
-  const encryptedValue = localStorage.getItem(key);
-  console.log({encryptedValue})
-  if (!encryptedValue) return null;
-  const decryptedValue = decryptData(encryptedValue);
-  return JSON.parse(decryptedValue);
+const get = (key) => {
+  try {
+    const data = localStorage.getItem(key);
+    const decryptedData = data && decryption(data);
+    return decryptedData && JSON.parse(decryptedData);
+  } catch (error) {
+    return undefined;
+  }
 };
 
-// Remove data from local storage
-export const removeFromLocalStorage = (key) => {
-  localStorage.removeItem(key);
+const set = (key, value) => {
+  try {
+    localStorage.setItem(key, encryption(JSON.stringify(value)));
+    return value;
+  } catch (error) {
+    return false;
+  }
 };
+
+const remove = (key) => {
+  try {
+    localStorage.removeItem(key);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+const clearAll = () => {
+  try {
+    localStorage.clear();
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+const Storage = {
+  get,
+  set,
+  remove,
+  clearAll,
+};
+
+export default Storage;

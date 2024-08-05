@@ -1,0 +1,130 @@
+
+.preference {
+    
+  font-family: Poppins;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 76px;
+  text-align: left;
+  color: rgba(120, 0, 36, 1);
+}
+.input-height{
+  height: 44px ;
+  border:1px solid rgba(120, 0, 36, 1)!important;
+}
+.field-container {
+  padding-left:1%;
+  padding-right: 1%;
+  padding-bottom: 20px;
+  width:100% ;
+}
+.profile-field-input{
+  max-width:550px !important ;
+}
+.minmaxage{
+  width:128px;
+}
+.profile{
+  font-size: 20px;
+  font-weight: 400;
+  font-family: poppins;
+  color:rgba(120, 0, 36, 1)
+}
+Input::placeholder{
+  color:rgba(172, 172, 172, 1) !important;
+}
+.arrow{
+  display:none
+}
+.religion{
+  display:flex ;align-items:center ;gap:10px ;
+}
+.religion-text{
+  width:270px!important
+}
+.button {
+  font-family:bold;
+  width: 30%;
+  height: 45px;
+  background: rgba(125, 0, 36, 1) !important;
+  border-radius: 9px 9px 9px 9px;
+ margin-top: 20px;
+ margin-bottom: 10px !important;
+ margin-left: 15%;
+}
+@media (max-width: 768px) {
+
+  .religion{
+    display:flex ;align-items:center ;gap:10px ;flex-wrap:wrap
+  }
+  .religion-text{
+    width:100% !important
+  }
+  .profile-field-input{
+    max-width:100% !important
+  }
+
+  .form-container {
+    padding: 10px;
+  }
+
+  .button{
+    width: 100% ;
+    margin-bottom: 15px;
+    margin-left: 0;
+  }
+  .minmaxage{
+   display: inline;
+
+  }
+  .avcssc{
+    width:100%
+  }
+  
+  .field-container {
+    background-color: #f3f3f3;
+    position: relative;
+  }
+
+  .backgroundImg{
+      background-image: url("./Assets/mobilebackground.svg") !important;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+   
+      
+  }
+  .chatImg{
+      float: right;
+     
+  }
+  .arrow{
+      display: flex;
+      font-size: 25px;
+      color:#780024
+  }
+  .mobile-view{
+      display:flex;
+      align-items: center;
+      justify-content: flex-start;
+  }
+  .minmaxage{
+    width:48.2% !important;
+  }
+ 
+}
+@media(min-width:769px)and (max-width:820px){
+  .profile-field-input{
+
+    max-width:550px !important;
+  }
+  .button {
+    margin-left: 33%;
+  }
+
+}
+@media(min-width:821px)and (max-width:1100px){
+  .button {
+    margin-left: 26%;
+  }
+}
