@@ -1,14 +1,14 @@
-import React, { useState,useEffect } from 'react'
-import { Input, Button,Modal,ModalHeader,ModalBody,Form,FormGroup } from 'reactstrap'
+import React, { useState, useEffect } from 'react'
+import { Input, Button, Modal, ModalBody, ModalHeader, Form, FormGroup } from 'reactstrap'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./signup.css";
 import { useHistory } from "react-router-dom";
 import { pelli, tick, backgroundImg } from "./assets";
 import { singnup } from "../../utils/constants"
-import { validateEmail, validatePassword } from "../../utils/validation"
+import { validateEmail } from "../../utils/validation"
 import { useDispatch } from "react-redux"
-import { userSignup } from "../../redux/slices/AuthSlice"
-import leftChakra from "./assets/leftchakra.svg"
+import { userSignup, otpverify, setToken, reSendOtp } from "../../redux/slices/AuthSlice"
+import { toast } from 'react-toastify';
 const styles = {
     eyeIcon: {
         position: "absolute",
@@ -52,7 +52,6 @@ const SignUp = () => {
     const [numError, setNumError] = useState(false);
     const [genderError, setGenderError] = useState("");
     const [displayOtp, setDisplayOtp] = useState(false);
-    const [pError,setPError]=useState(false)
     useEffect(() => {
         if (
             formData.userEmail === "" ||
@@ -67,56 +66,68 @@ const SignUp = () => {
             setBtnCondition(false);
         }
     }, [formData]);
-    const toggle = () => setModal(!modal);
-    const closeBox = () => {
+    const toggle = async () => {
+        setModal(!modal)
+    };
+    const closeBox = async () => {
         setSuccessModal(false);
         setModal(false);
-        history.push("/dashboard")
+        await dispatch(setToken())
     };
-    const toggleSuccesfull = () => {
+    const toggleSuccesfull = async () => {
         if (formData.otp !== "") {
-            setDisplayErr(false);
-            setSuccessModal(!successModal);
-            setModal(false);
-            setFormData({ ...formData, otp: "" });
+            const data = await dispatch(otpverify({ mobile: formData.mobile, otp: formData.otp }));
+            if (data?.payload.message == "User registered successfully") {
+                setDisplayErr(false);
+                setSuccessModal(!successModal);
+                setModal(false);
+                setFormData({ ...formData, otp: "" });
+            } else {
+                setDisplayErr(true);
+                setSuccessModal(false);
+                setModal(true);
+            }
         } else {
             setDisplayErr(true);
             setSuccessModal(false);
             setModal(true);
         }
     };
-
-
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
     const togglePasswordVisibilities = () => setRePassError(!rePassError);
     const handleSubmit = async (e) => {
         e.preventDefault();
         setDisplayOtp(true);
-        console.log(validateEmail(formData.userEmail))
-        if (validateEmail(formData.userEmail)==false) {
+        if (!validateEmail(formData.userEmail)) {
             setEmailIdError(true)
         }
         if (formData.userPass !== formData.repeatPass) {
             setPasswordError('Passwords do not match');
             setDisplayOtp(false);
-            setEmailIdError(false)
         } else if (formData.userPass.length < 8 || formData.repeatPass.length < 8) {
             setPasswordError("password must be minimum 8 characters");
-            setEmailIdError(false)
         } else if (formData.mobile.length !== 10) {
             setNumError("please enter valid 10 digit mobile number");
             setDisplayOtp(false);
-            setEmailIdError(false)
         } else {
-            await dispatch(userSignup(formData))
-            setPasswordError('');
-            setModal(true);
-            setNumError("");
-            setDisplayOtp(true);
-            setEmailIdError(false)
-            toggle();
+             const data=await dispatch(userSignup(formData))
+             if(data?.payload.message == "User Already Exists with MobileNumber Please Login"){
+                toast.error("User Already Exists with MobileNumber Please Login")
+             }
+             else if (data?.payload.message == "OTP Verification Is Pending") {
+                setPasswordError('');
+                setModal(true);
+                setNumError("");
+                setDisplayOtp(true);
+                toggle();
+            }else {
+                toast.error("Something went wrong")
+            }
         }
     };
+    const resendotp = async () => {
+        await dispatch(reSendOtp({ mobile: formData.mobile }))
+    }
     const onCheck = (e) => setIsChecked(e.target.checked);
     const handleBlur = (e) => {
         switch (e.target.name) {
@@ -144,26 +155,8 @@ const SignUp = () => {
     };
     const handleChange = (event) => {
         const { name, value } = event.target;
-                 if(name!=="mobile"){
-                    setFormData({...formData,[name]:value})
-                 }
-            else{
-                if(formData.mobile.length<10){
-                    setFormData({...formData,[name]:value})
-                  }
-                  
-            }      
-        if(name==="userPass"){
-            if(validatePassword(value)){
-                setPError(false)
-            } 
-            else{
-                setPError(true)
-            }
-        }
-        
-            
-        }
+        setFormData({ ...formData, [name]: value });
+    };
     const closeBtn = (
         <button className="close" onClick={closeBox} type="button">
             &times;
@@ -174,7 +167,6 @@ const SignUp = () => {
     }
     return (
         <div className='main-cont'>
-            <img src={leftChakra} className='left-chakra'/>
             <img src={backgroundImg} className='main-img' alt="Background" />
             <div className='container-xl'>
                 <Modal isOpen={modal} toggle={toggle} >
@@ -191,7 +183,12 @@ const SignUp = () => {
                                 placeholder={singnup.enterOtp}
                             ></Input>
                             {displayerr && <p className='pt-2' style={{ color: "red" }}>Please enter received OTP</p>}
-                            <p className='didnt'>{singnup.resendOtp}</p>
+                            <p className='didnt'>
+                                {singnup.resendOtp}
+                                <button onClick={resendotp} className='resend-otp bg-transparent border-0'>
+                                    {singnup.resend}
+                                </button>
+                            </p>
                             <Button className='verify-button' onClick={toggleSuccesfull}>
                                 {singnup.verify}
                             </Button>
@@ -210,7 +207,7 @@ const SignUp = () => {
                     <p className='otp-para'>{singnup.mobileVerified}</p>
                 </div>
             </Modal>
-            <Form onSubmit={handleSubmit} className="forms d-flex flex-column justify-content-evenly align-items-center">
+            <Form onSubmit={handleSubmit} className="forms">
                 <h1 className='star'>{singnup.title}</h1>
                 <div className='position-relative'>
                     <Input placeholder={singnup.fullName} bsSize="lg" className={fullNameError ? "form-control genderss" : "form-control genderss mb-3"} type='singnup' onChange={handleChange} value={formData.fullname} name='fullname' onBlur={handleBlur} required title='full name is required' />
@@ -218,7 +215,6 @@ const SignUp = () => {
                 </div>
                 {fullNameError && <p className='fullname-error mb-3'>please enter your full name</p>}
                 {formData.fullname === "" && displayOtp && <p className='fullname-error'>please enter your full name</p>}
-
                 <div className='position-relative'>
                     <Input type='select' className="form-control genderss select option place mb-3" value={formData.gender} onChange={handleChange} name="gender">
                         <option value="">{singnup.gender}</option>
@@ -234,8 +230,8 @@ const SignUp = () => {
                     {formData.userEmail === "" ? <p className='req'>*</p> : null}
                 </div>
                 {emailIdError && <p className='email-error'>please enter a valid email</p>}
-            
-                <div className='position-relative'>
+                <div>
+                    <div className='position-relative'>
                         <Input
                             bsSize="lg"
                             className={passError ? "form-control genderss mb-3" : "form-control genderss mb-3"}
@@ -246,67 +242,59 @@ const SignUp = () => {
                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                             title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                             value={formData.userPass} placeholder={singnup.password}
-
+                            required
                         />
-                       {formData.userPass === "" ? <p className='req'>*</p> : null}
-                        {formData.userPass?  <button
+                        {formData.userPass === "" ? <p className='req'>*</p> : null}
+                        <button
                             type="button"
                             onClick={togglePasswordVisibility}
                             className='eye eye-icon-1'
                         >
-                            {showPassword  ? <FaEyeSlash /> : <FaEye />}
-                        </button> :null}
-                        {pError&&<p className='req mt-5 pb-5'>Must contain at least one number, one uppercase and lowercase and at least 8 characters</p>}
-                        
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                    </div>
                 </div>
-                
-                  
-                
-                <div className={pError?'position-relative mt-5':"position-relative"} >
-
+                <div className='position-relative'>
                     <div>
-                        <Input bsSize="lg" className={rePassError ? "form-control genderss mb-3 " : "form-control genderss mb-3 "} type={rePassError ? 'singnup' : 'password'} id="reenter" onChange={handleChange} onBlur={handleBlur} name='repeatPass' value={formData.repeatPass} placeholder={singnup.reenterPassword} required />
+                        <Input bsSize="lg" className={rePassError ? "form-control genderss mb-3" : "form-control genderss mb-3"} type={rePassError ? 'singnup' : 'password'} id="reenter" onChange={handleChange} onBlur={handleBlur} name='repeatPass' value={formData.repeatPass} placeholder={singnup.reenterPassword} required />
                         {formData.repeatPass === "" ? <p className='req'>*</p> : null}
                     </div>
-                    {repeatpassError && <p className='email-error'>{singnup.repassErr}</p>}
-                    {formData.repeatPass? <button
+                    {repeatpassError && <p className='email-error'>{singnup.rePassErr}</p>}
+                    <button
                         type="button"
                         onClick={togglePasswordVisibilities}
                         className='eye eye-icon-2'
                     >
                         {rePassError ? <FaEyeSlash /> : <FaEye />}
-                    </button> :null }
-                    
+                    </button>
                 </div>
                 {passwordError && <div className='pass-err'>{passwordError}</div>}
                 <div className='number-cont'>
                     <FormGroup>
-                        <Input bsSize="sm" type="select" name="select" placeholder='+91' className="form-control genderss country" >
+                        <Input type="select" name="select" placeholder='+91' className="form-control genderss country" >
                             <option value="+91">
                                 +91
                             </option>
                         </Input>
                     </FormGroup>
-                    <Input bsSize="lg" className="form-control genderss number mb-5"  type="number"  onChange={handleChange}   value={formData.mobile} name='mobile' onBlur={handleBlur} placeholder={singnup.enterNumber} required />
+                    <Input bsSize="lg" className="form-control genderss number mb-5" type='number' onChange={handleChange} value={formData.mobile} name='mobile' onBlur={handleBlur} placeholder={singnup.enterNumber} required />
                     {formData.mobile === "" ? <p className='req'>*</p> : null}
                 </div>
                 {numError && <div className='pass-err'>{numError}</div>}
                 <div className='check d-flex justify-content-space-between align-items-center align-self-start mb-2 gap-2'>
                     <input type='checkbox' onChange={onCheck} value={isChecked} className="check-2-checkin" />
-                    <p className='para-terms w-100' >{singnup.agreeTerms}<span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span></p>
+                    <p className='para-terms' >{singnup.agreeTerms}<span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span></p>
                 </div>
                 <Button className='form next-button mb-3' type='submit' disabled={btnCondition}>
                     {singnup.title}
                 </Button>
-                <p className="already d-flex justify-content-center align-items-center gap-1">{singnup.alreadyAccount}
+                <p className="already d-flex align-item-center gap-1">{singnup.alreadyAccount}
                     <Button onClick={navtoLogin} className='btn btn-link text-decoration-none p-0'>
                         <span className='already already-login'>{singnup.login}</span>
                     </Button>
                 </p>
             </Form>
-
-
-            <div className='right-bg-cont position-fixed '>
+            <div className='right-bg-cont'>
                 <div className="d-flex align-items-center justify-content-space-around">
                     <h4 className="right-bg-head">{singnup.welcomeBack}</h4>
                     <img src={pelli} className='pellisambandalu' alt="Pelli Sambandalu" />
