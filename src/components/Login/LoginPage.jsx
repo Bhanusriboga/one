@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Button, Input, Form, FormFeedback, FormGroup, Col } from "reactstrap";
-import { useDispatch, useSelector } from "react-redux";
+import React, {  useState } from 'react'
+import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
+import {  useDispatch } from 'react-redux';
 import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
 import ForgotPage from "../Forgot/ForgotPage";
 import { login } from "../../utils/constants";
@@ -10,34 +10,43 @@ import { userLogin } from "../../redux/slices/AuthSlice";
 import "./Login.scss";
 
 const LoginPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [modal, setModal] = useState(false);
-  const [mobileValid, setMobileValid] = useState(true);
-  const [password, setPassword] = useState("");
-  const [mobile, setMobile] = useState("");
-  const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.auth);
-  const handleeyebtn = (e) => {
-    e.preventDefault();
-    setShowPassword(!showPassword);
-  };
-  useEffect(() => {
-    if (error !== "") {
-      toast.error("Invalid Credentials", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-      });
+    const [showPassword, setShowPassword] = useState(false);
+    const [modal, setModal] = useState(false);
+    const [mobileValid, setMobileValid] = useState(true)
+    const [password, setPassword] = useState("")
+    const [mobile, setMobile] = useState("")
+    const dispatch = useDispatch()
+    const handleeyebtn = (e) => {
+        e.preventDefault()
+        setShowPassword(!showPassword);
     }
-  }, [error]);
-  const toggle = () => setModal(!modal);
 
-  const handleLogin = async () => {
-    await dispatch(userLogin({ mobileNumber: mobile, password }));
-  };
+    const toggle = () => setModal(!modal);
+
+    const handleLogin = async () => {
+       const logindata= await dispatch(userLogin({ mobileNumber:mobile, password }));
+       if(logindata?.payload.jwt === "" || logindata?.payload.jwt === null || logindata?.payload.jwt === undefined){
+        toast.error("Invalid Credentials",
+            {
+                position:"top-center",
+                autoClose:2000,
+                hideProgressBar:false,
+                closeOnClick:true,
+                pauseOnHover:true,
+                draggable:false,
+            });
+       }else{
+        toast.success("Login Successful",
+            {
+                position:"top-center",
+                autoClose:2000,
+                hideProgressBar:false,
+                closeOnClick:true,
+                pauseOnHover:true,
+                draggable:false,
+            });
+       }
+    }
 
   const handleMobile = (event) => {
     if (validatePhoneNumber(event.target.value)) {
@@ -58,7 +67,6 @@ const LoginPage = () => {
         <h3 className="d-flex justify-content-center align-items-center loginhead">
           {login.login}
         </h3>
-
         <FormGroup className="mt-4 d-flex justify-content-center align-items-center ">
           <Col sm={9} className="letterIconplace">
             <Input

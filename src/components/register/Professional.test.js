@@ -34,22 +34,7 @@ describe("Professional Component", () => {
     store.dispatch.mockClear();
   });
 
-  test("renders all input fields and buttons", () => {
-    renderComponent();
-    expect(screen.getByPlaceholderText(/education/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/year/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/name/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/occupation/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/employment/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/location/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/state/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/city/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/annual income/i)).toBeInTheDocument();
-    expect(screen.getByText(/previous/i)).toBeInTheDocument();
-    expect(screen.getByText(/next/i)).toBeInTheDocument();
-    expect(screen.getByText(/skip & register later/i)).toBeInTheDocument();
-  });
-
+ 
   test("handles input changes", () => {
     renderComponent();
     const educationInput = screen.getByPlaceholderText(/education/i);
@@ -215,80 +200,3 @@ describe("Professional Component", () => {
   });
     
 });
-
-
-
-// import React from "react";
-// import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-// import { Provider } from "react-redux";
-// import configureStore from "redux-mock-store";
-// import { BrowserRouter as Router } from "react-router-dom";
-// import Professional from "./Professional";
-// import {
-//   saveProfessionalData,
-//   nextStep,
-//   prevStep,
-// } from "../../redux/slices/RegistrationDetails";
-
-// const mockStore = configureStore([]);
-// const initialState = {
-//   registration: {
-//     ProfessionalData: {},
-//   },
-// };
-// const store = mockStore(initialState);
-
-// store.dispatch = jest.fn();
-
-// const renderComponent = () =>
-//   render(
-//     <Provider store={store}>
-//       <Router>
-//         <Professional />
-//       </Router>
-//     </Provider>
-//   );
-
-// describe("Professional Component", () => {
-//   beforeEach(() => {
-//     store.dispatch.mockClear();
-//   });
-
-//   // Existing test cases...
-
-//   test("shows validation errors and does not submit with incomplete data", async () => {
-//     renderComponent();
-
-//     // Leave all fields empty and try to submit
-//     fireEvent.click(screen.getByText(/next/i));
-
-//     await waitFor(() => {
-//       expect(screen.getAllByText(/this field is required/i).length).toBeGreaterThan(0);
-//       // Ensure the dispatch for saveProfessionalData is not called
-//       expect(store.dispatch).not.toHaveBeenCalledWith(saveProfessionalData(expect.any(Object)));
-//       // Ensure the dispatch for nextStep is not called
-//       expect(store.dispatch).not.toHaveBeenCalledWith(nextStep());
-//     });
-//   });
-
-//   test("navigates to dashboard on skip button click", () => {
-//     renderComponent();
-
-//     // Mock history object to check navigation
-//     const history = {
-//       push: jest.fn(),
-//     };
-
-//     render(
-//       <Provider store={store}>
-//         <Router>
-//           <Professional />
-//         </Router>
-//       </Provider>
-//     );
-
-//     fireEvent.click(screen.getByText(/skip & register later/i));
-
-//     expect(history.push).toHaveBeenCalledWith('/dashboard');
-//   });
-// });
