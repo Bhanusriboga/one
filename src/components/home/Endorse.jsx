@@ -8,11 +8,11 @@ import customer from "./assets/Ellipse 16.svg"
 function Endorse() {
   const endorseList = [{ name: 'YUKTHI', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 4.8 }, { name: 'Kareem', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 3.4 }, { name: 'vishnu', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 5 }, { name: 'venkat', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 4.5 }, { name: 'YUKTHI', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 5 }, { name: 'vasavi', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 4 }]
   const scrollContainerRef = useRef(null);
-  const scroll = (scrollOffset) => {
-    // if (scrollContainerRef.current) {
-      scrollContainerRef?.current.scrollLeft += scrollOffset;
-    // }
-  };
+  // const scroll = (scrollOffset) => {
+  //   // if (scrollContainerRef.current) {
+  //     // scrollContainerRef?.current.scrollLeft += scrollOffset;
+  //   // }
+  // };
 
   
   const defaultOptions = {

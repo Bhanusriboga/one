@@ -5,7 +5,7 @@ import sidehalfimg from "./assets/394317-PCMJUW-273-Photoroom 9.png"
 import exploreright from "./assets/394317-PCMJUW-273-Photoroom 5.svg"
 import lefthalfimg from "./assets/394317-PCMJUW-273-Photoroom 10.png"
 import Couple from './Couple'
-import Choose from './Choose'
+import Choose from './choose'
 import Explore from './Explore';
 import rightcircle from "./assets/394317-PCMJUW-273-Photoroom 9 (2).png"
 import Endorse from './Endorse';

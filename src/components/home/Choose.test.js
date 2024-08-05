@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Choose from './choose';
+import Choose from './Choose';
 
 describe('Choose Component', () => {
   test('renders the Choose component', () => {
