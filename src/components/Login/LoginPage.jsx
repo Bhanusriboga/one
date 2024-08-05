@@ -1,13 +1,15 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
+import './Login.scss'
 import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
-import {  useDispatch } from 'react-redux';
-import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
-import ForgotPage from '../Forgot/ForgotPage';
+import { FaEye, FaEyeSlash,FaPhone, } from "react-icons/fa";
 import { login } from '../../utils/constants';
-import {toast} from "react-toastify"
+import { useDispatch } from 'react-redux';
+import {toast} from "react-toastify";
+import pelliimg from "../Login/Group 302.svg"
 import { validatePhoneNumber } from "../../utils/validation"
 import { userLogin } from '../../redux/slices/AuthSlice';
-import './Login.scss'
+import './Login.scss';
+import ForgotPage from "../Forgot/ForgotPage"
 
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -63,6 +65,8 @@ const LoginPage = () => {
 
     return (
         <div className='bcgimg'>
+            <img src={pelliimg} className='pelli-img'/>
+            <p className='bcg-text-1'>Welcome back to </p>
             <Form className='loginContent'>
                 <h3 className="d-flex justify-content-center align-items-center loginhead">{login.login}</h3>
                 <FormGroup className='mt-4 d-flex justify-content-center align-items-center '>

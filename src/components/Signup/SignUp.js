@@ -207,7 +207,7 @@ const SignUp = () => {
                     <p className='otp-para'>{singnup.mobileVerified}</p>
                 </div>
             </Modal>
-            <Form onSubmit={handleSubmit} className="forms d-flex flex-column justify-content-evenly align-items-center">
+            <Form onSubmit={handleSubmit} className="forms">
                 <h1 className='star'>{singnup.title}</h1>
                 <div className='position-relative'>
                     <Input placeholder={singnup.fullName} bsSize="lg" className={fullNameError ? "form-control genderss" : "form-control genderss mb-3"} type='singnup' onChange={handleChange} value={formData.fullname} name='fullname' onBlur={handleBlur} required title='full name is required' />

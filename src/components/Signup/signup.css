@@ -5,7 +5,7 @@
     position: relative;
 }
 .form-control.genderss.country {
-    width: 6.5vw;
+    width: 7vw;
     height: 8vh !important;
     text-align: left;
     color: rgba(171, 171, 171, 1);
@@ -22,14 +22,16 @@
     position: absolute;
     top:15vh;
     left: 4vw;
+    height: 110vh;
 }
 .main-img {
-    min-height: 130vh;
+    height: 100vh;
     width: 100vw;
+    position: fixed;
 }
 .main-cont {
     position: relative;
-    height: 130vh;
+    height: 100vh;
     overflow-x: hidden;
     width: 100vw;
 }
@@ -49,6 +51,11 @@
 }
 .pass-err {
     color: red;
+    position: absolute;
+    top:30vw;
+    left:10vw;
+    margin-bottom:10px
+
 }
 .opt-color {
     color: black;
@@ -97,7 +104,8 @@ input[type=checkbox] {
     color: #117FFF;
 }
 .already-login {
-    color: rgb(121, 1, 37)
+    color: rgb(121, 1, 37);
+    text-decoration: underline;
 }
 .form-control.genderss {
     width: 38vw;
@@ -116,7 +124,7 @@ input[type=checkbox] {
 }
 .form-control.genderss.select.option.place {
     width: 38vw;
-    height: 8vh;
+    height: 8.5vh ;
     border: 1.4px solid grey;
     color: rgba(171, 171, 171, 1);
     font-weight: 500;
@@ -139,7 +147,7 @@ input[type=checkbox] {
 }
 .check {
     height: 10vh;
-    width: 20vw;
+    
     margin-top: -8vh;
 }
 .form.next-button {
@@ -159,6 +167,10 @@ input[type=checkbox] {
     position: absolute;
     top: 0.5vh;
     left: 0.7vw
+}
+.red{
+    color: rgba(253, 89, 89, 1);
+    margin-bottom: 10vh;
 }
 .req-iam {
     color: rgba(253, 89, 89, 1);
@@ -186,6 +198,7 @@ input[type=checkbox] {
     font-weight: 700;
     color: rgba(255, 255, 255, 1);
     margin-top: 5px;
+
     align-self: flex-end;
 }
 .right-bg-para {
@@ -195,7 +208,7 @@ input[type=checkbox] {
     font-weight: lighter;
     color: #bbb9b9;
     padding-top: 0.5vw;
-    width: 38vw;
+    width: 33vw;
 }
 .pellisambandalu {
     margin-left: -6px;
@@ -222,6 +235,10 @@ input[type=checkbox] {
     width: 70%;
     color: rgba(82, 82, 82, 1);
 }
+.left-chakra{
+   display: none;
+}
+
 @media (max-width:900px) {
     .main-img {
         display: none;
@@ -292,7 +309,7 @@ input[type=checkbox] {
     }
     .check {
         height: 10vh;
-        width: auto;
+        
     }
     .check-2 {
         margin-top: -12px;
@@ -317,37 +334,61 @@ input[type=checkbox] {
         justify-content: flex-start;
         align-items: flex-start;
     }
-}
-@media (min-width:200px) and (max-width:700px) {
+    .left-chakra{
+        display: block !important;
+        width: 30% ;
+        height: 25%;
+    }
     .form-control.genderss.country {
-        width: 17vw;
+        width: 10vw;
         text-align: center;
-        height: 8vh !important;
+        height: 9.5vh !important;
+    }
+    .form-control.genderss.select.option.place {
+        width: 60vw;
+        height: 9vh  ;
+        border: 1.4px solid grey;
+        color: rgba(171, 171, 171, 1);
+        font-weight: 500;
+    }
+}
+
+
+@media (min-width:200px) and (max-width:700px) {
+    .left-chakra{
+        display: block !important;
+        width: 30% ;
+        height: 25%;
+    }
+    .form-control.genderss.country {
+        width: 30vw !important;
+        text-align: left !important;
+        height: 9.5vh !important;
+        font-size: 9px
     }
     .form-control.genderss::placeholder {
         font-size: 15px;   
     }
     .form-control.genderss.country::placeholder {
         text-align: left;
-        font-size: 15px;
         width: 1vw !important;
     }
     .check{
         display: flex;
-        width: 60vw;
-        justify-content:flex-start;
-        align-items:center;
+        
     }
 
     .form-control.genderss.number {
-        width: 40vw;
+        width: 35vw;
         position: relative;
     }
+
+    
     .para-terms {
         width: auto;
         text-align: center;
         font-size: 55%;
-        align-self: flex-end;
+        align-self: center;
     }
     
     .form.next-button {
@@ -359,8 +400,41 @@ input[type=checkbox] {
         background-color: rgb(121, 1, 37);
         margin-top:5vh
     }
-    
+    .form-control.genderss.select.option.place {
+        width: 60vw;
+        height: 9vh  ;
+        border: 1.4px solid grey;
+        color: rgba(171, 171, 171, 1);
+        font-weight: 500;
+    }
+    .already {
+        text-align: center;
+        font-weight: 600;
+        width: 100vw;
+    }
 
+}
+@media (min-width:400px) and (max-width:700px) {
+    .form-control.genderss.country {
+        width: 15vw !important ;
+        text-align: left !important;
+        height: 9.5vh !important;
+        font-size: 9px
+    }
+    .form-control.genderss.number{
+        width: 40vw !important;
+    }
+}
+@media (min-width:300px) and (max-width:400px) {
+    .form-control.genderss.country {
+        width: 20vw !important ;
+        text-align: left !important;
+        height: 9.5vh !important;
+        font-size: 9px
+    }
+    .form-control.genderss.number{
+        width: 40vw !important;
+    }
 }
 .modal-body {
     position: relative;
