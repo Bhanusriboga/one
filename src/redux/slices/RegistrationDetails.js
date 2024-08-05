@@ -46,6 +46,7 @@ export const {
   nextStep,
   prevStep,
   saveFormData,
+  
   saveUploadedFiles,
 } = RegistrationDetails.actions;
 export default RegistrationDetails.reducer;

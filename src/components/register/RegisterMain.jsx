@@ -14,7 +14,7 @@ function RegisterMain() {
         <h1 className=" mb-3 font-weight-bold  fs-1 mb-md-5  register-text">
         
           Register
-        </h1>
+        </h1> 
         <Stepper />
       </div>
       <div className="img-container1">

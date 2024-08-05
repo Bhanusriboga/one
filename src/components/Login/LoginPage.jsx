@@ -58,6 +58,7 @@ const LoginPage = () => {
         <h3 className="d-flex justify-content-center align-items-center loginhead">
           {login.login}
         </h3>
+
         <FormGroup className="mt-4 d-flex justify-content-center align-items-center ">
           <Col sm={9} className="letterIconplace">
             <Input
