@@ -1,6 +1,6 @@
 import React,{useRef} from 'react'
 import "./home.css"
-import arrow from "./assets/Group 29.png"
+import arrow from "./assets/arrow.png"
 import { useHistory } from 'react-router-dom'
 function Explore() {
   const myRef=useRef()
@@ -60,8 +60,6 @@ const getDivs=()=>{
     <div className="explore d-flex flex-column justify-content-between align-items-center ml-5" data-testid="explore-component">
       <p className='choose-us'>Explore matrimonial profiles</p>
 
-
-    
     <div className='scroll-container  d-flex  justify-content-evenly' ref={myRef} >
   <div className='scroll-div'>
      {getDivs()}

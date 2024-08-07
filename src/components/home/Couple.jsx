@@ -1,7 +1,7 @@
 import React from 'react'
 import "./home.css"
 import { useHistory } from 'react-router-dom'
-import coupleimg from "./assets/Rectangle 4110.svg"
+import coupleimg from "./assets/couple.svg"
 import Lottie from "react-lottie"
 import animation from "./assets/Animation - 1720516602656.json"
 function Couple() {

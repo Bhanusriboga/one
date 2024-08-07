@@ -22,7 +22,7 @@
     position: absolute;
     top:15vh;
     left: 4vw;
-    height: 110vh;
+    height: 110vh; 
 }
 .main-img {
     height: 100vh;
@@ -40,7 +40,6 @@
     font-size: 44px;
     font-weight: 600;
     line-height: 66px;
-    text-align: left;
     font-size: 44px;
     color: rgba(120, 0, 36, 1);
     padding-bottom: 20px;
@@ -183,9 +182,9 @@ input[type=checkbox] {
     font-weight: 500;
     color: rgb(174, 172, 172);
 }
-.right-bg-cont {
-    position: absolute;
-    top: 18%;
+.right-bg-cont1 {
+    position: fixed !important;
+    top: 15%;
     left: 54%;
     display: flex;
     flex-direction: column;
@@ -324,15 +323,8 @@ input[type=checkbox] {
         font-weight: bold;
         background-color: rgb(121, 1, 37)
     }
-    .right-bg-cont {
+    .right-bg-cont1 {
         display: none;
-        position: absolute;
-        top: 18%;
-        left: 54%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
     }
     .left-chakra{
         display: block !important;

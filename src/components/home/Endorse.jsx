@@ -3,16 +3,16 @@ import "./home.css"
 import StarRatings from 'react-star-ratings'
 import rightArrow from "./assets/Animation - 1721798930907.json"
 import Lottie from 'react-lottie'
-import customer from "./assets/Ellipse 16.svg"
+import customer from "./assets/customer.svg"
 
 function Endorse() {
   const endorseList = [{ name: 'YUKTHI', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 4.8 }, { name: 'Kareem', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 3.4 }, { name: 'vishnu', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 5 }, { name: 'venkat', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 4.5 }, { name: 'YUKTHI', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 5 }, { name: 'vasavi', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 4 }]
   const scrollContainerRef = useRef(null);
-  // const scroll = (scrollOffset) => {
-  //   // if (scrollContainerRef.current) {
-  //     // scrollContainerRef?.current.scrollLeft += scrollOffset;
-  //   // }
-  // };
+  const scroll = (scrollOffset) => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft += scrollOffset;
+    }
+  };
 
   
   const defaultOptions = {
@@ -29,7 +29,7 @@ function Endorse() {
       <p style={{ textAlign: "center", width: "90vw", fontWeight: '400',fontSize:"20px" }}>Discover what others have to say about their experiences with us. Their words of praise, heartfelt commendations, and glowing reviews serve as a testament to the effectiveness of our matchmaking services</p>
       <div className="scrollable-list-container  d-flex justify-content-center align-items-center">
       
-        <div onClick={() => scroll(-980)} className='animate-arrow-flip mb-3' >
+        <div onClick={() => scroll(-980)} className='animate-arrow-flip' >
         <Lottie className="animate-arrow" options={defaultOptions}
             height={100}
             width={100} />
@@ -58,7 +58,7 @@ function Endorse() {
             </div>
           ))}
         </div>
-        <div onClick={() => scroll(980)} className='right-arrow mb-3' >
+        <div onClick={() => scroll(980)} className='right-arrow' >
           <Lottie className="animate-arrow" options={defaultOptions}
             height={100}
             width={100} />
