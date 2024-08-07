@@ -8,7 +8,7 @@ import {logout as logoutAction} from "../../redux/slices/AuthSlice";
 import { settings } from '../../utils/constants';
 import DeleteAlert from './inner-components/DeleteAlert';
 import "./Settings.scss"
-import { requestEmailOtp, requestMobileOtp, verifyMobileOtp,changePassword,deleteAccount} from '../../redux/slices/Settings';
+import { requestEmailOtp, requestMobileOtp, verifyMobileOtp,changePassword,deleteAccount,verifyEmailOtp} from '../../redux/slices/Settings';
 import { toast } from 'react-toastify';
 
 const Settings = (props) => {
@@ -92,14 +92,20 @@ const Settings = (props) => {
     event.preventDefault();
 
     if (email) {
-      if(validateEmail(email)) {
+      if(!validateEmail(email)) {
         setEmailError('Invalid Email');
       }
       else if (showOtp && !/^\d{6}$/.test(otp)) {
         setEmailError(settings.otpError);
       } else {
         //api call for email change
-        setEmailError('');
+        const data=await dispatch(verifyEmailOtp({newMail,otp}));
+        if("OTP verified Successfully"===data?.payload?.message){
+          toast.success("Email updated successfully")
+          setEmailError('');
+        }else{
+          toast.error("Something went wrong..!")
+        }
       }
     }
 
