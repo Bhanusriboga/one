@@ -95,7 +95,7 @@ const LoginPage = () => {
                             onChange={handlePassword}
                             value={password}
                         />
-                        <button className='eyebutton' onClick={handleeyebtn}>{showPassword ? <FaEye color='#d3d3d3' /> : <FaEyeSlash color='#d3d3d3' />}</button>
+                        <button className='eyebutton' onClick={handleeyebtn} aria-label="Toggle password visibility">{showPassword ? <FaEye color='#d3d3d3' /> : <FaEyeSlash color='#d3d3d3' />}</button>
                     </Col>
                 </div>
                 <FormGroup
@@ -107,6 +107,7 @@ const LoginPage = () => {
                             color='link'
                             onClick={toggle}
                             className='text-decoration-none pl-1 cButton loginhead'
+                            data-testid="forgot-password-button"
                         >
                             {login.forgot}
                         </Button>
@@ -122,6 +123,7 @@ const LoginPage = () => {
                         className='w-25 mt-2 rounded-pill btnback'
                         size="lg"
                         onClick={handleLogin}
+                        data-testid="login-button"
                     >
                         {login.login}
                     </Button>

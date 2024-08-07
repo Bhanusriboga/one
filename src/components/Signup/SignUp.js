@@ -110,17 +110,17 @@ const SignUp = () => {
             setNumError("please enter valid 10 digit mobile number");
             setDisplayOtp(false);
         } else {
-             const data=await dispatch(userSignup(formData))
-             if(data?.payload.message == "User Already Exists with MobileNumber Please Login"){
+            const data = await dispatch(userSignup(formData))
+            if (data?.payload.message == "User Already Exists with MobileNumber Please Login") {
                 toast.error("User Already Exists with MobileNumber Please Login")
-             }
-             else if (data?.payload.message == "OTP Verification Is Pending") {
+            }
+            else if (data?.payload.message == "OTP Verification Is Pending") {
                 setPasswordError('');
                 setModal(true);
                 setNumError("");
                 setDisplayOtp(true);
                 toggle();
-            }else {
+            } else {
                 toast.error("Something went wrong")
             }
         }
@@ -167,13 +167,13 @@ const SignUp = () => {
     }
     return (
         <div className='main-cont'>
-            <img src={backgroundImg} className='main-img' alt="Background" />
+            <img src={backgroundImg} className='main-img' alt="Background" data-testid="background-img" />
             <div className='container-xl'>
-                <Modal isOpen={modal} toggle={toggle} >
+                <Modal isOpen={modal} toggle={toggle} data-testid="otp-modal">
                     <div className="modal-lg modal-xs">
                         <ModalBody className="d-flex flex-column align-items-center justify-content-evenly ">
-                            <h5 className='otp-head'>{singnup.otpVerification}</h5>
-                            <p className='otp-para'>{singnup.otpSent}</p>
+                            <h5 className='otp-head' data-testid="otp-head">{singnup.otpVerification}</h5>
+                            <p className='otp-para' data-testid="otp-para">{singnup.otpSent}</p>
                             <Input
                                 type='text'
                                 className='otp-input pb-2'
@@ -181,15 +181,16 @@ const SignUp = () => {
                                 name='otp'
                                 onChange={handleChange}
                                 placeholder={singnup.enterOtp}
+                                data-testid="otp-input"
                             ></Input>
-                            {displayerr && <p className='pt-2' style={{ color: "red" }}>Please enter received OTP</p>}
-                            <p className='didnt'>
+                            {displayerr && <p className='pt-2' style={{ color: "red" }} data-testid="otp-error">Please enter received OTP</p>}
+                            <p className='didnt' data-testid="resend-otp">
                                 {singnup.resendOtp}
                                 <button onClick={resendotp} className='resend-otp bg-transparent border-0'>
                                     {singnup.resend}
                                 </button>
                             </p>
-                            <Button className='verify-button' onClick={toggleSuccesfull}>
+                            <Button className='verify-button' onClick={toggleSuccesfull} data-testid="verify-button">
                                 {singnup.verify}
                             </Button>
                         </ModalBody>
@@ -201,22 +202,22 @@ const SignUp = () => {
                 <ModalHeader toggle={toggleSuccesfull} close={closeBtn}></ModalHeader>
                 <div className='d-flex flex-column align-items-center justify-content-center text-center p-3'>
                     <div className='d-flex align-items-center justify-content-center rounded-circle align-self-center' style={styles.verifiedIcon}>
-                        <img src={tick} alt="Verified" />
+                        <img src={tick} alt="Verified" data-testid="verified-img" />
                     </div>
-                    <h5 className='otp-head'>{singnup.verifiedSuccessfully}</h5>
-                    <p className='otp-para'>{singnup.mobileVerified}</p>
+                    <h5 className='otp-head' data-testid="verified-head">{singnup.verifiedSuccessfully}</h5>
+                    <p className='otp-para' data-testid="verified-para">{singnup.mobileVerified}</p>
                 </div>
             </Modal>
-            <Form onSubmit={handleSubmit} className="forms d-flex flex-column justify-content-evenly align-items-center">
-                <h1 className='star'>{singnup.title}</h1>
+            <Form onSubmit={handleSubmit} className="forms d-flex flex-column justify-content-evenly align-items-center" data-testid="signup-form">
+                <h1 className='star' data-testid="signup-title">{singnup.title}</h1>
                 <div className='position-relative'>
-                    <Input placeholder={singnup.fullName} bsSize="lg" className={fullNameError ? "form-control genderss" : "form-control genderss mb-3"} type='singnup' onChange={handleChange} value={formData.fullname} name='fullname' onBlur={handleBlur} required title='full name is required' />
+                    <Input placeholder={singnup.fullName} bsSize="lg" className={fullNameError ? "form-control genderss" : "form-control genderss mb-3"} type='singnup' onChange={handleChange} data-testid="fullname-input" value={formData.fullname} name='fullname' onBlur={handleBlur} required title='full name is required' />
                     {formData.fullname === "" ? <p className='req'>*</p> : null}
                 </div>
-                {fullNameError && <p className='fullname-error mb-3'>please enter your full name</p>}
+                {fullNameError && <p className='fullname-error mb-3' data-testid="fullname-error">please enter your full name</p>}
                 {formData.fullname === "" && displayOtp && <p className='fullname-error'>please enter your full name</p>}
                 <div className='position-relative'>
-                    <Input type='select' className="form-control genderss select option place mb-3" value={formData.gender} onChange={handleChange} name="gender">
+                    <Input type='select' className="form-control genderss select option place mb-3" value={formData.gender} onChange={handleChange} name="gender" data-testid="gender-select">
                         <option value="">{singnup.gender}</option>
                         <option value="MALE" className="opt-color">male</option>
                         <option value="Female" className="opt-color">female</option>
@@ -224,12 +225,12 @@ const SignUp = () => {
                     </Input>
                     {formData.gender === "I am" ? <p className='req'>*</p> : null}
                 </div>
-                {genderError && <p className='fullname-error'>please select a gender</p>}
+                {genderError && <p className='fullname-error' data-testid="gender-error">please select a gender</p>}
                 <div className='position-relative'>
-                    <Input bsSize="lg" type='email' className={!emailIdError ? "form-control genderss mb-3" : "form-control genderss"} onChange={handleChange} value={formData.userEmail} name='userEmail' onBlur={handleBlur} placeholder={singnup.emailId} required />
+                    <Input bsSize="lg" type='email' className={!emailIdError ? "form-control genderss mb-3" : "form-control genderss"} onChange={handleChange} value={formData.userEmail} name='userEmail' onBlur={handleBlur} placeholder={singnup.emailId} required data-testid="email-input" />
                     {formData.userEmail === "" ? <p className='req'>*</p> : null}
                 </div>
-                {emailIdError && <p className='email-error'>please enter a valid email</p>}
+                {emailIdError && <p className='email-error' data-testid="email-error">please enter a valid email</p>}
                 <div>
                     <div className='position-relative'>
                         <Input
@@ -243,12 +244,14 @@ const SignUp = () => {
                             title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                             value={formData.userPass} placeholder={singnup.password}
                             required
+                            data-testid="password-input"
                         />
                         {formData.userPass === "" ? <p className='req'>*</p> : null}
                         <button
                             type="button"
                             onClick={togglePasswordVisibility}
                             className='eye eye-icon-1'
+                            data-testid="toggle-password-visibility"
                         >
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
@@ -256,7 +259,7 @@ const SignUp = () => {
                 </div>
                 <div className='position-relative'>
                     <div>
-                        <Input bsSize="lg" className={rePassError ? "form-control genderss mb-3" : "form-control genderss mb-3"} type={rePassError ? 'singnup' : 'password'} id="reenter" onChange={handleChange} onBlur={handleBlur} name='repeatPass' value={formData.repeatPass} placeholder={singnup.reenterPassword} required />
+                        <Input bsSize="lg" className={rePassError ? "form-control genderss mb-3" : "form-control genderss mb-3"} type={rePassError ? 'singnup' : 'password'} id="reenter" onChange={handleChange} onBlur={handleBlur} name='repeatPass' value={formData.repeatPass} placeholder={singnup.reenterPassword} required data-testid="repeat-password-input" />
                         {formData.repeatPass === "" ? <p className='req'>*</p> : null}
                     </div>
                     {repeatpassError && <p className='email-error'>{singnup.rePassErr}</p>}
@@ -264,11 +267,12 @@ const SignUp = () => {
                         type="button"
                         onClick={togglePasswordVisibilities}
                         className='eye eye-icon-2'
+                        data-testid="toggle-repeat-password-visibility"
                     >
                         {rePassError ? <FaEyeSlash /> : <FaEye />}
                     </button>
                 </div>
-                {passwordError && <div className='pass-err'>{passwordError}</div>}
+                {passwordError && <div className='pass-err' data-testid="repeat-password-error">{passwordError}</div>}
                 <div className='number-cont'>
                     <FormGroup>
                         <Input type="select" name="select" placeholder='+91' className="form-control genderss country" >
@@ -277,15 +281,15 @@ const SignUp = () => {
                             </option>
                         </Input>
                     </FormGroup>
-                    <Input bsSize="lg" className="form-control genderss number mb-5" type='number' onChange={handleChange} value={formData.mobile} name='mobile' onBlur={handleBlur} placeholder={singnup.enterNumber} required />
+                    <Input bsSize="lg" className="form-control genderss number mb-5" type='number' onChange={handleChange} value={formData.mobile} name='mobile' onBlur={handleBlur} placeholder={singnup.enterNumber} required data-testid="mobile-input" />
                     {formData.mobile === "" ? <p className='req'>*</p> : null}
                 </div>
-                {numError && <div className='pass-err'>{numError}</div>}
+                {numError && <div className='pass-err' data-testid="mobile-error">{numError}</div>}
                 <div className='check d-flex justify-content-space-between align-items-center align-self-start mb-2 gap-2'>
-                    <input type='checkbox' onChange={onCheck} value={isChecked} className="check-2-checkin" />
+                    <input type='checkbox' onChange={onCheck} value={isChecked} className="check-2-checkin" data-testid="terms-checkbox" />
                     <p className='para-terms' >{singnup.agreeTerms}<span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span></p>
                 </div>
-                <Button className='form next-button mb-3' type='submit' disabled={btnCondition}>
+                <Button className='form next-button mb-3' type='submit' disabled={btnCondition} data-testid="signup-button">
                     {singnup.title}
                 </Button>
                 <p className="already d-flex align-item-center gap-1">{singnup.alreadyAccount}
