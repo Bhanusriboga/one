@@ -15,7 +15,7 @@ import Destination from './Destination';
 import  googleplay from "./assets/googleplay.svg"
 import appstore from "./assets/appstore.svg";
 import chakra from "./assets/chakraa.svg"
-
+import FooterBar from "../Dashboard/FooterBar"
 
  
 function Home() {
@@ -85,7 +85,11 @@ function Home() {
               <div className='download'>
                <img src={googleplay} className='appstore'/>
                <img src={appstore} className='bg-white appstore'/>
-              </div>
+          </div>
+          <hr className="hor-line"/>
+          <div className='pageFooter'>
+            <FooterBar />
+          </div>
         </div>
       </div>
     </div>

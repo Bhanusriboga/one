@@ -806,7 +806,14 @@ width: 64vw;
   }
 
 }
-
+.pageFooter {
+  background-color: #780024 !important;
+  color: white;
+}
+.hor-line{
+  border: 1px solid white;
+  width: 100vw;
+}
 
 
 
