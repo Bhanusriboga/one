@@ -4,8 +4,8 @@ import {Form} from "reactstrap";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { prevStep ,saveUploadedFiles, nextStep,uploadedFilesAPICall } from "../../redux/slices/RegistrationDetails";
 import "./Media.css";
-import { prevStep ,saveUploadedFiles, nextStep } from "../../redux/slices/RegistrationDetails";
 
 function Media() {
   const dispatch = useDispatch();
@@ -41,21 +41,28 @@ function Media() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    fileInputs.forEach((input, index) => {
-      if (input.file) {
-        formData.append(`file${index + 1}`, input.file);
-      }
-    });
-    if (fileInputs.some((input) => input.file !== null)) {
+    // const formData = new FormData();
+    // fileInputs.forEach((input, index) => {
+    //   if (input.file) {
+    //     formData.append(`file${index + 1}`, input.file);
+    //   }
+    // });
+    // if (fileInputs.some((input) => input.file !== null)) {
       dispatch(saveUploadedFiles(fileInputs));
       dispatch(nextStep());
-    } else {
-      alert("Upload is required");
-    }
+    // } else {
+    //   alert("Upload is required");
+    // }
   };
   const prev = ()=>{
     dispatch(prevStep())
+  }
+
+  const uploadImage = async (index) => {
+    const file = fileInputRefs.current[index]?.click()
+    const formData = new FormData();
+    formData.append("file", file)
+   const data = await dispatch(uploadedFilesAPICall(formData))
   }
 
   return (
@@ -76,7 +83,7 @@ function Media() {
               <button
                 type="button"
                 className="upload-btn"
-                onClick={() => fileInputRefs.current[index]?.click()}
+                onClick={uploadImage(index)}
               >
                 Upload
               </button>

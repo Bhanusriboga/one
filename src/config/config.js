@@ -11,7 +11,10 @@ const endPoints = {
   userStatus:"user-status",
   userInfo:"user-info?userId=",
   otpverify:"user-otp-verification",
-  reSendOtp:"request-mobile-otp"
+  reSendOtp:"request-mobile-otp",
+  basicDetails:"basic-details",
+  personalDetails:"personal-details",
+  professionalDetails:"professional-details"
 }
 
 export { baseURL, endPoints, encryptionSalt }      

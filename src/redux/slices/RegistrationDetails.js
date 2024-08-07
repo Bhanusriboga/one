@@ -1,14 +1,152 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import networkCall from '../../utils/NetworkCall';
+import { endPoints } from '../../config/config';
+import Storage from '../../utils/Storage';
+
+export const BasicDetailsAPICall = createAsyncThunk(
+  'registrationDetails/basicDetails',
+  async (props, thunkAPI) => {
+    const url = `${endPoints.basicDetails}?userId=${Storage.get('userId')}`;
+
+    const data = JSON.stringify({
+      dateOfBirth: props.dateOfBirth,
+      placeOfBirth: props.placeOfBirth,
+      timeOfBirth: "AM",
+      religion: props.religion,
+      motherTongue: props.motherTongue,
+      citizenShip: props.citizenShip,
+      languageProficiency: props.languageProficiency,
+      instgramId: props.instagramId,
+      linkedinId: props.linkedinId||"",
+      doorNumber: props.doorNo,
+      streetName: props.streetNo,
+      city: props.city,
+      state: props.state,
+      country: props.country,
+      postalCode: props.postalCode,
+    });
+    const headers = {
+      'Authorization': `${Storage.get('token')}`,
+    };
+    console.log({ url });
+    const { response, error } = await networkCall(url, 'POST', data, headers);
+    console.log('basic details--->', response);
+    console.log('error--->', error);
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    } else {
+      return thunkAPI.rejectWithValue(error || 'Something went wrong..!');
+    }
+  }
+);
+
+export const personalDetailsAPICall = createAsyncThunk(
+  'registrationDetails/personalDetails',
+  async (props, thunkAPI) => {
+    const url = `${endPoints.personalDetails}?userId=${Storage.get('userId')}`;
+    const data = JSON.stringify({
+      caste: props.caste,
+      subCaste: props.subCaste,
+      gothram: props.gothrum,
+      star: props.star,
+      zodiacSign: props.zodiacSign,
+      haveDosham: props.dosham == "Yes" ? true : false,
+      whatTypeOfDosham: "string",
+      familyStatus: props.family,
+      familyType: props.familyType,
+      fathername: props.fathername,
+      fatherOccupation: props.fatherOccupation,
+      mothername: props.mothername,
+      motherOccupation: props.motherOccupation,
+      noOfSiblings: props.noOfSiblings,
+      maritalStatus: props.maritalStatus,
+      anyDisabilities: props.disability != "Other" ? true : false,
+      // height: props.height,
+      heiht:6.2,
+      weightType: props.weightUnit,
+      weight: props.weight,
+      bodyType: props.bodyType,
+      complexion: props.complexion,
+      smokingHabits: props.smokingHabits,
+      eatingHabits: props.eatingHabits,
+      description: props.aboutYourself,
+      drinkingHabits: props.drinkingHabits
+    });
+
+    
+    const headers = {
+      'Authorization': `Bearer ${Storage.get('token')}`,
+    };
+    
+  
+    console.log({ url },{headers:Storage.get('token')});
+    const { response, error } = await networkCall(url, 'POST', data, headers);
+    console.log('basic details--->', response);
+    console.log('error--->', error);
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    } else {
+      return thunkAPI.rejectWithValue(error || 'Something went wrong..!');
+    }
+  }
+)
+
+export const professionalDetailsAPICall = createAsyncThunk("registrationDetails/professionalDetails",
+  async (props, thunkAPI) => {
+    const url = `${endPoints.professionalDetails}?userId=${Storage.get('userId')}`;
+    const data = JSON.stringify({
+      highestEducation: props.highestEducation,
+      // yearOfPassout: props.yearOfPassing,
+      yearOfPassout:"2020-06-20",//after backend deployment need to change
+      nameOfInstitute: props.nameOfTheInstitute,
+      occupation: props.occupation,
+      employmentStatus: props.employmentStatus,
+      employedIn: props.employedIn,
+      workLocation: props.workLocation,
+      state: props.workstate,
+      city: props.city,
+      annualIncome: props.annualIncome
+    });
+    const headers = {
+      'Authorization': `Bearer ${Storage.get('token')}`,
+    };
+    console.log({ url });
+    const { response, error } = await networkCall(url, 'POST', data, headers);
+    console.log('basic details--->', response);
+    console.log('error--->', error);
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    } else {
+      return thunkAPI.rejectWithValue(error || 'Something went wrong..!');
+    }
+  })
+export const uploadedFilesAPICall = createAsyncThunk("registrationDetails/uploadedFiles", async (props, thunkAPI) => {
+  const headers = {
+    'Authorization': Storage.get('token'),
+  };
+  const { response, error } = await networkCall(Storage.get('userId'), 'POST', props, headers);
+  console.log('basic details--->', response);
+  console.log('error--->', error);
+  if (response) {
+    return thunkAPI.fulfillWithValue(response);
+  } else {
+    return thunkAPI.rejectWithValue(error || 'Something went wrong..!');
+  }
+})
+
+
 
 const RegistrationDetails = createSlice({
   name: "registrationDetails",
   initialState: {
     formData1: {},
     personalData: {},
+    personalDataResponse:{},
     ProfessionalData: {},
     textArea: "",
-    currentStep: 1,
+    currentStep: 4,
     uploadedFiles: [],
+    loadder: false
   },
   reducers: {
     savePersonalData: (state, action) => {
@@ -37,6 +175,57 @@ const RegistrationDetails = createSlice({
       state.uploadedFiles = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(BasicDetailsAPICall.fulfilled, (state, action) => {
+      state.formData1 = action.payload;
+      state.loadder = false
+    }),
+      builder.addCase(BasicDetailsAPICall.rejected, (state, action) => {
+        console.log(action.error);
+        state.loadder = false
+      });
+    builder.addCase(BasicDetailsAPICall.pending, (state, action) => {
+      console.log(action.error);
+      state.loadder = true
+    });
+    builder.addCase(professionalDetailsAPICall.fulfilled, (state, action) => {
+      state.ProfessionalData = action.payload;
+      state.loadder = false
+    }),
+      builder.addCase(professionalDetailsAPICall.rejected, (state, action) => {
+        console.log(action.error);
+        state.loadder = false
+      });
+    builder.addCase(professionalDetailsAPICall.pending, (state, action) => {
+      console.log(action.error);
+      state.loadder = true
+    });
+    builder.addCase(personalDetailsAPICall.fulfilled, (state, action) => {
+      state.personalDataResponse = action.payload;
+      state.loadder = false
+    });
+    builder.addCase(personalDetailsAPICall.rejected, (state, action) => {
+      console.log(action.error);
+      state.loadder = false
+    });
+    builder.addCase(personalDetailsAPICall.pending, (state, action) => {
+      console.log(action.error);
+      state.loadder = true
+    });
+    builder.addCase(uploadedFilesAPICall.fulfilled, (state, action) => {
+      state.uploadedFiles = action.payload;
+      state.loadder = false
+    });
+    builder.addCase(uploadedFilesAPICall.rejected, (state, action) => {
+      console.log(action.error);
+      state.loadder = false
+    });
+    builder.addCase(uploadedFilesAPICall.pending, (state, action) => {
+      console.log(action.error);
+      state.loadder = true
+    });
+  },
+
 });
 
 export const {
@@ -46,7 +235,7 @@ export const {
   nextStep,
   prevStep,
   saveFormData,
-  
+
   saveUploadedFiles,
 } = RegistrationDetails.actions;
 export default RegistrationDetails.reducer;

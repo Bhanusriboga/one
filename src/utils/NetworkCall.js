@@ -1,5 +1,5 @@
-import axiosInstance from './axiosInstance';
 import { baseURL } from '../config/config';
+
 const resolve = async (promise) => {
   const resolved = {
     response: null,
@@ -18,7 +18,7 @@ const resolve = async (promise) => {
 const networkCall = async (
   url,
   method = 'GET',
-  data = null,
+  body = null,
   headers = {},
   responseType = 'json'
 ) => {
@@ -28,22 +28,21 @@ const networkCall = async (
       const fullUrl = url.startsWith('http') ? url : `${baseURL}/${url}`;
       const defaultHeaders = {
         'Content-Type':
-          data instanceof FormData ? 'multipart/form-data' : 'application/json',
+          body instanceof FormData ? 'multipart/form-data' : 'application/json',
         ...headers,
       };
 
-      const config = {
+
+      const response = await await fetch(fullUrl, {
         method,
-        url: fullUrl,
         headers: defaultHeaders,
-        data,
-        responseType,
-      };
-      const response = await axiosInstance(config);
-      return response;
+        ...(body && method !== 'GET' && method !== 'HEAD' && { body }),
+      });
+      
+      return response[responseType](); 
     }catch(error){
       console.log({error})// need to remove while deploy
-      return;
+      return Promise.reject(error);
     }
   };
   return await resolve(makeCall);

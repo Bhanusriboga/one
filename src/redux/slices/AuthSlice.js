@@ -15,7 +15,7 @@ export const userSignup = createAsyncThunk(
     }
     const { response,error } = await networkCall(endPoints.signup, "POST", JSON.stringify(data));
     if (response) {
-      return thunkAPI.fulfillWithValue(response.data);
+      return thunkAPI.fulfillWithValue(response);
     }
     else {
       return thunkAPI.rejectWithValue(error||"Something went wrong..!")
@@ -29,7 +29,7 @@ export const userLogin = createAsyncThunk(
   async (props, thunkAPI) => {
     const { response, error } = await networkCall(endPoints.login, "POST", JSON.stringify(props));
     if (response) {
-      return thunkAPI.fulfillWithValue(response.data);
+      return thunkAPI.fulfillWithValue(response);
     }
     else {
       return thunkAPI.rejectWithValue(error||"Something went wrong..!")
@@ -42,13 +42,13 @@ export const fetchUserInfo = createAsyncThunk(
   async (_, thunkAPI) => {
     const token=Storage.get("token")
     if(token){
-      const { userId } = Storage.get("userInfo");
+      const  userId  = Storage.get("userId");
       const header={
         Authorization: token
       }
       const { response, error } = await networkCall(endPoints.userInfo+userId, 'GET',header);
       if (response) {
-        return thunkAPI.fulfillWithValue(response.data);
+        return thunkAPI.fulfillWithValue(response);
       } else {
         return thunkAPI.rejectWithValue(error || 'Something went wrong..!');
       }
@@ -80,6 +80,29 @@ export const reSendOtp=createAsyncThunk(
     }
     else {
       return thunkAPI.rejectWithValue(error||"Something went wrong..!")
+    }
+  }
+)
+
+export const getMyDetails=createAsyncThunk(
+  "auth/getMyDetails",
+  async (_, thunkAPI) => {
+    const token=Storage.get("token")
+    if(token){
+      const  userId  = Storage.get("userId");
+      const header={
+        Authorization: `Bearer ${token}`
+      }
+      console.log("userId ...... ",userId,token)
+      console.log(endPoints.userInfo+userId)
+      const { response, error } = await networkCall(endPoints.userInfo+userId, 'GET',header);
+      if (response) {
+        return thunkAPI.fulfillWithValue(response);
+      } else {
+        return thunkAPI.rejectWithValue(error || 'Something went wrong..!');
+      }
+    }else{
+      return thunkAPI.rejectWithValue('token not exist..!');
     }
   }
 )
@@ -127,7 +150,7 @@ const AuthSlice = createSlice({
       })
       .addCase(userLogin.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.Mydata = action.payload;
         state.token = action.payload.jwt
         Storage.set("token", action.payload.jwt);
         Storage.set("userId", action.payload.userId);
@@ -155,7 +178,7 @@ const AuthSlice = createSlice({
       })
       .addCase(otpverify.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.Mydata = action.payload;
         Storage.set("token", action.payload.jwt);
         Storage.set("userId", action.payload.userId);
       })
@@ -175,6 +198,18 @@ const AuthSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
+
+    builder.addCase(getMyDetails.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(getMyDetails.fulfilled, (state, action) => {
+      state.loading = false;
+      state.Mydata = action.payload?.object;
+    })
+    .addCase(getMyDetails.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
   }
 });
 
