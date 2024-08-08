@@ -219,7 +219,7 @@ const AuthSlice = createSlice({
       .addCase(requestOtpForgetApi.pending, (state) => {
         state.loading = true;
       })
-      .addCase(requestOtpForgetApi.fulfilled, (state, action) => {
+      .addCase(requestOtpForgetApi.fulfilled, (state) => {
         state.loading = false;
        
       })

@@ -8,6 +8,7 @@ import logout from '../../Assets/topImageforgot.png';
 import { requestOtpForgetApi,otpverifyForgetApi ,changePasswordForgotApi } from '../../redux/slices/AuthSlice';
 
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const ForgotPassword = (props) => {
   const {  modal, toggle } = props
@@ -129,10 +130,9 @@ const ForgotPassword = (props) => {
       setErrors({ mobile: '', otp: otpError, newPassword: '', confirmPassword: '' });
       return;
     }
-    const data = await dispatch(otpverifyForgetApi(formData));
-    console.log('otp verify api---------->',{data})
+     await dispatch(otpverifyForgetApi(formData));
+     toast.success("OTP  Verified successfully")
 
-    alert('OTP Verified successfully!');
   };
 
   const handleSave = async(e) => {
@@ -156,9 +156,14 @@ const ForgotPassword = (props) => {
       return;
     }
     const data =  await dispatch(changePasswordForgotApi(formData));
-    console.log(data)
+    if('Password Changed Successfully'==data?.payload?.data?.message){
+      toast.success("password updated successfully")
+      toggle();
+    }else{
+      toast.error("Something went wrong..!")
+    }
 
-    alert('Password created successfully!');
+   
   };
 
   const handleVerify = async() => {
@@ -167,9 +172,9 @@ const ForgotPassword = (props) => {
       setErrors({ mobile: mobileError, otp: '', newPassword: '', confirmPassword: '' });
       return;
     }
-   const data=await dispatch(requestOtpForgetApi(formData))
-   console.log({data});
-    alert('OTP sent successfully!');
+   await dispatch(requestOtpForgetApi(formData))
+   toast.success('OTP sent successfully!')
+  
   };
 
   return (
