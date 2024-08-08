@@ -20,7 +20,8 @@ const ProfileList = () => {
   }, [])
 
   const getAllUsersData = async () => {
-    await dispatch(getAllUsers());
+    const data=await dispatch(getAllUsers());
+    setfilterData(data?.payload?.object)
   }
   useEffect(() => {
     setfilterData(data)

@@ -385,7 +385,7 @@ const SignUp = () => {
         <div className="container-xl">
           <Modal isOpen={modal} toggle={toggle}>
             <div className="modal-lg modal-xs">
-              <ModalBody className="d-flex flex-column align-items-center justify-content-evenly ">
+              <ModalBody className="d-flex flex-column align-items-center justify-content-evenly signup-modal ">
                 <h5 className="otp-head">{singnup.otpVerification}</h5>
                 <p className="otp-para">{singnup.otpSent}</p>
                 <Input

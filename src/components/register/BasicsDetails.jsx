@@ -21,6 +21,7 @@ import {
   saveFormData,
   BasicDetailsAPICall
 } from "../../redux/slices/RegistrationDetails";
+import {updateMydata} from "../../redux/slices/AuthSlice";
 function BasicsDetails() {
   const [formData, setFormData] = useState({
     dateOfBirth: "",
@@ -127,6 +128,7 @@ function BasicsDetails() {
     if (validateAllFields()) {
       const data = await dispatch(BasicDetailsAPICall(formData));
       if(data?.payload?.message === "Basic details added successfully" || data?.payload?.message ==="Basic Details Already Exists Please Updated your Details"){
+        dispatch(updateMydata());
         toast.success("User Basic Details Registered Successfully", {
           position: "top-center",
           autoClose: 2000,
