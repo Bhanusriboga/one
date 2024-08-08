@@ -149,7 +149,7 @@ overflow-x: hidden;
 .destination-cont { padding: 5vw; height: 60vh; }
 .begin { width: 178px; height: 60px; font-family: Poppins; margin-top: 4vw; padding-top: 1vh; font-size: 24px; font-weight: 600;  text-align: center; border-radius: 15px; background-color: rgba(120, 0, 36, 1); opacity: 0px; border-width: 0px; color: rgba(243, 243, 243, 1); transition: transform 1s ease; }
 .begin:hover { transform: scale(1.1); }
-.custom-navBar{ background-color: #780024; width: 100vw;  position: fixed; height:auto;background-color: 0.3s ease; backdrop-filter: 0.3s ease; opacity: 0.3s ease-in-out !important; } 
+.custom-navBar{ background-color: #780024; width: 100vw;  position: fixed; height:13vh;background-color: 0.3s ease; backdrop-filter: 0.3s ease; opacity: 0.3s ease-in-out !important; } 
 .burger-icon{
   position: fixed;
   right:2rem;
@@ -158,7 +158,7 @@ overflow-x: hidden;
 }
 .navbar-blur { backdrop-filter: blur(10px) !important; opacity: 0.6 !important; }
 .dropDown2 { width: 13vw; height: 28vh; background-color: #F3F3F3; margin-top: 22vh; position: absolute; text-align: center; left: 85vw; color: black; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-left: 7vh !important; top: -90px; }
-.nav-logo { width: 255.57px; height: 38.12px; top: 20px; left: 13px; margin-left: 5vw; }
+.nav-logo { zoom: 1;position: fixed;top: -120px;left: 0.5 !important;max-width: 650px !important; max-height: 300px !important; bottom: 20 !important;}
 .contact-head { font-family: Poppins; font-size: 22px; font-weight: 700; text-align: left; color: rgba(224, 170, 62, 1); }
 .mobile { font-family: Poppins; font-size: 16px; font-weight: 500; text-align: left; color: rgba(255, 255, 255, 1); }
 .emailid { font-family: Poppins; font-size: 16px; font-weight: 500; text-align: left; color: rgba(255, 255, 255, 1); }
@@ -214,22 +214,75 @@ color: #E2E2E2;
 .chakra{
   zoom: 0.7;
 }
+
+.navbar {
+  background-color: #780024 !important;
+  transition: background-color 0.2s, backdrop-filter 0.3s;
+}
+
+.navbar-blur {
+  backdrop-filter: blur(5px);
+}
+
+.navbar-nav {
+  margin-left: auto;
+}
+
+.navbar-toggler {
+  border: none;
+  background: none;
+}
+
+.navbar-toggler-icon {
+  font-size: 24px;
+  color: white;
+}
+
+
+@media (max-width: 768px) {
+  .navbar-nav {
+      margin-top: 1rem;
+  }
+  /* .nav-logo { zoom: 0.9;position: fixed;top: -65px;left: 5;max-width: 600px !important; max-height: 200px !important; bottom: 20 !important;} */
+
+  .nav-link {
+      padding: 0.5rem 1rem;
+      text-align: center;
+  }
+}
+
+
+
 @media (max-width:599px) and (min-width:350px) {
   .chakra{
     zoom: 0.6;
   }
+  .custom-navBar{ background-color: #780024 !important; width: 100vw;  position: fixed;background-color: 0.3s ease; backdrop-filter: 0.3s ease; opacity: 0.3s ease-in-out !important; } 
+.head123{
+  background-color: #780024 !important;
+  height: fit-content;
+}
   .right-chakra{
     display: none;
   }
    .collapse-nav{
     margin-left: 5vw !important;
   }
-  .footer-head{
+   .footer-head{
     font-size: 1rem;
+  }
+  /* .nav-logo{
+    zoom: 0.18;
+    margin-left: 10vw !important;
+  } */
+  .footer-1{
+    margin-top: 10vh;
+    height: 55vh;
   }
   .footer-para{
     font-size: 0.7rem;
   }
+
   .content {
     width: 100vw;
     height:auto;
@@ -502,7 +555,6 @@ width: 64vw;
   }
   .customer-img{
       top: 28.5%;
-      height: auto;
   }
   .explore-cont{
       display:none  !important;
@@ -518,6 +570,8 @@ width: 64vw;
   .chakra{
     zoom: 0.6;
   }
+  .custom-navBar{ background-color: #780024; width: 100vw;  position: fixed; height:auto;background-color: 0.3s ease; backdrop-filter: 0.3s ease; opacity: 0.3s ease-in-out !important; } 
+
   .appstore{
     clip-path: inset(20px,20px,20px,20px);
     zoom: 0.8;
@@ -527,6 +581,9 @@ width: 64vw;
   }
   .footer-para{
     font-size: 1rem;
+  }
+  .footer-1{
+    margin-top: 5vh;
   }
   .right-circle{
     top: 182vh;
@@ -595,7 +652,7 @@ width: 64vw;
  .leftexplore{ display: none; }
  .col1{ z-index: 1; left: 5vw; top: 46%; position:absolute; color: #F3F3F3; height: 40vh; width:30vw }
   .top-para-para{ font-family: Poppins; font-size: 12px; font-weight: 400; text-align: left; width: 38vw !important;  }
-  .customer-img{ top: 28%; width: 45vw; height: 35%; }
+  .customer-img{ top: 28%; height: 35%; }
   .couple-img{ height:70vh; width: 50vw;}
   .couple-container{ width:150vw; height: 70vh;display: flex;justify-content: space-between; margin-left: 50vw;}
   .img-container{
@@ -618,12 +675,20 @@ width: 64vw;
   .collapse-nav{
     margin-left: 10vw;
   }
+  .custom-navBar{ background-color: #780024; width: 100vw;  position: fixed; height:auto;background-color: 0.3s ease; backdrop-filter: 0.3s ease; opacity: 0.3s ease-in-out !important; } 
+  /* .nav-logo{
+    zoom: 0.18;
+    margin-left: 10vw !important;
+  } */
   .appstore{
     clip-path: inset(20px,20px,20px,20px);
     zoom: 0.8;
   }
   .chakra{
     zoom: 0.5 !important;
+  }
+  .footer-1{
+    margin-top: -5vh;
   }
   .right-chakra{
     display: none;

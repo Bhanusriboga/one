@@ -1,3 +1,4 @@
+
 import React from 'react'
 import {
   Navbar,
@@ -7,14 +8,14 @@ import {
   NavLink 
 } from 'reactstrap';
 import './Dashboard.scss'
-import logo from '../../Assets/Logo.png'
+import logo from '../../Assets/icon.svg'
 
 const Header = () => {
 
   return (
     <Navbar className='navbck' light expand="md" >
       <div>
-        <NavbarBrand href="/"><img src={logo}></img></NavbarBrand>
+        <NavbarBrand href="/"><img src={logo} className='nav-logo '></img></NavbarBrand>
       </div>
       <Nav className="me-auto w-100 d-flex justify-content-end" navbar >
         <NavItem>
