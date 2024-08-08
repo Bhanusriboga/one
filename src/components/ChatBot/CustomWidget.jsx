@@ -164,9 +164,9 @@ const iconStyle = {
 };
 
 const mobileStyle = {
-  position: 'fixed',
-  top: '5rem',
-  right: '3rem',
+  position: 'absolute',
+  top: '4rem',
+  right: '2rem',
   background: 'transparent',
   border: 'none',
   borderRadius: '50%',

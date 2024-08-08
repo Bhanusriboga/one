@@ -1,21 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import Header from './Header'
 import FooterBar from './FooterBar'
 import PageContainer from './PageContainer'
+import { fetchUserInfo } from '../../redux/slices/AuthSlice'
+import {getIgnoredUsers,getShortListedUsers} from '../../redux/slices/Users'
 import './Dashboard.scss'
+// import ComingSoon from '../ComingSoon/ComingSoon'
 
-const Dashboard = props => {
+const Dashboard = () => {
+  const dispatch=useDispatch()
+  const getUSerInfo=async()=>{
+    await dispatch(fetchUserInfo())
+    await dispatch(getIgnoredUsers())
+    await dispatch(getShortListedUsers())
+   }
+  useEffect(() => {
+    getUSerInfo()
+  },[])
+
   return (
     <div className='h-100 w-100 pgback'>
-      <div className='pageHeader fixed-top'>
+      <div className='pageHeader'>
         <Header/>
       </div>
       <div className='pageContainer conwidth'>
+        {/* <ComingSoon/> */}
         <PageContainer/>
-      </div>
-      <div className='fixed-bottom'>
+        <div className='pageFooter'>
         <FooterBar/>
       </div>
+      </div>
+
 
     </div>
   )
