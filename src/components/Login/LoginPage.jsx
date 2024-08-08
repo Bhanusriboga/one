@@ -1,4 +1,5 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
+import './Login.scss'
 import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
 import {  useDispatch } from 'react-redux';
 import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";

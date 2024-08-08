@@ -7,7 +7,7 @@ import ForgotPage from './components/Forgot/ForgotPage'
 import SignUp from './components/Signup/SignUp'
 import Dashboard from './components/Dashboard/Dashboard'
 import RegisterMain from './components/register/RegisterMain'
-import {getMyDetails} from "./redux/slices/AuthSlice"
+import Home from "./components/home/Home"import {getMyDetails} from "./redux/slices/AuthSlice"
 import UPIPayment from './components/payment/Payment'
 // Main Routes don't change any thing
 const Routes = () => {
@@ -52,6 +52,9 @@ const AppRoutes = () => {
 const UnAuthorizedRoutes = () => {
     return (
         <Switch>
+            <Route path="/home">
+                <Home />
+            </Route>
             <Route path="/login">
                 <LoginPage />
             </Route>
@@ -64,7 +67,7 @@ const UnAuthorizedRoutes = () => {
             <Route path="/register">
                 <RegisterMain />
             </Route>
-            <Redirect path='/' to="login"></Redirect>
+            <Redirect path='/' to="home"></Redirect>
         </Switch>
     )
 }
