@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
   auth: AuthReducer,
   // Add other reducers here
   users:UserReducer,
-  RegistrationDetails:RegistrationDetails,,
+  RegistrationDetails:RegistrationDetails,
   settings:SettingsReducer
 });
 

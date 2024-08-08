@@ -1,6 +1,6 @@
 import React,{useRef} from 'react'
 import "./home.css"
-import arrow from "./assets/Group 29.png"
+import arrow from "./assets/arrow.png"
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 function Explore() {
   const myRef=useRef()
