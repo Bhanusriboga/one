@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <Navbar className='navbck' light expand="md" >
       <div>
-        <NavbarBrand href="/"><img src={logo}></img></NavbarBrand>
+        <NavbarBrand href="/"><img src={logo} alt="logo"></img></NavbarBrand>
       </div>
       <Nav className="me-auto w-100 d-flex justify-content-end" navbar >
         <NavItem>

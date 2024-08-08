@@ -14,7 +14,7 @@ const FooterBar = () => {
 
         </Col>
 
-        <Col lg={2} className='mt-5  mb-3 vertical-divider '>
+        <Col lg={2} className='mt-5  mb-3  '>
         <div className='d-flex flex-column align-items-start me-5 ms-1'>
         <div className='labelstl '>{footerContent.contactLabel}</div>
         <div>{footerContent.Mobile}</div>
@@ -32,7 +32,7 @@ const FooterBar = () => {
         </Col>
         <Col md={3} className='mt-5 mb-3 d-flex align-items-center'>
         <div>
-        <img src={logo}></img>
+        <img src={logo} alt="logo"></img>
         </div>
         </Col>
       </Row>

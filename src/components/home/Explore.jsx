@@ -1,6 +1,6 @@
 import React,{useRef} from 'react'
 import "./home.css"
-import arrow from "./assets/Group 29.png"
+import arrow from "./assets/arrow.png"
 import { useHistory } from 'react-router-dom'
 function Explore() {
   const myRef=useRef()
@@ -16,7 +16,7 @@ const getDivs=()=>{
     for(let i=0;i<list.length;i++){
         items.push( <div className='scr d-flex' key={`item-${i}`}>
           <div className='card-bg'>
-          <p className='card-text'>RELIGION</p>
+          <p className='card-text1'>RELIGION</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -28,7 +28,7 @@ const getDivs=()=>{
           </div>
         </div>
         <div className="card-bg">
-          <p className='card-text'>CASTE</p>
+          <p className='card-text1'>CASTE</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -40,7 +40,7 @@ const getDivs=()=>{
           </div>
         </div>
         <div className='card-bg'>
-          <p className='card-text '>MOTHER TONGUE</p>
+          <p className='card-text1 '>MOTHER TONGUE</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -60,8 +60,6 @@ const getDivs=()=>{
     <div className="explore d-flex flex-column justify-content-between align-items-center ml-5" data-testid="explore-component">
       <p className='choose-us'>Explore matrimonial profiles</p>
 
-
-    
     <div className='scroll-container  d-flex  justify-content-evenly' ref={myRef} >
   <div className='scroll-div'>
      {getDivs()}
@@ -71,7 +69,7 @@ const getDivs=()=>{
 
       <div className="explore-cont mb-5" onClick={() => navigator.push("/signup")} >
         <div className='card-bg'>
-          <p className='card-text'>RELIGION</p>
+          <p className='card-text1'>RELIGION</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -83,7 +81,7 @@ const getDivs=()=>{
           </div>
         </div>
         <div className='card-bg'>
-          <p className='card-text'>CASTE</p>
+          <p className='card-text1'>CASTE</p>
           <div className='para-div para-div-big'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -95,7 +93,7 @@ const getDivs=()=>{
           </div>
         </div>
         <div className='card-bg'>
-          <p className='card-text '>MOTHER TONGUE</p>
+          <p className='card-text1 '>MOTHER TONGUE</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>

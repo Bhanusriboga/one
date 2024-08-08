@@ -1,0 +1,119 @@
+.stepper-container {
+    width: 95%; 
+    margin-top: 20px;
+    padding-left: 27px;
+  }
+  .stepper-main-container{
+    width :100%;
+    
+  }
+  
+  .RSPBprogressBar {
+    height: 3px !important; 
+    line-height: 0;
+  }
+  
+  .RSPBprogressBar.filler {
+    height: 3.4px !important; 
+  }
+  
+  .step-content {
+    margin-top: 70px;
+  }
+  
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .step-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .indexedStep {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: rgba(120, 0, 36, 1);
+    text-align: center;
+    border: 2px solid rgba(120, 0, 36, 1);
+    margin: 0 !important;
+  }
+  
+  .indexedStep.accomplished {
+    background-color: rgba(120, 0, 36, 1);
+    color: #fff;
+  }
+  
+  .step-names {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    padding-top: 30px;
+  }
+  
+  .step-name {
+    text-align: center;
+    font-weight: 500;
+    font-size: 13px;
+    color: rgba(120, 0, 36, 1);
+    padding-top: 10px;
+  
+  }
+  
+  .mobile-view {
+    display: none;
+    text-align: center;
+  } 
+  @media(max-width:768px){
+    .mobile-view {
+      display: flex;
+      align-items: center;
+      gap:10px
+    
+    }
+    .step-content {
+      margin-top: 30px;
+    }
+    
+    .circular-progress-container {
+      width: 100px;
+      height: 100px;
+      margin-right: 10px; 
+    } 
+    .step-name-mobile {
+      font-size: 22px;
+      font-weight: 500;
+      color:rgba(120, 0, 36, 1)
+    }
+    .CircularProgressbar-text {
+      dominant-baseline: central;
+      text-anchor: middle;
+      fill:rgba(120, 0, 36, 1) !important;
+      font-size: 15px;
+      font-weight: 500;
+      stroke-width: 20px !important;
+    }
+    .stepper-container {
+      display: none;
+    }
+    .step-name {
+      display: none;
+    }
+  }
+  @media(min-width:769px) and (max-width:996px){
+    .step-name{
+      font-size: 16px;
+    }
+    .indexedStep{
+      width:45px;
+      height:45px
+    }
+  }

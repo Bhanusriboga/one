@@ -1,0 +1,107 @@
+.dob {
+    height: 46px;
+    border-radius: 5px !important;
+    border: 2px solid #777676 !important;
+    font-family: "poppins" !important;
+  }
+   
+
+   
+  .errors {
+    color: red;
+    height: 1em;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+  }
+   
+  .link1 {
+    text-decoration: none;
+    color: gray;
+    text-decoration-line: underline;
+    font-size: 20px;
+  }
+   
+  .reg3previous {
+    border-radius: 50px;
+    height: 4vh;
+    width: 8vw !important;
+    background-color: #7C082B;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 1.6vw;
+    text-align: center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+   
+  /* Responsive styles for screens smaller than 768px */
+  @media (max-width: 768px) {
+    .button {
+      border-radius: 50px;
+      height: 10vh;
+      width: 70% !important; /* Adjust width for better fit on small screens */
+      background-color: #7C082B;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      padding: 1vw; /* Adjust padding */
+      text-align: center;
+    }
+   
+
+   
+    .gap {
+      gap: 2vh; /* Adjust gap for smaller screens */
+    }
+   
+    .font {
+      font-size: 15px;
+      font-weight: 400;
+    }
+   
+    .dob {
+      width: 100% !important; /* Full width on small screens */
+      padding: 0 2%; /* Added padding to avoid edge alignment */
+    }
+   
+    .link {
+      text-decoration: none;
+      color: gray;
+      text-decoration-line: underline;
+      font-size: 15px;
+      padding-left: 0; /* Remove excessive padding */
+    }
+   
+    .mb-4 {
+      margin-bottom: 1rem !important;
+    }
+  }
+   
+  /* Additional adjustments for very small screens (below 576px) */
+  @media (max-width: 576px) {
+    .button {
+      height: 12vh;
+      width: 90% !important; /* Almost full width for very small screens */
+      font-size: 14px;
+      padding: 2vw; /* Increased padding for better touch targets */
+    }
+   
+
+   
+    .dob {
+      padding: 0 1%; /* Further reduced padding */
+    }
+   
+    .font {
+      font-size: 14px;
+    }
+   
+    .link {
+      font-size: 14px;
+      padding-left: 0;
+    }
+  }
+   

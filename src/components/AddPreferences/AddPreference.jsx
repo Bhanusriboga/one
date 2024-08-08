@@ -28,6 +28,9 @@ import {
   SmokingHabits,
   EatingHabits,
 } from "./Database";
+import { useDispatch } from "react-redux";
+import { addPreferencesPost } from "../../redux/slices/AddPreferences";
+import { toast } from "react-toastify";
 
 const AddPreference = () => {
   const [validation, setValidation] = useState({
@@ -81,7 +84,7 @@ const AddPreference = () => {
     drinkingHabits: {
       value: "",
       invalid: false,
-      message: addPreference. DrinkingHabits,
+      message: addPreference.DrinkingHabits,
     },
     smokingHabits: {
       value: "",
@@ -94,8 +97,8 @@ const AddPreference = () => {
       message: addPreference.EatingHabits,
     },
   });
-
   const [errorMessage, setErrorMessage] = useState("");
+  const dispatch=useDispatch();
 
   const handleBlur = () => {
     let newValidation = { ...validation };
@@ -126,30 +129,42 @@ const AddPreference = () => {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    let newValidation = { ...validation };
-    let firstInvalidField = null;
-    for (let field of Object.keys(validation)) {
-      const fieldElement = form[field];
-      if (fieldElement.value==""||fieldElement.value=="select") {
-        if (!firstInvalidField) {
-          firstInvalidField = field;
-        }
-        newValidation[field].invalid = true;
-        break;
-      }
+  const handleSubmit = async () => {
+    // event.preventDefault();
+    // const form = event.target;
+    // let newValidation = { ...validation };
+    // let firstInvalidField = null;
+    // for (let field of Object.keys(validation)) {
+    //   const fieldElement = form[field];
+    //   if (fieldElement.value == "" || fieldElement.value == "select") {
+    //     if (!firstInvalidField) {
+    //       firstInvalidField = field;
+    //     }
+    //     newValidation[field].invalid = true;
+    //     break;
+    //   }
+    // }
+    const data = await dispatch(addPreferencesPost(validation));
+    if(data.payload.message=="Preferences Updated Successfully"){
+      toast.success("Preferences Updated Successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     }
-    setValidation(newValidation);
-    setErrorMessage(
-      firstInvalidField ? validation[firstInvalidField].message : ""
-    );
+    // setValidation(newValidation);
+    // setErrorMessage(
+    //   firstInvalidField ? validation[firstInvalidField].message : ""
+    // );
   };
 
   return (
     <div>
-      <Form noValidate onSubmit={handleSubmit}>
+      <Form>
         <div className="mobile-view">
           <FaArrowLeft className="arrow" />
           <h2 className="preference">{addPreference.hedding}</h2>
@@ -183,7 +198,7 @@ const AddPreference = () => {
                 {addPreference.select}
               </option>
               {ProfileCreatedFor.map((item, id) => (
-                <option key={id} value={item}>
+                <option key={id} value={item.toLocaleUpperCase()}>
                   {item}
                 </option>
               ))}
@@ -550,8 +565,8 @@ const AddPreference = () => {
                 {addPreference.select}
               </option>
               {Occupation.map((item, id) => (
-                <option key={id} value={item}>
-                  {item}
+                <option key={id} value={item.value}>
+                  {item.label}
                 </option>
               ))}
             </Input>
@@ -588,8 +603,8 @@ const AddPreference = () => {
                 {addPreference.select}
               </option>
               {Employeement.map((item, id) => (
-                <option key={id} value={item}>
-                  {item}
+                <option key={id} value={item.value}>
+                  {item.label}
                 </option>
               ))}
             </Input>
@@ -801,13 +816,13 @@ const AddPreference = () => {
               {addPreference.select}
             </option>
             {DrinkingHabits.map((item, id) => (
-              <option key={id} value={item}>
-                {item}
+              <option key={id} value={item.value}>
+                {item.label}
               </option>
             ))}
           </Input>
           <FormFeedback>
-            {validation. drinkingHabits.invalid && errorMessage}
+            {validation.drinkingHabits.invalid && errorMessage}
           </FormFeedback>
         </FormGroup>
         <FormGroup className="profile-field-input">
@@ -838,8 +853,8 @@ const AddPreference = () => {
               {addPreference.select}
             </option>
             {SmokingHabits.map((item, id) => (
-              <option key={id} value={item}>
-                {item}
+              <option key={id} value={item.value}>
+                {item.label}
               </option>
             ))}
           </Input>
@@ -875,7 +890,7 @@ const AddPreference = () => {
               {addPreference.select}
             </option>
             {EatingHabits.map((item, id) => (
-              <option key={id} value={item}>
+              <option key={id} value={item.toLocaleUpperCase()}>
                 {item}
               </option>
             ))}
@@ -884,7 +899,10 @@ const AddPreference = () => {
             {validation.eatingHabits.invalid && errorMessage}
           </FormFeedback>
         </FormGroup>
-        <Button className="submit-btn button">{addPreference.submit}</Button>
+        <Button
+          className="submit-btn button"
+          onClick={handleSubmit}
+        >{addPreference.submit}</Button>
       </Form>
     </div>
   );

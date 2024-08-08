@@ -1,10 +1,11 @@
 
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./Details.css";
 import { MdEdit } from "react-icons/md";
 import { EditProfile } from "../../utils/constants";
-
+import {  updatebasicdetails } from "../../redux/slices/Users";
+import { useDispatch } from 'react-redux';
 const initialdetails = {
   "Date of Birth": "xyzxyz",
   "Place of Birth": "xyzxyzk",
@@ -32,7 +33,7 @@ const Basicdetails = () => {
   const [address, setAddress] = useState(basicdetails);
   const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({});
-
+  const dispatch = useDispatch()
   const handleEdit = () => {
     setIsEditing(!isEditing);
   };
@@ -81,8 +82,27 @@ const Basicdetails = () => {
 
     return Object.keys(newErrors).length === 0;
   };
-  const handleSave = () => {
+  const handleSave = async() => {
     if (validateForm()) {
+      const payload = {
+        "dateOfBirth": details["Date of Birth"],
+        "placeOfBirth": details["Place of Birth"],
+        "timeOfBirth": details["Time of Birth"],
+        "religion": details.Religion,
+        "motherTongue": details["Mother Tongue"],
+        "citizenShip": details.Citizenship,
+        "languageProficiency": details["Language Proficiency"],
+        "instgramId": details["Instagram id"],
+        "linkedinId": details["LinkedIn id"],
+        "doorNumber": address.Address["Door no&Street Name"],
+        "streetName": address.Address["Door no&Street Name"],
+        "city": address.Address.City,
+        "state": address.Address.State,
+        "country": address.Address.Country,
+        "postalCode": address.Address["Postal code"]
+      };
+     const editresponse= await dispatch(updatebasicdetails(payload));
+     console.log(editresponse, 'editresponse')
       setIsEditing(false);
     }
   };
@@ -91,9 +111,9 @@ const Basicdetails = () => {
       <div className="basic-main-heading1 mt-5">
         <h2 className="main-heading">{EditProfile.basicdetails}</h2>
         <button className="edit-btn" onClick={isEditing ? handleSave : handleEdit}>
-  {isEditing ? "Save" : EditProfile.edit}
-  {!isEditing && <MdEdit className='edit-icon'/>}
-</button>
+          {isEditing ? "Save" : EditProfile.edit}
+          {!isEditing && <MdEdit className='edit-icon' />}
+        </button>
 
       </div>
       <div className="backgroundimg">
@@ -154,7 +174,7 @@ const Basicdetails = () => {
           </Row>
         </div>
       ))}
-      <hr/>
+      <hr />
     </Container>
   );
 };

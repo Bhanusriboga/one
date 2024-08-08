@@ -1,6 +1,6 @@
 import React,{useRef} from 'react'
 import "./home.css"
-import arrow from "./assets/Group 29.png"
+import arrow from "./assets/arrow.png"
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 function Explore() {
   const myRef=useRef()
@@ -18,7 +18,7 @@ for (let index = 0; index < 101; index++) {
     for(let i=0;i<list.length;i++){
         items.push( <div className='scr d-flex'>
           <div className='card-bg'>
-          <p className='card-text'>RELIGION</p>
+          <p className='card-text1'>RELIGION</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -30,7 +30,7 @@ for (let index = 0; index < 101; index++) {
           </div>
         </div>
         <div className="card-bg">
-          <p className='card-text'>CASTE</p>
+          <p className='card-text1'>CASTE</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -42,7 +42,7 @@ for (let index = 0; index < 101; index++) {
           </div>
         </div>
         <div className='card-bg'>
-          <p className='card-text '>MOTHER TONGUE</p>
+          <p className='card-text1 '>MOTHER TONGUE</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -74,7 +74,7 @@ for (let index = 0; index < 101; index++) {
 
       <div className="explore-cont mb-5" onClick={() => navigator.push("/signup")} >
         <div className='card-bg'>
-          <p className='card-text'>RELIGION</p>
+          <p className='card-text1'>RELIGION</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -86,7 +86,7 @@ for (let index = 0; index < 101; index++) {
           </div>
         </div>
         <div className='card-bg'>
-          <p className='card-text'>CASTE</p>
+          <p className='card-text1'>CASTE</p>
           <div className='para-div para-div-big'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -98,7 +98,7 @@ for (let index = 0; index < 101; index++) {
           </div>
         </div>
         <div className='card-bg'>
-          <p className='card-text '>MOTHER TONGUE</p>
+          <p className='card-text1 '>MOTHER TONGUE</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>

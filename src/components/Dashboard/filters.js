@@ -59,6 +59,7 @@ const Filters = props => {
                 name="select"
                 className='filterInput'
                 type="select"
+                data-testid="religion-select"
               >
                 <option value={''}>Select Religion</option>
                 {religion.map((val) => (
@@ -70,7 +71,7 @@ const Filters = props => {
             </FormGroup>
           </Col>
           <Col md={2}>
-            <FormGroup onChange={(e) => handleSelect(e, "cast")}>
+            <FormGroup onChange={(e) => handleSelect(e, "cast")} data-testid="cast-input">
               <Label for="Cast" className='fontSie'>
                 Caste
               </Label>
@@ -83,7 +84,7 @@ const Filters = props => {
             </FormGroup>
           </Col>
           <Col md={2}>
-            <FormGroup onChange={(e) => handleSelect(e, "subcast")}>
+            <FormGroup onChange={(e) => handleSelect(e, "subcast")} data-testid="subcast-input">
               <Label for="sub-Caste" className='fontSie'>
                 Sub-Caste
               </Label>
@@ -96,11 +97,11 @@ const Filters = props => {
             </FormGroup>
           </Col>
           <Col md={2} className='d-flex align-items-center mt-4'>
-            <Button className='seatchButton' onClick={handleBasicSearch}>Search</Button>
+            <Button className='seatchButton' onClick={handleBasicSearch} data-testid="basic-search-button" >Search</Button>
           </Col>
           <Col md={3} className='d-flex align-items-center mt-5'>
             <FormGroup className='mb-4'>
-              <Dropdown isOpen={dropdownOpen} toggle={(e) => toggle(e)} className='advancedfilters'>
+              <Dropdown isOpen={dropdownOpen} toggle={(e) => toggle(e)} className='advancedfilters' data-testid="advanced-filters-dropdown">
                 <DropdownToggle caret outline color="dark">Advanced Filters</DropdownToggle>
                 <DropdownMenu className='dropDownBack' color='beige'>
                   <DropdownItem header>Marital status</DropdownItem>
@@ -115,6 +116,7 @@ const Filters = props => {
                           name="radio1"
                           type="radio"
                           value={'Single'}
+                          data-testid="marital-single"
                         // checked={marital === 'Single'? true:false}
 
                         />
@@ -128,6 +130,7 @@ const Filters = props => {
                           name="radio1"
                           type="radio"
                           value={'Married'}
+                          data-testid="marital-married"
                         // checked={marital === 'Married'? true:false}
                         />
                         {'Married'}
@@ -138,6 +141,7 @@ const Filters = props => {
                           name="radio1"
                           type="radio"
                           value={'Widowed'}
+                          data-testid="marital-widowed"
                         // checked={marital === 'Widowed'? true:false}
                         />
                         {' Widowed'}
@@ -148,6 +152,7 @@ const Filters = props => {
                           name="radio1"
                           type="radio"
                           value={'Diversed'}
+                          data-testid="marital-divorced"
                         // checked={marital === 'Diversed'? true:false}
                         />
                         {' Diversed'}
@@ -167,6 +172,7 @@ const Filters = props => {
                             name="radio1"
                             type="radio"
                             value={'Bussiness Owener'}
+                            data-testid="occupation-business-owner"
                           />
                           {' Bussiness Owener '}
                         </div>
@@ -175,6 +181,7 @@ const Filters = props => {
                             name="radio1"
                             type="radio"
                             value={'Governament employee'}
+                            data-testid="occupation-government-employee"
                           />
                           {'Governament employee'}
                         </div>
@@ -183,6 +190,7 @@ const Filters = props => {
                             name="radio1"
                             type="radio"
                             value={'Corporate Employee'}
+                            data-testid="occupation-corporate-employee"
                           />
                           {'Corporate Employee'}
                         </div>
@@ -194,6 +202,7 @@ const Filters = props => {
                             name="radio1"
                             type="radio"
                             value={'Self Employed'}
+                            data-testid="occupation-self-employed"
                           />
                           {'Self Employed'}
                         </div>
@@ -202,6 +211,7 @@ const Filters = props => {
                             name="radio1"
                             type="radio"
                             value={'Celebrity'}
+                            data-testid="occupation-celebrity"
                           />
                           {'Celebrity'}
                         </div>
@@ -210,6 +220,7 @@ const Filters = props => {
                             name="radio1"
                             type="radio"
                             value={'Un Employed'}
+                            data-testid="occupation-unemployed"
                           />
                           {'Un Employed'}
                         </div>
@@ -225,6 +236,7 @@ const Filters = props => {
                       type='number'
                       step="0.01"
                         placeholder='Min'
+                        data-testid="age-min"
                       />
                     </div>
                     <div className='p-2'>
@@ -232,6 +244,7 @@ const Filters = props => {
                        type='number'
                        step="0.01"
                         placeholder='Max'
+                        data-testid="age-max"
                       />
                     </div>
                   </div>
@@ -240,15 +253,17 @@ const Filters = props => {
                      type='number'
                      step="0.01"
                       placeholder='annual income'
+                      data-testid="annual-income" 
                     />
                   </div>
                   <div className='p-2'>
                     <Input
                       placeholder='Enter City'
+                      data-testid="city-input"
                     />
                   </div>
                           <div className='d-flex justify-content-center px-2'>
-                          <Button className='seatchButton' onClick={(e)=>toggleSearch(e)} >Search</Button>
+                          <Button className='seatchButton' onClick={(e)=>toggleSearch(e)} data-testid="advanced-search-button">Search</Button>
                           </div>
 
 

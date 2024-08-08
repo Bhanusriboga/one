@@ -287,8 +287,8 @@ align-self: center;
         gap:1%
     }
     .ignorecase{
-        padding-left: 6px;
-        padding-right: 6px;
+        padding-left: 4px;
+        padding-right: 4px;
     }
        .ignorecase-name{
         font-size: 18px;
