@@ -4,7 +4,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import './Details.css';
 import { MdEdit } from "react-icons/md";
 import { EditProfile } from '../../utils/constants';
-
+import { useDispatch } from 'react-redux';
+import { updatepersonaldetails } from '../../redux/slices/Users';
 const initialDetails = {
   "Religion": {
     "Caste": "xyzxyz",
@@ -41,8 +42,8 @@ const Personaldetails = () => {
   const [details, setDetails] = useState(initialDetails);
   const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({});
-
-  const handleEdit = () => {
+  const dispatch = useDispatch()
+  const handleEdit = async() => {
     if (isEditing) {
       const newErrors = {};
       Object.entries(details).forEach(([section, sectionDetails]) => {
@@ -56,6 +57,35 @@ const Personaldetails = () => {
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
+        const payload={
+          "caste": details.Religion.Caste,
+          "subCaste": details.Religion['Sub-Caste'],
+          "gothram": details.Religion.Gothra,
+          "star": details.Religion.Star,
+          "zodiacSign": details.Religion['Zodiac Sign'],
+          "haveDosham": details.Religion['About Dosham'] !=''? true:false,
+          "whatTypeOfDosham": details.Religion['About Dosham'],
+          "familyStatus": details['Family Information']['Family Status'],
+          "familyType": details['Family Information']['Family Type'],
+          "fatherName": details['Family Information']['Father Name'],
+          "fatherOccupation": details['Family Information']['Father Occupation'],
+          "motherName": details['Family Information']['Mother Name'],
+          "motherOccupation": details['Family Information']['Mother Occupation'],
+          "noOfSiblings": details['Family Information'].Siblings,
+          "maritalStatus": details['Personal Information']['Marital Status'],
+          "anyDisabilities": details['Personal Information']['Any Disabilities'],
+          "height": details['Personal Information'].Height,
+          "weightType": details['Personal Information'].Weight,
+          "weight": details['Personal Information'].Weight,
+          "bodyType": details['Personal Information']['Body Type'],
+          "complexion": details['Personal Information'].Complexion,
+          "smokingHabits": details['Personal Information']['Smoking Habits'],
+          "eatingHabits": details['Personal Information']['Eating Habits'],
+          "description": details['Personal Information']['About me'],
+          "drinkingHabits": details['Personal Information']['Drinking Habits']
+        }
+        const editresponse= await dispatch(updatepersonaldetails(payload));
+        console.log(editresponse, 'editresponse')
         setIsEditing(false);
       }
     } else {

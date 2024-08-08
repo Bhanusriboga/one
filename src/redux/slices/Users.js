@@ -48,6 +48,51 @@ export const getIgnoredUsers = createAsyncThunk(
     }
   }
 )
+export const updatebasicdetails = createAsyncThunk(
+  "users/updatebasicdetails",
+  async (props, thunkAPI) => {
+    const userId = Storage.get("userId")
+    const url = `${endPoints.editUserbasicdetails}?userId=${userId}`
+    const { response } = await networkCall(url, "POST", JSON.stringify(props));
+    if (response) {
+      console.logI(response,"testing response")
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue("Something went wrong..!")
+    }
+  }
+)
+export const updatepersonaldetails = createAsyncThunk(
+  "users/updatepersonaldetails",
+  async (props, thunkAPI) => {
+    const userId = Storage.get("userId")
+    const url = `${endPoints.editUserpersonaldetails}?userId=${userId}`
+    const { response } = await networkCall(url, "POST", JSON.stringify(props));
+    if (response) {
+      console.logI(response,"testing response")
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue("Something went wrong..!")
+    }
+  }
+)
+export const updateprofesionaldetails = createAsyncThunk(
+  "users/updateprofesionaldetails",
+  async (props, thunkAPI) => {
+    const userId = Storage.get("userId")
+    const url = `${endPoints.editUserprofessionaldetails}?userId=${userId}`
+    const { response } = await networkCall(url, "POST", JSON.stringify(props));
+    if (response) {
+      console.logI(response,"testing response")
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue("Something went wrong..!")
+    }
+  }
+)
 export const getShortListedUsers = createAsyncThunk(
   "users/getShortListedUsers",
   async (_, thunkAPI) => {
