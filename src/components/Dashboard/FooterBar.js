@@ -32,7 +32,7 @@ const FooterBar = () => {
         </Col>
         <Col md={3} className='mt-5 mb-3 d-flex align-items-center'>
         <div>
-        <img src={logo}></img>
+        <img src={logo} alt="logo"></img>
         </div>
         </Col>
       </Row>
