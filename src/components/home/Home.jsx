@@ -13,7 +13,7 @@ import Endorse from './Endorse';
 import rightchakra from "./assets/right-chakra.png"
 import Destination from './Destination';
 import  googleplay from "./assets/googleplay.svg"
-import appstore from "./assets/appstore.svg";
+import appstore from "./assets/apple.svg";
 import chakra from "./assets/chakraa.svg"
 import FooterBar from "../Dashboard/FooterBar"
 
