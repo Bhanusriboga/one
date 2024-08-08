@@ -61,7 +61,7 @@ function Home() {
         </div>
  
       </nav>
-      <div className='content d-flex flex-column justify-content-center align-items-center'>
+      <div className='content11 d-flex flex-column justify-content-center align-items-center'>
         <Couple />
         <Choose width={width} />
         <img src={sidehalfimg} className='side-choose' />

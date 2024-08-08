@@ -86,7 +86,7 @@ overflow-x: hidden;
 .home-page-div::-webkit-scrollbar{
   display: none;
 }
-.content {
+.content11 {
   background: linear-gradient(180deg, #B88A44 0%, #E0AA3E 7%, #E0AA3E 16.5%, #F9F295 23.5%, #FFFEF2 51.5%, #F9F295 79.5%, #E0AA3E 85.5%, #E0AA3E 95%, #B88A44 100%);
   width: 100vw;
   padding: 6vw;
