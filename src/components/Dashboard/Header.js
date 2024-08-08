@@ -8,15 +8,21 @@ import {
 } from 'reactstrap';
 import './Dashboard.scss'
 import logo from '../../Assets/Logo.png'
-
+import { useDispatch } from 'react-redux';
+import {logout as logoutAction} from "../../redux/slices/AuthSlice";
 const Header = () => {
+  const dispatch=useDispatch() ;
+
+  const logout = async() => {
+    await dispatch(logoutAction());
+   };
 
   return (
     <Navbar className='navbck' light expand="md" >
       <div>
         <NavbarBrand href="/"><img src={logo} alt="logo"></img></NavbarBrand>
       </div>
-      <Nav className="me-auto w-100 d-flex justify-content-end" navbar >
+      <Nav className="me-auto  w-100 d-none d-md-flex justify-content-end" navbar>
         <NavItem>
           <NavLink href="/payment" className='navBtn'>Pricing</NavLink>
         </NavItem>
@@ -25,9 +31,9 @@ const Header = () => {
         </NavItem>
         <NavItem>
           <NavLink href="/components" className='navBtn'>Contact Us</NavLink>
-        </NavItem>
+        </NavItem> 
         <NavItem>
-          <NavLink href="/login" className='navBtn'>Logout</NavLink>
+          <NavLink href="/login" onClick={logout} className='navBtn'>Logout</NavLink>
         </NavItem>
       </Nav>
     </Navbar>
