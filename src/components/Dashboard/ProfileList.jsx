@@ -27,20 +27,20 @@ const ProfileList = () => {
   }, [data,userId])
   const filters = (data, maindata) => {
     let updatedfilteredData = []
-    if (data.religion !== '' && data.subcast === '' && data.cast === '') {
-      updatedfilteredData = maindata.filter(item => item.religion.toLowerCase().includes(data.religion.toLowerCase()))
-    } else if (data.religion === '' && data.subcast !== '' && data.cast === '') {
-      updatedfilteredData = maindata.filter(item => item.subcast.toLowerCase().includes(data.subcast.toLowerCase()))
-    } else if (data.religion === '' && data.subcast === '' && data.cast !== '') {
-      updatedfilteredData = maindata.filter(item => item.cast.toLowerCase().includes(data.cast.toLowerCase()))
-    } else if (data.religion !== '' && data.subcast === '' && data.cast !== '') {
-      updatedfilteredData = maindata.filter(item => item.religion.toLowerCase().includes(data.religion.toLowerCase()) && item.cast.toLowerCase().includes(data.cast.toLowerCase()))
-    } else if (data.religion !== '' && data.subcast !== '' && data.cast === '') {
-      updatedfilteredData = maindata.filter(item => item.religion.toLowerCase().includes(data.religion.toLowerCase()) && item.subcast.toLowerCase().includes(data.subcast.toLowerCase()))
-    } else if (data.religion === '' && data.subcast !== '' && data.cast !== '') {
-      updatedfilteredData = maindata.filter(item => item.cast.toLowerCase().includes(data.cast.toLowerCase()) && item.subcast.toLowerCase().includes(data.subcast.toLowerCase()))
-    } else if (data.religion !== '' && data.cast !== '' && data.subcast !== '') {
-      updatedfilteredData = maindata.filter(item => item.religion.toLowerCase().includes(data.religion.toLowerCase()) && item.cast.toLowerCase().includes(data.cast.toLowerCase()) && item.subcast.toLowerCase().includes(data.subcast.toLowerCase()))
+    if (data?.religion !== '' && data?.subcast === '' && data?.cast === '') {
+      updatedfilteredData = maindata?.filter(item => item.religion.toLowerCase().includes(data?.religion.toLowerCase()))
+    } else if (data?.religion === '' && data?.subcast !== '' && data?.cast === '') {
+      updatedfilteredData = maindata?.filter(item => item.subcast.toLowerCase().includes(data?.subcast.toLowerCase()))
+    } else if (data?.religion === '' && data?.subcast === '' && data?.cast !== '') {
+      updatedfilteredData = maindata?.filter(item => item.cast.toLowerCase().includes(data?.cast.toLowerCase()))
+    } else if (data?.religion !== '' && data?.subcast === '' && data?.cast !== '') {
+      updatedfilteredData = maindata?.filter(item => item.religion.toLowerCase().includes(data?.religion.toLowerCase()) && item.cast.toLowerCase().includes(data?.cast.toLowerCase()))
+    } else if (data?.religion !== '' && data?.subcast !== '' && data?.cast === '') {
+      updatedfilteredData = maindata?.filter(item => item.religion.toLowerCase().includes(data?.religion.toLowerCase()) && item.subcast.toLowerCase().includes(data?.subcast.toLowerCase()))
+    } else if (data?.religion === '' && data?.subcast !== '' && data?.cast !== '') {
+      updatedfilteredData = maindata?.filter(item => item.cast.toLowerCase().includes(data?.cast.toLowerCase()) && item.subcast.toLowerCase().includes(data?.subcast.toLowerCase()))
+    } else if (data?.religion !== '' && data?.cast !== '' && data?.subcast !== '') {
+      updatedfilteredData = maindata?.filter(item => item.religion.toLowerCase().includes(data?.religion.toLowerCase()) && item.cast.toLowerCase().includes(data?.cast.toLowerCase()) && item.subcast.toLowerCase().includes(data?.subcast.toLowerCase()))
     }
     return updatedfilteredData
   }

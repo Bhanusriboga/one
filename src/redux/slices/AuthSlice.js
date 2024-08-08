@@ -19,9 +19,11 @@ export const userSignup = createAsyncThunk(
       JSON.stringify(data)
     );
     if (response) {
-      return thunkAPI.fulfillWithValue(response.data);
-    } else {
-      return thunkAPI.rejectWithValue(error || "Something went wrong..!");
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue(error||"Something went wrong..!")
+
     }
   }
 );
@@ -35,60 +37,26 @@ export const userLogin = createAsyncThunk(
       JSON.stringify(props)
     );
     if (response) {
-      return thunkAPI.fulfillWithValue(response.data);
-    } else {
-      return thunkAPI.rejectWithValue(error || "Something went wrong..!");
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue(error||"Something went wrong..!")
     }
   }
-);
-//{{Dev-Url}}/request-mobile-otp?mobile=9701941724
-export const requestOtpForgetApi = createAsyncThunk('auth/requestOtpForgetApi', async (props, thunkAPI) => {
-  const url = `${endPoints.requestOtpForgetApi}?mobile=${props.mobile}`;
-  const { response, error } = await networkCall(url, "POST");
-
-  if (response) {
-    return thunkAPI.fulfillWithValue(response);
-  } else {
-    return thunkAPI.rejectWithValue(error || "Something went wrong..!");
-  } 
-})
-//{{Dev-Url}}/user-otp-verification?mobile=8919127541&otp=680530
-export const otpverifyForgetApi = createAsyncThunk('auth/otpverifyForgetApi', async (props, thunkAPI) => {
-  const url = `${endPoints.otpverifyForgetApi}?mobile=${props.mobile}&otp=${props.otp}`;
-  const { response, error } = await networkCall(url, "POST");
-  if (response) {
-    return thunkAPI.fulfillWithValue(response);
-  } else {
-    return thunkAPI.rejectWithValue(error || "Something went wrong..!");
-  }
-}) 
-//{{Local_Url}}/forgot-password?mobileNumber=8465044553&password=Shyam@123
-export const changePasswordForgotApi = createAsyncThunk('auth/changePasswordForgotApi', async (props, thunkAPI) => {
-  const url = `${endPoints.changePasswordForgot}?mobileNumber=${props.mobile}&password=${props.newPassword}`;
-  const { response, error } = await networkCall(url, "POST");
-  if (response) {
-    return thunkAPI.fulfillWithValue(response);
-  } else {
-    return thunkAPI.rejectWithValue(error || "Something went wrong..!");
-  }
-})
+)
 
 export const fetchUserInfo = createAsyncThunk(
   "user/fetchUserInfo",
   async (_, thunkAPI) => {
-    const token = Storage.get("token");
-    if (token) {
-      const { userId } = Storage.get("userInfo");
-      const header = {
-        Authorization: token,
-      };
-      const { response, error } = await networkCall(
-        endPoints.userInfo + userId,
-        "GET",
-        header
-      );
+    const token=Storage.get("token")
+    if(token){
+      const  userId  = Storage.get("userId");
+      const header={
+        Authorization: token
+      }
+      const { response, error } = await networkCall(endPoints.userInfo+userId, 'GET',header);
       if (response) {
-        return thunkAPI.fulfillWithValue(response.data);
+        return thunkAPI.fulfillWithValue(response);
       } else {
         return thunkAPI.rejectWithValue(error || "Something went wrong..!");
       }
@@ -166,8 +134,8 @@ const AuthSlice = createSlice({
       })
       .addCase(userLogin.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
-        state.token = action.payload.jwt;
+        state.Mydata = action.payload;
+        state.token = action.payload.jwt
         Storage.set("token", action.payload.jwt);
         Storage.set("userId", action.payload.userId);
       })
@@ -195,7 +163,7 @@ const AuthSlice = createSlice({
       })
       .addCase(otpverify.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.Mydata = action.payload;
         Storage.set("token", action.payload.jwt);
         Storage.set("userId", action.payload.userId);
       })
@@ -215,46 +183,19 @@ const AuthSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
-      builder
-      .addCase(requestOtpForgetApi.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(requestOtpForgetApi.fulfilled, (state) => {
-        state.loading = false;
-       
-      })
-      .addCase(requestOtpForgetApi.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-      builder
-      .addCase(otpverifyForgetApi.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(otpverifyForgetApi.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action.payload;
-        Storage.set("token", action.payload.jwt);
-        Storage.set("userId", action.payload.userId);
-      })
-      .addCase(otpverifyForgetApi.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-      builder
-      .addCase(changePasswordForgotApi.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(changePasswordForgotApi.fulfilled, (state, action) => {
-        state.loading = false;
-        state.message = action.payload?.message;
-      })
-      .addCase(changePasswordForgotApi.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-   
-  },
+
+    builder.addCase(getMyDetails.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(getMyDetails.fulfilled, (state, action) => {
+      state.loading = false;
+      state.Mydata = action.payload?.object;
+    })
+    .addCase(getMyDetails.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+  }
 });
 
 export const { logout, setToken } = AuthSlice.actions;

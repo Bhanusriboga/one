@@ -18,6 +18,11 @@ const endPoints = {
   changePassword:"change-password",
   deleteAccount:"profile",
   verifyEmailOtp:"verify-email-otp",
+  basicDetails:"basic-details",
+  personalDetails:"personal-details",
+  professionalDetails:"professional-details",
+  userDescription:"user-description",
+  addPreference:"/",
   requestOtpForgetApi:"request-mobile-otp",
   otpverifyForgetApi:"user-otp-verification",
   changePasswordForgot:"forgot-password"

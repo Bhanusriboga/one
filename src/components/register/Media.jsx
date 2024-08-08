@@ -1,11 +1,10 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {Form} from "reactstrap";
-import { FaArrowLeft } from "react-icons/fa6";
-import { FaArrowRight } from "react-icons/fa6";
+import { Form } from "reactstrap";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { prevStep, saveUploadedFiles, nextStep, uploadedFilesAPICall } from "../../redux/slices/RegistrationDetails";
 import "./Media.css";
-import { prevStep ,saveUploadedFiles, nextStep } from "../../redux/slices/RegistrationDetails";
 
 function Media() {
   const dispatch = useDispatch();
@@ -25,14 +24,18 @@ function Media() {
 
   const fileInputRefs = useRef([]);
 
-  const handleFileChange = (id, event) => {
-    const newFileInputs = fileInputs.map((input) => {
-      if (input.id === id) {
-        return { ...input, file: event.target.files[0] };
-      }
-      return input;
-    });
-    setFileInputs(newFileInputs);
+  const handleFileChange = async (id, event, index) => {
+    const file = event.target.files[0];
+    if (file) {
+      const newFileInputs = fileInputs.map((input) => {
+        if (input.id === id) {
+          return { ...input, file };
+        }
+        return input;
+      });
+      setFileInputs(newFileInputs);
+      await uploadImage(file, index);  
+    }
   };
 
   const handleAddMore = () => {
@@ -41,22 +44,26 @@ function Media() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(saveUploadedFiles(fileInputs));
+    dispatch(nextStep());
+  };
+
+  const prev = () => {
+    dispatch(prevStep());
+  };
+
+  const uploadImage = async (file) => {
     const formData = new FormData();
-    fileInputs.forEach((input, index) => {
-      if (input.file) {
-        formData.append(`file${index + 1}`, input.file);
-      }
-    });
-    if (fileInputs.some((input) => input.file !== null)) {
-      dispatch(saveUploadedFiles(fileInputs));
-      dispatch(nextStep());
-    } else {
-      alert("Upload is required");
+    formData.append("file", file);
+
+    try {
+       await dispatch(uploadedFilesAPICall(formData));
+      // Handle success (e.g., update state, show success message)
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      // Handle error (e.g., show error message)
     }
   };
-  const prev = ()=>{
-    dispatch(prevStep())
-  }
 
   return (
     <div className="register4-maincontainer">
@@ -67,7 +74,7 @@ function Media() {
             <input
               type="file"
               ref={(el) => (fileInputRefs.current[index] = el)}
-              onChange={(e) => handleFileChange(input.id, e)}
+              onChange={(e) => handleFileChange(input.id, e, index)}  // Pass index to handleFileChange
               className="file-input"
               style={{ display: "none" }}
             />
@@ -89,31 +96,31 @@ function Media() {
         <button type="button" onClick={handleAddMore} className="add-more-btn">
           + Add more
         </button>
-<div className="back-next-btn-container">
+        <div className="back-next-btn-container">
           <button className="previous-btn" onClick={prev}>
-              {" "}
-              <FaArrowLeft
-                style={{
-                  paddingRight: "5px",
-                  fontSize: "25px",
-                  paddingTop: "5px",
-                }}
-              />
-              previous
-            </button>
-            <button className="previous-btn" onClick={handleSubmit}>
-              Next
-              <FaArrowRight
-                style={{
-                  paddingLeft: "5px",
-                  alignSelf: "center",
-                  fontSize: "25px",
-                  paddingTop: "5px",
-                }}
-              />
-            </button>
-          </div>
-          <Link className="skip-btn" to='/dashboard'> Skip & Register later</Link>
+            {" "}
+            <FaArrowLeft
+              style={{
+                paddingRight: "5px",
+                fontSize: "25px",
+                paddingTop: "5px",
+              }}
+            />
+            previous
+          </button>
+          <button className="previous-btn" onClick={handleSubmit}>
+            Next
+            <FaArrowRight
+              style={{
+                paddingLeft: "5px",
+                alignSelf: "center",
+                fontSize: "25px",
+                paddingTop: "5px",
+              }}
+            />
+          </button>
+        </div>
+        <Link className="skip-btn" to="/dashboard"> Skip & Register later</Link>
       </Form>
     </div>
   );

@@ -7,8 +7,8 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { nextStep, prevStep } from "../../redux/slices/RegistrationDetails";
-import { saveProfessionalData } from "../../redux/slices/RegistrationDetails";
+import { nextStep, prevStep,saveProfessionalData,professionalDetailsAPICall } from "../../redux/slices/RegistrationDetails";
+import { toast } from "react-toastify";
 
 function Professional() {
   const [formData, setFormData] = useState({
@@ -27,16 +27,17 @@ function Professional() {
   const [formErrors, setFormErrors] = useState({});
 
   const education = ["PhD", "Masters", "Bachelors", "Others"];
+  
   const occupation = [
-    "Business Owner",
-    "Celebrity",
-    "Self Employed",
-    "Government Employee",
-    "Corporate Employee",
-    "Unemployed",
-    "Others",
+    {label:"Business Owner",value:"BusinessOwner"},
+    {label:"Celebrity",value:"Celebrity"},
+    {label:"Self Employed",value:"SelfEmployed"},
+    {label:"Government Employee",value:"GovernmentEmployee"},
+    {label:"Corporate Employee",value:"CorporateEmployee"},
+    {label:"Unemployed",value:"Unemployed"},
+    {label:"Others",value:"Others"},
   ];
-  const employmentStatus = ["Full Time", "Part Time", "Contract"];
+  const employmentStatus = [{label:"Full Time",value:"FullTime"},{label:"Part Time",value:"PartTime"},{label:"Contract",value:"Contract"}]; 
   const income = [
     "Less than 50k",
     "50K",
@@ -127,11 +128,19 @@ function Professional() {
     return isValid;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleNext()) {
-      dispatch(saveProfessionalData(formData));
-      dispatch(nextStep());
+      const data=await dispatch(professionalDetailsAPICall(formData));
+      if(data?.payload?.message=="Professional details added successfully"||data?.payload?.message=="ProfessionalDetails Already Exists"){
+        dispatch(saveProfessionalData(formData));
+        dispatch(nextStep());
+      }else{
+        toast.error("Something went wrong", {
+          position: "top-center",
+          autoClose: 2000,
+        })
+      }
     }
   };
 
@@ -227,8 +236,8 @@ function Professional() {
                   Occupation *
                 </option>
                 {occupation.map((occ, index) => (
-                  <option key={index} value={occ}>
-                    {occ}
+                  <option key={index} value={occ.value}>
+                    {occ.label}
                   </option>
                 ))}
               </Input>
@@ -253,8 +262,8 @@ function Professional() {
                   {registration1.employment}
                 </option>
                 {employmentStatus.map((es, index) => (
-                  <option key={index} value={es}>
-                    {es}
+                  <option key={index} value={es.value}>
+                    {es.label}
                   </option>
                 ))}
               </Input>
