@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "./assets/logo.svg"
 import "./home.css"
@@ -20,6 +20,7 @@ import FooterBar from "../Dashboard/FooterBar"
  
 function Home() {
   const [burger,setBurger]=useState(false)
+  const bottomRef=useRef()
   const [scrolled, setScrolled] = useState(false)
   const [width, setWidth] = useState(window.innerWidth)
   useEffect(() => {
@@ -39,6 +40,12 @@ function Home() {
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener('resize', handleResize);
   }, [])
+  const scrollToBottom=()=>{
+        if(bottomRef.current){
+          bottomRef.current.scrollIntoView({behaviour:"smooth"})
+        }
+         
+  }
   return (
     <div className='home-page-div d-flex flex-column justify-content-between align-items-center w-100 ' >
       <nav className={` navbar-expand-lg navbar-expand-md ${!burger&&"d-flex align-items-center justify-content-between "} custom-navBar fixed-top ${scrolled && "navbar-blur"}`}>
@@ -49,7 +56,7 @@ function Home() {
         <div className="collapse navbar-collapse " id="navbarNav" >
           <ul className="navbar-nav collapse-nav"> 
             <li className="nav-item">
-              <a className="nav-link" href="#">About us</a>
+              <a className="nav-link" href="#" onClick={(e) => { e.preventDefault(); scrollToBottom(); }}>About us</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/signUp">Signup</a>
@@ -75,7 +82,7 @@ function Home() {
         <img src={rightchakra} className='position-absolute right-chakra'/>
         <Destination />
 
-        <div className='footer-1 d-flex flex-column align-items-center justify-content-evenly'>
+        <div className='footer-1 d-flex flex-column align-items-center justify-content-evenly' id="footer" ref={bottomRef}>
               <div className='d-flex justify-content-center align-items-center'>
                <img src={chakra} className='chakra'/>
                <h4 className='footer-head'>Let&apos;s write our own love story together : Download Our App For Any Queries</h4>
