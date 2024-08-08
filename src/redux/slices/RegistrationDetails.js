@@ -57,7 +57,7 @@ export const personalDetailsAPICall = createAsyncThunk(
       motherOccupation: props.motherOccupation,
       noOfSiblings: props.noOfSiblings,
       maritalStatus: props.maritalStatus,
-      anyDisabilities: props.disability != "Other" ? true : false,
+      anyDisabilities: props.disability == "Disabilities" ? "None" : props.disability,
       // height: props.height,
       heiht: 6.2,
       weightType: props.weightUnit,

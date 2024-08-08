@@ -53,7 +53,7 @@ export const updatebasicdetails = createAsyncThunk(
   async (props, thunkAPI) => {
     const userId = Storage.get("userId")
     const url = `${endPoints.editUserbasicdetails}?userId=${userId}`
-    const { response } = await networkCall(url, "POST", JSON.stringify(props));
+    const { response } = await networkCall(url, "PUT", JSON.stringify(props));
     if (response) {
       console.logI(response,"testing response")
       return thunkAPI.fulfillWithValue(response);

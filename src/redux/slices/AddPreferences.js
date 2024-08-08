@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import networkCall from '../../utils/NetworkCall';
-import { endPoints } from '../../config/config';
 import Storage from '../../utils/Storage';
 
 export const addPreferencesPost = createAsyncThunk('addPreferences/post',
     async (props, thunkAPI) => {
-        const url = `${endPoints.addPreference}?userId=${Storage.get('userId')}`;
+        const url = `?userId=${Storage.get('userId')}`;
 
         const headers = {
             'Authorization': `Bearer ${Storage.get('token')}`,

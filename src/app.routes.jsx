@@ -68,7 +68,8 @@ const UnAuthorizedRoutes = () => {
             <Route path="/register">
                 <RegisterMain />
             </Route>
-            <Redirect path='/' to="home"></Redirect>
+
+            <Redirect path='/' to="login"></Redirect>
         </Switch>
     )
 }

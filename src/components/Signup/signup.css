@@ -270,7 +270,7 @@ input::-webkit-inner-spin-button {
 .left-chakra {
   display: none;
 }
-.modal-body {
+.signup-modal {
   position: relative;
   flex: 1 1 auto;
   padding: var(--bs-modal-padding);
