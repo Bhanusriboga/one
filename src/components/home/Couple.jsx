@@ -26,7 +26,7 @@ function Couple() {
                 height={40}
                 width={40} /></span> </div>
           </div> 
-           <div className="img-container">
+           <div className="img-container1">
           <img src={coupleimg} className='couple-img' alt='couple image' />
           </div>
       </div>
