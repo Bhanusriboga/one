@@ -3,12 +3,13 @@ import './Login.scss'
 import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
 import {  useDispatch } from 'react-redux';
 import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
-import ForgotPage from "../Forgot/ForgotPage";
+
 import { login } from "../../utils/constants";
 import { toast } from "react-toastify";
 import { validatePhoneNumber } from "../../utils/validation";
 import { userLogin } from "../../redux/slices/AuthSlice";
 import "./Login.scss";
+import ForgotPassword from '../Forgot/ForgotPassword';
 
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -141,7 +142,7 @@ const LoginPage = () => {
           </Button>
         </FormGroup>
       </Form>
-      <ForgotPage modal={modal} toggle={toggle} />
+      <ForgotPassword modal={modal} toggle={toggle} />
     </div>
   );
 };

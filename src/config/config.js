@@ -6,7 +6,7 @@ const endPoints = {
   //simularly add other end points
   signup:"user-signup",
   login:"user-login",
-  getAllUsers:"users/users-active",
+  getAllUsers:"users-active",
   userByStatus:"users-by-status",
   editUserbasicdetails: "basic-details",
   editUserpersonaldetails: "personal-details",
@@ -26,6 +26,9 @@ const endPoints = {
   professionalDetails:"professional-details",
   userDescription:"user-description",
   addPreference:"/",
+  requestOtpForgetApi:"request-mobile-otp",
+  otpverifyForgetApi:"user-otp-verification",
+  changePasswordForgot:"forgot-password"
 }
 
 export { baseURL, endPoints, encryptionSalt }      
