@@ -331,7 +331,7 @@ const familyTypes = [
 ];
 
 const occupationsofFather = [
-  {label:"Business Owner",value:"BUSINESSOWNER"},
+  {label:"Business Owner",value:"BUSINESS"},
   {label:"Home maker",value:"HOMEMAKER"},
   {label:"Employed",value:"EMPLOYED"},
   {label:"Retired",value:"RETIRED"},
@@ -341,7 +341,7 @@ const occupationsofFather = [
 ];
 
 const occupationsOfMother = [
-  {label:"Business Owner",value:"BUSINESSOWNER"},
+  {label:"Business Owner",value:"BUSINESS"},
   {label:"Home maker",value:"HOMEMAKER"},
   {label:"Employed",value:"EMPLOYED"},
   {label:"Retired",value:"RETIRED"},
@@ -354,13 +354,14 @@ const noOfSiblings = ["1", "2", "3", "4", "5"];
 
 const maritalStatus = ["Single", "Married", "Divorced", "Widowed"];
 const disabilitiesOptions = [
+  "Disabilities",
   "Visual Impairment",
   "Hearing Impairment",
   "Mobility Impairment",
   "Cognitive/Intellectual Impairment",
   "Psychiatric/Mental Health Condition",
   "Chronic Illness",
-  "Other",
+  "None",
 ];
 
 const PersonalDetails = () => {
@@ -379,7 +380,7 @@ const PersonalDetails = () => {
     motherOccupation: "",
     siblings: "",
     maritalStatus: "",
-    disability: "",
+    disability: "Disabilities",
     height: "",
     weightUnit: "",
     weight: "",
@@ -1031,21 +1032,13 @@ const PersonalDetails = () => {
                 onChange={handleChange}
                 onBlur={() => handleBlur("disability")}
                 className="dob1 custom-input"
-                invalid={!!errors.disability}>
-                <option value="" disabled>
-                  Disabilities
-                </option>
+                >
                 {disabilitiesOptionsList.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
                 ))}
               </Input>
-              {errors.disability && currentError === "disability" && (
-                <FormFeedback className="d-block">
-                  {errors.disability}
-                </FormFeedback>
-              )}
             </FormGroup>
           </Col>
         </Row>
@@ -1118,7 +1111,7 @@ const PersonalDetails = () => {
                     <option value="" disabled>
                       Select
                     </option>
-                    {(formData.weightUnit === "kg"
+                    {(formData.weightUnit == "Kgs"
                       ? weightOptionsKg
                       : weightOptionsLbs
                     ).map((option) => (

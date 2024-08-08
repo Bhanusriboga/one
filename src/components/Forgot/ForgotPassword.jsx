@@ -156,7 +156,7 @@ const ForgotPassword = (props) => {
       return;
     }
     const data =  await dispatch(changePasswordForgotApi(formData));
-    if('Password Changed Successfully'==data?.payload?.data?.message){
+    if('Password Changed Successfully'==data?.payload?.message){//"Password Changed Successfully"
       toast.success("password updated successfully")
       toggle();
     }else{

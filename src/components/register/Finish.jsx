@@ -34,7 +34,7 @@ function Finish() {
     } else {
       dispatch(saveTextArea(textarea));
      const data = await dispatch(userDescriptionAPICall({description: textarea}))
-      if(data?.payload?.message==="success"){
+      if(data?.payload?.message=="User Description Added Successfully"||data?.payload?.message=="User Description Already Exists..!"){
         setModal(true);
       }else{
         toast.error("Please try again , Something went wrong")
