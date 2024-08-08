@@ -30,9 +30,9 @@ const getDivs=()=>{
         <div className="card-bg">
           <p className='card-text1'>CASTE</p>
           <div className='para-div'>
-            <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
-            <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
-          </div>
+          <p className='para-explore'>Reddy | Chowdhary | Balija | Kapu | Achari</p>
+            <p className='para-explore '>Reddy | Chowdhary | Balija | Kapu | Achari</p>
+       </div>
           <p></p>
           <div className='expore-btn d-flex justify-content-evenly align-items-center' onClick={() => navigator.push("/signup")}>
             <p className="btn-text btn-text-big"> Explore</p>
@@ -42,8 +42,8 @@ const getDivs=()=>{
         <div className='card-bg'>
           <p className='card-text1 '>MOTHER TONGUE</p>
           <div className='para-div'>
-            <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
-            <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
+            <p className='para-explore'>Telugu | Hindi | Urdu | Tamil | Malayalam</p>
+            <p className='para-explore '> Telugu | Hindi | Urdu | Tamil | Malayalam</p>
           </div>
           <p></p>
           <div className='expore-btn d-flex justify-content-evenly align-items-center' onClick={() => navigator.push("/signup")}>
@@ -83,8 +83,8 @@ const getDivs=()=>{
         <div className='card-bg'>
           <p className='card-text1'>CASTE</p>
           <div className='para-div para-div-big'>
-            <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
-            <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
+            <p className='para-explore'>Reddy | Chowdhary | Balija | Kapu | Achari</p>
+            <p className='para-explore '>Reddy | Chowdhary | Balija | Kapu | Achari</p>
           </div>
           <p></p>
           <div className='expore-btn  explore-btn-big d-flex justify-content-evenly align-items-center' onClick={() => navigator.push("/signup")}>
@@ -95,9 +95,9 @@ const getDivs=()=>{
         <div className='card-bg'>
           <p className='card-text1 '>MOTHER TONGUE</p>
           <div className='para-div'>
-            <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
-            <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
-          </div>
+          <p className='para-explore'>Telugu | Hindi | Urdu | Tamil | Malayalam</p>
+            <p className='para-explore '> Telugu | Hindi | Urdu | Tamil | Malayalam</p>
+            </div>
           <p></p>
           <div className='expore-btn d-flex justify-content-evenly align-items-center' onClick={() => navigator.push("/signup")}>
             <p className="btn-text"> Explore</p>
@@ -105,7 +105,6 @@ const getDivs=()=>{
           </div>
         </div>
       </div>
-      
       <div>
       </div>
     </div>
