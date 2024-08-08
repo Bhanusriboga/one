@@ -10,7 +10,6 @@ import DeleteAlert from './inner-components/DeleteAlert';
 import "./Settings.scss"
 import { requestEmailOtp, requestMobileOtp, verifyMobileOtp,changePassword,deleteAccount,verifyEmailOtp} from '../../redux/slices/Settings';
 import { toast } from 'react-toastify';
-import CustomWidget from '../ChatBot/CustomWidget';
 
 const Settings = (props) => {
   const [email, setEmail] = useState('');
@@ -344,7 +343,6 @@ const Settings = (props) => {
           </div>
         </section>
       </Form>
-      <CustomWidget />
     </Container>
     </>
   );
