@@ -8,10 +8,24 @@ const endPoints = {
   login:"user-login",
   getAllUsers:"users/users-active",
   userByStatus:"users-by-status",
+  editUserbasicdetails: "basic-details",
+  editUserpersonaldetails: "personal-details",
+  editUserprofessionaldetails: "professional-details",
   userStatus:"user-status",
   userInfo:"user-info?userId=",
   otpverify:"user-otp-verification",
-  reSendOtp:"request-mobile-otp"
+  reSendOtp:"request-mobile-otp",
+  requestMobileOtp:"request-mobile-otp?mobile=",
+  mobileOtpVerify:"verify-mobile-otp",
+  requestEmailOtp:"request-email-otp?email=",
+  changePassword:"change-password",
+  deleteAccount:"profile",
+  verifyEmailOtp:"verify-email-otp",
+  basicDetails:"basic-details",
+  personalDetails:"personal-details",
+  professionalDetails:"professional-details",
+  userDescription:"user-description",
+  addPreference:"/",
 }
 
-export { baseURL, endPoints, encryptionSalt }
+export { baseURL, endPoints, encryptionSalt }      

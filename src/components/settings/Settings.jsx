@@ -8,6 +8,8 @@ import {logout as logoutAction} from "../../redux/slices/AuthSlice";
 import { settings } from '../../utils/constants';
 import DeleteAlert from './inner-components/DeleteAlert';
 import "./Settings.scss"
+import { requestEmailOtp, requestMobileOtp, verifyMobileOtp,changePassword,deleteAccount,verifyEmailOtp} from '../../redux/slices/Settings';
+import { toast } from 'react-toastify';
 import CustomWidget from '../ChatBot/CustomWidget';
 
 const Settings = (props) => {
@@ -22,7 +24,6 @@ const Settings = (props) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showOtp, setShowOtp] = useState(false);
   const [showOtpPhone, setShowOtpPhone] = useState(false);
-  const [profilePrivacy, setProfilePrivacy] = useState(false);
   const [deleteReason, setDeleteReason] = useState('');
   const [emailError, setEmailError] = useState('');
   const [phoneError, setPhoneError] = useState('');
@@ -34,20 +35,29 @@ const Settings = (props) => {
   };
   const handleDelete = () => {
     setShowAlert(true);
-    // need to call delete api
   }
-  const handleDeleteConfirm = () => { 
+  const handleDeleteConfirm = async() => { 
+    // need to call delete api
+  const data= await dispatch(deleteAccount(deleteReason));
+  if("User Profile Deleted Successfully"===data?.payload?.message){
+    toast.success("Account deleted successfully")
     setShowAlert(false);
+    logout();
+  }else{
+    toast.error("Something went wrong..!")
+  }
   };
   const handleInputChange = (setter) => (event) => setter(event.target.value);
-  const handleCheckboxChange = (setter) => (event) => setter(event.target.checked);
 
   const handleEmailVerify = (event) => {
     event.preventDefault();
     if (validateEmail(email)) {
-      setEmailError('');
-      setShowOtp(true);
-      sendOtp();
+      if(sendOtp()){
+        setEmailError('');
+        setShowOtp(true);
+      }else{
+        toast.error("Something went wrong..!")
+      }
     } else {
       setEmailError(settings.validEmailError);
     }
@@ -56,39 +66,52 @@ const Settings = (props) => {
   const handlePhoneVerify = (event) => {
     event.preventDefault();
     if (validatePhoneNumber(phone)) { 
-      setPhoneError('');
-      setShowOtpPhone(true);
-      sendOtpPhone();
+      if(sendOtpPhone()){
+        setPhoneError('');
+        setShowOtpPhone(true);
+      }else{
+        toast.error("Something went wrong..!")
+      }
     } else {
       setPhoneError(settings.validPhoneError);
     }
   };
 
-  const sendOtp = () => {
+  const sendOtp = async() => {
     // Add OTP sending logic here
+    const data=await dispatch(requestEmailOtp(email));
+    return data?.data?.message=="OTP sent to email successfully";
   };
 
-  const sendOtpPhone = () => {
+  const sendOtpPhone = async() => {
     // Add OTP sending logic here
+    const data=await dispatch(requestMobileOtp(phone));
+    return data?.data?.message=="OTP sent to mobile successfully";
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
 
     if (email) {
-      if(validateEmail(email)) {
+      if(!validateEmail(email)) {
         setEmailError('Invalid Email');
       }
       else if (showOtp && !/^\d{6}$/.test(otp)) {
         setEmailError(settings.otpError);
       } else {
         //api call for email change
-        setEmailError('');
+        const data=await dispatch(verifyEmailOtp({newMail,otp}));
+        if("OTP verified Successfully"===data?.payload?.message){
+          toast.success("Email updated successfully")
+          setEmailError('');
+        }else{
+          toast.error("Something went wrong..!")
+        }
       }
     }
 
     if (phone) {
-      if(validatePhoneNumber(phone)) {
+      if(!validatePhoneNumber(phone)) {
         setPhoneError('Invalid Phone Number');
       }
       else if (showOtpPhone && !/^\d{6}$/.test(otpPhone)) {
@@ -96,6 +119,12 @@ const Settings = (props) => {
       } else {
         //api call for phone number change
         setPhoneError('');
+       const data= await dispatch(verifyMobileOtp({newPhone,otpPhone}));
+       if("OTP verified Successfully"===data?.payload?.message?.message){
+          toast.success("Mobile number updated successfully")
+       }else{
+          toast.error("Something went wrong..!")
+       }
       }
     }
 
@@ -106,6 +135,12 @@ const Settings = (props) => {
         setPasswordError(settings.passwordMatchError);
       } else {
         //api call for password change
+        const data=await dispatch(changePassword({currentPassword,newPassword}));
+        if("Password Changed Successfully"==data?.payload?.message){
+          toast.success("Password changed successfully")
+        }else{
+          toast.error(data?.payload?.message=="Invalid Password"?"Invalid Password":"Something went wrong..!")
+        }
         setPasswordError('');
       }
     }
@@ -225,9 +260,7 @@ const Settings = (props) => {
             </FormGroup>
           ))}
           {passwordError && <div className="error-message">{passwordError}</div>}
-          <Button className='save-button' onClick={handleSubmit}>
-            {settings.savePasswordButton}
-          </Button>
+          
         </section>
         <section className="mt-2">
           <h2 className="subTitle">{settings.changePhoneTitle}</h2>
@@ -253,15 +286,6 @@ const Settings = (props) => {
               {id === 'phone' && phoneError && <div className="error-message">{phoneError}</div>}
             </FormGroup>
           ))}
-        </section>
-        <section>
-          <h2 className="subTitle">{settings.profilePrivacyTitle}</h2>
-          <FormGroup check>
-            <Label check>
-              <Input type="checkbox" checked={profilePrivacy} onChange={handleCheckboxChange(setProfilePrivacy)} />{' '}
-              {settings.profilePrivacyLabel}
-            </Label>
-          </FormGroup>
         </section>
         <section>
           <h2 className="subTitle">{settings.deleteProfileTitle}</h2>

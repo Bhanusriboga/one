@@ -17,7 +17,7 @@ function IgnoreUsers() {
   const { ignored } = useSelector((state) => state.users);
   useEffect(() => {
     getIgnoreItemList();
-    setTotalpages(Math.ceil(ignored.length / 10));
+    setTotalpages(Math.ceil(ignored?.length / 10));
     setCurrentPage(1);
   },[])
  
@@ -107,7 +107,7 @@ const getIgnoreItemList=async()=>{
           <h4 className='ignore-heading'>{ignoreUserText.heading}</h4>
         </div>
         <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-4 g-md-3">
-          {ignored.map((user, index) => {
+          {ignored?.map((user, index) => {
             const even = index % 2 === 0;
             const styles = {
               background: even ? 'linear-gradient(#B88A44 0%,#E0AA3E 31%, #F9F295 55% ,#E0AA3E 71%,#B88A44 100%)' : '#780024',
