@@ -6,9 +6,6 @@
   flex-direction: column;
 }
 
-
-
-
 .cButton:focus,
 .cButton:active {
   outline: none !important;
@@ -19,16 +16,17 @@
   width: fit-content;
 }
 .fogbck {
-  background-image: url('../../Assets/forgotbck.svg') !important;
+  background-image: url("../../Assets/forgotbck.svg") !important;
   background-repeat: no-repeat;
 }
 .bcgimg {
-  background-image: url('../../Assets/Login.png');
+  background-image: url("../../Assets/background.png");
   background-size: 1445px 100%;
   height: 100%;
   width: 100%;
   display: flex;
-  align-items: flex-end;
+  // align-items: center;
+  justify-content: space-between;
   background-repeat: no-repeat;
 }
 
@@ -38,7 +36,7 @@
 }
 
 .eyebutton {
-  transform: 'translateY(-50%)';
+  transform: "translateY(-50%)";
   background: transparent;
   border: none;
   cursor: pointer;

@@ -16,10 +16,13 @@ line-height: 76px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
+  & .secondary{
+    color: #FF3131;
+}
 }
 .subTitle{
   font-size: 18px;
-  font-family: 'poppins';
+  font-family: 'poppins'; 
   font-weight: 500;
   line-height: 55px;
   color:#000
@@ -31,7 +34,6 @@ line-height: 76px;
 .input-style:focus{
   border:none;
 }
-
 .verify{
   position: absolute;
   right: 10px;
@@ -47,29 +49,17 @@ line-height: 76px;
   border-radius: 9px;
   border: 1px solid #000;
   opacity: 1;
-  border: none;
   padding-left: 2%;
 }
 .input-email{
   width: 588px;
   height: 45px;
   border-radius: 9px;
-  border: 1px solid #000;
+  border: 1px solid #D2D2D2;
   opacity: 1;
-  border: none;
   padding-left: 2%;
   padding-right: 20%;
   background: #fff;
-}
-.input-style {
-  width: 588px;
-  height: 45px;
-  border-radius: 9px;
-  border: 1px solid #000;
-  opacity: 1;
-  background: #fff;
-  border: none;
-  padding-left: 2%;
 }
 
 .radio-container {
@@ -79,7 +69,7 @@ line-height: 76px;
   background-color: #c8c8c8  ;
   width: 150px;
   justify-content: center;
-  margin: 0px 5px;
+  margin: 8px 5px;
   border-radius: 10px;
 
 }
@@ -136,12 +126,11 @@ line-height: 76px;
   color: red;
   font-size: 0.9em;
 }
-
+.arrow{
+  display: none!important;
+}
 @media only screen and (max-width: 598px) {
   .input-email{
-    width: 90%;
-  }
-  .input-style{
     width: 90%;
   }
  
@@ -151,5 +140,9 @@ line-height: 76px;
   .verify{
     right: 12%;
 
+  }
+  .arrow{
+    cursor: pointer;
+    display: block!important;
   }
 }

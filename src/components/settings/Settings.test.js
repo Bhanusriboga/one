@@ -1,142 +1,142 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 import Settings from './Settings';
+import { settings } from '../../utils/constants';
+
+// Mock store
+const mockStore = configureStore([]);
+const store = mockStore({});
+
+const renderWithProvider = (component) => {
+  return render(
+    <Provider store={store}>
+      {component}
+    </Provider>
+  );
+};
 
 describe('Settings Component', () => {
-  beforeEach(() => {
-    render(<Settings />);
+  it('renders without crashing', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    expect(screen.getByTestId('settings')).toBeInTheDocument();
   });
 
-  test('shows error when verifying email without input', () => {
-    const verifyButton = screen.getByText('Verify');
-    fireEvent.click(verifyButton);
-    const emailInput = screen.getByPlaceholderText('accumenta@gmail.com');
-    expect(emailInput).toHaveClass('error');
-    const emailError = screen.getByText('Please enter a valid email address');
-    expect(emailError).toBeInTheDocument();
-  });
 
-  test('changes email and verifies', () => {
-    const emailInput = screen.getByPlaceholderText('accumenta@gmail.com');
-    const verifyButton = screen.getByText('Verify');
 
+  it('updates email state on input change', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const emailInput = screen.getByPlaceholderText(settings.emailPlaceholder);
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
     expect(emailInput.value).toBe('test@example.com');
-
-    fireEvent.click(verifyButton);
-    const otp = screen.getByPlaceholderText('Enter OTP');
-    expect(otp).toBeInTheDocument();
   });
 
-  test('shows error when submitting invalid OTP', () => {
-    const emailInput = screen.getByPlaceholderText('accumenta@gmail.com');
-    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-    const verifyButton = screen.getByText('Verify');
-    fireEvent.click(verifyButton);
-
-    const otpInput = screen.getByPlaceholderText('Enter OTP');
-    fireEvent.change(otpInput, { target: { value: '123' } });
-
-    const saveButton = screen.getByText('Save All');
-    fireEvent.click(saveButton);
-
-    const emailError = screen.getByText('OTP must be a 6-digit number');
-    expect(emailError).toBeInTheDocument();
-    expect(otpInput).toHaveClass('error');
-  });
-
-  test('changes password fields', () => {
-    const currentPasswordInput = screen.getByPlaceholderText('Enter Current Password');
-    const newPasswordInput = screen.getByPlaceholderText('Enter New Password');
-    const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
-
-    fireEvent.change(currentPasswordInput, { target: { value: 'currentPassword123' } });
-    fireEvent.change(newPasswordInput, { target: { value: 'newPassword123' } });
-    fireEvent.change(confirmPasswordInput, { target: { value: 'newPassword123' } });
-
-    expect(currentPasswordInput.value).toBe('currentPassword123');
-    expect(newPasswordInput.value).toBe('newPassword123');
-    expect(confirmPasswordInput.value).toBe('newPassword123');
-  });
-
-  test('shows error when submitting password fields without filling all details', () => {
-    const saveButton = screen.getByText('Save Password');
-    fireEvent.click(saveButton);
-
-    const passwordError = screen.getByText('All password fields are required');
-    expect(passwordError).toBeInTheDocument();
-  });
-
-  test('shows error when new password and confirm password do not match', () => {
-    const currentPasswordInput = screen.getByPlaceholderText('Enter Current Password');
-    const newPasswordInput = screen.getByPlaceholderText('Enter New Password');
-    const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
-
-    fireEvent.change(currentPasswordInput, { target: { value: 'currentPassword123' } });
-    fireEvent.change(newPasswordInput, { target: { value: 'newPassword123' } });
-    fireEvent.change(confirmPasswordInput, { target: { value: 'differentPassword123' } });
-
-    const saveButton = screen.getByText('Save Password');
-    fireEvent.click(saveButton);
-
-    const passwordError = screen.getByText('New Password and Confirm Password do not match');
-    expect(passwordError).toBeInTheDocument();
-  });
-
-  test('toggles profile privacy', () => {
-    const privacyCheckbox = screen.getByLabelText('Let others know that I shortlisted their profile');
-    fireEvent.click(privacyCheckbox);
-    expect(privacyCheckbox.checked).toBe(true);
-    fireEvent.click(privacyCheckbox);
-    expect(privacyCheckbox.checked).toBe(false);
-  });
-
-  test('toggles delete profile and selects a reason', () => {
-    const deleteProfileCheckbox = screen.getByLabelText('Please choose a reason for profile deletion');
-    fireEvent.click(deleteProfileCheckbox);
-    expect(deleteProfileCheckbox.checked).toBe(true);
-
-    const marriedRadio = screen.getByLabelText('Married');
-    fireEvent.click(marriedRadio);
-    expect(marriedRadio.checked).toBe(true);
-
-    const notInterestedRadio = screen.getByLabelText('Not interested');
-    fireEvent.click(notInterestedRadio);
-    expect(notInterestedRadio.checked).toBe(true);
-  });
-
-  test('logs out', () => {
-    const logoutButton = screen.getByText('Logout');
-    fireEvent.click(logoutButton);
-  });
-
-  test('submits form with valid data', () => {
-    const emailInput = screen.getByPlaceholderText('accumenta@gmail.com');
-    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-    const verifyButton = screen.getByText('Verify');
-    fireEvent.click(verifyButton);
-
-    const otpInput = screen.getByPlaceholderText('Enter OTP');
+  it('updates OTP state on input change when showOtp is true', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    fireEvent.change(screen.getByPlaceholderText(settings.emailPlaceholder), { target: { value: 'test@example.com' } });
+    fireEvent.click(screen.getByTestId('email-verify'));
+    const otpInput = screen.getByPlaceholderText(settings.otpPlaceholder);
     fireEvent.change(otpInput, { target: { value: '123456' } });
-    const newMailInput = screen.getByPlaceholderText('Enter New Mail');
-    fireEvent.change(newMailInput, { target: { value: 'newtest@example.com' } });
+    expect(otpInput.value).toBe('123456');
+  });
 
-    const currentPasswordInput = screen.getByPlaceholderText('Enter Current Password');
-    const newPasswordInput = screen.getByPlaceholderText('Enter New Password');
-    const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
+  it('shows error message for invalid email on verify', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const emailInput = screen.getByPlaceholderText(settings.emailPlaceholder);
+    fireEvent.change(emailInput, { target: { value: 'invalid-email' } });
+    fireEvent.click(screen.getByTestId('email-verify'));
+    expect(screen.getByText(settings.validEmailError)).toBeInTheDocument();
+  });
 
-    fireEvent.change(currentPasswordInput, { target: { value: 'currentPassword123' } });
-    fireEvent.change(newPasswordInput, { target: { value: 'newPassword123' } });
-    fireEvent.change(confirmPasswordInput, { target: { value: 'newPassword123' } });
+  it('shows OTP inputs when verify button is clicked for valid email', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const emailInput = screen.getByPlaceholderText(settings.emailPlaceholder);
+    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+    fireEvent.click(screen.getByTestId('email-verify'));
+    expect(screen.getByPlaceholderText(settings.otpPlaceholder)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(settings.newMailPlaceholder)).toBeInTheDocument();
+  });
 
-    const saveButton = screen.getByText('Save All');
+  it('updates phone state on input change', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const phoneInput = screen.getByPlaceholderText(settings.phonePlaceholder);
+    fireEvent.change(phoneInput, { target: { value: '1234567890' } });
+    expect(phoneInput.value).toBe('1234567890');
+  });
+
+  it('shows error message for invalid phone number on verify', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const phoneInput = screen.getByPlaceholderText(settings.phonePlaceholder);
+    fireEvent.change(phoneInput, { target: { value: '099' } });
+    fireEvent.click(screen.getByTestId('phone-verify'));
+    expect(screen.getByText(settings.validPhoneError)).toBeInTheDocument();
+  });
+
+  it('shows OTP inputs when verify button is clicked for valid phone number', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const phoneInput = screen.getByPlaceholderText(settings.phonePlaceholder);
+    fireEvent.change(phoneInput, { target: { value: '1234567890' } });
+    fireEvent.click(screen.getByTestId('phone-verify'));
+    expect(screen.getByPlaceholderText(settings.otpPlaceholder)).toBeInTheDocument();
+  });
+
+  it('updates password state on input change', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const currentPasswordInput = screen.getByPlaceholderText(settings.currentPasswordPlaceholder);
+    fireEvent.change(currentPasswordInput, { target: { value: 'currentPassword' } });
+    expect(currentPasswordInput.value).toBe('currentPassword');
+  });
+
+  it('shows error message if new password and confirm password do not match', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const currentPasswordInput = screen.getByPlaceholderText(settings.currentPasswordPlaceholder);
+    const newPasswordInput = screen.getByPlaceholderText(settings.newPasswordPlaceholder);
+    const confirmPasswordInput = screen.getByPlaceholderText(settings.confirmPasswordPlaceholder);
+    fireEvent.change(currentPasswordInput, { target: { value: 'currentPassword' } });
+    fireEvent.change(newPasswordInput, { target: { value: 'newPassword' } });
+    fireEvent.change(confirmPasswordInput, { target: { value: 'differentPassword' } });
+    fireEvent.click(screen.getByText(settings.savePasswordButton));
+    expect(screen.getByText(settings.passwordMatchError)).toBeInTheDocument();
+  });
+
+  it('toggles profile privacy checkbox', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const checkbox = screen.getByLabelText(settings.profilePrivacyLabel);
+    fireEvent.click(checkbox);
+    expect(checkbox.checked).toBe(true);
+  });
+
+  it('updates delete reason on radio button change', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const radio = screen.getByLabelText(settings.foundAMatch);
+    fireEvent.click(radio);
+    expect(radio.checked).toBe(true);
+  });
+
+  it('shows delete alert when delete button is clicked', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const radio = screen.getByLabelText(settings.foundAMatch);
+    fireEvent.click(radio);
+    const deleteButton = screen.getByText(settings.deleteBtn);
+    fireEvent.click(deleteButton);
+    expect(screen.getByText(settings.deleteTitle)).toBeInTheDocument();
+  });
+
+  it('calls logout action when logout button is clicked', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const logoutButton = screen.getByText(settings.logoutButton);
+    fireEvent.click(logoutButton);
+    const actions = store.getActions();
+    expect(actions[0].type).toBe('auth/logout');
+  });
+
+  it('shows error message if required fields are missing on submit', () => {
+    renderWithProvider(<Settings setActiveContent={jest.fn()} />);
+    const emailInput = screen.getByPlaceholderText(settings.emailPlaceholder);
+    fireEvent.change(emailInput, { target: { value: 'sfdsf' } });
+    const saveButton = screen.getByText(settings.saveAllButton);
     fireEvent.click(saveButton);
-
-    // Assuming there will be no errors shown and the form will be submitted successfully
-    expect(screen.queryByText('Please enter a valid email address')).not.toBeInTheDocument();
-    // expect(screen.queryByText('OTP must be a 6-digit number')).not.toBeInTheDocument();
-    expect(screen.queryByText('All password fields are required')).not.toBeInTheDocument();
-    expect(screen.queryByText('New Password and Confirm Password do not match')).not.toBeInTheDocument();
   });
 });

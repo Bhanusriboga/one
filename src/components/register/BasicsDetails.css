@@ -1,0 +1,132 @@
+.react-datepicker__input-container{
+    width: 100%;
+}
+.react-datepicker-wrapper{
+    width: 100%;
+    font-size: 22px !important;
+}
+.dob1{
+    height:48px !important;
+    border: 0.91px solid rgba(119, 118, 118, 1) !important;
+    border-radius: 6px; 
+    background-color: none;
+}
+.textinput{
+  font-family: Poppins;
+font-size: 12px;
+font-weight: 400;
+line-height: 30.95px;
+text-align: left;
+
+}
+.registration1-input{
+  border: 0.91px solid rgba(119, 118, 118, 1) !important;
+  border-radius: 6px; 
+  background-color: none;
+}
+.css-13cymwt-control{
+  height: 100% !important;
+  outline: none !important;
+  border: none !important;
+
+}
+.react-select__control .css-13cymwt-control:hover{
+  outline: none !important;
+  border-color: none !important;
+  height: 100% !important;
+}
+.btn-next{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.custom-input::placeholder {
+    color: rgba(171, 171, 171, 1) !important ;   
+    font-size: 16px;
+  }
+  input::after{
+    background-color: none;
+  }
+  .custom-input {
+    background-color: white;
+  }
+  .custom-input:focus {
+    background-color: white; 
+    outline: none;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1); 
+  } 
+.registrationHeading{
+  color: rgba(120, 0, 36, 1);
+  font-family: Poppins;
+font-size: 24px;
+font-weight: 500;
+line-height: 36px;
+
+}
+.form-select::-webkit-input-placeholder{
+  color:red !important
+}
+option {
+  color:black !important
+}
+.registerNext {
+  width: 100%;
+  height: 47.08px;
+  background-color: rgba(120, 0, 36, 1) !important;
+  border-radius: 33px !important;
+  font-family: Poppins;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  line-height: 48px !important;
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.skip-btn {
+  width: 100%;
+  font-size: 18px;
+  font-weight: 400;
+  color: #616161 !important;
+  text-align: center;
+  padding: 0;
+}
+
+
+
+
+/* button */
+
+.back-next-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15%;
+  padding-top: 90px;
+
+}
+
+.previous-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 33px;
+  font-size: 22px;
+  height: 47px;
+  background-color: #800020;
+  color: #FFFFFF;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.skip-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 25px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #616161
+}

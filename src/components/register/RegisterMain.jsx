@@ -10,9 +10,8 @@ function RegisterMain() {
     <div className="d-flex align-item-center justify-content-between main-container">
       <img src={logo} alt="logo" className="img-logo" />
 
-      <div className="content">
+      <div className="content-register">
         <h1 className=" mb-3 font-weight-bold  fs-1 mb-md-5  register-text">
-        
           Register
         </h1>
         <Stepper />

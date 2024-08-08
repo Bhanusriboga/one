@@ -1,7 +1,7 @@
 .stepper-container {
-    width: 95%; /* Adjust the width as needed */
+    width: 95%; 
     margin-top: 20px;
-    padding-left: 20px;
+    padding-left: 27px;
   }
   .stepper-main-container{
     width :100%;
@@ -10,11 +10,11 @@
   
   .RSPBprogressBar {
     height: 3px !important; 
-    line-height: 0;/* Adjust the height as needed */
+    line-height: 0;
   }
   
   .RSPBprogressBar.filler {
-    height: 3.4px !important; /* Ensure the filled part matches the height of the container */
+    height: 3.4px !important; 
   }
   
   .step-content {
@@ -44,7 +44,7 @@
     color: rgba(120, 0, 36, 1);
     text-align: center;
     border: 2px solid rgba(120, 0, 36, 1);
-    margin: 0 !important; /* Remove default margin */
+    margin: 0 !important;
   }
   
   .indexedStep.accomplished {
@@ -79,11 +79,14 @@
       gap:10px
     
     }
+    .step-content {
+      margin-top: 30px;
+    }
     
     .circular-progress-container {
       width: 100px;
       height: 100px;
-      margin-right: 10px; /* Add some space between the circular progress and the text */
+      margin-right: 10px; 
     } 
     .step-name-mobile {
       font-size: 22px;

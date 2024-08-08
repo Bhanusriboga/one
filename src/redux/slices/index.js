@@ -1,11 +1,12 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import AuthReducer from './AuthSlice';
-import StepperSlice from './StepperSlice';
-
+import UserReducer from './Users';
+import RegistrationDetails from './RegistrationDetails';
 const rootReducer = combineReducers({
   auth: AuthReducer,
-  stepper:StepperSlice,
   // Add other reducers here
+  users:UserReducer,
+  RegistrationDetails:RegistrationDetails,
 });
 
 export default rootReducer;
