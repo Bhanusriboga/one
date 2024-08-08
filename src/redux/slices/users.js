@@ -78,7 +78,7 @@ const UserSlice = createSlice({
       })
     builder.addCase(getAllUsers.fulfilled, (state, action) => {
       state.loading = false;
-      state.data = action.payload.object;
+      state.data = action.payload?.object;
     })
     builder.addCase(getAllUsers.rejected, (state) => {
         state.loading = false;

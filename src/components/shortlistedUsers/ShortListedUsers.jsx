@@ -19,7 +19,7 @@ function ShortListedUsers() {
 
   useEffect(() => {
     dispatch(getShortListedUsers());
-    setTotalpages(Math.ceil(shortlisted.length / 10));
+    setTotalpages(Math.ceil(shortlisted?.length / 10));
     setCurrentPage(1);
   }, [dispatch]);
 
@@ -131,7 +131,7 @@ function ShortListedUsers() {
           <h4 className='shortlist-heading'>{ignoreUserText.heading1}</h4>
         </div>
         <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3">
-          {shortlisted.map((user, index) => {
+          {shortlisted?.map((user, index) => {
             let background;
             let color;
             let buttonBackgroundColor;

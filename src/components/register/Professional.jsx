@@ -132,7 +132,6 @@ function Professional() {
     event.preventDefault();
     if (handleNext()) {
       const data=await dispatch(professionalDetailsAPICall(formData));
-      console.log("data -=-=-=-=-> ",data)
       if(data?.payload?.message=="Professional details added successfully"||data?.payload?.message=="ProfessionalDetails Already Exists"){
         dispatch(saveProfessionalData(formData));
         dispatch(nextStep());

@@ -93,8 +93,6 @@ export const getMyDetails=createAsyncThunk(
       const header={
         Authorization: `Bearer ${token}`
       }
-      console.log("userId ...... ",userId,token)
-      console.log(endPoints.userInfo+userId)
       const { response, error } = await networkCall(endPoints.userInfo+userId, 'GET',header);
       if (response) {
         return thunkAPI.fulfillWithValue(response);

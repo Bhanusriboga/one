@@ -126,7 +126,6 @@ function BasicsDetails() {
 
     if (validateAllFields()) {
       const data = await dispatch(BasicDetailsAPICall(formData));
-      console.log("Basic Details -=-=-=-=-=-=-=>>>> ", data)
       if(data?.payload?.message === "Basic details added successfully" || data?.payload?.message ==="Basic Details Already Exists Please Updated your Details"){
         toast.success("User Basic Details Registered Successfully", {
           position: "top-center",

@@ -17,7 +17,7 @@ export const BasicDetailsAPICall = createAsyncThunk(
       citizenShip: props.citizenShip,
       languageProficiency: props.languageProficiency,
       instgramId: props.instagramId,
-      linkedinId: props.linkedinId||"",
+      linkedinId: props.linkedinId || "",
       doorNumber: props.doorNo,
       streetName: props.streetNo,
       city: props.city,
@@ -26,12 +26,9 @@ export const BasicDetailsAPICall = createAsyncThunk(
       postalCode: props.postalCode,
     });
     const headers = {
-      'Authorization': `${Storage.get('token')}`,
+      'Authorization': `Bearer ${Storage.get('token')}`,
     };
-    console.log({ url });
     const { response, error } = await networkCall(url, 'POST', data, headers);
-    console.log('basic details--->', response);
-    console.log('error--->', error);
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     } else {
@@ -62,7 +59,7 @@ export const personalDetailsAPICall = createAsyncThunk(
       maritalStatus: props.maritalStatus,
       anyDisabilities: props.disability != "Other" ? true : false,
       // height: props.height,
-      heiht:6.2,
+      heiht: 6.2,
       weightType: props.weightUnit,
       weight: props.weight,
       bodyType: props.bodyType,
@@ -73,16 +70,13 @@ export const personalDetailsAPICall = createAsyncThunk(
       drinkingHabits: props.drinkingHabits
     });
 
-    
+
     const headers = {
       'Authorization': `Bearer ${Storage.get('token')}`,
     };
-    
-  
-    console.log({ url },{headers:Storage.get('token')});
+
+
     const { response, error } = await networkCall(url, 'POST', data, headers);
-    console.log('basic details--->', response);
-    console.log('error--->', error);
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     } else {
@@ -97,7 +91,7 @@ export const professionalDetailsAPICall = createAsyncThunk("registrationDetails/
     const data = JSON.stringify({
       highestEducation: props.highestEducation,
       // yearOfPassout: props.yearOfPassing,
-      yearOfPassout:"2020-06-20",//after backend deployment need to change
+      yearOfPassout: "2020-06-20",//after backend deployment need to change
       nameOfInstitute: props.nameOfTheInstitute,
       occupation: props.occupation,
       employmentStatus: props.employmentStatus,
@@ -110,23 +104,48 @@ export const professionalDetailsAPICall = createAsyncThunk("registrationDetails/
     const headers = {
       'Authorization': `Bearer ${Storage.get('token')}`,
     };
-    console.log({ url });
     const { response, error } = await networkCall(url, 'POST', data, headers);
-    console.log('basic details--->', response);
-    console.log('error--->', error);
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     } else {
       return thunkAPI.rejectWithValue(error || 'Something went wrong..!');
     }
   })
-export const uploadedFilesAPICall = createAsyncThunk("registrationDetails/uploadedFiles", async (props, thunkAPI) => {
-  const headers = {
-    'Authorization': Storage.get('token'),
+export const uploadedFilesAPICall = createAsyncThunk("registrationDetails/uploadedFiles", async (formData, thunkAPI) => {
+  const config = {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${Storage.get("token")}`,
+      // Note: `Content-Type` is not explicitly set because the browser will automatically set the correct boundary for `multipart/form-data`
+    },
   };
-  const { response, error } = await networkCall(Storage.get('userId'), 'POST', props, headers);
-  console.log('basic details--->', response);
-  console.log('error--->', error);
+
+  try {
+    const response = await fetch(`https://pr-pellisambanalu-springboot-service.azurewebsites.net/api/v1/${Storage.get("userId")}`, config);
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Upload error:", errorData);
+      return thunkAPI.rejectWithValue(errorData || "Something went wrong..!");
+    }
+
+    const responseData = await response.json();
+    return thunkAPI.fulfillWithValue(responseData);
+  } catch (error) {
+    console.error("Upload error:", error);
+    return thunkAPI.rejectWithValue(error.message || "Something went wrong..!");
+  }
+})
+
+export const userDescriptionAPICall = createAsyncThunk("registrationDetails/userDescription", async (props, thunkAPI) => {
+  const url = `${endPoints.userDescription}?userId=${Storage.get('userId')}`;
+  const data = JSON.stringify({
+    description: props.description
+  });
+  const headers = {
+    'Authorization': `Bearer ${Storage.get('token')}`,
+  };
+  const { response, error } = await networkCall(url, 'POST', data, headers);
   if (response) {
     return thunkAPI.fulfillWithValue(response);
   } else {
@@ -135,16 +154,15 @@ export const uploadedFilesAPICall = createAsyncThunk("registrationDetails/upload
 })
 
 
-
 const RegistrationDetails = createSlice({
   name: "registrationDetails",
   initialState: {
     formData1: {},
     personalData: {},
-    personalDataResponse:{},
+    personalDataResponse: {},
     ProfessionalData: {},
     textArea: "",
-    currentStep: 4,
+    currentStep: 1,
     uploadedFiles: [],
     loadder: false
   },
@@ -180,48 +198,49 @@ const RegistrationDetails = createSlice({
       state.formData1 = action.payload;
       state.loadder = false
     }),
-      builder.addCase(BasicDetailsAPICall.rejected, (state, action) => {
-        console.log(action.error);
+      builder.addCase(BasicDetailsAPICall.rejected, (state) => {
         state.loadder = false
       });
-    builder.addCase(BasicDetailsAPICall.pending, (state, action) => {
-      console.log(action.error);
+    builder.addCase(BasicDetailsAPICall.pending, (state) => {
       state.loadder = true
     });
     builder.addCase(professionalDetailsAPICall.fulfilled, (state, action) => {
       state.ProfessionalData = action.payload;
       state.loadder = false
     }),
-      builder.addCase(professionalDetailsAPICall.rejected, (state, action) => {
-        console.log(action.error);
+      builder.addCase(professionalDetailsAPICall.rejected, (state) => {
         state.loadder = false
       });
-    builder.addCase(professionalDetailsAPICall.pending, (state, action) => {
-      console.log(action.error);
+    builder.addCase(professionalDetailsAPICall.pending, (state) => {
       state.loadder = true
     });
     builder.addCase(personalDetailsAPICall.fulfilled, (state, action) => {
       state.personalDataResponse = action.payload;
       state.loadder = false
     });
-    builder.addCase(personalDetailsAPICall.rejected, (state, action) => {
-      console.log(action.error);
+    builder.addCase(personalDetailsAPICall.rejected, (state) => {
       state.loadder = false
     });
-    builder.addCase(personalDetailsAPICall.pending, (state, action) => {
-      console.log(action.error);
+    builder.addCase(personalDetailsAPICall.pending, (state) => {
       state.loadder = true
     });
     builder.addCase(uploadedFilesAPICall.fulfilled, (state, action) => {
       state.uploadedFiles = action.payload;
       state.loadder = false
     });
-    builder.addCase(uploadedFilesAPICall.rejected, (state, action) => {
-      console.log(action.error);
+    builder.addCase(uploadedFilesAPICall.rejected, (state) => {
       state.loadder = false
     });
-    builder.addCase(uploadedFilesAPICall.pending, (state, action) => {
-      console.log(action.error);
+    builder.addCase(uploadedFilesAPICall.pending, (state) => {
+      state.loadder = true
+    });
+    builder.addCase(userDescriptionAPICall.fulfilled, (state) => {
+      state.loadder = false
+    });
+    builder.addCase(userDescriptionAPICall.rejected, (state) => {
+      state.loadder = false
+    });
+    builder.addCase(userDescriptionAPICall.pending, (state) => {
       state.loadder = true
     });
   },

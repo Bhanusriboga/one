@@ -7,7 +7,8 @@ import ForgotPage from './components/Forgot/ForgotPage'
 import SignUp from './components/Signup/SignUp'
 import Dashboard from './components/Dashboard/Dashboard'
 import RegisterMain from './components/register/RegisterMain'
-import Home from "./components/home/Home"import {getMyDetails} from "./redux/slices/AuthSlice"
+import Home from "./components/home/Home"
+import {getMyDetails} from './redux/slices/AuthSlice';
 import UPIPayment from './components/payment/Payment'
 // Main Routes don't change any thing
 const Routes = () => {

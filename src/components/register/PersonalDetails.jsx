@@ -492,7 +492,6 @@ const PersonalDetails = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-    console.log({formData});
       dispatch(saveFormData(formData));
       const data = await dispatch(personalDetailsAPICall(formData));
       if (data.payload.message == "PersonalDetails Already Exists try to Update"||data.payload.message == "Personal details added successfully") {

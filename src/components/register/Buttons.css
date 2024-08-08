@@ -1,0 +1,33 @@
+.back-next-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15%;
+    padding-top: 90px;
+
+}
+
+.previous-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 33px;
+    font-size: 22px;
+    height: 47px;
+    background-color: #800020;
+
+    color: #FFFFFF;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.skip-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 25px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #616161
+}
