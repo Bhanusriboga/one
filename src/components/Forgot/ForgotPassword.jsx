@@ -5,6 +5,9 @@ import './ForgotPassword.css';
 import PropTypes from 'prop-types';
 import topImage from '../../Assets/forgotlogo.svg';
 import logout from '../../Assets/topImageforgot.png';
+import { requestOtpForgetApi,otpverifyForgetApi ,changePasswordForgotApi } from '../../redux/slices/AuthSlice';
+
+import { useDispatch } from 'react-redux';
 
 const ForgotPassword = (props) => {
   const {  modal, toggle } = props
@@ -14,6 +17,8 @@ const ForgotPassword = (props) => {
     newPassword: '',
     confirmPassword: ''
   });
+  const dispatch = useDispatch()
+
 
   const [errors, setErrors] = useState({
     mobile: '',
@@ -110,7 +115,7 @@ const ForgotPassword = (props) => {
     setIsSaveButtonDisabled(!validateAllFields());
   }, [formData]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     const mobileError = validateMobile();
@@ -124,11 +129,13 @@ const ForgotPassword = (props) => {
       setErrors({ mobile: '', otp: otpError, newPassword: '', confirmPassword: '' });
       return;
     }
+    const data = await dispatch(otpverifyForgetApi(formData));
+    console.log('otp verify api---------->',{data})
 
     alert('OTP Verified successfully!');
   };
 
-  const handleSave = (e) => {
+  const handleSave = async(e) => {
     e.preventDefault();
 
     const mobileError = validateMobile();
@@ -148,16 +155,20 @@ const ForgotPassword = (props) => {
       setErrors({ mobile: '', otp: '', newPassword: '', confirmPassword: confirmPasswordError });
       return;
     }
+    const data =  await dispatch(changePasswordForgotApi(formData));
+    console.log(data)
 
     alert('Password created successfully!');
   };
 
-  const handleVerify = () => {
+  const handleVerify = async() => {
     const mobileError = validateMobile();
     if (mobileError) {
       setErrors({ mobile: mobileError, otp: '', newPassword: '', confirmPassword: '' });
       return;
     }
+   const data=await dispatch(requestOtpForgetApi(formData))
+   console.log({data});
     alert('OTP sent successfully!');
   };
 
@@ -177,7 +188,7 @@ const ForgotPassword = (props) => {
             <Label for="mobile" className="d-block text-center mb-10">
               Enter your mobile number to reset your password
             </Label>
-            <InputGroup>
+            <InputGroup className='forget-input'>
               <Input
                 type="tel"
                 name="mobile"
@@ -195,7 +206,7 @@ const ForgotPassword = (props) => {
             </InputGroup>
             {errors.mobile && <div className="invalid-feedback d-block">{errors.mobile}</div>}
           </FormGroup>
-          <FormGroup className="d-flex align-items-center">
+          <FormGroup className="d-flex align-items-center forget-input">
             <Input
               type="text"
               name="otp"
@@ -205,14 +216,14 @@ const ForgotPassword = (props) => {
               onChange={handleOtpChange}
               inputMode="numeric"
               maxLength="6"
-              className={`input-field otp-input ${errors.otp ? 'is-invalid' : ''}`}
+              className={`input-field otp-input ${errors.otp ? 'is-invalid' : 'forget-input'}`}
             />
             <Button className="submit-button" type="submit">Submit</Button>
           </FormGroup>
           {errors.otp && <div className="invalid-feedback d-block">{errors.otp}</div>}
         </Form>
         <Form onSubmit={handleSave}>
-          <FormGroup>
+          <FormGroup >
             <Input
               type="password"
               name="newPassword"
@@ -220,11 +231,11 @@ const ForgotPassword = (props) => {
               placeholder="Enter new password"
               value={formData.newPassword}
               onChange={handleInputChange}
-              className={`input-field mb-10 ${errors.newPassword ? 'is-invalid' : ''}`}
+              className={`input-field mb-10 ${errors.newPassword ? 'is-invalid' : 'forget-input'}`}
             />
             {errors.newPassword && <div className="invalid-feedback d-block">{errors.newPassword}</div>}
           </FormGroup>
-          <FormGroup>
+          <FormGroup className='forget-input'>
             <Input
               type="password"
               name="confirmPassword"
@@ -232,7 +243,7 @@ const ForgotPassword = (props) => {
               placeholder="Confirm password"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              className={`input-field mb-10 ${errors.confirmPassword ? 'is-invalid' : ''}`}
+              className={`input-field mb-10 ${errors.confirmPassword ? 'is-invalid' : 'forget-input'}`}
             />
             {errors.confirmPassword && <div className="invalid-feedback d-block">{errors.confirmPassword}</div>}
           </FormGroup>

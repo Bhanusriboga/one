@@ -53,7 +53,7 @@ function Finish() {
       {errorMsg && <span className="error-message">{errorMsg}</span>}
 
       <Modal isOpen={modal} toggle={toggle} className="modal-with-bgp-0 m-">
-        <ModalBody className=" w-100 h-100 m-0">
+        <ModalBody className=" w-100 h-100 m-0 modal-content-finish">
           <div className="text-center">
             <h3 className="pt-4">Registered Successfully</h3>
             <p className="py-3 text-muted mx-4">

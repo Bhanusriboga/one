@@ -17,7 +17,10 @@ const endPoints = {
   requestEmailOtp:"request-email-otp?email=",
   changePassword:"change-password",
   deleteAccount:"profile",
-  verifyEmailOtp:"verify-email-otp"
+  verifyEmailOtp:"verify-email-otp",
+  requestOtpForgetApi:"request-mobile-otp",
+  otpverifyForgetApi:"user-otp-verification",
+  changePasswordForgot:"forgot-password"
 }
 
 export { baseURL, endPoints, encryptionSalt }      
