@@ -10,6 +10,18 @@
   height: 44px ;
   border:1px solid rgba(120, 0, 36, 1)!important;
 }
+.addPreferenceHeader{
+  width: 296px;
+height: 76px;
+gap: 0px;
+opacity: 0px;
+font-family: Poppins;
+font-size: 36px;
+font-weight: 400;
+line-height: 76px;
+text-align: left;
+color: rgba(120, 0, 36, 1);
+}
 .field-container {
   padding-left:1%;
   padding-right: 1%;
