@@ -1,6 +1,6 @@
 import React, { useEffect, useState,useRef } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
-// import logo from "./assets/logo.svg"
+
 import newlogo from "./assets/logo.svg"
 import "./home.css"
 import sidehalfimg from "./assets/side-half-img.png"
@@ -95,7 +95,8 @@ function Home() {
         <img src={rightchakra} className='position-absolute right-chakra'/>
         <Destination />
 
-        <div className='footer-1 d-flex flex-column align-items-center justify-content-evenly' id="footer" ref={bottomRef}>
+        <div className='footer-1 mt-5 d-flex flex-column align-items-center justify-content-evenly' id="footer" ref={bottomRef}>
+              <div className='first-footer '>
               <div className='d-flex justify-content-center align-items-center'>
                <img src={chakra} className='chakra'/>
                <h4 className='footer-head'>Let&apos;s write our own love story together : Download Our App For Any Queries</h4>
@@ -105,7 +106,8 @@ function Home() {
               <div className='download'>
                <img src={googleplay} className='appstore'/>
                <img src={appstore} className='bg-white appstore'/>
-          </div>
+              </div>
+              </div>
           <hr className="hor-line"/>
           <div className='pageFooter'>
             <FooterBar />

@@ -89,6 +89,7 @@ overflow-x: hidden;
 .content11 {
   background: linear-gradient(180deg, #B88A44 0%, #E0AA3E 7%, #E0AA3E 16.5%, #F9F295 23.5%, #FFFEF2 51.5%, #F9F295 79.5%, #E0AA3E 85.5%, #E0AA3E 95%, #B88A44 100%);
   width: 100vw;
+  padding-bottom: 0%;
   padding: 6vw;
    overflow-x: hidden;
 }
@@ -121,7 +122,6 @@ overflow-x: hidden;
 }
 .choose {
   width: 100vw;
-  opacity: 0px;  
 }
 .side-choose { position: absolute; top: 117vh; left: 0vw; }
 .choose-us-cont { justify-self: center; width:80vw }
@@ -181,9 +181,19 @@ width: 55vw;
 .starss{
   width: 20vw !important ;
 }
+.first-footer{
+  height:60vh !important;
+  background-color: #B88A44;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color:#780024;
+
+}
 .footer-1{
   background-color:#780024;
-  height: 50vh;
+  height:110vh !important;
   width: 100vw;
   
 }
@@ -234,7 +244,7 @@ color: #E2E2E2;
 }
 
 .navbar-toggler-icon {
-  font-size: 24px;
+  font-size: 5vw;
   color: white;
 }
 
@@ -584,6 +594,7 @@ width: 64vw;
   }
   .footer-1{
     margin-top: 5vh;
+    height: 70vh;
   }
   .right-circle{
     top: 182vh;
@@ -669,6 +680,10 @@ width: 64vw;
   .endorse-stars{
       top: 78.8%;
   }
+  .nav-logo{
+    zoom: 1;
+    margin-top:1.5vh
+  }
   .top-para{ font-family: Poppins; color: #940221;font-size: 26px; font-weight: 500; text-align: left; width: 60vw; }
 }
 @media (min-width:180px) and (max-width:350px){
@@ -676,10 +691,9 @@ width: 64vw;
     margin-left: 10vw;
   }
   .custom-navBar{ background-color: #780024; width: 100vw;  position: fixed; height:auto;background-color: 0.3s ease; backdrop-filter: 0.3s ease; opacity: 0.3s ease-in-out !important; } 
-  /* .nav-logo{
-    zoom: 0.18;
-    margin-left: 10vw !important;
-  } */
+  .nav-logo{
+    zoom: 0.8;
+  }
   .appstore{
     clip-path: inset(20px,20px,20px,20px);
     zoom: 0.8;
@@ -734,7 +748,7 @@ width: 64vw;
 
       .customer-img{
           top: 16.2vh;
-          width: 45vw;
+          width: 35vw;
           height: 19vh;
       }
   .side-choose {
@@ -792,12 +806,10 @@ width: 64vw;
 }
 
 .para-div{ width: 40vw; top:33%; left: 7vw; }
-/* .para-div-big{ width: 40vw; top:14vh; left: 9vw; } */
 .para-explore{ width: 30vw; font-size:82%; top: 20vw ; left: 8vw; line-height: 3.8vw; text-align: left; }
 .exploreRight { display: none; }
 .leftexplore{ display: none; }
 .expore-btn{ width: 26vw; height: 4.3vh; top: 80%; left: 7vw; }
-/* .explore-btn-big{ width: 32vw; height: 5vh; top: 30vh; left: 7vw; } */
 .btn-arrow{ width: 10vw; }
 .btn-arrow.btn-arrow-big{ width: 10vw; }
 .btn-text.btn-text-big{ font-size: 9px; width: 15vw ; padding: 1vh; }
@@ -849,6 +861,9 @@ width: 64vw;
 @media (max-width:1025px){
   .right-chakra{
    display: none;
+  }
+  .img-container1{
+    display: block;
   }
   .appstore{
     clip-path: inset(20px,20px,20px,20px);
