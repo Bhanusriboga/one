@@ -22,8 +22,6 @@
   display: none !important;
 }
 .scroll-div{
-  width: 1000vw;
-  display: flex;
   display: none;
 }
 .scroll-div::-webkit-scrollbar{
@@ -253,26 +251,23 @@ color: #E2E2E2;
   .navbar-nav {
       margin-top: 1rem;
   }
-  /* .nav-logo { zoom: 0.9;position: fixed;top: -65px;left: 5;max-width: 600px !important; max-height: 200px !important; bottom: 20 !important;} */
-
   .nav-link {
       padding: 0.5rem 1rem;
       text-align: center;
   }
 }
 
-
-
 @media (max-width:599px) and (min-width:350px) {
   .chakra{
     zoom: 0.6;
   }
   .custom-navBar{ background-color: #780024 !important; width: 100vw;  position: fixed;background-color: 0.3s ease; backdrop-filter: 0.3s ease; opacity: 0.3s ease-in-out !important; } 
-.head123{
+
+  .head123{
   background-color: #780024 !important;
   height: fit-content;
 }
-  .right-chakra{
+  .right-chakra,.animate-arrow-flip,.right-circle,.right-chakra,.side-choose,.exploreRight,.right-arrow,.leftexplore,.explore-cont{
     display: none;
   }
    .collapse-nav{
@@ -299,9 +294,7 @@ color: #E2E2E2;
     padding-top:-20vw !important
 
 }
-  .right-circle{
-    display: none;
-  }
+ 
   .btn-text{
   font-size: 3.5vw;
   }
@@ -407,17 +400,7 @@ color: #E2E2E2;
       opacity: 0px;
   }
   
-  .side-choose {
-      display: none;
-  }
-
-  .exploreRight {
-      display: none;
-  }
-
-  .side-choose {
-      display: none;
-  }
+  
   .yukthi-cont {
       display: flex;
       width: 100vw;
@@ -444,15 +427,8 @@ color: #E2E2E2;
   .begin { font-family: Poppins; font-size: 24px; font-weight: 600; text-align: center; border-radius: 15px; background-color: rgba(120, 0, 36, 1); color: rgba(243, 243, 243, 1); margin-top: 8vh !important;}
 .destination { color: rgba(120, 0, 36, 1); width: 80vw; font-family: Libre Caslon Text; font-size: 35px; font-weight: 400; text-align: center; line-height: 100%; }
   .card-bg{ background-image: url("./assets/Card-Slide01\ 1.png"); background-repeat: no-repeat; background-size: cover; width: 38vh; height: 42vh; position: relative; border-radius: 10px; object-fit: cover; align-self: center; }
-  .arrows{
-      display: none;
-  }
-  .right-arrow{
-      display: none;
-  }
-  .animate-arrow-flip{
-    display: none;
-  }
+ 
+ 
  .expore-btn{
      height: 12%;
      top: 79% !important;
@@ -484,9 +460,7 @@ color: #E2E2E2;
       justify-content: center;
       align-items: center;
   }
-  .leftexplore {
-      display: none;
-  }
+ 
   
   .contact {
       display: flex;
@@ -566,9 +540,7 @@ width: 64vw;
   .customer-img{
       top: 28.5%;
   }
-  .explore-cont{
-      display:none  !important;
-  }
+  
   .appstore{
     clip-path: inset(20px,20px,20px,20px);
     zoom: 0.8;
@@ -616,12 +588,7 @@ width: 64vw;
   }
  .engage-btn{ width: 20vw !important;height: 6.5vh; font-size: medium; }
  .couple-img{ zoom: 1.2!important; height: 70vh; margin-left:-11%; margin-top: -5vh!important; }
- .side-choose{
-  display: none;
- }
- .exploreRight{
-  display: none;
- }
+ 
  .explore{
   margin-bottom: 10vh !important;
  }
@@ -647,20 +614,11 @@ width: 64vw;
      
      line-height: 25px !important;
  }
- .right-side-img-bottom{
-  display: none;
- }
- 
- .right-chakra{
-  display: none;
- }
- .right-circle{
-  display: none;
- }
+
  .arrows{ zoom: 0.75;}
  .right-arrow{zoom: 0.75;}
  .animate-arrow-flip{zoom: 0.75}
- .leftexplore{ display: none; }
+ .leftexplore,.animate-arrow-flip,.right-circle,.right-circle,.right-side-img-bottom,.exploreRight,.side-choose{ display: none; }
  .col1{ z-index: 1; left: 5vw; top: 46%; position:absolute; color: #F3F3F3; height: 40vh; width:30vw }
   .top-para-para{ font-family: Poppins; font-size: 12px; font-weight: 400; text-align: left; width: 38vw !important;  }
   .customer-img{ top: 28%; height: 35%; }
@@ -704,12 +662,6 @@ width: 64vw;
   .footer-1{
     margin-top: -5vh;
   }
-  .right-chakra{
-    display: none;
-  }
-  .right-circle{
-    display: none;
-  }
 .scroll-container{
   overflow-x: scroll;
   width: 100vw;
@@ -724,7 +676,6 @@ width: 64vw;
 .footer-para{
   font-size: 0.4rem;
 }
-
   .endorsements{
     height:90vh
   }
@@ -733,7 +684,6 @@ width: 64vw;
   .endorse-text-para{
     font-size: 62%;
     top: 63%;
-    
     text-align: center;
 }
   .endorse-stars{
@@ -751,9 +701,7 @@ width: 64vw;
           width: 35vw;
           height: 19vh;
       }
-  .side-choose {
-     display: none;
-  }
+
   .top-para{ font-family: Poppins; font-size: 120%; font-weight: 500; text-align: left; color:white; width: 80vw; }
   .explore{
       margin-top: 25vh;
@@ -775,11 +723,8 @@ width: 64vw;
       font-weight: 500 !important;
       text-align: center;
       width: 85vw ;
-      
   }
-.lefthalfimg{
-  display: none;
-}
+
 
 .card-bg{
   background-image: url("./assets/Card-Slide01\ 1.png");
@@ -801,14 +746,12 @@ width: 64vw;
  top: 13%;
  left: 13%;
 }
-.explore-cont{
-  display: none;
-}
+
 
 .para-div{ width: 40vw; top:33%; left: 7vw; }
 .para-explore{ width: 30vw; font-size:82%; top: 20vw ; left: 8vw; line-height: 3.8vw; text-align: left; }
-.exploreRight { display: none; }
-.leftexplore{ display: none; }
+
+
 .expore-btn{ width: 26vw; height: 4.3vh; top: 80%; left: 7vw; }
 .btn-arrow{ width: 10vw; }
 .btn-arrow.btn-arrow-big{ width: 10vw; }
@@ -817,15 +760,10 @@ width: 64vw;
 .scrollable-list-container{ width: 100vw;height: 150vh !important; }
 .scrollable-list{ width: 100vw; height: 40vh ; }
 .endorse-square{ zoom: 0.7; object-fit: contain; }
-.arrows{
-  display: none;
+.arrows,.exploreRight,.animate,.right-arrow,.animate-arrow-flip,.animate-arrows,.explore-cont,.lefthalfimg,.side-choose,.right-circle,.right-chakra,.right-side-img-bottom{
+  display: none !important;
 }
-.right-arrow{
-  display: none ;
-}
-.animate-arrow-flip{
-  display: none;
-}
+
 .destination-cont {
   padding: 5vw;
   margin-top: 10vh;
@@ -838,16 +776,9 @@ width: 64vw;
   font-size: 15px;
   margin-top: 2vh;
 }
-.right-side-img-bottom {
-  display: none !important;
-}
 .endorse-stars{
   top: 80%;
 }
-.animate{
-  display: none !important;
-}
-
   .para-ring {
     position: absolute;
     top: 49%;
@@ -859,9 +790,7 @@ width: 64vw;
 }
 }
 @media (max-width:1025px){
-  .right-chakra{
-   display: none;
-  }
+  
   .img-container1{
     display: block;
   }
@@ -872,19 +801,10 @@ width: 64vw;
   .chakra{
     zoom: 0.6;
   }
-  .right-circle{
+  .leftexplore, .side-choose, .exploreRight,.right-circle,.right-chakra {
     display: none;
   }
-  .leftexplore{
-    display: none;
-  }
-  .side-choose{
-    display: none;
-  }
-  .exploreRight{
-    display: none;
-  }
-
+  
 }
 .pageFooter {
   background-color: #780024 !important;
