@@ -52,13 +52,11 @@
   color: #ffffff;
   font-size: 35px;
   font-weight: 700;
-  font-family: poppins;
 }
 .right-section-para {
   color: #bbb9b9;
   font-size: 20px;
   font-weight: 300;
-  font-family: poppins;
   width: 92%;
   line-height: 1.5;
 }
@@ -68,7 +66,6 @@
 .signup-heading {
   font-size: 38px;
   padding-top: 20px;
-  font-family: poppins !important;
   font-weight: 500;
   color: #780024;
   text-align: center;
@@ -109,7 +106,6 @@
 }
 
 .star {
-  font-family: Poppins;
   font-size: 44px;
   font-weight: 600;
   line-height: 66px;
@@ -134,7 +130,6 @@
 }
 .email-error {
   color: red;
-  font-family: monospace;
   align-self: flex-start;
 }
 .eye {
@@ -182,7 +177,6 @@ input::-webkit-inner-spin-button {
 }
 .form-control-genderss::placeholder {
   color: rgba(171, 171, 171, 1);
-  font-family: Poppins;
   font-size: 20px;
   font-weight: 400;
   line-height: 30px;
@@ -197,7 +191,6 @@ input::-webkit-inner-spin-button {
 }
 .form-control-genderss.select.option.place::placeholder {
   color: rgba(171, 171, 171, 1) !important;
-  font-family: Poppins;
   font-size: 25px;
   font-weight: 400;
   line-height: 30px;
@@ -205,7 +198,6 @@ input::-webkit-inner-spin-button {
 }
 .select-tag::placeholder {
   color: rgba(171, 171, 171, 1) !important;
-  font-family: Poppins;
   font-size: 20px;
   font-weight: 400;
   line-height: 30px;
@@ -252,14 +244,12 @@ input::-webkit-inner-spin-button {
   width: 100vw;
 }
 .otp-head {
-  font-family: Poppins;
   font-size: 130% !important;
   font-weight: 500;
   text-align: center;
   width: 100% !important;
 }
 .otp-para {
-  font-family: Poppins;
   font-size: 100%;
   font-weight: 400;
   line-height: 30px;
@@ -277,7 +267,6 @@ input::-webkit-inner-spin-button {
   height: 55vh;
 }
 .otp-head {
-  font-family: Poppins;
   font-size: 150%;
   font-weight: 500;
   line-height: 54px;
@@ -285,7 +274,6 @@ input::-webkit-inner-spin-button {
   width: 70%;
 }
 .otp-para {
-  font-family: Poppins;
   font-size: 100%;
   font-weight: 400;
   line-height: 30px;
@@ -296,7 +284,6 @@ input::-webkit-inner-spin-button {
 .otp-input {
   text-align: center;
   border: 1px solid rgba(154, 154, 154, 1);
-  font-family: Poppins;
   font-size: 100%;
   font-weight: 400;
   line-height: 30px;
@@ -313,7 +300,6 @@ input::-webkit-inner-spin-button {
   text-align: center;
 }
 .didnt {
-  font-family: Poppins;
   font-size: 100%;
   font-weight: 400;
   line-height: 21px;
@@ -327,7 +313,6 @@ input::-webkit-inner-spin-button {
   border-radius: 22.98px;
   background-color: rgba(120, 0, 36, 1) !important;
   color: rgba(255, 255, 255, 1);
-  font-family: Poppins;
   font-size: 100%;
   font-weight: 600;
   line-height: 21px;
@@ -447,7 +432,7 @@ input::-webkit-inner-spin-button {
   .signup-form-gender {
     height: 49px !important;
     color: rgba(171, 171, 171, 1) !important;
-    font-family: Poppins;
+
   }
   .signup-form-gender::placeholder {
     color: rgba(171, 171, 171, 1) !important;
