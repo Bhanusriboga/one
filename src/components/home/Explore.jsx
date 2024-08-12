@@ -30,7 +30,7 @@ const getDivs=()=>{
         <div className="card-bg">
           <p className='card-text1'>CASTE</p>
           <div className='para-div'>
-          <p className='para-explore'>Reddy | Chowdhary | Balija | Kapu | Achari</p>
+            <p className='para-explore'>Reddy | Chowdhary | Balija | Kapu | Achari</p>
             <p className='para-explore '>Reddy | Chowdhary | Balija | Kapu | Achari</p>
        </div>
           <p></p>
@@ -68,42 +68,7 @@ const getDivs=()=>{
   </div>
 
       <div className="explore-cont mb-5" onClick={() => navigator.push("/signup")} >
-        <div className='card-bg'>
-          <p className='card-text1'>RELIGION</p>
-          <div className='para-div'>
-            <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
-            <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
-          </div>
-          <p></p>
-          <div className='expore-btn  d-flex justify-content-evenly align-items-center' onClick={() => navigator.push("/signup")}>
-            <p className="btn-text"> Explore</p>
-            <img src={arrow} className='btn-arrow' />
-          </div>
-        </div>
-        <div className='card-bg'>
-          <p className='card-text1'>CASTE</p>
-          <div className='para-div para-div-big'>
-            <p className='para-explore'>Reddy | Chowdhary | Balija | Kapu | Achari</p>
-            <p className='para-explore '>Reddy | Chowdhary | Balija | Kapu | Achari</p>
-          </div>
-          <p></p>
-          <div className='expore-btn  explore-btn-big d-flex justify-content-evenly align-items-center' onClick={() => navigator.push("/signup")}>
-            <p className="btn-text btn-text-big"> Explore</p>
-            <img src={arrow} className='btn-arrow btn-arrow-big' />
-          </div>
-        </div>
-        <div className='card-bg'>
-          <p className='card-text1 '>MOTHER TONGUE</p>
-          <div className='para-div'>
-          <p className='para-explore'>Telugu | Hindi | Urdu | Tamil | Malayalam</p>
-            <p className='para-explore '> Telugu | Hindi | Urdu | Tamil | Malayalam</p>
-            </div>
-          <p></p>
-          <div className='expore-btn d-flex justify-content-evenly align-items-center' onClick={() => navigator.push("/signup")}>
-            <p className="btn-text"> Explore</p>
-            <img src={arrow} className='btn-arrow'alt='arrow' />
-          </div>
-        </div>
+        {getDivs()}
       </div>
       <div>
       </div>
