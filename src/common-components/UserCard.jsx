@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { Card } from 'react-bootstrap';
 import { GoHeart } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
 import { ignoreUserText } from '../utils/constants';
@@ -12,17 +11,17 @@ function UsersCard(userDetails) {
     const { user, background, color, viewButtonColor, buttonBackgroundColor, onMoveToIgnoreList, removeUserFromShortList } = userDetails
     return (
         <div className='user-card-maincontainer'>
-            <Card className='usercard'
+            <div className='usercard'
                 style={{
                     background: background,
                     color: color
                 }}
             >
                 <div className='user-card-icons-container'>
-                    <button onClick={onMoveToIgnoreList} disabled={user.userStatus !== "Active"} className='bg-transparent border-0'>
+                    <button onClick={onMoveToIgnoreList} disabled={user.userStatus === "Ignored"} className='bg-transparent border-0'>
                         <img src={ignore} alt='ignore' style={{ width: '25px', height: '25px' }} data-testid="usercard-ignoreicon" />
                     </button>
-                    <button disabled={user.userStatus !== "Active"} className='bg-transparent border-0' onClick={removeUserFromShortList}>
+                    <button disabled={user.userStatus === "Shortlisted"} className='bg-transparent border-0' onClick={removeUserFromShortList}>
                         {
                             user.userStatus === "Shortlisted" ?
                                 <AiFillHeart className='usercard-hearticon' style={{ color: 'white' }} data-testid="usercard-hearticon" />
@@ -51,8 +50,8 @@ function UsersCard(userDetails) {
                         </button>
                     </div>
                 </div>
-            </Card>
-        </div>
+            </div>
+         </div>
 
     )
 }

@@ -14,7 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { registration1 } from "../../utils/constants";
 import "./BasicsDetails.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   nextStep,
@@ -543,13 +543,13 @@ function BasicsDetails() {
               </Button>
             </div>
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-9 ms-md-5">
               <Link className="btn btn-link skip-btn" to="/dashboard">
                 Skip & Register later
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
       </Form>
     </div>

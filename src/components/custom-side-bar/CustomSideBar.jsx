@@ -47,7 +47,7 @@ const CustomSideBar = () => {
 
   return (
     <>
-    <Container fluid className='outer-container mt-4'>
+    <Container fluid className='outer-container mt-4 mb-4'>
       <Row className='row'>
         <Col xs="12" className="d-flex flex-row justify-content-between d-md-none">
           <Button className="bg-transparent border-0" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
