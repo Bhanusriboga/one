@@ -1,8 +1,8 @@
 export const footerContent={
   registrationlabel: 'Pellisambandlu © 2023 - All rights reserved | Designed by Accumenta services Pvt Ltd',
   infoText: 'Selecting a life partner is like adding a pecious melody to the song of your life, forever altering its tune. the sweetest symphony is found in choosing the perfect harmony. How delightful it would be to have a trusted companion to join in this heartarming duet of choice.',
-  Mobile: 'Mobile: 1234567890',
-  Email: 'Email: xyz@gmail.com',
+  Mobile: 'Mobile: +91 8247412579',
+  Email: 'Email: CustomerCare @Pellisambandalu.com',
   contactLabel: 'Contact Us',
   privacyLabel: 'Privacy & You',
   pp: 'Privacy policy',
@@ -243,4 +243,46 @@ export const CustomSideBar = {
   fromGallery: "From Gallery",
   fromCamera: "From Camera",
   cancel: "Cancel"
+};
+
+export  const registerMain = {
+  imgHeading:'Welcome to',
+  textIlaic:'pellisambandalu',
+  imgtext:'Our expert team provides comprehensive planning and personalized services to ensure your special day is perfect. Trust us to turn your dream wedding into reality. Contact us today!'
+}
+
+export const registration1={
+  education:"Highest Education ",
+  field:"This field is required",
+  occupation:"Occupation*",
+  employment:"Employment Status ",
+  income:"Annual Income ",
+  year:"Year of Passing",
+  place:"Place of Birth ",
+  time:"Time of Birth",
+  city:"Citizenship",
+  language :"Language Proficiency",
+  instagram:"Instagram ID",
+  linkedIn:"LinkedIn ID",
+  address:"Address",
+  state:"State",
+  country:"Country",
+  postal:"Postal Code",
+  door:"Door No/Building No/Building Name",
+  street:"Street Name",
+  cityName:"City Name",
+  name:"Name of the institute",
+  employedinplaceholder:"EmployedIn",
+  locationplaceholder:"Work Location",
+  stateplaceholder:"State",
+  cityplaceholder:"City",
+  annualincome:" annual income field is  Required",
+  annualtext:"Annual Income",
+  date:"Date of Birth",
+  religion:"Religion",
+  mother:"Mother Tongue",
+  link:"Skip & Register Later",
+
+  caste:"caste"
+
 };

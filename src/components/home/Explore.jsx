@@ -16,7 +16,7 @@ const getDivs=()=>{
     for(let i=0;i<list.length;i++){
         items.push( <div className='scr d-flex' key={`item-${i}`}>
           <div className='card-bg'>
-          <p className='card-text'>RELIGION</p>
+          <p className='card-text1'>RELIGION</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -28,7 +28,7 @@ const getDivs=()=>{
           </div>
         </div>
         <div className="card-bg">
-          <p className='card-text'>CASTE</p>
+          <p className='card-text1'>CASTE</p>
           <div className='para-div'>
           <p className='para-explore'>Reddy | Chowdhary | Balija | Kapu | Achari</p>
             <p className='para-explore '>Reddy | Chowdhary | Balija | Kapu | Achari</p>
@@ -40,7 +40,7 @@ const getDivs=()=>{
           </div>
         </div>
         <div className='card-bg'>
-          <p className='card-text '>MOTHER TONGUE</p>
+          <p className='card-text1 '>MOTHER TONGUE</p>
           <div className='para-div'>
             <p className='para-explore'>Telugu | Hindi | Urdu | Tamil | Malayalam</p>
             <p className='para-explore '> Telugu | Hindi | Urdu | Tamil | Malayalam</p>
@@ -69,7 +69,7 @@ const getDivs=()=>{
 
       <div className="explore-cont mb-5" onClick={() => navigator.push("/signup")} >
         <div className='card-bg'>
-          <p className='card-text'>RELIGION</p>
+          <p className='card-text1'>RELIGION</p>
           <div className='para-div'>
             <p className='para-explore'>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
             <p className='para-explore '>Hindu | Muslim | Christian Buddhism | Jain | Sikhism</p>
@@ -81,7 +81,7 @@ const getDivs=()=>{
           </div>
         </div>
         <div className='card-bg'>
-          <p className='card-text'>CASTE</p>
+          <p className='card-text1'>CASTE</p>
           <div className='para-div para-div-big'>
             <p className='para-explore'>Reddy | Chowdhary | Balija | Kapu | Achari</p>
             <p className='para-explore '>Reddy | Chowdhary | Balija | Kapu | Achari</p>
@@ -93,7 +93,7 @@ const getDivs=()=>{
           </div>
         </div>
         <div className='card-bg'>
-          <p className='card-text '>MOTHER TONGUE</p>
+          <p className='card-text1 '>MOTHER TONGUE</p>
           <div className='para-div'>
           <p className='para-explore'>Telugu | Hindi | Urdu | Tamil | Malayalam</p>
             <p className='para-explore '> Telugu | Hindi | Urdu | Tamil | Malayalam</p>

@@ -1,0 +1,89 @@
+.card{
+    width: 521px !important;
+    border: black;
+    border-Radius: 10px ;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.button {
+    width: 200px;
+    height: 45px;
+    border: none;
+    border-radius: 74.01px ;
+    background-color: rgba(120, 0, 36, 1);
+    color: white;
+    font-family: Poppins;
+    font-size: 20.27px;
+    text-align: center;
+}
+.text{
+width: 104px;
+font-family: Poppins;
+font-size: 12.92px;
+font-weight: 400;
+text-align: center;
+color: #212121;
+
+}
+.hrline{
+width: 300px;
+height: 2px;
+top: 305px;
+left: 562px;
+gap: 0px;
+opacity: 0.1px;
+color: #212121;
+;
+}
+.price{
+font-family: Poppins;
+font-size: 37.16px;
+font-weight: 800;
+text-align: left;
+color:rgba(120, 0, 36, 1); ;
+}
+.card-title{
+font-family: Poppins;
+font-size: 32px;
+font-weight: 700;
+color: rgba(32, 34, 36, 1);
+}
+.close{
+    width: 20px;
+    float: right;
+    border: none;
+    background: none;
+}
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+@media (max-width: 600px) {
+    .card {
+      /* width: 90%; */
+    }
+  .price {
+      font-size: 1.5rem;
+    }
+  .text {
+      font-size: 0.875rem;
+    }
+  .button {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+    }
+  .card-title {
+      font-size: 1rem;
+    }
+  ul li {
+      font-size: 0.875rem;
+    }
+  .close-button {
+      font-size: 1.25rem;
+    }
+  }
