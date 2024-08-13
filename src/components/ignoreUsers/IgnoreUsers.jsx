@@ -6,8 +6,8 @@ import './Ignoreuser.css';
 import { ignoreUserText } from '../../utils/constants';
 import PaginationComponent from '../../common-components/pagination/PaginationComponent';
 import UsersCard from '../../common-components/UserCard';
-import { getIgnoredUsers  } from '../../redux/slices/Users';
-import { changeUserStatus } from '../../redux/slices/Users';
+import { getIgnoredUsers  } from '../../redux/slices/users';
+import { changeUserStatus } from '../../redux/slices/users';
 import Loader from '../../common-components/Loader';
 
 function IgnoreUsers() {

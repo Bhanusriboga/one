@@ -6,7 +6,7 @@ import Header from './Header';
 import FooterBar from './FooterBar';
 import PageContainer from './PageContainer';
 import { fetchUserInfo } from '../../redux/slices/AuthSlice';
-import { getIgnoredUsers, getShortListedUsers } from '../../redux/slices/Users';
+import { getShortListedUsers, getIgnoredUsers } from '../../redux/slices/users';
 
 // Mock components and actions
 jest.mock('./Header', () => () => <div>Header Mock</div>);
@@ -15,7 +15,7 @@ jest.mock('./PageContainer', () => () => <div data-testid="page-container">PageC
 jest.mock('../../redux/slices/AuthSlice', () => ({
   fetchUserInfo: jest.fn(),
 }));
-jest.mock('../../redux/slices/Users', () => ({
+jest.mock('../../redux/slices/users', () => ({
   getIgnoredUsers: jest.fn(),
   getShortListedUsers: jest.fn(),
 }));
