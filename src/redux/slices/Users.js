@@ -6,7 +6,7 @@ import Storage from '../../utils/Storage';
 export const getAllUsers = createAsyncThunk(
   "users/getAllUsers",
   async (_, thunkAPI) => {
-    const { response } = await networkCall(endPoints.getAllUsers, "GET");
+    const { response } = await networkCall(endPoints.getAllUsers+Storage.get("userId"), "GET");
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
