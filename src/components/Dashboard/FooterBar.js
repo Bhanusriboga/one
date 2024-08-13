@@ -1,7 +1,8 @@
 import React from 'react'
 import { footerContent } from '../../utils/constants'
 import './Dashboard.scss'
-import logo from '../../Assets/Logo.png'
+// import logo from '../../Assets/Logo.png'
+import logo from '../../Assets/icon.svg'
 import { Col, Row } from 'reactstrap'
 const FooterBar = () => {
   return (
@@ -32,7 +33,7 @@ const FooterBar = () => {
         </Col>
         <Col md={3} className='mt-5 mb-3 d-flex align-items-center'>
         <div>
-        <img src={logo} alt="logo"></img>
+        <img src={logo} alt="logo" className='footer-logo'></img>
         </div>
         </Col>
       </Row>
