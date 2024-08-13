@@ -171,6 +171,7 @@ const AddPreference = () => {
         </div>
         <div className="backgroundImg">
           <FormGroup className="religion-text">
+            <h3 className="addPreferenceHeader d-none d-md-block" >{addPreference.hedding}</h3>
             <Label for="profileCreatedFor">
               <h5 className="profile">{addPreference.profile}</h5>
             </Label>
