@@ -161,8 +161,4 @@ const UserSlice = createSlice({
 });
 
 // export const {  } = UserSlice.actions;
-<<<<<<< HEAD
 export default UserSlice.reducer;
-=======
-export default UserSlice.reducer;
->>>>>>> 0841533e7ab1e7f7edba3bae8fbebf4717e5de43
