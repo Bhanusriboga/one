@@ -1,54 +1,43 @@
 import React, { useState } from 'react'
 import './Login.scss'
 import { Button, Input, Form, FormFeedback, FormGroup, Col } from 'reactstrap';
-import {  useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
 
-import { login } from "../../utils/constants";
+import { login, toastError, toastsuccess } from "../../utils/constants";
 import { toast } from "react-toastify";
 import { validatePhoneNumber } from "../../utils/validation";
 import { userLogin } from "../../redux/slices/AuthSlice";
 import "./Login.scss";
 import ForgotPassword from '../Forgot/ForgotPassword';
-
+import {LoginBack,LogoText,WelcomeText} from '../../commonSyles/LoginStyles.js'
+import { pelli } from '../Signup/assets/index.js';
+import { useHistory } from 'react-router-dom';
 const LoginPage = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [modal, setModal] = useState(false);
-    const [mobileValid, setMobileValid] = useState(true)
-    const [password, setPassword] = useState("")
-    const [mobile, setMobile] = useState("")
-    const dispatch = useDispatch()
-    const handleeyebtn = (e) => {
-        e.preventDefault()
-        setShowPassword(!showPassword);
-    }
+  const [showPassword, setShowPassword] = useState(false);
+  const history = useHistory()
+  const [modal, setModal] = useState(false);
+  const [mobileValid, setMobileValid] = useState(true)
+  const [password, setPassword] = useState("")
+  const [mobile, setMobile] = useState("")
+  const dispatch = useDispatch()
+  const handleeyebtn = (e) => {
+    e.preventDefault()
+    setShowPassword(!showPassword);
+  }
 
-    const toggle = () => setModal(!modal);
-
-    const handleLogin = async () => {
-       const logindata= await dispatch(userLogin({ mobileNumber:mobile, password }));
-       if(logindata?.payload.jwt === "" || logindata?.payload.jwt === null || logindata?.payload.jwt === undefined){
-        toast.error("Invalid Credentials",
-            {
-                position:"top-center",
-                autoClose:2000,
-                hideProgressBar:false,
-                closeOnClick:true,
-                pauseOnHover:true,
-                draggable:false,
-            });
-       }else{
-        toast.success("Login Successful",
-            {
-                position:"top-center",
-                autoClose:2000,
-                hideProgressBar:false,
-                closeOnClick:true,
-                pauseOnHover:true,
-                draggable:false,
-            });
-       }
+  const toggle = () => setModal(!modal);
+  const handleSignUp =()=>{
+    history.push('/signUp')
+  }
+  const handleLogin = async () => {
+    const logindata = await dispatch(userLogin({ mobileNumber: mobile, password }));
+    if (logindata?.payload.jwt === "" || logindata?.payload.jwt === null || logindata?.payload.jwt === undefined) {
+      toast.error("Invalid Credentials",toastError);
+    } else {
+      toast.success("Login Successful",toastsuccess);
     }
+  }
 
   const handleMobile = (event) => {
     if (validatePhoneNumber(event.target.value)) {
@@ -64,8 +53,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="bcgimg">
+    <LoginBack>
       <Form className="loginContent">
+      <WelcomeText>Welcome back to <LogoText>  <img src={pelli} alt="Pelli Sambandalu" className='pellilogo' /></LogoText></WelcomeText>
         <h3 className="d-flex justify-content-center align-items-center loginhead">
           {login.login}
         </h3>
@@ -108,7 +98,7 @@ const LoginPage = () => {
             </button>
           </Col>
         </div>
-        <FormGroup row className="d-flex justify-content-center">
+        <FormGroup row className="d-flex justify-content-center w-100">
           <Col sm={9} className="d-flex justify-content-end forgotwidth">
             <Button
               color="link"
@@ -121,7 +111,7 @@ const LoginPage = () => {
         <FormGroup
           check
           row
-          className="d-flex justify-content-center align-items-center p-0">
+          className="d-flex justify-content-center align-items-center p-0 w-100">
           <Button
             tag="a"
             className="w-25 mt-2 rounded-pill btnback"
@@ -135,7 +125,7 @@ const LoginPage = () => {
           <span className="fitWidth text-black"> {login.noAccount}</span>
           <Button
             color="link"
-            href="/signUp"
+            onClick={handleSignUp}
             tag="a"
             className="text-decoration-none p-0 cButton loginhead signupbtn">
             {login.signup}
@@ -143,7 +133,7 @@ const LoginPage = () => {
         </FormGroup>
       </Form>
       <ForgotPassword modal={modal} toggle={toggle} />
-    </div>
+    </LoginBack>
   );
 };
 

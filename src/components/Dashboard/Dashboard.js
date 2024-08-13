@@ -4,8 +4,8 @@ import Header from './Header'
 import FooterBar from './FooterBar'
 import PageContainer from './PageContainer'
 import { fetchUserInfo } from '../../redux/slices/AuthSlice'
-import {getIgnoredUsers,getShortListedUsers} from '../../redux/slices/Users'
 import './Dashboard.scss'
+import { getIgnoredUsers, getShortListedUsers } from '../../redux/slices/users'
 // import ComingSoon from '../ComingSoon/ComingSoon'
 
 const Dashboard = () => {

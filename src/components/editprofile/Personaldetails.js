@@ -5,7 +5,7 @@ import './Details.css';
 import { MdEdit } from "react-icons/md";
 import { EditProfile } from '../../utils/constants';
 import { useDispatch } from 'react-redux';
-import { updatepersonaldetails } from '../../redux/slices/Users';
+import { updatepersonaldetails } from '../../redux/slices/users';
 const initialDetails = {
   "Religion": {
     "Caste": "xyzxyz",
