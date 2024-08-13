@@ -4,9 +4,9 @@ import { Row } from "reactstrap"
 import { useDispatch, useSelector } from 'react-redux';
 import './ProfileList.scss'
 import Filters from './filters';
-import { changeUserStatus, getAllUsers } from '../../redux/slices/Users';
 import UsersCard from '../../common-components/UserCard';
 import Loader from '../../common-components/Loader';
+import { changeUserStatus, getAllUsers } from '../../redux/slices/users';
 const ProfileList = () => {
   const [filterdata, setfilterData] = useState()
   const { data, loading } = useSelector(state => state.users)

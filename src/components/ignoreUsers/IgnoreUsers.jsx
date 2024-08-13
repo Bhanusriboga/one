@@ -7,7 +7,7 @@ import { ignoreUserText } from '../../utils/constants';
 import { toast } from 'react-toastify';
 import PaginationComponent from '../../common-components/pagination/PaginationComponent';
 import UsersCard from '../../common-components/UserCard';
-import { getIgnoredUsers, getShortListedUsers } from '../../redux/slices/Users';
+import { getShortListedUsers, getIgnoredUsers } from '../../redux/slices/users';
 
 function IgnoreUsers() {
   const [currentPage, setCurrentPage] = useState(1);
