@@ -1,3 +1,14 @@
+.main-card-payment{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .card{
     width: 521px !important;
     border: black;
@@ -11,13 +22,11 @@
     border-radius: 74.01px ;
     background-color: rgba(120, 0, 36, 1);
     color: white;
-    font-family: Poppins;
     font-size: 20.27px;
     text-align: center;
 }
 .text{
 width: 104px;
-font-family: Poppins;
 font-size: 12.92px;
 font-weight: 400;
 text-align: center;
@@ -35,14 +44,12 @@ color: #212121;
 ;
 }
 .price{
-font-family: Poppins;
 font-size: 37.16px;
 font-weight: 800;
 text-align: left;
 color:rgba(120, 0, 36, 1); ;
 }
 .card-title{
-font-family: Poppins;
 font-size: 32px;
 font-weight: 700;
 color: rgba(32, 34, 36, 1);
@@ -62,6 +69,12 @@ color: rgba(32, 34, 36, 1);
     background: none;
     font-size: 1.5rem;
     cursor: pointer;
+  }
+  .amount{
+  
+    font-size: 2rem;
+    font-weight: 800;
+    color:#780024;
   }
 @media (max-width: 600px) {
     .card {

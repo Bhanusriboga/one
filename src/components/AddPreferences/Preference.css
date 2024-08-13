@@ -1,7 +1,5 @@
 
 .preference {
-    
-  font-family: Poppins;
   font-size: 36px;
   font-weight: 400;
   line-height: 76px;
@@ -11,6 +9,18 @@
 .input-height{
   height: 44px ;
   border:1px solid rgba(120, 0, 36, 1)!important;
+}
+.addPreferenceHeader{
+  width: 296px;
+height: 76px;
+gap: 0px;
+opacity: 0px;
+font-family: Poppins;
+font-size: 36px;
+font-weight: 400;
+line-height: 76px;
+text-align: left;
+color: rgba(120, 0, 36, 1);
 }
 .field-container {
   padding-left:1%;
@@ -39,7 +49,6 @@ color: rgba(120, 0, 36, 1);
 .profile{
   font-size: 20px;
   font-weight: 400;
-  font-family: poppins;
   color:rgba(120, 0, 36, 1)
 }
 Input::placeholder{
@@ -55,7 +64,6 @@ Input::placeholder{
   width:270px!important
 }
 .button {
-  font-family:bold;
   width: 30%;
   height: 45px;
   background: rgba(125, 0, 36, 1) !important;
