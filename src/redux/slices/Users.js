@@ -8,7 +8,7 @@ export const getAllUsers = createAsyncThunk(
   async (_, thunkAPI) => {
     const { response } = await networkCall(endPoints.getAllUsers+Storage.get("userId"), "GET");
     if (response) {
-      return thunkAPI.fulfillWithValue(response.data);
+      return thunkAPI.fulfillWithValue(response);
     }
     else {
       return thunkAPI.rejectWithValue("Something went wrong..!")
@@ -23,7 +23,7 @@ export const changeUserStatus = createAsyncThunk(
   async (props, thunkAPI) => {
     const { response } = await networkCall(endPoints.userStatus, "POST", props);
     if (response) {
-      return thunkAPI.fulfillWithValue(response.data);
+      return thunkAPI.fulfillWithValue(response);
     }
     else {
       return thunkAPI.rejectWithValue("Something went wrong..!")
