@@ -55,7 +55,7 @@ export const addPreference = {
 
   EatingHabits: "Eating Habits is required.",
 
-  profile: "ProfileCreatedFor",
+  profile: "Profile Created For",
 
   minage: "MinAge",
 

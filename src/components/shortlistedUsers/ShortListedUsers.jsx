@@ -3,15 +3,17 @@ import { Col, Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaArrowLeft } from "react-icons/fa6";
 import { ignoreUserText } from '../../utils/constants';
-import { toast } from 'react-toastify';
 import PaginationComponent from '../../common-components/pagination/PaginationComponent';
 import UsersCard from '../../common-components/UserCard';
+import { getShortListedUsers } from '../../redux/slices/users';
+import { changeUserStatus } from '../../redux/slices/users';
 import './Usercard.css';
-import { getIgnoredUsers, getShortListedUsers } from '../../redux/slices/users';
+
 
 function ShortListedUsers() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalpages, setTotalpages] = useState(10);
+  const [totalpages, setTotalpages] = useState(1);
+  const { userId } = useSelector(state => state.auth)
   const dispatch = useDispatch();
 
   const { shortlisted } = useSelector((state) => state.users);
@@ -22,104 +24,15 @@ function ShortListedUsers() {
     setCurrentPage(1);
   }, [dispatch]);
 
-  const handleMoveToIgnoreList = (userId) => {
-    const userExists = shortlisted.some((user) => user.userId === userId);
-    if (userExists) {
-      const toastId = toast.success(
-        <div>
-          User will be moved to ignore list.
-          <button
-            style={{
-              border: '5px',
-              borderRadius: '5px',
-              float: 'right',
-              backgroundColor: 'olive',
-              fontSize: '12px',
-              padding: '8px',
-              color: 'white'
-            }}
-            onClick={() => undoMoveToIgnoreList(userId, toastId)}
-          >
-            Undo
-          </button>
-        </div>,
-        {
-          position: "top-center",
-          autoClose: 8000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        }
-      );
+  
 
-      setTimeout(() => {
-        dispatch(getIgnoredUsers("shortlisted"));
-        toast.success('User moved to ignore list', {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }, 8000);
-    } else {
-      toast.error("User not found", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
-  };
+  const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) => {
+    await dispatch(changeUserStatus({ affectedUserId, changeByUserId, userStatus }))
+  }
 
-  const undoMoveToIgnoreList = (userId, toastId) => {
-    dispatch(getShortListedUsers("shortlisted"));
-    toast.update(toastId, {
-      render: 'User move to ignore list cancelled',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
-  const removeUserFromShortList = () => {
-    dispatch(getIgnoredUsers("Shortlisted"));
-    toast.error('User removed from short list!', {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     if (window.innerWidth < 576) {
-  //       setUsersPerPage(4);
-  //     } else if (window.innerWidth < 768) {
-  //       setUsersPerPage(6);
-  //     } else {
-  //       setUsersPerPage(10);
-  //     }
-  //   };
 
-  //   handleResize();
-  //   window.addEventListener('resize', handleResize);
-  //   return () => window.removeEventListener('resize', handleResize);
-  // }, []);
 
 
   return (
@@ -156,8 +69,8 @@ function ShortListedUsers() {
                   color={color}
                   buttonBackgroundColor={buttonBackgroundColor}
                   viewButtonColor={viewButtonColor}
-                  onMoveToIgnoreList={() => handleMoveToIgnoreList(user.userId)}
-                  removeUserFromShortList={() => removeUserFromShortList(user.userId)}
+                  onMoveToIgnoreList={() => changeUSerStateById(user.userId, userId, "Ignored")}
+                removeUserFromShortList={() => changeUSerStateById(user.userId, userId, "Shortlisted")}
                 />
               </Col>
             );

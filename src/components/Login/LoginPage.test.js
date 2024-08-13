@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from '../../redux/slices/index'; 
 import { toast } from 'react-toastify';
-import { userLogin } from '../../redux/slices/Users';
+import { userLogin } from '../../redux/slices/users';
 
 const store = createStore(rootReducer);
 
@@ -29,7 +29,7 @@ jest.mock('react-toastify', () => ({
   update: jest.fn(),
 }));
 
-jest.mock('../../redux/slices/Users', () => ({
+jest.mock('../../redux/slices/users', () => ({
   userLogin: jest.fn(),
 }));
 

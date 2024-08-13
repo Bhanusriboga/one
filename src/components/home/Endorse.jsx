@@ -4,9 +4,14 @@ import StarRatings from 'react-star-ratings'
 import rightArrow from "./assets/Animation - 1721798930907.json"
 import Lottie from 'react-lottie'
 import customer from "./assets/customer.svg"
+import kareem from "./assets/kareem.png"
+import yukthifemale from "./assets/yukthifemale.png"
+import venkatimg from "./assets/venkatimg.png"
+
+
 
 function Endorse() {
-  const endorseList = [{ name: 'YUKTHI', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 4.8 }, { name: 'Kareem', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 3.4 }, { name: 'vishnu', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 5 }, { name: 'venkat', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 4.5 }, { name: 'YUKTHI', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 5 }, { name: 'vasavi', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: "", rating: 4 }]
+  const endorseList = [{ name: 'YUKTHI', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: customer, rating: 4.8 }, { name: 'Kareem', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl:kareem , rating: 3.4 }, { name: 'vishnu', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: kareem, rating: 5 }, { name: 'venkat', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: venkatimg, rating: 4.5 }, { name: 'YUKTHI', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: customer, rating: 5 }, { name: 'vasavi', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: yukthifemale, rating: 4 }]
   const scrollContainerRef = useRef(null);
   const scroll = (scrollOffset) => {
     if (scrollContainerRef.current) {
@@ -38,8 +43,8 @@ function Endorse() {
           {endorseList.map((item, index) => (
             <div key={index} className="scrollable-list-item">
               <div className='endorse-square d-flex flex-column justify-content-center align-items-center'>
-                <h5 className='endorse-heading'>YUKTHI</h5>
-                <img className='customer-img' src={customer} />
+                <h5 className='endorse-heading'>{item.name}</h5>
+                <img className='customer-img' src={item.imgUrl} />
                 <div className='width-100'>
                   <p className='endorse-text-para justify-self-center'>Joining this website was the best decision<br /> of my life! Within weeks,<br /> I found my perfect match. </p>
                 </div>

@@ -7,10 +7,13 @@ import Filters from './filters';
 import UsersCard from '../../common-components/UserCard';
 import Loader from '../../common-components/Loader';
 import { changeUserStatus, getAllUsers } from '../../redux/slices/users';
+import PaginationComponent from '../../common-components/pagination/PaginationComponent';
 const ProfileList = () => {
   const [filterdata, setfilterData] = useState()
   const { data, loading } = useSelector(state => state.users)
   const { userId } = useSelector(state => state.auth)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalpages, setTotalpages] = useState(1);
   const dispatch = useDispatch()
   const handleFilters = () => {
 
@@ -22,10 +25,15 @@ const ProfileList = () => {
   const getAllUsersData = async () => {
     const data=await dispatch(getAllUsers());
     setfilterData(data?.payload?.object)
+    setTotalpages(Math.ceil(data?.payload?.object?.length / 10));
+    setCurrentPage(1);
   }
   useEffect(() => {
     setfilterData(data)
   }, [data,userId])
+
+  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+
   const filters = (data, maindata) => {
     let updatedfilteredData = []
     if (data?.religion !== '' && data?.subcast === '' && data?.cast === '') {
@@ -51,6 +59,7 @@ const ProfileList = () => {
 
   const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) => {
     await dispatch(changeUserStatus({ affectedUserId, changeByUserId, userStatus }))
+    await getAllUsersData();
   }
 
   return (
@@ -89,6 +98,13 @@ const ProfileList = () => {
             )
           })}
         </Row>)}
+        <div className='d-flex justify-content-center pt-2'>
+        {totalpages>1 && <PaginationComponent
+            totalPages={totalpages}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />}
+        </div>
     </div>
   )
 

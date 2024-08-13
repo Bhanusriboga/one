@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import ProfileList from './ProfileList'; // Adjust the import based on your file structure
-import rootReducer from '../../redux/slices/Users'; // Adjust based on your file structure
+import rootReducer from '../../redux/slices/users'; // Adjust based on your file structure
 
 const store = createStore(rootReducer, {
   user: {

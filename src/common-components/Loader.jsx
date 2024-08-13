@@ -1,15 +1,9 @@
 import React from 'react';
-import './Loader.scss';
-
+import loader from '../Assets/loader.gif'
 const Loader = () => {
   return (
-    <div className="spinner">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div className="h-100 w-100 d-flex justify-content-center align-items-center">
+      <img src={loader} alt="loader" />
     </div>
   );
 };

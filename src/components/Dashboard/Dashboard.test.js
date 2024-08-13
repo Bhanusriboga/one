@@ -15,7 +15,7 @@ jest.mock('./PageContainer', () => () => <div data-testid="page-container">PageC
 jest.mock('../../redux/slices/AuthSlice', () => ({
   fetchUserInfo: jest.fn(),
 }));
-jest.mock('../../redux/slices/Users', () => ({
+jest.mock('../../redux/slices/users', () => ({
   getIgnoredUsers: jest.fn(),
   getShortListedUsers: jest.fn(),
 }));
