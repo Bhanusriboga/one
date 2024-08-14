@@ -8,7 +8,12 @@ import ignore from '../Assets/Ignore.svg'
 import './UserCard.scss'
 
 function UsersCard(userDetails) {
-    const { user, background, color, viewButtonColor, buttonBackgroundColor, onMoveToIgnoreList, removeUserFromShortList } = userDetails
+    const { user, background, color, viewButtonColor, buttonBackgroundColor, onMoveToIgnoreList, removeUserFromShortList,setActiveContent } = userDetails
+   const renderUserId=(userId)=>{
+    //need to write the dispath method to call api for getting single user details
+    console.log("userid --- ",userId)
+    setActiveContent("singleUser")
+   }
     return (
         <div className='user-card-maincontainer'>
             <div className='usercard'
@@ -31,7 +36,9 @@ function UsersCard(userDetails) {
                     </button>
                 </div>
                 <div className='shortlist-mobile'>
-                    <div className='usercard-image-container'></div>
+                    <div className='usercard-image-container'>
+                        {user?.imageUrl&&<img src={user?.imageUrl} alt='profile' className='usercard-image h-100 w-100 rounded-circle' />}
+                    </div>
                     <div>
                         <h6 className='usercard-name'>{user?.username}</h6>
                         <button className='usercard-button-mobile' style={{ backgroundColor: buttonBackgroundColor, color: viewButtonColor }}>
@@ -45,8 +52,10 @@ function UsersCard(userDetails) {
                                 <p className='user-age'>{ignoreUserText.Religion} :</p><p className='user-age'>{user?.religion}</p>
                             </div>
                         </div>
-                        <button className='usercard-button' style={{ backgroundColor: buttonBackgroundColor, color: viewButtonColor }}>
-                            <Link to={`/user/${user.userId}`} style={{ color: viewButtonColor, textDecoration: 'none' }}>{ignoreUserText.ViewProfileBtn}</Link>
+                        <button className='usercard-button' style={{ backgroundColor: buttonBackgroundColor, color: viewButtonColor }} onClick={() => renderUserId(user.userId)}>
+                            <text style={{ color: viewButtonColor, textDecoration: 'none' }} >
+                                {ignoreUserText.ViewProfileBtn}
+                            </text>
                         </button>
                     </div>
                 </div>

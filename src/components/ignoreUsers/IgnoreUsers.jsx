@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import { Col, Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { FaArrowLeft } from "react-icons/fa6";
 import './Ignoreuser.css';
 import { ignoreUserText } from '../../utils/constants';
@@ -10,13 +11,13 @@ import { getIgnoredUsers  } from '../../redux/slices/users';
 import { changeUserStatus } from '../../redux/slices/users';
 import Loader from '../../common-components/Loader';
 
-function IgnoreUsers() {
+function IgnoreUsers(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const { userId } = useSelector(state => state.auth)
   const {loader}=useSelector(state=>state.users)
   const dispatch = useDispatch();
-
+  const {setActiveContent}=props;
   const { ignored } = useSelector((state) => state.users);
   useEffect(() => {
     getIgnoreItemList();
@@ -63,6 +64,7 @@ const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) =
                   viewButtonColor={styles.viewButtonColor}
                   onMoveToIgnoreList={() => changeUSerStateById(user.userId, userId, "Ignored")}
                 removeUserFromShortList={() => changeUSerStateById(user.userId, userId, "Shortlisted")}
+                setActiveContent={setActiveContent}
                 />
               </Col>
             );
@@ -80,5 +82,7 @@ const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) =
     </div>
   );
 }
-
+IgnoreUsers.propTypes ={
+  setActiveContent:PropTypes.func.isRequired
+}
 export default IgnoreUsers;

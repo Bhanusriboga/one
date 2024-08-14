@@ -8,13 +8,15 @@ import UsersCard from '../../common-components/UserCard';
 import Loader from '../../common-components/Loader';
 import { changeUserStatus, getAllUsers } from '../../redux/slices/users';
 import PaginationComponent from '../../common-components/pagination/PaginationComponent';
-const ProfileList = () => {
+import PropTypes from 'prop-types';
+const ProfileList = (props) => {
   const [filterdata, setfilterData] = useState()
   const { data, loading } = useSelector(state => state.users)
   const { userId } = useSelector(state => state.auth)
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const dispatch = useDispatch()
+  const {setActiveContent}=props;
   const handleFilters = () => {
 
   }
@@ -94,7 +96,9 @@ const ProfileList = () => {
                 background={background}
                 color={color}
                 viewButtonColor={viewButtonColor}
-                buttonBackgroundColor={buttonBackgroundColor} />
+                buttonBackgroundColor={buttonBackgroundColor} 
+                setActiveContent={setActiveContent}
+                />
             )
           })}
         </Row>)}
@@ -109,5 +113,7 @@ const ProfileList = () => {
   )
 
 }
-
+ProfileList.propTypes ={
+  setActiveContent:PropTypes.func.isRequired
+}
 export default ProfileList
