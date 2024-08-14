@@ -4,14 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FaArrowLeft } from "react-icons/fa6";
 import './Ignoreuser.css';
 import { ignoreUserText } from '../../utils/constants';
-import { toast } from 'react-toastify';
 import PaginationComponent from '../../common-components/pagination/PaginationComponent';
 import UsersCard from '../../common-components/UserCard';
-import { getIgnoredUsers, getShortListedUsers } from '../../redux/slices/Users';
+import { getIgnoredUsers  } from '../../redux/slices/users';
+import { changeUserStatus } from '../../redux/slices/users';
+import Loader from '../../common-components/Loader';
 
 function IgnoreUsers() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalpages, setTotalpages] = useState(10);
+  const [totalpages, setTotalpages] = useState(1);
+  const { userId } = useSelector(state => state.auth)
+  const {loader}=useSelector(state=>state.users)
   const dispatch = useDispatch();
 
   const { ignored } = useSelector((state) => state.users);
@@ -24,80 +27,14 @@ function IgnoreUsers() {
 const getIgnoreItemList=async()=>{
  await dispatch(getIgnoredUsers());
 }
+const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) => {
+  await dispatch(changeUserStatus({ affectedUserId, changeByUserId, userStatus }))
+  getIgnoreItemList();
+}
 
-
-  const handleMoveToShortList = (userId) => {
-    const userExists = ignored.some((user) => user.userId === userId);
-    if (userExists) {
-      const toastId = toast.success(
-        <div>
-          User will be moved to shortlist. 
-          <button data-testid ="undo-button" style={{border:'5px', borderRadius:'5px' ,float:'right', backgroundColor:'olive', fontSize:'12px',padding:'8px',color:'white'}} onClick={() => undoMoveToShortList( toastId)}>Undo</button>
-        </div>,
-        {
-          position: "top-center",
-          autoClose: 8000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        }
-      );
-
-      setTimeout(() => {
-        dispatch(getShortListedUsers("shortlisted"));
-        toast.success('User moved to shortlist', {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }, 8000);
-    } else {
-      toast.error('User not found', {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
-  };
   const handlePageChange=(currentPage)=>{
     setCurrentPage(currentPage);
   }
-  const undoMoveToShortList = ( toastId) => {
-    dispatch(getIgnoredUsers("ignored"));
-    toast.update(toastId, {
-      render: 'User move to shortlist cancelled',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-
-  const removeUserFromIgnoreList = () => {
-    dispatch(getIgnoredUsers("ignored"));
-    toast.error('User removed from ignore list!', {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-
 
   return (
     <div>
@@ -106,7 +43,8 @@ const getIgnoreItemList=async()=>{
           <FaArrowLeft className='ignore-back-mobile' />
           <h4 className='ignore-heading'>{ignoreUserText.heading}</h4>
         </div>
-        <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-4 g-md-3">
+
+        {loader?<Loader/>:<Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-4 g-md-3">
           {ignored?.map((user, index) => {
             const even = index % 2 === 0;
             const styles = {
@@ -123,13 +61,13 @@ const getIgnoreItemList=async()=>{
                   color={styles.color}
                   buttonBackgroundColor={styles.buttonBackgroundColor}
                   viewButtonColor={styles.viewButtonColor}
-                  onMoveToIgnoreList={() => handleMoveToShortList(user.userId)}
-                  removeUserFromShortList={() => removeUserFromIgnoreList(user.userId)}
+                  onMoveToIgnoreList={() => changeUSerStateById(user.userId, userId, "Ignored")}
+                removeUserFromShortList={() => changeUSerStateById(user.userId, userId, "Shortlisted")}
                 />
               </Col>
             );
           })}
-        </Row>
+        </Row>}
         <div className='ignoredlisted-pagination'>
          {totalpages>1&& <PaginationComponent
             totalPages={totalpages}

@@ -55,7 +55,7 @@ export const addPreference = {
 
   EatingHabits: "Eating Habits is required.",
 
-  profile: "ProfileCreatedFor",
+  profile: "Profile Created For",
 
   minage: "MinAge",
 
@@ -114,6 +114,26 @@ export const headerContent={
   firstg:'First Marraige Grooms',
   secondg:'Second Marriage Grooms',
   contact:'Contact',
+}
+export const toastsuccess={
+  position: "top-right",
+  autoClose: 2000,
+  hideProgressBar: false,
+  theme: 'colored',
+  type: 'success',
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: false,
+}
+export const toastError={
+  position: "top-right",
+  autoClose: 2000,
+  hideProgressBar: false,
+  theme: 'colored',
+  type: 'error',
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: false,
 }
 export const login={
   login: 'Login',

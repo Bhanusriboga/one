@@ -118,7 +118,7 @@ overflow-x: hidden;
 }
 .side-choose { position: absolute; top: 117vh; left: 0vw; }
 .choose-us-cont { justify-self: center; width:80vw }
-.choose-us { color: rgba(120, 0, 36, 1); font-family: Libre Caslon Text; font-size: 50px; font-weight: 500 !important; text-align: center; width: 80vw ; }
+.choose-us { color: rgba(120, 0, 36, 1);  font-size: 50px; font-weight: 500 !important; text-align: center; width: 80vw ; }
 .rings { background-image: url("./assets/rings.png"); background-repeat: no-repeat; width: 120.75px; height: 145px; text-align: center; background-color: transparent; }
 .explore {
   width: 87vw;
@@ -136,7 +136,7 @@ overflow-x: hidden;
 }
 .collapse-nav{
   margin-left:auto;}
-.destination { color: rgba(120, 0, 36, 1); width: 70vw; font-family: Libre Caslon Text; font-size: 38px; font-weight: 400; line-height: 76px; text-align: center; }
+.destination { color: rgba(120, 0, 36, 1); width: 70vw;  font-size: 38px; font-weight: 400; line-height: 76px; text-align: center; }
 .destination-cont { padding: 5vw; height: 60vh; }
 .begin { width: 178px; height: 9vh !important;  margin-top: 4vw; font-size: 24px; font-weight: 600;  text-align: center; border-radius: 15px; background-color: rgba(120, 0, 36, 1); border-width: 0px; color: rgba(243, 243, 243, 1); transition: transform 1s ease; }
 .begin:hover { transform: scale(1.1); }
@@ -340,7 +340,6 @@ color: #E2E2E2;
   }
   .choose-us {
       color: rgba(120, 0, 36, 1);
-      font-family: Libre Caslon Text;
       font-size: 28px;
       font-weight: 500 !important;
       text-align: center;
@@ -352,7 +351,6 @@ color: #E2E2E2;
       color: white;
   }
   .exploretext {
-      font-family: Libre Caslon Text;
       font-size: 30px;
       font-weight: 400;
       text-align: center;
@@ -427,7 +425,6 @@ color: #E2E2E2;
   }
   .choose-us {
       color: rgba(120, 0, 36, 1);
-      font-family: Libre Caslon Text;
       font-size: 28px;
       font-weight: 500 !important;
       text-align: center;
@@ -621,7 +618,6 @@ width: 64vw;
   }
   .choose-us {
       color: rgba(120, 0, 36, 1);
-      font-family: Libre Caslon Text;
       font-size: 28px;
       font-weight: 500 !important;
       text-align: center;

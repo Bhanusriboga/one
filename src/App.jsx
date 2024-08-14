@@ -7,7 +7,7 @@ import store from './redux/store.js';
 
 const App = () => {
   return (
-    <div className='vh-100 pagewidth'>
+    <div className='vh-100 w-100'>
       <Provider store={store}>
         <BrowserRouter>
           <Routes />

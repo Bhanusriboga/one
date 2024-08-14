@@ -3,7 +3,6 @@
   display: none;
 }
 .main-heading{
-font-family: Poppins;
 font-size: 20px;
 font-weight: 600;
 color: rgba(153, 9, 9, 1);
@@ -15,20 +14,17 @@ color: rgba(153, 9, 9, 1);
  border-radius: 10px;
 }
 .sub-heading{
-font-family: Poppins;
 font-size: 20px;
 font-weight: 600;
 text-align: left;
 color: rgba(153, 9, 9, 1);
 }
 .keytext{
-font-family: Poppins;
 font-size: 17.97px;
 font-weight: 500;
 text-align: left;
 }
 .valtext{
-font-family: Poppins;
 font-size: 17.97px;
 font-weight: 400;
 text-align: left;
@@ -45,7 +41,6 @@ left: 793px;
 border-radius: 5px;
 border: none;
 background: rgba(120, 0, 36, 1);
-font-family: Poppins;
 font-size: 15px;
 font-weight: 400;
 color: white;
@@ -112,7 +107,6 @@ padding-left: 4px;
     outline: none;
   }
 .editprofile-tittle{
-font-family: Poppins;
 font-size: 36px;
 font-weight: 400;
 line-height: 76px;
@@ -124,7 +118,6 @@ width: 223px;
 height: 58px;
 border-radius: 5px;
 border: none;
-font-family: Poppins;
 font-size: 24px;
 font-weight: 500;
 text-align: center;
@@ -173,7 +166,7 @@ float: right;
       width: 100%;
     }
     .editprofile-tittle{
-    font-family: Poppins;
+  
     font-size: 25px;
     font-weight: 500;
     line-height: 48.55px;

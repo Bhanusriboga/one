@@ -14,7 +14,7 @@ export const BasicDetailsAPICall = createAsyncThunk(
       timeOfBirth: "AM",
       religion: props.religion,
       motherTongue: props.motherTongue,
-      citizenShip: props.citizenShip,
+      citizenShip: props.citizenship,
       languageProficiency: props.languageProficiency,
       instgramId: props.instagramId,
       linkedinId: props.linkedinId || "",

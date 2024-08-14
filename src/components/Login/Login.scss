@@ -71,7 +71,6 @@
 .signupbtn {
   font-weight: bold !important;
 }
-
 .letterIconplace {
   position: relative;
   width: 68%;
@@ -106,6 +105,13 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+  }
+}
+@media (min-width:0px) and (max-width:320px) {
+  .loginContent {
+    display: flex;
+    justify-content: flex-end;
     flex-direction: column;
   }
 }

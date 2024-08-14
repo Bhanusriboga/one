@@ -55,7 +55,6 @@ input::placeholder {
   font-size: 16px;
   color: #b7b7b7;
   font-weight: 600;
-  font-family: sans-serif;
 }
 
 .upload-btn:hover {
@@ -68,7 +67,6 @@ input::placeholder {
   padding-left: 20px;
   font-size: 20px;
   font-weight: 500;
-  font-family: sans-serif;
 }
 
 .add-more-btn {
