@@ -1,8 +1,8 @@
 export const footerContent={
   registrationlabel: 'Pellisambandlu © 2023 - All rights reserved | Designed by Accumenta services Pvt Ltd',
   infoText: 'Selecting a life partner is like adding a pecious melody to the song of your life, forever altering its tune. the sweetest symphony is found in choosing the perfect harmony. How delightful it would be to have a trusted companion to join in this heartarming duet of choice.',
-  Mobile: 'Mobile: 1234567890',
-  Email: 'Email: xyz@gmail.com',
+  Mobile: 'Mobile: +91 8247412579',
+  Email: 'Email: CustomerCare @Pellisambandalu.com',
   contactLabel: 'Contact Us',
   privacyLabel: 'Privacy & You',
   pp: 'Privacy policy',
@@ -55,7 +55,7 @@ export const addPreference = {
 
   EatingHabits: "Eating Habits is required.",
 
-  profile: "ProfileCreatedFor",
+  profile: "Profile Created For",
 
   minage: "MinAge",
 
@@ -114,6 +114,26 @@ export const headerContent={
   firstg:'First Marraige Grooms',
   secondg:'Second Marriage Grooms',
   contact:'Contact',
+}
+export const toastsuccess={
+  position: "top-right",
+  autoClose: 2000,
+  hideProgressBar: false,
+  theme: 'colored',
+  type: 'success',
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: false,
+}
+export const toastError={
+  position: "top-right",
+  autoClose: 2000,
+  hideProgressBar: false,
+  theme: 'colored',
+  type: 'error',
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: false,
 }
 export const login={
   login: 'Login',

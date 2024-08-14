@@ -15,7 +15,7 @@
   padding-bottom: 20px;
 }
 
-.modal-content {
+.modal-content-finish {
   background-image: url('../../Assets/register_pg5.png') !important;
   background-size: cover;
   background-position: center;
@@ -26,7 +26,6 @@
 
 .text-center h3 {
   font-size: 1.5rem;
-  font-family: Poppins;
 font-size: 33px;
 font-weight: 700;
 color: rgba(255, 255, 255, 1);
@@ -34,7 +33,6 @@ color: rgba(255, 255, 255, 1);
 
 .text-center p{
   color:rgba(201, 201, 201, 1) !important;
-  font-family: Poppins;
 font-size: 18px;
 font-weight: 400;
 
@@ -42,7 +40,6 @@ text-align: center;
 
 }
 .linktodashboard{
-  font-family: Poppins;
 font-size: 20px;
 font-weight: 500;
 line-height: 30px;

@@ -7,8 +7,10 @@
     font-size: 15px !important;
     font-weight: 400 !important;
     margin-right: 5px;
+    cursor: pointer;
 
 }
+
 .pageFooter {
     background-color: #780024 !important;
     color: white;
@@ -16,7 +18,10 @@
 }
 .margindata{
     width: 90% !important;
-    margin-left: 9% !important;
+    margin-left: 10% !important;
+}
+.info-text{
+    width: 25vw !important;
 }
 .copyrightBot{
     border-top: 1px solid #F2F7F9;
@@ -25,6 +30,21 @@
     background-image: url(../../Assets/footerright.png), url(../../Assets/footerleftimg.png) !important;
     background-position: right top, left top;
     background-repeat: no-repeat, no-repeat;
+    width: 100% !important;
+}
+.footerBackSmall{
+    background-position: right top, left top;
+    background-repeat: no-repeat, no-repeat;
+    background-color: #780024;
+}
+.pelli-imgs{
+    width:70vw
+
+}
+.horizontal-line{
+    width: 100vw;
+    border:1px solid #F2F7F9 ;
+    margin-right: 10vw !important;
 }
 .dashbcg {
     background-image: url('../../Assets/dashboardBcg.svg') !important;
@@ -57,6 +77,7 @@
     font-size: large !important;
     font-weight: 400 !important;
 }
+
 @media(max-width:991px){
     .vertical-divider{
         border: none !important;
@@ -69,6 +90,20 @@
         border-top: none !important;
         width: 100%;
     } 
+    .info-text{
+        width: 65vw !important;
+        margin-left: 10vw;
+    }
+    .left-margin{
+        margin-left: 30vw;
+    }
+    .left-margins{
+        margin-left: 22vw;
+    }
+
+
+
+    
   }
 
 .advancedfilters {

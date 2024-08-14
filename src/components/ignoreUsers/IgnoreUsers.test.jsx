@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import IgnoreUsers from './IgnoreUsers'; // Adjust import path
-import { moveToShortlist, undoAction, removeUser, changePage } from '../../redux/slices/Users'; // Adjust import path
+import { moveToShortlist, undoAction, removeUser, changePage } from '../../redux/slices/users'; // Adjust import path
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

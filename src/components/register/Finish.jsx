@@ -4,9 +4,10 @@ import { Modal, ModalBody, Input } from "reactstrap";
 import "./Finish.css";
 import { prevStep } from "../../redux/slices/RegistrationDetails";
 import { useDispatch, useSelector } from "react-redux";
-import { saveTextArea } from "../../redux/slices/RegistrationDetails";
+import { saveTextArea,userDescriptionAPICall } from "../../redux/slices/RegistrationDetails";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Finish() {
   const dispatch = useDispatch();
@@ -27,12 +28,17 @@ function Finish() {
     setErrorMsg("");
   };
 
-  const submittext = () => {
+  const submittext =async () => {
     if (textarea.length < 10) {
       setErrorMsg("Please describe yourself in at least 10 characters.");
     } else {
       dispatch(saveTextArea(textarea));
-      setModal(true);
+     const data = await dispatch(userDescriptionAPICall({description: textarea}))
+      if(data?.payload?.message=="User Description Added Successfully"||data?.payload?.message=="User Description Already Exists..!"){
+        setModal(true);
+      }else{
+        toast.error("Please try again , Something went wrong")
+      }
     }
   };
 
@@ -53,7 +59,7 @@ function Finish() {
       {errorMsg && <span className="error-message">{errorMsg}</span>}
 
       <Modal isOpen={modal} toggle={toggle} className="modal-with-bgp-0 m-">
-        <ModalBody className=" w-100 h-100 m-0">
+        <ModalBody className=" w-100 h-100 m-0 modal-content-finish">
           <div className="text-center">
             <h3 className="pt-4">Registered Successfully</h3>
             <p className="py-3 text-muted mx-4">

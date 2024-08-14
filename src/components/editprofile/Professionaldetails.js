@@ -3,6 +3,9 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import './Details.css';
 import { MdEdit } from "react-icons/md";
 import { EditProfile } from '../../utils/constants';
+import { useDispatch } from 'react-redux';
+import { updateprofesionaldetails } from '../../redux/slices/users';
+
 
 const initialDetails = {
   "Highest Education": "B.Tech",
@@ -32,7 +35,7 @@ const ProfessionalDetails = () => {
   const [details, setDetails] = useState(initialDetails);
   const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({});
-
+  const dispatch = useDispatch()
   const leftColumnKeys = [
     "Highest Education",
     "Name Of the Institute",
@@ -48,7 +51,7 @@ const ProfessionalDetails = () => {
     "State"
   ];
 
-  const handleEdit = () => {
+  const handleEdit = async() => {
     if (isEditing) {
       const newErrors = {};
       Object.keys(details).forEach((key) => {
@@ -61,6 +64,20 @@ const ProfessionalDetails = () => {
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
+        const payload={
+          "highestEducation": details['Highest Education'],
+          "yearOfPassOut": details['Year Of Passing'],
+          "nameOfInstitute": details['Name Of the Institute'],
+          "occupation": details.Occupation,
+          "employmentStatus": details['Employment Status'],
+          "employedIn": details['Employed in'],
+          "workLocation": details['Work Location'],
+          "state": details.State,
+          "city": details.City,
+          "annualIncome": details['Employed in']
+        }
+        const editresponse= await dispatch(updateprofesionaldetails(payload));
+        console.log(editresponse, 'editresponse')
         setIsEditing(false);
       }
     } else {

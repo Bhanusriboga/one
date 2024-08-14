@@ -14,10 +14,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { registration1 } from "../../utils/constants";
 import "./BasicsDetails.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { nextStep, saveFormData } from "../../redux/slices/RegistrationDetails";
-
+import {
+  nextStep,
+  saveFormData,
+  BasicDetailsAPICall
+} from "../../redux/slices/RegistrationDetails";
+import {updateMydata} from "../../redux/slices/AuthSlice";
 function BasicsDetails() {
   const [formData, setFormData] = useState({
     dateOfBirth: "",
@@ -39,8 +43,8 @@ function BasicsDetails() {
 
   const [selectedTime, setSelectedTime] = useState(null);
   const [errors, setErrors] = useState({});
-  const  formData1  = useSelector((store) => store.RegistrationDetails.formData1);
-const dispatch = useDispatch()
+  const formData1 = useSelector((store) => store.RegistrationDetails.formData1);
+  const dispatch = useDispatch()
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -118,22 +122,35 @@ const dispatch = useDispatch()
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateAllFields()) {
-      toast.success("User Basic Details Registered Successfully", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-
-      dispatch(saveFormData(formData));
-      dispatch(nextStep());
+      const data = await dispatch(BasicDetailsAPICall(formData));
+      if(data?.payload?.message === "Basic details added successfully" || data?.payload?.message ==="Basic Details Already Exists Please Updated your Details"){
+        dispatch(updateMydata());
+        toast.success("User Basic Details Registered Successfully", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(saveFormData(formData));
+        dispatch(nextStep());
+      }else{
+        toast.error("Something went wrong", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
   };
 
@@ -526,13 +543,13 @@ const dispatch = useDispatch()
               </Button>
             </div>
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-9 ms-md-5">
               <Link className="btn btn-link skip-btn" to="/dashboard">
                 Skip & Register later
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
       </Form>
     </div>

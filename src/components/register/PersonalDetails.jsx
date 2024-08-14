@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Row,
   Col,
@@ -15,8 +15,7 @@ import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { nextStep, saveFormData } from "../../redux/slices/RegistrationDetails";
-import { prevStep } from "../../redux/slices/RegistrationDetails";
+import { nextStep, saveFormData, prevStep, personalDetailsAPICall } from "../../redux/slices/RegistrationDetails";
 
 
 const subCastes = [
@@ -201,6 +200,7 @@ const castes = [
   "Miniramanu",
   "Modugu",
   "Mond",
+  "Mudiraj",
   "Muslim",
   "Muthrasi",
   "Nadar",
@@ -322,41 +322,46 @@ const zodiacSign = [
   "Aquarius",
   "Pisces",
 ];
-const family = ["Underclass", "Low class", "Middle class", "Upper class"];
+const family = [{ label: "Low class", value: "LOWERCLASS" }, { label: "Middle class", value: "MIDDLECLASS" }, { label: "Upper class", value: "UPPERCLASS" }];
 const familyTypes = [
-  "Nuclear Family",
-  "Single-Parent Family",
-  "Joint Family",
-  "Blended Family",
+ { label:"Nuclear Family",value:"NUCLEARFAMILY"},
+ { label:"Single Parent Family",value:"SINGEPARENTFAMILY"},
+ { label:"Joint Family",value:"JOINTFAMILY"},
+ { label:"Blended Family",value:"BLENDEDFAMILY"},
 ];
+
 const occupationsofFather = [
-  "Business Owner",
-  "Employed",
-  "Professional",
-  "Retired",
-  "Unemployed",
-  "Passed Away",
-  "Others",
+  {label:"Business Owner",value:"BUSINESS"},
+  {label:"Home maker",value:"HOMEMAKER"},
+  {label:"Employed",value:"EMPLOYED"},
+  {label:"Retired",value:"RETIRED"},
+  {label:"Unemployed",value:"UNEMPLOYED"},
+  {label:"Passed Away",value:"PASSEDAWAY"},
+  {label:"Others",value:"OTHERS"},
 ];
+
 const occupationsOfMother = [
-  "Others",
-  "Home maker",
-  "Employed",
-  "Business",
-  "Retired",
-  "Unemployed",
-  "Passed Away",
+  {label:"Business Owner",value:"BUSINESS"},
+  {label:"Home maker",value:"HOMEMAKER"},
+  {label:"Employed",value:"EMPLOYED"},
+  {label:"Retired",value:"RETIRED"},
+  {label:"Unemployed",value:"UNEMPLOYED"},
+  {label:"Passed Away",value:"PASSEDAWAY"},
+  {label:"Others",value:"OTHERS"},
 ];
 const noOfSiblings = ["1", "2", "3", "4", "5"];
+
+
 const maritalStatus = ["Single", "Married", "Divorced", "Widowed"];
 const disabilitiesOptions = [
+  "Disabilities",
   "Visual Impairment",
   "Hearing Impairment",
   "Mobility Impairment",
   "Cognitive/Intellectual Impairment",
   "Psychiatric/Mental Health Condition",
   "Chronic Illness",
-  "Other",
+  "None",
 ];
 
 const PersonalDetails = () => {
@@ -375,7 +380,7 @@ const PersonalDetails = () => {
     motherOccupation: "",
     siblings: "",
     maritalStatus: "",
-    disability: "",
+    disability: "Disabilities",
     height: "",
     weightUnit: "",
     weight: "",
@@ -386,7 +391,7 @@ const PersonalDetails = () => {
     aboutYourself: "",
     eatingHabits: "",
   });
-  const personalData = useSelector((store)=>store.RegistrationDetails.personalData)
+  const personalData = useSelector((store) => store.RegistrationDetails.personalData)
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState({
@@ -451,7 +456,7 @@ const PersonalDetails = () => {
     setFormData({ ...formData, [action.name]: selectedOption.value });
     validateField(action.name, selectedOption.value);
   };
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -460,14 +465,14 @@ const PersonalDetails = () => {
     }));
     validateField(name, value);
   };
-  
+
   const validateField = (name, value) => {
     let error = "";
     if (!value || (typeof value === "string" && value.trim() === "")) {
       error = `${name} is required`;
     }
     setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
-  
+
     if (error) {
       setCurrentError(name);
     } else if (currentError === name) {
@@ -475,7 +480,7 @@ const PersonalDetails = () => {
     }
     return !error;
   };
-  
+
   const validateForm = () => {
     let isValid = true;
     for (const field of formFields) {
@@ -484,24 +489,31 @@ const PersonalDetails = () => {
     }
     return isValid;
   };
-  
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      toast.success("User personal Registered Successfully", {
-        position: "top-center",
-        autoClose: 2000,
-      });
-  
       dispatch(saveFormData(formData));
-      dispatch(nextStep());
-    } else if (currentError) {
+      const data = await dispatch(personalDetailsAPICall(formData));
+      if (data.payload.message == "PersonalDetails Already Exists try to Update"||data.payload.message == "Personal details added successfully") {
+        toast.success("User personal Registered Successfully", {
+          position: "top-center",
+          autoClose: 2000,
+        });
+        dispatch(nextStep());
+      }else{
+        toast.error("Something went wrong", {
+          position: "top-center",
+          autoClose: 2000,
+        });
+      }
+    } else if (currentError) {  
       const errorField = document.getElementById(currentError);
       if (errorField) errorField.focus();
     }
   };
-  
-  
+
+
   const prev = () => {
     dispatch(prevStep());
   };
@@ -521,8 +533,8 @@ const PersonalDetails = () => {
 
   const heightOptions = generateHeightOptions();
   const weightUnits = [
-    { value: "kg", label: "Kg" },
-    { value: "lbs", label: "Lbs" },
+    { value: "Kgs", label: "Kg" },
+    { value: "Lbs", label: "Lbs" },
   ];
 
   const casteOptions = castes.map((caste) => ({ value: caste, label: caste }));
@@ -532,18 +544,18 @@ const PersonalDetails = () => {
   }));
   const starOptions = star.map((s) => ({ value: s, label: s }));
   const zodiacSignOptions = zodiacSign.map((z) => ({ value: z, label: z }));
-  const familyOptions = family.map((item) => ({ value: item, label: item }));
+  const familyOptions = family.map((item) => ({ value: item.value, label: item.label }));
   const familyTypeOptions = familyTypes.map((item) => ({
-    value: item,
-    label: item,
+    value: item.value,
+    label: item.label,
   }));
   const fatherOccupationOptions = occupationsofFather.map((item) => ({
-    value: item,
-    label: item,
+    value: item.value,
+    label: item.label,
   }));
   const motherOccupationOptions = occupationsOfMother.map((item) => ({
-    value: item,
-    label: item,
+    value: item.value,
+    label: item.label,
   }));
   const siblingsOptions = noOfSiblings.map((item) => ({
     value: item,
@@ -559,52 +571,48 @@ const PersonalDetails = () => {
   }));
   const weightOptionsKg = Array.from({ length: 200 }, (_, i) => ({
     value: i + 1,
-    label: `${i + 1} kg`,
+    label: `${i + 1} Kgs`,
   }));
   const weightOptionsLbs = Array.from({ length: 440 }, (_, i) => ({
     value: i + 1,
-    label: `${i + 1} lbs`,
+    label: `${i + 1} Lbs`,
   }));
 
   const bodyTypeOptions = [
-    { value: "Slim", label: "Slim" },
-    { value: "Athletic", label: "Athletic" },
-    { value: "Average", label: "Average" },
-    { value: "Heavy", label: "Heavy" },
+    { value: "THIN", label: "Slim" },
+    { value: "MEDIUM", label: "Medium" },
+    { value: "FAT", label: "Fat" },
   ];
 
   const complexionOptions = [
-    { value: "Pale", label: "Pale" },
-    { value: "Fair", label: "Fair" },
-    { value: "Medium", label: "Medium" },
-    { value: "Naturally brown", label: "Naturally brown" },
-    { value: "Black", label: "Black" },
+    { value: "PALE", label: "Pale" },
+    { value: "FAIR", label: "Fair" },
+    { value: "MEDIUM", label: "Medium" },
+    { value: "NATURALLYBROWN", label: "Naturally brown" },
+    { value: "BLACK", label: "Black" },
   ];
 
   const drinkingHabitsOptions = [
-    { value: "I don’t Drink", label: "I don’t Drink" },
-    { value: "Once a week", label: "Once a week" },
-    { value: "Twice/ trice a month", label: "Twice/ trice a month" },
-    { value: "Almost every night", label: "Almost every night" },
-    { value: "Very rarely", label: "Very rarely" },
+    { value: "I_DONT_DRINK", label: "I don’t Drink" },
+    { value: "ONCE_A_WEEK", label: "Once a week" },
+    { value: "TWICE_THRICE_A_WEEK", label: "Twice/ trice a month" },
+    { value: "ALMOST_EVERY_NIGHT", label: "Almost every night" },
+    { value: "VERY_RARELY", label: "Very rarely" },
   ];
-
   const smokingHabitsOptions = [
-    { value: "Non-smoker", label: "Non-smoker" },
-    { value: "Occasional smoker", label: "Occasional smoker" },
-    { value: "Regular smoker", label: "Regular smoker" },
+    { value: "NON_SMOKER", label: "Non-smoker" },
+    { value: "LIGHT_SMOKER", label: "Occasional smoker" },
+    { value: "REGULAR_SMOKER", label: "Regular smoker" },
   ];
 
   const eatingHabitsOptions = [
-    { value: "Veg", label: "Veg" },
-    { value: "Non Veg", label: "Non Veg" },
-    { value: "Vegan", label: "Vegan" },
+    { value: "VEG", label: "Veg" },
+    { value: "NONVEG", label: "Non Veg" },
+    { value: "VEGAN", label: "Vegan" },
   ];
   useEffect(() => {
     if (personalData && Object.keys(personalData).length > 0) {
       setFormData(personalData);
-
-      
     }
   }, [personalData]);
   return (
@@ -666,7 +674,7 @@ const PersonalDetails = () => {
           <Col md={12}>
             <FormGroup check inline>
               <Label check>
-                <Input type="radio" name="marryCommunity"  className="textinput"/> Willing to marry
+                <Input type="radio" name="marryCommunity" className="textinput" /> Willing to marry
                 from other community also
               </Label>
             </FormGroup>
@@ -746,47 +754,47 @@ const PersonalDetails = () => {
           </Col>
         </Row>
         <Row form>
-  <Col md={6}>
-    <FormGroup className="dob1 custom-input">
-      <div className="border rounded p-2 d-flex align-items-center">
-        <Label className="mb-2 me-3">Have Dosham?</Label>
-        <div className="d-flex align-items-center">
-          <FormGroup check className="me-3">
-            <Label check>
-              <Input
-                type="radio"
-                name="dosham"
-                value="Yes"
-                checked={formData.dosham === "Yes"}
-                onChange={handleChange}
-                invalid={formData.dosham === "" && errors.dosham}
-              />
-              Yes
-            </Label>
-          </FormGroup>
-          <FormGroup check>
-            <Label check>
-              <Input
-                type="radio"
-                name="dosham"
-                value="No"
-                checked={formData.dosham === "No"}
-                onChange={handleChange}
-                invalid={formData.dosham === "" && errors.dosham}
-              />
-              No
-            </Label>
-          </FormGroup>
-        </div>
-      </div>
-      {errors.dosham && currentError === "dosham" && (
-        <FormFeedback className="d-block ms-3">
-          {errors.dosham}
-        </FormFeedback>
-      )}
-    </FormGroup>
-  </Col>
-</Row>
+          <Col md={6}>
+            <FormGroup className="dob1 custom-input">
+              <div className="border rounded p-2 d-flex align-items-center">
+                <Label className="mb-2 me-3">Have Dosham?</Label>
+                <div className="d-flex align-items-center">
+                  <FormGroup check className="me-3">
+                    <Label check>
+                      <Input
+                        type="radio"
+                        name="dosham"
+                        value="Yes"
+                        checked={formData.dosham === "Yes"}
+                        onChange={handleChange}
+                        invalid={formData.dosham === "" && errors.dosham}
+                      />
+                      Yes
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check>
+                    <Label check>
+                      <Input
+                        type="radio"
+                        name="dosham"
+                        value="No"
+                        checked={formData.dosham === "No"}
+                        onChange={handleChange}
+                        invalid={formData.dosham === "" && errors.dosham}
+                      />
+                      No
+                    </Label>
+                  </FormGroup>
+                </div>
+              </div>
+              {errors.dosham && currentError === "dosham" && (
+                <FormFeedback className="d-block ms-3">
+                  {errors.dosham}
+                </FormFeedback>
+              )}
+            </FormGroup>
+          </Col>
+        </Row>
         <Row form>
           <Col md={12}>
             <FormGroup>
@@ -1024,21 +1032,13 @@ const PersonalDetails = () => {
                 onChange={handleChange}
                 onBlur={() => handleBlur("disability")}
                 className="dob1 custom-input"
-                invalid={!!errors.disability}>
-                <option value="" disabled>
-                  Disabilities
-                </option>
+                >
                 {disabilitiesOptionsList.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
                 ))}
               </Input>
-              {errors.disability && currentError === "disability" && (
-                <FormFeedback className="d-block">
-                  {errors.disability}
-                </FormFeedback>
-              )}
             </FormGroup>
           </Col>
         </Row>
@@ -1111,7 +1111,7 @@ const PersonalDetails = () => {
                     <option value="" disabled>
                       Select
                     </option>
-                    {(formData.weightUnit === "kg"
+                    {(formData.weightUnit == "Kgs"
                       ? weightOptionsKg
                       : weightOptionsLbs
                     ).map((option) => (
@@ -1294,34 +1294,34 @@ const PersonalDetails = () => {
             </FormGroup>
           </Col>
         </Row>
-        
-          <div className="back-next-btn-container">
+
+        <div className="back-next-btn-container">
           <button className="previous-btn" onClick={prev}>
-              {" "}
-              <FaArrowLeft
-                style={{
-                  paddingRight: "5px",
-                  fontSize: "25px",
-                  paddingTop: "5px",
-                }}
-              />
-              previous
-            </button>
-            <button className="previous-btn" onClick={handleSubmit}>
-              Next
-              <FaArrowRight
-                style={{
-                  paddingLeft: "5px",
-                  alignSelf: "center",
-                  fontSize: "25px",
-                  paddingTop: "5px",
-                }}
-              />
-            </button>
-          </div>
-          <Link className="skip-btn" to='/dashboard'> Skip & Register later</Link>
-        </Form>
-      
+            {" "}
+            <FaArrowLeft
+              style={{
+                paddingRight: "5px",
+                fontSize: "25px",
+                paddingTop: "5px",
+              }}
+            />
+            previous
+          </button>
+          <button className="previous-btn" onClick={handleSubmit}>
+            Next
+            <FaArrowRight
+              style={{
+                paddingLeft: "5px",
+                alignSelf: "center",
+                fontSize: "25px",
+                paddingTop: "5px",
+              }}
+            />
+          </button>
+        </div>
+        <Link className="skip-btn" to='/dashboard'> Skip & Register later</Link>
+      </Form>
+
     </>
   );
 };

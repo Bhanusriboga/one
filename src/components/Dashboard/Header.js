@@ -1,4 +1,5 @@
-import React from 'react'
+
+import React,{useState} from 'react'
 import {
   Navbar,
   Nav,
@@ -7,24 +8,26 @@ import {
   NavLink 
 } from 'reactstrap';
 import './Dashboard.scss'
-import logo from '../../Assets/Logo.png'
+import logo from '../../Assets/icon.svg'
+import UPIPayment from '../payment/Payment';
 import { useDispatch } from 'react-redux';
-import {logout as logoutAction} from "../../redux/slices/AuthSlice";
+import {logout as logoutAction} from '../../redux/slices/AuthSlice';
 const Header = () => {
-  const dispatch=useDispatch() ;
-
-  const logout = async() => {
-    await dispatch(logoutAction());
-   };
+  const dispatch =useDispatch()
+const [paymentPopup,setPaymentPopup]=useState(false);
+const toggle=()=>setPaymentPopup(!paymentPopup)
+const logout=async()=>{
+  await dispatch(logoutAction());
+}
 
   return (
     <Navbar className='navbck' light expand="md" >
       <div>
-        <NavbarBrand href="/"><img src={logo} alt="logo"></img></NavbarBrand>
+        <NavbarBrand href="/"><img src={logo} className='nav-logo '></img></NavbarBrand>
       </div>
       <Nav className="me-auto  w-100 d-none d-md-flex justify-content-end" navbar>
         <NavItem>
-          <NavLink href="/payment" className='navBtn'>Pricing</NavLink>
+          <NavLink onClick={toggle} className='navBtn'>Pricing</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="/components" className='navBtn'>Chat with Us</NavLink>
@@ -33,9 +36,12 @@ const Header = () => {
           <NavLink href="/components" className='navBtn'>Contact Us</NavLink>
         </NavItem> 
         <NavItem>
-          <NavLink href="/login" onClick={logout} className='navBtn'>Logout</NavLink>
+          <NavLink onClick={logout} className='navBtn'>Logout</NavLink>
         </NavItem>
       </Nav>
+    <button onClick={toggle} className='border-0 bg-transparent'>
+    {paymentPopup&&<UPIPayment/>}
+    </button>
     </Navbar>
   )
 }
