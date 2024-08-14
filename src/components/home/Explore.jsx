@@ -3,7 +3,7 @@ import "./home.css";
 import arrow from "./assets/arrow.png";
 import { useHistory } from 'react-router-dom';
 import PropTypes from "prop-types"
-const ExploreCard = (props) =>{ 
+const ExploreCard = (props) =>{
   const { title, items, onClick }=props;
   return(
   <div className='card-bg'>
@@ -27,7 +27,7 @@ ExploreCard.propTypes={
 function Explore() {
   const myRef = useRef();
   const navigator = useHistory();
-
+ 
   const data = [
     {
       title: "RELIGION",
@@ -42,20 +42,20 @@ function Explore() {
       items: ["Telugu | Hindi | Urdu | Tamil | Malayalam", "Marati | Kannada | Bengali"],
     }
   ];
-
+ 
   return (
     <div className="explore d-flex flex-column justify-content-between align-items-center ml-5" data-testid="explore-component">
       <p className='choose-us'>Explore matrimonial profiles</p>
-
+ 
       <div className='scroll-container d-flex justify-content-evenly' ref={myRef}>
         <div className='scroll-div'>
           {data.map((card, index) => (
             <ExploreCard key={index} title={card.title} items={card.items} onClick={() => navigator.push("/signup")} />
           ))}
-          
+         
         </div>
       </div>
-
+ 
       <div className="explore-cont mb-5" onClick={() => navigator.push("/signup")}>
         {data.map((card, index) => (
           <ExploreCard key={index} title={card.title} items={card.items} onClick={() => navigator.push("/signup")} />
@@ -64,5 +64,5 @@ function Explore() {
     </div>
   );
 }
-
+ 
 export default Explore;
