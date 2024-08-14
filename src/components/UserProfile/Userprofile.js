@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Card, CardBody, CardText } from "reactstrap";
 import { CiSquareMinus, CiHeart } from "react-icons/ci";
 import { FaArrowLeft, FaHeart, FaMinusSquare } from "react-icons/fa";
-import { personalData, userName, buttons } from "./Data";
+import { personalData, userName } from "./Data";
 import Userinnerpeofile from "./Userinnerprofile";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Userprofile.css";
@@ -124,14 +124,6 @@ const Userprofile = () => {
                 {item.value}
               </span>
             ))}
-            <button className="back-button align-items-center rounded">
-              <FaArrowLeft />
-              {buttons.map((item, ind) => (
-                <span className="icon-text" key={ind}>
-                  {item.value}
-                </span>
-              ))}
-            </button>
           </div>
           <div className="row">
             <div className="col-md-5 m-1">
