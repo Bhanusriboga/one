@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useRef } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
-
-import newlogo from "./assets/logo.svg"
+import { AiOutlineClose } from "react-icons/ai";
+import newlogos from "./assets/new_logo.svg"
 import "./home.css"
 import sidehalfimg from "./assets/side-half-img.png"
 import exploreright from "./assets/explore-right.svg"
@@ -17,8 +17,6 @@ import  googleplay from "./assets/googleplay.svg"
 import appstore from "./assets/apple.svg";
 import chakra from "./assets/chakraa.svg"
 import FooterBar from "../Dashboard/FooterBar"
-
- 
 function Home() {
   const [burger,setBurger]=useState(false)
   const bottomRef=useRef()
@@ -52,9 +50,10 @@ function Home() {
 <nav className={`navbar navbar-expand-lg fixed-top ${scrolled ? 'navbar-blur' : ''}`} style={{ backgroundColor: '#780024' }}>
             <div className="container-fluid">
                 <a className="navbar-brand" href="#">
-                    <img src={newlogo} className="nav-logo" alt="Company Logo" />
+                    <img src={newlogos} className="nav-logo" alt="Company Logo" />
                 </a>
-                <button 
+                
+                {burger?<AiOutlineClose className='close-icon mt-3'  onClick={() => setBurger(!burger)} />:<button 
                     className="navbar-toggler" 
                     type="button" 
                     onClick={() => setBurger(!burger)} 
@@ -63,7 +62,7 @@ function Home() {
                     aria-label="Toggle navigation"
                 >
                     <GiHamburgerMenu className='navbar-toggler-icon' />
-                </button>
+                </button>}
                 <div className={`collapse navbar-collapse ${burger ? 'show' : ''}`} id="navbarNav">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
@@ -96,21 +95,22 @@ function Home() {
         <Destination />
 
         <div className='footer-1 mt-5 d-flex flex-column align-items-center justify-content-evenly' id="footer" ref={bottomRef}>
-              <div className='first-footer '>
+              <div className='first-footer d-flex flex-column justify-content-evenly align-items-center'>
               <div className='d-flex justify-content-center align-items-center'>
                <img src={chakra} className='chakra'/>
                <h4 className='footer-head'>Let&apos;s write our own love story together : Download Our App For Any Queries</h4>
                <img src={chakra} className='chakra'/>
               </div>
               <p className='footer-para'>Our platform is dedicated to helping you find a lifelong partner who shares your values, dreams, and aspirations.</p>
-              <div className='download'>
-               <img src={googleplay} className='appstore'/>
-               <img src={appstore} className='bg-white appstore'/>
+              <div className='download d-flex justify-content-between'>
+               <img src={googleplay} className='appstore '/>
+               <img src={appstore} className='appstore'/>
               </div>
               </div>
           <hr className="hor-line"/>
           <div className='pageFooter'>
             <FooterBar />
+
           </div>
         </div>
       </div>
