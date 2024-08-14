@@ -51,7 +51,7 @@ const AppRoutes = () => {
 
     return (
         <Suspense fallback={<Loader />}>
-            {basicDetails === true || basicDetails === false && (
+            {basicDetails === true || basicDetails === false ? (
                 <Switch>
                     <Route path="/dashboard">
                         <Dashboard />
@@ -64,7 +64,7 @@ const AppRoutes = () => {
                     </Route>
                     <Redirect path="/" to="/dashboard" />
                 </Switch>
-            ) }
+            ):<Loader/> }
         </Suspense>
     );
 };
