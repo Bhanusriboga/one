@@ -22,7 +22,7 @@ export const changeUserStatus = createAsyncThunk(
   "users/changeUserStatus",
   async (props, thunkAPI) => {
     const userId=Storage.get("userId")
-    const { response } = await networkCall(`${endPoints.userByStatus}?userId=${userId}`, "POST", JSON.stringify(props));
+    const { response } = await networkCall(`${endPoints.userStatus}?userId=${userId}`, "POST", JSON.stringify(props));
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
