@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import AuthReducer from './AuthSlice';
-import UserReducer from './Users';
+import UserReducer from './users.js';
 import SettingsReducer from './Settings';
 
 import RegistrationDetails from './RegistrationDetails';

@@ -5,7 +5,8 @@ import './Details.css';
 import { MdEdit } from "react-icons/md";
 import { EditProfile } from '../../utils/constants';
 import { useDispatch } from 'react-redux';
-import { updateprofesionaldetails } from '../../redux/slices/Users';
+import { updateprofesionaldetails } from '../../redux/slices/users';
+
 
 const initialDetails = {
   "Highest Education": "B.Tech",

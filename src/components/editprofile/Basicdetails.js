@@ -4,10 +4,11 @@ import { Container, Row, Col } from "react-bootstrap";
 import "./Details.css";
 import { MdEdit } from "react-icons/md";
 import { EditProfile } from "../../utils/constants";
-import {  updatebasicdetails } from "../../redux/slices/Users";
+
 import { useDispatch } from 'react-redux';
+import { updatebasicdetails } from "../../redux/slices/users";
 const initialdetails = {
-  "Date of Birth": "xyzxyz",
+  "Date of Birth": "1998-04-02",
   "Place of Birth": "xyzxyzk",
   "Time of Birth": "xyz",
   "Mother Tongue": "xyz",

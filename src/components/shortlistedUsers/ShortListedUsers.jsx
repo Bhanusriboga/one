@@ -5,8 +5,8 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { ignoreUserText } from '../../utils/constants';
 import PaginationComponent from '../../common-components/pagination/PaginationComponent';
 import UsersCard from '../../common-components/UserCard';
-import { getShortListedUsers } from '../../redux/slices/Users';
-import { changeUserStatus } from '../../redux/slices/Users';
+import { getShortListedUsers } from '../../redux/slices/users';
+import { changeUserStatus } from '../../redux/slices/users';
 import './Usercard.css';
 
 
