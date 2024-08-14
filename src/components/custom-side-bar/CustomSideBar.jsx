@@ -12,13 +12,18 @@ import ProfileList from '../Dashboard/ProfileList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './CustomSideBar.scss';
 import Editprofile from '../editprofile/Editprofile';
-
 import AddPreferences from '../AddPreferences/AddPreference';
+import { useDispatch } from 'react-redux';
+import {logout as logoutAction} from "../../redux/slices/AuthSlice";
 import CustomWidget from '../ChatBot/CustomWidget';
 const CustomSideBar = () => {
   const [activeContent, setActiveContent] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
- 
+  const dispatch=useDispatch() ;
+  const logout = async() => {
+    await dispatch(logoutAction());
+   };
+
   const buttonData = [
     { id: 'editProfile', label: 'Edit Profile' },
     { id: 'addPreferences', label: 'Add Preferences' },
@@ -27,8 +32,15 @@ const CustomSideBar = () => {
     { id: 'settings', label: 'Settings' },
   ];
 
+  // Buttons to show only on small screens
+  const extraButtons = [
+    { id: 'Pricing', label: 'Pricing' },
+    { id: 'Chat with Us', label: 'Chat with Us' },
+    { id: 'Contact Us', label: 'Contact Us' },
+    // { id: 'Logout', label: 'Logout' }
+  ];
+
   const RenderContent = () => {
-    // Replace all the items with component which we going to develop
     switch (activeContent) {
       case 'addPreferences':
         return <AddPreferences />;
@@ -54,14 +66,14 @@ const CustomSideBar = () => {
             {isSidebarOpen ? <RxCross2 size={30} color='#780024' /> : <FaBarsStaggered size={30} color='#780024' />}
           </Button>
           <div className='image-container'>
-            <div className='position-absolute bottom-0 end-0 bg-white d-flex align-item-center justify-content-center rounded-circle p-1'>
-               <MdEdit />
+            <div className='position-absolute bottom-0 end-0 bg-white d-flex align-items-center justify-content-center rounded-circle p-1'>
+              <MdEdit />
             </div>
           </div>
         </Col>
         <Col xs={isSidebarOpen?"12":"3"} className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
           <div className='image-container1'>
-            <Button className='d-flex align-item-center justify-content-center border-0 position-absolute bottom-0 gap-1 add'>
+            <Button className='d-flex align-items-center justify-content-center border-0 position-absolute bottom-0 gap-1 add'>
               Add
                <MdEdit size={'15px'} className='mt-1'/>
             </Button>
@@ -70,20 +82,42 @@ const CustomSideBar = () => {
             <div key={button.id} className='button-parent'>
               <Button block="true" className="bg-transparent border-0 text-color" onClick={() => setActiveContent(button.id)}>
                 {button.label}
-              </Button> 
+              </Button>
               {index !== buttonData.length - 1 && <hr className='hr' />}
             </div>
           ))}
+          {/* Render small screen navigation buttons after the sidebar content */}
+          <div className="w-100 d-block d-md-none justify-content-end sidebar-nav">
+          <hr className='hr' />
+      {extraButtons.map((button, index) => (
+        <React.Fragment key={button.id}>
+          <div className='button-parent'>
+            <Button block className="bg-transparent border-0 text-color" onClick={() => setActiveContent(button.id)}>
+              {button.label}
+            </Button>
+            {index !== extraButtons.length - 1 && <hr className='hr' />}
+          </div>
+        </React.Fragment>
+      ))}
+      <div className='button-parent'>
+      <hr className='hr' />
+        <Button block className="text-color" onClick={logout} >
+          Logout
+        </Button>
+      </div>
+    </div>
+
+
         </Col>
         <Col xs="12" md="9" className="content ml-4 pt-0" data-testid="content">
           {activeContent !== '' ? <button onClick={() => setActiveContent('')} className='back-button bg-white gap-1'>
-            <FaArrowLeft color='#B8B8B8' size={15} className=',t-1' />
+            <FaArrowLeft color='#B8B8B8' size={15} className='mt-1' />
             <span className='text-lightBlack'>
               Back
             </span>
           </button> : null}
           <RenderContent />
-        </Col>  
+        </Col>
       </Row>
     </Container>
     <CustomWidget />

@@ -19,12 +19,13 @@ const toggle=()=>setPaymentPopup(!paymentPopup)
 const logout=async()=>{
   await dispatch(logoutAction());
 }
+
   return (
     <Navbar className='navbck' light expand="md" >
       <div>
         <NavbarBrand href="/"><img src={logo} className='nav-logo '></img></NavbarBrand>
       </div>
-      <Nav className="me-auto w-100 d-flex justify-content-end" navbar >
+      <Nav className="me-auto  w-100 d-none d-md-flex justify-content-end" navbar>
         <NavItem>
           <NavLink onClick={toggle} className='navBtn'>Pricing</NavLink>
         </NavItem>
@@ -33,7 +34,7 @@ const logout=async()=>{
         </NavItem>
         <NavItem>
           <NavLink href="/components" className='navBtn'>Contact Us</NavLink>
-        </NavItem>
+        </NavItem> 
         <NavItem>
           <NavLink onClick={logout} className='navBtn'>Logout</NavLink>
         </NavItem>
