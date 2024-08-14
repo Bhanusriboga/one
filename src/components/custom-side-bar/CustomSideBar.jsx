@@ -15,6 +15,7 @@ import Editprofile from '../editprofile/Editprofile';
 
 import AddPreferences from '../AddPreferences/AddPreference';
 import CustomWidget from '../ChatBot/CustomWidget';
+import Userprofile from '../UserProfile/Userprofile';
 const CustomSideBar = () => {
   const [activeContent, setActiveContent] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -25,6 +26,8 @@ const CustomSideBar = () => {
     { id: 'ignoredUsers', label: 'Ignored Users' },
     { id: 'shortlisted', label: 'Shortlisted' },
     { id: 'settings', label: 'Settings' },
+    { id: 'singleUser', label: '' },
+
   ];
 
   const RenderContent = () => {
@@ -35,13 +38,15 @@ const CustomSideBar = () => {
       case 'editProfile':
         return <Editprofile />
       case 'ignoredUsers':
-        return <IgnoreUsers/>;
+        return <IgnoreUsers setActiveContent={setActiveContent}/>;
       case 'shortlisted':
-        return <ShortListedUsers />
+        return <ShortListedUsers setActiveContent={setActiveContent}/>
       case 'settings':
         return <Settings setActiveContent={setActiveContent}/>;
+      case 'singleUser':
+        return <Userprofile setActiveContent={setActiveContent}/>
       default:
-        return <ProfileList />
+        return <ProfileList setActiveContent={setActiveContent}/>
     }
   };
 
@@ -67,11 +72,12 @@ const CustomSideBar = () => {
             </Button>
           </div>
           {buttonData.map((button, index) => (
+            index==buttonData.length-1?null:
             <div key={button.id} className='button-parent'>
               <Button block="true" className="bg-transparent border-0 text-color" onClick={() => setActiveContent(button.id)}>
                 {button.label}
               </Button> 
-              {index !== buttonData.length - 1 && <hr className='hr' />}
+              {index !== buttonData.length - 2 && <hr className='hr' />}
             </div>
           ))}
         </Col>

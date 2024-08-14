@@ -121,6 +121,7 @@ export const requestOtpForgetApi = createAsyncThunk('auth/requestOtpForgetApi', 
 })
 
 export const otpverifyForgetApi = createAsyncThunk('auth/otpverifyForgetApi', async (props, thunkAPI) => {
+  
   const url = `${endPoints.otpverifyForgetApi}?mobile=${props.mobile}&otp=${props.otp}`;
   const { response, error } = await networkCall(url, "POST");
   if (response) {
@@ -131,7 +132,7 @@ export const otpverifyForgetApi = createAsyncThunk('auth/otpverifyForgetApi', as
 }) 
 
 export const changePasswordForgotApi = createAsyncThunk('auth/changePasswordForgotApi', async (props, thunkAPI) => {
-  const url = `${endPoints.changePasswordForgot}?mobileNumber=${props.mobile}&password=${props.newPassword}`;
+  const url = `${endPoints.changePasswordForgot}?mobileNumber=${props.mobile}&otp=${props.otp}&password=${props.newPassword}`;
   const { response, error } = await networkCall(url, "POST");
   if (response) {
     return thunkAPI.fulfillWithValue(response);

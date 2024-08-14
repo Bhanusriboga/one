@@ -28,7 +28,8 @@ const endPoints = {
   addPreference:"/",
   requestOtpForgetApi:"request-mobile-otp",
   otpverifyForgetApi:"user-otp-verification",
-  changePasswordForgot:"forgot-password"
+  changePasswordForgot:"forgot-password",
+  userFilter:"/user-filter?userId="
 }
 
 export { baseURL, endPoints, encryptionSalt }      

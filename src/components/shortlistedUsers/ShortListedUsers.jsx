@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { FaArrowLeft } from "react-icons/fa6";
 import { ignoreUserText } from '../../utils/constants';
 import PaginationComponent from '../../common-components/pagination/PaginationComponent';
@@ -10,12 +11,12 @@ import { changeUserStatus } from '../../redux/slices/users';
 import './Usercard.css';
 
 
-function ShortListedUsers() {
+function ShortListedUsers(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const { userId } = useSelector(state => state.auth)
   const dispatch = useDispatch();
-
+  const {setActiveContent}=props;
   const { shortlisted } = useSelector((state) => state.users);
 
   useEffect(() => {
@@ -71,6 +72,7 @@ function ShortListedUsers() {
                   viewButtonColor={viewButtonColor}
                   onMoveToIgnoreList={() => changeUSerStateById(user.userId, userId, "Ignored")}
                 removeUserFromShortList={() => changeUSerStateById(user.userId, userId, "Shortlisted")}
+                setActiveContent={setActiveContent}
                 />
               </Col>
             );
@@ -87,5 +89,7 @@ function ShortListedUsers() {
     </div>
   );
 }
-
+ShortListedUsers.propTypes = {
+  setActiveContent: PropTypes.func.isRequired,
+}
 export default ShortListedUsers;
