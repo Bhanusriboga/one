@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom'
 import { GoHeart } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
 import { ignoreUserText } from '../utils/constants';
@@ -41,8 +40,8 @@ function UsersCard(userDetails) {
                     </div>
                     <div>
                         <h6 className='usercard-name'>{user?.username}</h6>
-                        <button className='usercard-button-mobile' style={{ backgroundColor: buttonBackgroundColor, color: viewButtonColor }}>
-                            <Link to={`/user/${user.userId}`} style={{ color: viewButtonColor, textDecoration: 'none' }}>View Profile</Link>
+                        <button className='usercard-button-mobile' style={{ backgroundColor: buttonBackgroundColor, color: viewButtonColor }}  onClick={() => renderUserId(user.userId)}>
+                            <text  style={{ color: viewButtonColor }}>View Profile</text>
                         </button>
                         <div className='usercard-only-mobileview'>
                             <div className='usercard-text'>

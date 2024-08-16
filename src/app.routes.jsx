@@ -1,8 +1,9 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMyDetails } from './redux/slices/AuthSlice';
+import { getMyDetails, logout } from './redux/slices/AuthSlice';
 import Loader from './common-components/Loader';
+import showToast from './common-components/showToast';
 
 // Lazy loading the components
 const LoginPage = lazy(() => import('./components/Login/LoginPage'));
@@ -29,7 +30,12 @@ const AppRoutes = () => {
     useEffect(() => {
         const fetchMyDetails = async () => {
             const data = await dispatch(getMyDetails());
-            if (data?.payload?.object?.basicDetailsAvailable) {
+            if(data.payload?.status==401){//after ai change need to change this as exact status code
+                showToast({message:data?.payload?.message,type:'error',position:'top-right',autoClose:2000})
+                await dispatch(logout())
+                setBasicDetails(false);
+            }
+            else if (data?.payload?.object?.basicDetailsAvailable) {
                 setBasicDetails(true);
             } else {
                 setBasicDetails(false);

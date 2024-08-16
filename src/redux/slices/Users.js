@@ -7,7 +7,7 @@ import Showtoast from '../../common-components/showToast';
 export const getAllUsers = createAsyncThunk(
   "users/getAllUsers",
   async (_, thunkAPI) => {
-    const { response } = await networkCall(endPoints.getAllUsers+Storage.get("userId"), "GET");
+    const { response } = await networkCall(endPoints.userFilter+Storage.get("userId"), "POST",JSON.stringify({}));
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
