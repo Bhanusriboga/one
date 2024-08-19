@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import loginbackpage from '../Assets/background.png'
+import loginRight from '../components/Signup/assets/registerlogo.png'
 export const LoginBack = styled.div`
 background-image: url(${loginbackpage});
   background-size: 1445px 100%;
@@ -9,6 +10,15 @@ background-image: url(${loginbackpage});
   justify-content: space-between;
   background-repeat: no-repeat;
   position: relative;
+    @media (min-width:0px) and (max-width:1150px) {
+    background-image: url(${loginRight});
+    background-size: 105px;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: center;
+  }
 `;
 export const WelcomeText = styled.div`
     top: 8%;
@@ -32,10 +42,7 @@ export const WelcomeText = styled.div`
   }
 `;
 export const LogoText = styled.span`
-margin-left: -15px;
-      @media (min-width:0px) and (max-width:1115px) {
-      margin-left: 0px;
-      }
+color:#E0AA3E;
 `;
 export const DisplayFlex = styled.div`
     display: flex;
