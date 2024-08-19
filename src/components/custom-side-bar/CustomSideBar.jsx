@@ -48,7 +48,7 @@ const CustomSideBar = () => {
   return (
     <>
     <Container fluid className='outer-container mt-4 mb-4'>
-      <Row className='row'>
+      <Row className='row w-100'>
         <Col xs="12" className="d-flex flex-row justify-content-between d-md-none">
           <Button className="bg-transparent border-0" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             {isSidebarOpen ? <RxCross2 size={30} color='#780024' /> : <FaBarsStaggered size={30} color='#780024' />}
