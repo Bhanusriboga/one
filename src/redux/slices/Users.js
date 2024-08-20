@@ -36,10 +36,8 @@ export const changeUserStatus = createAsyncThunk(
 export const UserFilterApi=createAsyncThunk(
   "users/UserFilterApi",
   async (props, thunkAPI) => {
-    console.log({props})
     const userId=Storage.get("userId");
-    const { response,error } = await networkCall(`${endPoints.userFilter}${userId}`, "POST",JSON.stringify(props));
-    console.log({response,error})
+    const { response } = await networkCall(`${endPoints.userFilter}${userId}`, "POST",JSON.stringify(props));
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
@@ -179,13 +177,11 @@ const UserSlice = createSlice({
     })
     builder.addCase(UserFilterApi.fulfilled, (state,action) => {
       state.loading = false;
-      console.log({action})
       if(action?.object){
         state.data=action?.object
       }
     })
-    builder.addCase(UserFilterApi.rejected, (state,action) => {
-      console.log({action})
+    builder.addCase(UserFilterApi.rejected, (state) => {
         state.loading = false;
         Showtoast("Filters not applyed, Something went wrong..!")
     })

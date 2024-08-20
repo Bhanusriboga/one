@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
-import { addPreference } from "../../utils/constants";
+import { addPreference, toastsuccess } from "../../utils/constants";
 import {
   Button,
   Form,
@@ -146,15 +146,7 @@ const AddPreference = () => {
     // }
     const data = await dispatch(addPreferencesPost(validation));
     if(data.payload.message=="Preferences Updated Successfully"){
-      toast.success("Preferences Updated Successfully", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
+      toast.success("Preferences Updated Successfully", toastsuccess);
     }
     // setValidation(newValidation);
     // setErrorMessage(

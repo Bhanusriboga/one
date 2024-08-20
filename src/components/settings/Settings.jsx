@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { validateEmail,validatePhoneNumber } from "../../utils/validation";
 import {logout as logoutAction} from "../../redux/slices/AuthSlice";
-import { settings } from '../../utils/constants';
+import { settings, toastError, toastsuccess } from '../../utils/constants';
 import DeleteAlert from './inner-components/DeleteAlert';
 import "./Settings.scss"
 import { requestEmailOtp, requestMobileOtp, verifyMobileOtp,changePassword,deleteAccount,verifyEmailOtp} from '../../redux/slices/Settings';
@@ -39,11 +39,11 @@ const Settings = (props) => {
     // need to call delete api
   const data= await dispatch(deleteAccount(deleteReason));
   if("User Profile Deleted Successfully"===data?.payload?.message){
-    toast.success("Account deleted successfully")
+    toast.success("Account deleted successfully",toastsuccess)
     setShowAlert(false);
     logout();
   }else{
-    toast.error("Something went wrong..!")
+    toast.error("Something went wrong..!",toastError)
   }
   };
   const handleInputChange = (setter) => (event) => setter(event.target.value);
@@ -55,7 +55,7 @@ const Settings = (props) => {
         setEmailError('');
         setShowOtp(true);
       }else{
-        toast.error("Something went wrong..!")
+        toast.error("Something went wrong..!",toastError)
       }
     } else {
       setEmailError(settings.validEmailError);
@@ -69,7 +69,7 @@ const Settings = (props) => {
         setPhoneError('');
         setShowOtpPhone(true);
       }else{
-        toast.error("Something went wrong..!")
+        toast.error("Something went wrong..!",toastError)
       }
     } else {
       setPhoneError(settings.validPhoneError);
@@ -101,10 +101,10 @@ const Settings = (props) => {
         //api call for email change
         const data=await dispatch(verifyEmailOtp({newMail,otp}));
         if("OTP verified Successfully"===data?.payload?.message){
-          toast.success("Email updated successfully")
+          toast.success("Email updated successfully",toastsuccess)
           setEmailError('');
         }else{
-          toast.error("Something went wrong..!")
+          toast.error("Something went wrong..!",toastError)
         }
       }
     }
@@ -120,9 +120,9 @@ const Settings = (props) => {
         setPhoneError('');
        const data= await dispatch(verifyMobileOtp({newPhone,otpPhone}));
        if("OTP verified Successfully"===data?.payload?.message?.message){
-          toast.success("Mobile number updated successfully")
+          toast.success("Mobile number updated successfully",toastsuccess)
        }else{
-          toast.error("Something went wrong..!")
+          toast.error("Something went wrong..!",toastError)
        }
       }
     }
@@ -136,9 +136,9 @@ const Settings = (props) => {
         //api call for password change
         const data=await dispatch(changePassword({currentPassword,newPassword}));
         if("Password Changed Successfully"==data?.payload?.message){
-          toast.success("Password changed successfully")
+          toast.success("Password changed successfully",toastsuccess)
         }else{
-          toast.error(data?.payload?.message=="Invalid Password"?"Invalid Password":"Something went wrong..!")
+          toast.error(data?.payload?.message=="Invalid Password"?"Invalid Password":"Something went wrong..!",toastError)
         }
         setPasswordError('');
       }

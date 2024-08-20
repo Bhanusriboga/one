@@ -32,7 +32,11 @@ const LoginPage = () => {
   }
   const handleLogin = async () => {
     const logindata = await dispatch(userLogin({ mobileNumber: mobile, password }));
-    if (logindata?.payload.jwt === "" || logindata?.payload.jwt === null || logindata?.payload.jwt === undefined) {
+    if(logindata?.payload?.status==500){
+      toast.error("Server Not Responding Try Again",toastError);
+      
+    }
+    else if (logindata?.payload.jwt === "" || logindata?.payload.jwt === null || logindata?.payload.jwt === undefined) {
       toast.error("Invalid Credentials",toastError);
     } else {
       toast.success("Login Successful",toastsuccess);
