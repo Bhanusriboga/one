@@ -130,8 +130,12 @@ const ForgotPassword = (props) => {
       setErrors({ mobile: '', otp: otpError, newPassword: '', confirmPassword: '' });
       return;
     }
-     await dispatch(otpverifyForgetApi(formData));
-     toast.success("OTP  Verified successfully")
+    const data= await dispatch(otpverifyForgetApi(formData));
+    if('User registered successfully'==data?.payload?.message){
+      toast.success("OTP  Verified successfully")
+    }else{
+      toast.error("Something went wrong..!")
+    }
 
   };
 
@@ -156,7 +160,7 @@ const ForgotPassword = (props) => {
       return;
     }
     const data =  await dispatch(changePasswordForgotApi(formData));
-    if('Password Changed Successfully'==data?.payload?.message){//"Password Changed Successfully"
+    if('Password Changed Successfully'==data?.payload?.message){
       toast.success("password updated successfully")
       toggle();
     }else{
@@ -172,9 +176,14 @@ const ForgotPassword = (props) => {
       setErrors({ mobile: mobileError, otp: '', newPassword: '', confirmPassword: '' });
       return;
     }
-   await dispatch(requestOtpForgetApi(formData))
-   toast.success('OTP sent successfully!')
-  
+   const data=await dispatch(requestOtpForgetApi(formData))
+    if ("OTP sent to mobile successfully" == data?.payload?.message) {
+      toast.success('OTP sent successfully!')
+    }else if("User Not Found try SignUp"==data?.payload?.message){
+      toast.error("User Not Found try SignUp")
+    } else {
+      toast.error("Something went wrong..!")
+    }
   };
 
   return (

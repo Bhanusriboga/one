@@ -1,6 +1,8 @@
 .shortlist-container{
-    margin: auto;
-    padding-top: 3%;
+  
+  margin-top: 5%;
+    
+    // padding-top: 3%;
     padding-left: 8px;
     padding-right: 10px;
     
@@ -21,7 +23,7 @@ right:0;
 
 }
 .shortlist-heading{
-    padding-top: 30px;
+ 
     padding-bottom: 16px;
     color:#780024;
     font-size: 34px;
@@ -167,7 +169,7 @@ justify-content: space-between;
 
     }
      .user-card-maincontainer{
-        max-width: 360px;
+        max-width: 400px !important;
         margin: auto;
      }
      .shortlist-mobile{

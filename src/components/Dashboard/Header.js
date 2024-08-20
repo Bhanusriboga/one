@@ -22,8 +22,8 @@ const logout=async()=>{
 
   return (
     <Navbar className='navbck' light expand="md" >
-      <div>
-        <NavbarBrand href="/"><img src={logo} className='nav-logo '></img></NavbarBrand>
+      <div className='footer-logo navlogo'>
+        <NavbarBrand href="/"><img src={logo} className='h-100 w-100 position-relative'></img></NavbarBrand>
       </div>
       <Nav className="me-auto  w-100 d-none d-md-flex justify-content-end" navbar>
         <NavItem>

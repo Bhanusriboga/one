@@ -19,6 +19,7 @@
 .margindata{
     width: 90% !important;
     margin-left: 10% !important;
+    
 }
 .info-text{
     width: 25vw !important;
@@ -78,6 +79,14 @@
     font-weight: 400 !important;
 }
 
+.footer-logo{
+    height: 150px;
+    width: 250px;
+    max-width: 100%;
+}
+.navlogo{
+    height: 50px;
+}
 @media(max-width:991px){
     .vertical-divider{
         border: none !important;

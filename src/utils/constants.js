@@ -275,7 +275,7 @@ export const registration1={
   education:"Highest Education ",
   field:"This field is required",
   occupation:"Occupation*",
-  employment:"Employment Status ",
+  employment:"Employment Type ",
   income:"Annual Income ",
   year:"Year of Passing",
   place:"Place of Birth ",

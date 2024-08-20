@@ -16,6 +16,7 @@ import AddPreferences from '../AddPreferences/AddPreference';
 import { useDispatch } from 'react-redux';
 import {logout as logoutAction} from "../../redux/slices/AuthSlice";
 import CustomWidget from '../ChatBot/CustomWidget';
+import Userprofile from '../UserProfile/Userprofile';
 const CustomSideBar = () => {
   const [activeContent, setActiveContent] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -30,6 +31,7 @@ const CustomSideBar = () => {
     { id: 'ignoredUsers', label: 'Ignored Users' },
     { id: 'shortlisted', label: 'Shortlisted' },
     { id: 'settings', label: 'Settings' },
+    { id: 'singleUser', label: '' },
   ];
 
   // Buttons to show only on small screens
@@ -47,20 +49,22 @@ const CustomSideBar = () => {
       case 'editProfile':
         return <Editprofile />
       case 'ignoredUsers':
-        return <IgnoreUsers/>;
+        return <IgnoreUsers setActiveContent={setActiveContent}/>;
       case 'shortlisted':
-        return <ShortListedUsers />
+        return <ShortListedUsers setActiveContent={setActiveContent}/>
       case 'settings':
         return <Settings setActiveContent={setActiveContent}/>;
+      case 'singleUser':
+        return <Userprofile setActiveContent={setActiveContent}/>
       default:
-        return <ProfileList />
+        return <ProfileList setActiveContent={setActiveContent}/>
     }
   };
 
   return (
     <>
     <Container fluid className='outer-container mt-4 mb-4'>
-      <Row className='row'>
+      <Row className='w-100'>
         <Col xs="12" className="d-flex flex-row justify-content-between d-md-none">
           <Button className="bg-transparent border-0" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             {isSidebarOpen ? <RxCross2 size={30} color='#780024' /> : <FaBarsStaggered size={30} color='#780024' />}
@@ -79,11 +83,12 @@ const CustomSideBar = () => {
             </Button>
           </div>
           {buttonData.map((button, index) => (
+            index==buttonData.length-1?null:
             <div key={button.id} className='button-parent'>
               <Button block="true" className="bg-transparent border-0 text-color" onClick={() => setActiveContent(button.id)}>
                 {button.label}
-              </Button>
-              {index !== buttonData.length - 1 && <hr className='hr' />}
+              </Button> 
+              {index !== buttonData.length - 2 && <hr className='hr' />}
             </div>
           ))}
           {/* Render small screen navigation buttons after the sidebar content */}
