@@ -10,6 +10,9 @@
     cursor: pointer;
 
 }
+.pgback{
+    overflow: hidden;
+}
 
 .pageFooter {
     background-color: #780024 !important;
@@ -77,6 +80,11 @@
     font-size: large !important;
     font-weight: 400 !important;
 }
+@media (min-width: 768px) and (max-width:1000px) {
+    .seatchButton {
+        width: 100%;
+    }
+}
 
 .footer-logo{
     height: 150px;
@@ -141,9 +149,9 @@
             background-color: #FFFFFF !important;
         }
 
-        .form-check-input {
-            background-color: #FFFFFF !important;
-        }
+        // .form-check-input {
+        //     background-color: #FFFFFF !important;
+        // }
     }
 
     .seatchButton {

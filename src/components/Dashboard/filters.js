@@ -83,7 +83,7 @@ const Filters = props => {
               />
             </FormGroup>
           </Col>
-          <Col md={2}>
+          <Col md={3}>
             <FormGroup onChange={(e) => handleSelect(e, "subcast")} data-testid="subcast-input">
               <Label for="sub-Caste" className='fontSie'>
                 Sub-Caste
