@@ -40,7 +40,7 @@ const UPIPayment = () => {
     
 
     <div className="main text-center d-flex justify-content-center align-items-center mt-5 vh-100 main-card-payment overlay">
-      <div className="card">
+      <div className="card1">
         <div className="mt-3">
         <button type="button" className="close-button" aria-label="Close">
           <span aria-hidden="true">&times;</span>
