@@ -52,7 +52,12 @@ const AppRoutes = () => {
         if (basicDetails !== undefined) {
             if (basicDetails) {
                 const currentPath = history.location.pathname;
-            if(currentPath.startsWith('/dashboard'))
+            // for testing perpose this was added need to remove while deploy after testing
+            //removed for start
+            if(currentPath.startsWith("/register"))
+                history.push('/register');
+            //removed for end
+            else if(currentPath.startsWith('/dashboard'))
                 history.push(`/dashboard${history.location.pathname.substr(10)}`);
             else
                 history.push('/dashboard');
