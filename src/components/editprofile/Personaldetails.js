@@ -1,40 +1,40 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './Details.css';
 import { MdEdit } from "react-icons/md";
 import { EditProfile } from '../../utils/constants';
-import { useDispatch } from 'react-redux';
-import { updatepersonaldetails } from '../../redux/slices/users';
+import { useDispatch, useSelector } from 'react-redux';
+import { updatepersonaldetails, getpersonaldetails } from '../../redux/slices/users';
 const initialDetails = {
   "Religion": {
-    "Caste": "xyzxyz",
-    "Sub-Caste": "xyzxyz",
-    "Gothra": "xyz",
-    "Star": "xyz",
-    "Zodiac Sign": "xyz",
-    "About Dosham": "xyz"
+    "Caste": "",
+    "Sub-Caste": "",
+    "Gothra": "",
+    "Star": "",
+    "Zodiac Sign": "",
+    "About Dosham": ""
   },
   "Family Information": {
-    "Family Status": "xyzxyz",
-    "Family Type": "xyzxyz",
-    "Father Name": "xyz",
-    "Father Occupation": "xyz",
-    "Mother Name": "xyz",
-    "Mother Occupation": "xyz",
+    "Family Status": "",
+    "Family Type": "",
+    "Father Name": "",
+    "Father Occupation": "",
+    "Mother Name": "",
+    "Mother Occupation": "",
     "Siblings": "1"
   },
   "Personal Information": {
-    "Marital Status": "xyzxyz",
-    "Complexion": "xyzxyz",
-    "Any Disabilities": "11:55 PM",
-    "Body Type": "xyzxyz",
-    "Drinking Habits": "Never drink",
-    "Eating Habits": "Non Veg",
-    "Smoking Habits": "Never smoke",
-    "Weight": "11",
-    "Height": "11",
-    "About me": "xyzxyz",
+    "Marital Status": "",
+    "Complexion": "",
+    "Any Disabilities": "",
+    "Body Type": "",
+    "Drinking Habits": "",
+    "Eating Habits": "",
+    "Smoking Habits": "",
+    "Weight": "",
+    "Height": "",
+    "About me": "",
   }
 };
 
@@ -42,8 +42,49 @@ const Personaldetails = () => {
   const [details, setDetails] = useState(initialDetails);
   const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({});
-  const dispatch = useDispatch()
-  const handleEdit = async() => {
+  const dispatch = useDispatch();
+  const { personaldetails } = useSelector(state => state.users)
+  useEffect( () => {
+     dispatch(getpersonaldetails());
+  }, [])
+
+  useEffect(() => {
+    console.log(personaldetails,"personaldetails")
+    if (personaldetails) {
+      setDetails({
+        "Religion": {
+          "Caste": personaldetails?.caste?.toLowerCase(),
+          "Sub-Caste": personaldetails?.subCaste?.toLowerCase(),
+          "Gothra": personaldetails?.gothram?.toLowerCase(),
+          "Star": personaldetails?.star?.toLowerCase(),
+          "Zodiac Sign": personaldetails?.zodiacSign?.toLowerCase(),
+          "About Dosham": personaldetails?.whatTypeOfDosham?.toLowerCase()
+        },
+        "Family Information": {
+          "Family Status": personaldetails?.familyStatus?.toLowerCase(),
+          "Family Type": personaldetails?.familyType?.toLowerCase(),
+          "Father Name": personaldetails?.fatherName?.toLowerCase(),
+          "Father Occupation": personaldetails?.fatherOccupation?.toLowerCase(),
+          "Mother Name": personaldetails?.motherName?.toLowerCase(),
+          "Mother Occupation": personaldetails?.motherOccupation?.toLowerCase(),
+          "Siblings": personaldetails?.noOfSiblings?.toLowerCase()
+        },
+        "Personal Information": {
+          "Marital Status": personaldetails?.maritalStatus?.toLowerCase(),
+          "Complexion": personaldetails?.complexion?.toLowerCase(),
+          "Any Disabilities": personaldetails?.anyDisabilities?.toLowerCase(),
+          "Body Type": personaldetails?.bodyType?.toLowerCase(),
+          "Drinking Habits": personaldetails?.drinkingHabits?.toLowerCase(),
+          "Eating Habits": personaldetails?.eatingHabits?.toLowerCase(),
+          "Smoking Habits": personaldetails?.smokingHabits?.toLowerCase(),
+          "Weight": personaldetails?.weight?.toLowerCase(),
+          "Height": personaldetails?.height?.toLowerCase(),
+          "About me": personaldetails?.description?.toLowerCase(),
+        }
+      })
+    }
+  }, [personaldetails])
+  const handleEdit = async () => {
     if (isEditing) {
       const newErrors = {};
       Object.entries(details).forEach(([section, sectionDetails]) => {
@@ -57,13 +98,13 @@ const Personaldetails = () => {
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
-        const payload={
+        const payload = {
           "caste": details.Religion.Caste,
           "subCaste": details.Religion['Sub-Caste'],
           "gothram": details.Religion.Gothra,
           "star": details.Religion.Star,
           "zodiacSign": details.Religion['Zodiac Sign'],
-          "haveDosham": details.Religion['About Dosham'] !=''? true:false,
+          "haveDosham": details.Religion['About Dosham'] != '' ? true : false,
           "whatTypeOfDosham": details.Religion['About Dosham'],
           "familyStatus": details['Family Information']['Family Status'],
           "familyType": details['Family Information']['Family Type'],
@@ -84,7 +125,7 @@ const Personaldetails = () => {
           "description": details['Personal Information']['About me'],
           "drinkingHabits": details['Personal Information']['Drinking Habits']
         }
-        const editresponse= await dispatch(updatepersonaldetails(payload));
+        const editresponse = await dispatch(updatepersonaldetails(payload));
         console.log(editresponse, 'editresponse')
         setIsEditing(false);
       }
@@ -119,10 +160,10 @@ const Personaldetails = () => {
         <h2 className='main-heading'>{EditProfile.personaldetails}</h2>
         <button className="edit-btn ml-1" onClick={handleEdit}>
           {isEditing ? <>Save</> :
-           <>
-           {EditProfile.edit}
-           <MdEdit className='edit-icon'/>
-          </> }
+            <>
+              {EditProfile.edit}
+              <MdEdit className='edit-icon' />
+            </>}
         </button>
       </div>
       {Object.entries(details).map(([sectionTitle, sectionDetails]) => (
@@ -162,7 +203,7 @@ const Personaldetails = () => {
           </Row>
         </div>
       ))}
-      <hr/>
+      <hr />
     </Container>
   );
 };

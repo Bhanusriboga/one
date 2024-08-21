@@ -28,7 +28,7 @@ const Filters = props => {
   const toggleSearch = (e) => {
     e.preventDefault()
     // props.handleFilters()
-    props.handleFilters({ marital, occupation });//avoid eslint error  have add this so 
+    props?.handleFilters({ marital, occupation });//avoid eslint error  have add this so 
     setDropdownOpen(false)
   };
   const handleBasicSearch=(e)=>{
