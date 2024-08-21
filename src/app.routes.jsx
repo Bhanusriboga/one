@@ -1,5 +1,5 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
-import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
+import { Route, Switch, useHistory, Redirect,BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyDetails, logout } from './redux/slices/AuthSlice';
 import Loader from './common-components/Loader';
@@ -18,7 +18,9 @@ const UPIPayment = lazy(() => import('./components/payment/Payment'));
 // Main Routes don't change anything
 const Routes = () => {
     const { token } = useSelector(state => state.auth);
-    return token ? <AppRoutes /> : <UnAuthorizedRoutes />;
+    return (<BrowserRouter>
+        {token ? <AppRoutes /> : <UnAuthorizedRoutes />}
+    </BrowserRouter>);
 };
 
 // Mention Authorized Routes
@@ -49,6 +51,10 @@ const AppRoutes = () => {
     useEffect(() => {
         if (basicDetails !== undefined) {
             if (basicDetails) {
+                const currentPath = history.location.pathname;
+            if(currentPath.startsWith('/dashboard'))
+                history.push(`/dashboard${history.location.pathname.substr(10)}`);
+            else
                 history.push('/dashboard');
             } else {
                 history.push('/register');

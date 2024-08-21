@@ -1,18 +1,18 @@
 import React from 'react'
-import PropTypes from "prop-types";
+import { useHistory } from 'react-router-dom'
 import Basicdetails from './Basicdetails'
 import Personaldetails from './Personaldetails'
 import Professionaldetails from './Professionaldetails'
 import Mediadetails from './Mediadetails'
 import { FaArrowLeft } from "react-icons/fa6"
 import { EditProfile } from '../../utils/constants'
-
  
-const Editprofile = (props) => {
+const Editprofile = () => {
+  const history = useHistory();
   return (
     <div> 
       <div className='editprofile-tittle mb-2 mt-3 d-flex '>
-      <FaArrowLeft className='leftarrow' onClick={()=>props.setActiveContent("")}/>
+      <FaArrowLeft className='leftarrow' onClick={()=>history.goBack()}/>
         <h1>{EditProfile.editprofile}</h1>
       </div>
       <div className='edit-details'>
@@ -25,7 +25,5 @@ const Editprofile = (props) => {
     </div>
   )
 }
-Editprofile.propTypes = {
-  setActiveContent: PropTypes.func.isRequired,
-}
+
 export default Editprofile

@@ -4,7 +4,7 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { MdEdit } from "react-icons/md";
 import { FaArrowLeft } from "react-icons/fa6";
-
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import Settings from '../settings/Settings';
 import IgnoreUsers from '../ignoreUsers/IgnoreUsers';
 import ShortListedUsers from '../shortlistedUsers/ShortListedUsers';
@@ -18,49 +18,41 @@ import {logout as logoutAction} from "../../redux/slices/AuthSlice";
 import CustomWidget from '../ChatBot/CustomWidget';
 import Userprofile from '../UserProfile/Userprofile';
 const CustomSideBar = () => {
-  const [activeContent, setActiveContent] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const dispatch=useDispatch() ;
-  const logout = async() => {
+  const history = useHistory();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const logout = async () => {
     await dispatch(logoutAction());
-   };
+    history.push('/home'); // Redirect to home or login after logout
+  };
 
   const buttonData = [
-    { id: 'editProfile', label: 'Edit Profile' },
-    { id: 'addPreferences', label: 'Add Preferences' },
-    { id: 'ignoredUsers', label: 'Ignored Users' },
-    { id: 'shortlisted', label: 'Shortlisted' },
-    { id: 'settings', label: 'Settings' },
-    { id: 'singleUser', label: '' },
-
+    { id: 'editProfile', label: 'Edit Profile', path: 'edit-profile' },
+    { id: 'addPreferences', label: 'Add Preferences', path: 'add-preferences' },
+    { id: 'ignoredUsers', label: 'Ignored Users', path: 'ignored-users' },
+    { id: 'shortlisted', label: 'Shortlisted', path: 'shortlisted' },
+    { id: 'settings', label: 'Settings', path: 'settings' },
+    { id: 'singleUser', label: 'single User',path:'user-details' },
   ];
 
-
-  // Buttons to show only on small screens
   const extraButtons = [
-    { id: 'Pricing', label: 'Pricing' },
-    { id: 'Chat with Us', label: 'Chat with Us' },
-    { id: 'Contact Us', label: 'Contact Us' },
-    // { id: 'Logout', label: 'Logout' }
+    { id: 'Pricing', label: 'Pricing', path: 'pricing' },
+    { id: 'Chat with Us', label: 'Chat with Us', path: 'chat' },
+    { id: 'Contact Us', label: 'Contact Us', path: 'contact' },
   ];
-
   const RenderContent = () => {
-    switch (activeContent) {
-      case 'addPreferences':
-        return <AddPreferences setActiveContent={setActiveContent}/>;
-      case 'editProfile':
-        return <Editprofile setActiveContent={setActiveContent}/>
-      case 'ignoredUsers':
-        return <IgnoreUsers setActiveContent={setActiveContent}/>;
-      case 'shortlisted':
-        return <ShortListedUsers setActiveContent={setActiveContent}/>
-      case 'settings':
-        return <Settings setActiveContent={setActiveContent}/>;
-      case 'singleUser':
-        return <Userprofile setActiveContent={setActiveContent}/>
-      default:
-        return <ProfileList setActiveContent={setActiveContent}/>
-    }
+    return (
+      <Switch>
+        <Route path="/dashboard/add-preferences" component={AddPreferences} />
+        <Route path="/dashboard/edit-profile" component={Editprofile} />
+        <Route path="/dashboard/ignored-users" component={IgnoreUsers} />
+        <Route path="/dashboard/shortlisted" component={ShortListedUsers} />
+        <Route path="/dashboard/settings" component={Settings} />
+        <Route path="/dashboard/user-details/:id" component={Userprofile} />
+        <Route exact path="/dashboard" component={ProfileList} />
+      </Switch>
+    )
   };
 
   return (
@@ -86,7 +78,7 @@ const CustomSideBar = () => {
           {buttonData.map((button, index) => (
             index==buttonData.length-1?null:
             <div key={button.id} className='button-parent'>
-              <Button block="true" className="bg-transparent border-0 text-color" onClick={() => setActiveContent(button.id)}>
+              <Button block="true" className="bg-transparent border-0 text-color" onClick={() => history.push(`/dashboard/${button.path}`)}>
                 {button.label}
               </Button> 
               {index !== buttonData.length - 2 && <hr className='hr' />}
@@ -98,7 +90,7 @@ const CustomSideBar = () => {
       {extraButtons.map((button, index) => (
         <React.Fragment key={button.id}>
           <div className='button-parent'>
-            <Button block className="bg-transparent border-0 text-color" onClick={() => setActiveContent(button.id)}>
+            <Button block className="bg-transparent border-0 text-color" onClick={() => history.push(`/dashboard/${button.path}`)}>
               {button.label}
             </Button>
             {index !== extraButtons.length - 1 && <hr className='hr' />}
@@ -115,13 +107,13 @@ const CustomSideBar = () => {
 
 
         </Col>
-        <Col xs="12" md="9" className="content ml-4 pt-0" data-testid="content">
-          {activeContent !== '' ? <button onClick={() => setActiveContent('')} className='back-button bg-white gap-1'>
-            <FaArrowLeft color='#B8B8B8' size={15} className='mt-1' />
-            <span className='text-lightBlack'>
-              Back
-            </span>
-          </button> : null}
+        <Col xs="12" md="9" className="content  pt-0 ml-5" data-testid="content">
+          {location.pathname !== '/dashboard' ? (
+            <button onClick={() => history.push('/dashboard')} className='back-button bg-white gap-1'>
+              <FaArrowLeft color='#616161' size={15} />
+              <span className='text-lightBlack'>Back</span>
+            </button>
+          ) : null}
           <RenderContent />
         </Col>
       </Row>

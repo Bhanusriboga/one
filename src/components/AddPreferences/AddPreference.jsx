@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
-import PropTypes from "prop-types";
+import {useHistory} from "react-router-dom"
 import { addPreference, toastsuccess } from "../../utils/constants";
 import {
   Button,
@@ -33,7 +33,7 @@ import { useDispatch } from "react-redux";
 import { addPreferencesPost } from "../../redux/slices/AddPreferences";
 import { toast } from "react-toastify";
 
-const AddPreference = (props) => {
+const AddPreference = () => {
   const [validation, setValidation] = useState({
     profileCreatedFor: {
       value: "",
@@ -100,7 +100,7 @@ const AddPreference = (props) => {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch=useDispatch();
-
+  const history=useHistory();
   const handleBlur = () => {
     let newValidation = { ...validation };
     const firstInvalidField = Object.keys(newValidation).find((key) => {
@@ -159,7 +159,7 @@ const AddPreference = (props) => {
     <div>
       <Form>
         <div className="mobile-view">
-          <FaArrowLeft className="arrow" onClick={()=>props.setActiveContent("")}/>
+          <FaArrowLeft className="arrow" onClick={()=>history.goBack()}/>
           <h2 className="preference">{addPreference.hedding}</h2>
         </div>
         <div className="backgroundImg">
@@ -901,7 +901,5 @@ const AddPreference = (props) => {
     </div>
   );
 };
-AddPreference.propTypes = {
-  setActiveContent: PropTypes.func.isRequired,
-}
+
 export default AddPreference;

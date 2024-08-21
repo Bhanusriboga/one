@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { FaArrowLeft } from "react-icons/fa6";
-import PropTypes from 'prop-types';
+import {useHistory} from "react-router-dom"
 import { useDispatch } from 'react-redux';
 import { validateEmail,validatePhoneNumber } from "../../utils/validation";
 import {logout as logoutAction} from "../../redux/slices/AuthSlice";
@@ -11,7 +11,7 @@ import "./Settings.scss"
 import { requestEmailOtp, requestMobileOtp, verifyMobileOtp,changePassword,deleteAccount,verifyEmailOtp} from '../../redux/slices/Settings';
 import { toast } from 'react-toastify';
 
-const Settings = (props) => {
+const Settings = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [newMail, setNewMail] = useState('');
@@ -29,6 +29,7 @@ const Settings = (props) => {
   const [passwordError, setPasswordError] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const dispatch=useDispatch() ;
+  const history = useHistory();
   const handleCancel = () => {
     setShowAlert(false);
   };
@@ -147,6 +148,7 @@ const Settings = (props) => {
 
   const logout = async() => {
    await dispatch(logoutAction());
+    history.push('/home');
   };
 
   const emailFields = [
@@ -214,12 +216,12 @@ const Settings = (props) => {
     {showAlert && <DeleteAlert onCancel={handleCancel} onDelete={handleDeleteConfirm} />}
       <Container fluid className={showAlert ? 'blur' : ''}>
         <div className='d-flex justify-content-left align-items-center gap-1'>
-          <FaArrowLeft color='#780024' onClick={() => props.setActiveContent('')} size={20} className='arrow'/>
-          <h1 className="title" data-testid="settings">{settings.settingsTitle}</h1>
+          <FaArrowLeft color='#780024' onClick={() => history.goBack()} size={20} className='arrow'/>
+          <h1 className="settingsTitle" data-testid="settings">{settings.settingsTitle}</h1>
         </div>
       <Form onSubmit={handleSubmit}>
         <section>
-          <h2 className="subTitle">{settings.changeEmailTitle}</h2>
+          <h2 className="settingsSubTitle">{settings.changeEmailTitle}</h2>
           {emailFields.map(({ id, type, placeholder, value, onChange, label, maxLength }) => (
             <FormGroup key={id}>
               {label && <Label for={id}>{label}</Label>}
@@ -245,7 +247,7 @@ const Settings = (props) => {
         </section>
        
         <section>
-          <h2 className="subTitle">{settings.changePasswordTitle}</h2>
+          <h2 className="settingsSubTitle">{settings.changePasswordTitle}</h2>
           {passwordFields.map(({ id, type, placeholder, value, onChange }) => (
             <FormGroup key={id} className='email-parent'>
               <input
@@ -262,7 +264,7 @@ const Settings = (props) => {
           
         </section>
         <section className="mt-2">
-          <h2 className="subTitle">{settings.changePhoneTitle}</h2>
+          <h2 className="settingsSubTitle">{settings.changePhoneTitle}</h2>
           {phoneFields.map(({ id, type, placeholder, value, onChange, label, maxLength }) => (
             <FormGroup key={id}>
               {label && <Label for={id}>{label}</Label>}
@@ -287,7 +289,7 @@ const Settings = (props) => {
           ))}
         </section>
         <section>
-          <h2 className="subTitle">{settings.deleteProfileTitle}</h2>
+          <h2 className="settingsSubTitle">{settings.deleteProfileTitle}</h2>
             <FormGroup>
               <div>{settings.deleteProfileCheckboxLabel}</div>
               <div className="radio-container">
@@ -329,7 +331,7 @@ const Settings = (props) => {
               {deleteReason && <button onClick={handleDelete} className='logout logout-design'>
                 {settings.deleteBtn}
               </button>}
-          <h2 className="subTitle">{settings.logoutTitle}</h2>
+          <h2 className="settingsSubTitle">{settings.logoutTitle}</h2>
           <div>
             {settings.logoutMessage}
           </div>
@@ -348,7 +350,5 @@ const Settings = (props) => {
   );
 };
 
-Settings.propTypes = {
-  setActiveContent: PropTypes.func.isRequired,
-}
+
 export default Settings;

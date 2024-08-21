@@ -3,15 +3,16 @@ import React from 'react';
 import { GoHeart } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
 import { ignoreUserText } from '../utils/constants';
+import { useHistory } from "react-router-dom";
 import ignore from '../Assets/Ignore.svg'
 import './UserCard.scss'
 
 function UsersCard(userDetails) {
-    const { user, background, color, viewButtonColor, buttonBackgroundColor, onMoveToIgnoreList, removeUserFromShortList,setActiveContent } = userDetails
-   const renderUserId=(userId)=>{
+    const { user, background, color, viewButtonColor, buttonBackgroundColor, onMoveToIgnoreList, removeUserFromShortList } = userDetails
+   const history=useHistory();
+    const renderUserId=(userId)=>{
     //need to write the dispath method to call api for getting single user details
-    console.log("userid --- ",userId)
-    setActiveContent("singleUser")
+    history.push(`/dashboard/user-details/${userId}`)
    }
     return (
         <div className='user-card-maincontainer'>
