@@ -7,7 +7,7 @@ import Showtoast from '../../common-components/showToast';
 export const getAllUsers = createAsyncThunk(
   "users/getAllUsers",
   async (_, thunkAPI) => {
-    const { response } = await networkCall(endPoints.getAllUsers+Storage.get("userId"), "GET");
+    const { response } = await networkCall(endPoints.userFilter+Storage.get("userId"), "POST");
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
@@ -36,10 +36,8 @@ export const changeUserStatus = createAsyncThunk(
 export const UserFilterApi=createAsyncThunk(
   "users/UserFilterApi",
   async (props, thunkAPI) => {
-    console.log({props})
     const userId=Storage.get("userId");
-    const { response,error } = await networkCall(`${endPoints.userFilter}${userId}`, "POST",JSON.stringify(props));
-    console.log({response,error})
+    const { response } = await networkCall(`${endPoints.userFilter}${userId}`, "POST",JSON.stringify(props));
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
@@ -245,13 +243,11 @@ const UserSlice = createSlice({
     })
     builder.addCase(UserFilterApi.fulfilled, (state,action) => {
       state.loading = false;
-      console.log({action})
       if(action?.object){
         state.data=action?.object
       }
     })
-    builder.addCase(UserFilterApi.rejected, (state,action) => {
-      console.log({action})
+    builder.addCase(UserFilterApi.rejected, (state) => {
         state.loading = false;
         Showtoast("Filters not applyed, Something went wrong..!")
     })

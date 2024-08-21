@@ -8,6 +8,7 @@ import { saveTextArea,userDescriptionAPICall } from "../../redux/slices/Registra
 import { FaArrowLeft } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { toastError } from "../../utils/constants";
 
 function Finish() {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function Finish() {
       if(data?.payload?.message=="User Description Added Successfully"||data?.payload?.message=="User Description Already Exists..!"){
         setModal(true);
       }else{
-        toast.error("Please try again , Something went wrong")
+        toast.error("Please try again , Something went wrong",toastError)
       }
     }
   };

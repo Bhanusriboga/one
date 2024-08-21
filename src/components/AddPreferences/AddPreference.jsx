@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
-import { addPreference } from "../../utils/constants";
+import {useHistory} from "react-router-dom"
+import { addPreference, toastsuccess } from "../../utils/constants";
 import {
   Button,
   Form,
@@ -99,7 +100,7 @@ const AddPreference = () => {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch=useDispatch();
-
+  const history=useHistory();
   const handleBlur = () => {
     let newValidation = { ...validation };
     const firstInvalidField = Object.keys(newValidation).find((key) => {
@@ -146,15 +147,7 @@ const AddPreference = () => {
     // }
     const data = await dispatch(addPreferencesPost(validation));
     if(data.payload.message=="Preferences Updated Successfully"){
-      toast.success("Preferences Updated Successfully", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
+      toast.success("Preferences Updated Successfully", toastsuccess);
     }
     // setValidation(newValidation);
     // setErrorMessage(
@@ -166,7 +159,7 @@ const AddPreference = () => {
     <div>
       <Form>
         <div className="mobile-view">
-          <FaArrowLeft className="arrow" />
+          <FaArrowLeft className="arrow" onClick={()=>history.goBack()}/>
           <h2 className="preference">{addPreference.hedding}</h2>
         </div>
         <div className="backgroundImg">

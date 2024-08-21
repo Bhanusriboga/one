@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import { Col, Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { FaArrowLeft } from "react-icons/fa6";
 import './Ignoreuser.css';
 import { ignoreUserText } from '../../utils/constants';
@@ -11,22 +11,23 @@ import { getIgnoredUsers  } from '../../redux/slices/users';
 import { changeUserStatus } from '../../redux/slices/users';
 import Loader from '../../common-components/Loader';
 
-function IgnoreUsers(props) {
+function IgnoreUsers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const { userId } = useSelector(state => state.auth)
   const {loader}=useSelector(state=>state.users)
   const dispatch = useDispatch();
-  const {setActiveContent}=props;
+  const history = useHistory();
   const { ignored } = useSelector((state) => state.users);
   useEffect(() => {
     getIgnoreItemList();
-    setTotalpages(Math.ceil(ignored?.length / 10));
+    setTotalpages(Math.ceil(ignored?.length / 12));
     setCurrentPage(1);
   },[])
  
 const getIgnoreItemList=async()=>{
  await dispatch(getIgnoredUsers());
+ setTotalpages(Math.ceil(ignored?.length / 12));
 }
 const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) => {
   await dispatch(changeUserStatus({ affectedUserId, changeByUserId, userStatus }))
@@ -41,12 +42,12 @@ const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) =
     <div>
       <div className="ignore-container">
         <div className='mobile-back-arrow-container'>
-          <FaArrowLeft className='ignore-back-mobile' />
+          <FaArrowLeft className='ignore-back-mobile' onClick={() => history.goBack()}/>
           <h4 className='ignore-heading'>{ignoreUserText.heading}</h4>
         </div>
 
-        {loader?<Loader/>:<Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-4 g-md-3">
-          {ignored?.map((user, index) => {
+        {loader?<Loader/>:<Row xs={1} sm={2} md={3} lg={4} className="">
+          {ignored?.slice(currentPage * 12 - 12, currentPage * 12)?.map((user, index) => {
             const even = index % 2 === 0;
             const styles = {
               background: even ? 'linear-gradient(#B88A44 0%,#E0AA3E 31%, #F9F295 55% ,#E0AA3E 71%,#B88A44 100%)' : '#780024',
@@ -62,9 +63,8 @@ const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) =
                   color={styles.color}
                   buttonBackgroundColor={styles.buttonBackgroundColor}
                   viewButtonColor={styles.viewButtonColor}
-                  onMoveToIgnoreList={() => changeUSerStateById(user.userId, userId, "Ignored")}
+                  onMoveToIgnoreList={() => changeUSerStateById(user.userId, userId, "Active")}
                 removeUserFromShortList={() => changeUSerStateById(user.userId, userId, "Shortlisted")}
-                setActiveContent={setActiveContent}
                 />
               </Col>
             );
@@ -82,7 +82,5 @@ const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) =
     </div>
   );
 }
-IgnoreUsers.propTypes ={
-  setActiveContent:PropTypes.func.isRequired
-}
+
 export default IgnoreUsers;

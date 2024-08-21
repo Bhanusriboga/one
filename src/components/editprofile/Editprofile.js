@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from 'react'
+import { useHistory } from 'react-router-dom'
 import Basicdetails from './Basicdetails'
 import Personaldetails from './Personaldetails'
 import Professionaldetails from './Professionaldetails'
@@ -15,10 +16,11 @@ const Editprofile = () => {
     console.log(Mydata.object,"testing")
     setUserData(Mydata.object)
   },[Mydata])
+  const history = useHistory();
   return (
     <div> 
       <div className='editprofile-tittle mb-2 mt-3 d-flex '>
-      <FaArrowLeft className='leftarrow'/>
+      <FaArrowLeft className='leftarrow' onClick={()=>history.goBack()}/>
         <h1>{EditProfile.editprofile}</h1>
       </div>
       <div className='edit-details'>
