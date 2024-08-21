@@ -6,11 +6,11 @@ import './ProfileList.scss'
 import Filters from './filters';
 import UsersCard from '../../common-components/UserCard';
 import Loader from '../../common-components/Loader';
-import { changeUserStatus, getAllUsers } from '../../redux/slices/users';
+import { changeUserStatus, getAllUsers,UserFilterApi } from '../../redux/slices/users';
 import PaginationComponent from '../../common-components/pagination/PaginationComponent';
 import PropTypes from 'prop-types';
 const ProfileList = (props) => {
-  const [filterdata, setfilterData] = useState()
+  const [filterdata, setfilterData] = useState([])
   const { data, loading } = useSelector(state => state.users)
   const { userId } = useSelector(state => state.auth)
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,27 +36,29 @@ const ProfileList = (props) => {
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
-  const filters = (data, maindata) => {
-    let updatedfilteredData = []
-    if (data?.religion !== '' && data?.subcast === '' && data?.cast === '') {
-      updatedfilteredData = maindata?.filter(item => item.religion.toLowerCase().includes(data?.religion.toLowerCase()))
-    } else if (data?.religion === '' && data?.subcast !== '' && data?.cast === '') {
-      updatedfilteredData = maindata?.filter(item => item.subcast.toLowerCase().includes(data?.subcast.toLowerCase()))
-    } else if (data?.religion === '' && data?.subcast === '' && data?.cast !== '') {
-      updatedfilteredData = maindata?.filter(item => item.cast.toLowerCase().includes(data?.cast.toLowerCase()))
-    } else if (data?.religion !== '' && data?.subcast === '' && data?.cast !== '') {
-      updatedfilteredData = maindata?.filter(item => item.religion.toLowerCase().includes(data?.religion.toLowerCase()) && item.cast.toLowerCase().includes(data?.cast.toLowerCase()))
-    } else if (data?.religion !== '' && data?.subcast !== '' && data?.cast === '') {
-      updatedfilteredData = maindata?.filter(item => item.religion.toLowerCase().includes(data?.religion.toLowerCase()) && item.subcast.toLowerCase().includes(data?.subcast.toLowerCase()))
-    } else if (data?.religion === '' && data?.subcast !== '' && data?.cast !== '') {
-      updatedfilteredData = maindata?.filter(item => item.cast.toLowerCase().includes(data?.cast.toLowerCase()) && item.subcast.toLowerCase().includes(data?.subcast.toLowerCase()))
-    } else if (data?.religion !== '' && data?.cast !== '' && data?.subcast !== '') {
-      updatedfilteredData = maindata?.filter(item => item.religion.toLowerCase().includes(data?.religion.toLowerCase()) && item.cast.toLowerCase().includes(data?.cast.toLowerCase()) && item.subcast.toLowerCase().includes(data?.subcast.toLowerCase()))
+  const filters =async (maindata) => {
+    let updatedfilteredData = [];
+    const filters = {
+      religion: maindata?.religion,
+      cast: maindata?.cast,
+      subcast: maindata?.subcast,
+      // "martialStatus": maindata?.martialStatus,
+      // "occupation": maindata?.occupation,
+      // "minAge": maindata?.minAge,
+      // "maxAge": maindata?.maxAge,
+      // "city": maindata?.city,
+      // "annualIncome": maindata?.annualIncome
+    }
+    if (maindata?.religion !== '' || maindata?.subcast === '' || maindata?.cast === '') {
+      const data = await dispatch(UserFilterApi(filters));
+      updatedfilteredData = data?.payload?.object;
     }
     return updatedfilteredData
   }
-  const handleBasic = (FilterItems) => {
-    setfilterData(filters(FilterItems, data))
+  const handleBasic = async(FilterItems) => {
+    const responseData=await filters(FilterItems)
+    if(responseData?.length!==0)
+    setfilterData(responseData)
   }
 
   const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) => {
@@ -67,9 +69,7 @@ const ProfileList = (props) => {
   return (
     <div>
       <Filters handlefilters={handleFilters} handleBasic={handleBasic} />
-      {loading ? (<div className="w-100 bg-transparent d-flex justify-content-center align-items-center">
-        <Loader />
-      </div>):
+      {loading ? (<Loader />):
         (<Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3 w-100 bcg">
           {filterdata?.map((val, index) => {
             let background;

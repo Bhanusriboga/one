@@ -38,15 +38,22 @@
 .right-section {
   width: 50%;
   justify-self: flex-start;
+  position: fixed;
+  left:50%
 }
 .main-img {
   width: 100% !important;
   height: 100% !important;
+padding-left: 1px;
+  z-index: 0;
+  left: 30%;
 }
 .right-section-text {
-  position: absolute;
+  position: fixed;
   padding-top: 8%;
   padding-left: 8%;
+  z-index: 1;
+  margin-left: 50px!important;
 }
 .right-section-text h4 {
   color: #ffffff;
@@ -62,11 +69,13 @@
 }
 .forms {
   width: 85%;
+  height: 120vh;
+  overflow-y: auto;
 }
 .signup-heading {
-  font-size: 38px;
+  font-size: 40px;
   padding-top: 20px;
-  font-weight: 500;
+  font-weight: 600;
   color: #780024;
   text-align: center;
 }
@@ -75,8 +84,15 @@
 }
 .signup-form-gender {
   height: 49px !important;
-  border: 1px solid #777676 !important;
+  border: 1.37px solid #777676 !important;
   color: rgba(171, 171, 171, 1) !important;
+}
+.signup-form-gender::placeholder{
+  font-weight: 500 !important;
+  font-size: 10px !important;
+  color: #780024;
+  margin-left: 10px !important;
+
 }
 .number-cont {
   display: flex;
@@ -140,6 +156,7 @@
   cursor: pointer;
   outline: none;
   top: 20% !important;
+  z-index: 1;
 }
 
 input::-webkit-outer-spin-button,
@@ -224,6 +241,37 @@ input::-webkit-inner-spin-button {
   top: 0.5vh;
   left: 0.7vw;
 }
+.required-inputs {
+  position: relative;
+  padding-left: 20px;
+}
+ 
+.required-inputs::before {
+  content: '*';
+  color: red;
+  position: absolute !important;
+  left: 10vw;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; 
+}
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+ 
+.required-asterisk {
+  color: red;
+  left: 5px;
+  font-size: 16px;
+  top: 10%;
+  position: absolute;
+}
+ 
+input {
+  padding-left: 20px; 
+}
 .red {
   color: rgba(253, 89, 89, 1);
   margin-bottom: 10vh;
@@ -242,6 +290,7 @@ input::-webkit-inner-spin-button {
 
 .para-terms {
   width: 100vw;
+  font-weight: 550;
 }
 .otp-head {
   font-size: 130% !important;
@@ -294,7 +343,7 @@ input::-webkit-inner-spin-button {
   left: 491px;
   gap: 0px;
   border-radius: 9;
-  opacity: 1;
+
 }
 .otp-input::placeholder {
   text-align: center;
@@ -329,7 +378,7 @@ input::-webkit-inner-spin-button {
 
 @media (min-width: 769px) and (max-width: 1150px) {
   .left-section {
-    max-width: 70%;
+    width: 60%;
     margin: auto;
   }
   .req {
@@ -346,7 +395,7 @@ input::-webkit-inner-spin-button {
     display: none;
   }
   .form-control-genderss {
-    width: 60vw;
+
     height: 8vh;
     border: 1.4px solid grey;
     color: rgb(22, 21, 21);
@@ -459,6 +508,7 @@ input::-webkit-inner-spin-button {
     text-align: center;
     font-size: 18px;
     align-self: center;
+   
   }
 
   .form.next-button {

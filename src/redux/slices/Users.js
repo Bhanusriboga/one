@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import networkCall from '../../utils/NetworkCall';
 import { endPoints } from '../../config/config';
 import Storage from '../../utils/Storage';
+import Showtoast from '../../common-components/showToast';
 // this method is used to get all users
 export const getAllUsers = createAsyncThunk(
   "users/getAllUsers",
@@ -32,6 +33,21 @@ export const changeUserStatus = createAsyncThunk(
   }
 )
 
+export const UserFilterApi=createAsyncThunk(
+  "users/UserFilterApi",
+  async (props, thunkAPI) => {
+    console.log({props})
+    const userId=Storage.get("userId");
+    const { response,error } = await networkCall(`${endPoints.userFilter}${userId}`, "POST",JSON.stringify(props));
+    console.log({response,error})
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue("Something went wrong..!")
+    }
+  }
+)
 
 // This function is used to get users by status
 // userState are  Ignored, Shortlisted and Active. userId is our own id
@@ -157,7 +173,22 @@ const UserSlice = createSlice({
     })
     builder.addCase(changeUserStatus.rejected, (state) => {
         state.loading = false;
-      });
+    });
+    builder.addCase(UserFilterApi.pending, (state) => {
+      state.loading = true;
+    })
+    builder.addCase(UserFilterApi.fulfilled, (state,action) => {
+      state.loading = false;
+      console.log({action})
+      if(action?.object){
+        state.data=action?.object
+      }
+    })
+    builder.addCase(UserFilterApi.rejected, (state,action) => {
+      console.log({action})
+        state.loading = false;
+        Showtoast("Filters not applyed, Something went wrong..!")
+    })
   }
 });
 

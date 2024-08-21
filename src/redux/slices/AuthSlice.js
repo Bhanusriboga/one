@@ -31,6 +31,7 @@ export const userSignup = createAsyncThunk(
 export const userLogin = createAsyncThunk(
   "auth/login",
   async (props, thunkAPI) => {
+    console.log("-------------->",endPoints.login,props)
     const { response, error } = await networkCall(
       endPoints.login,
       "POST",

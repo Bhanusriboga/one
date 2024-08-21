@@ -8,7 +8,6 @@ import PaginationComponent from '../../common-components/pagination/PaginationCo
 import UsersCard from '../../common-components/UserCard';
 import { getShortListedUsers } from '../../redux/slices/users';
 import { changeUserStatus } from '../../redux/slices/users';
-// import './Usercard.css';
 
 
 function ShortListedUsers(props) {
@@ -40,7 +39,7 @@ function ShortListedUsers(props) {
     <div style={{ position: "relative" }}>
       <div className="shortlist-container">
         <div className='shortlist-mobile-back-arrow-container'>
-          <FaArrowLeft className='shortlist-back-mobile' />
+          <FaArrowLeft onClick={() => props.setActiveContent('')} className='shortlist-back-mobile' />
           <h4 className='shortlist-heading'>{ignoreUserText.heading1}</h4>
         </div>
         <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3">

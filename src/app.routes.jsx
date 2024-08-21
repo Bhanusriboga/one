@@ -15,7 +15,7 @@ const UPIPayment = lazy(() => import('./components/payment/Payment'));
 
 // Main Routes don't change anything
 const Routes = () => {
-    const { token } = useSelector(state => state.auth);
+    const { token } = useSelector(state => state.auth); 
     return token ? <AppRoutes /> : <UnAuthorizedRoutes />;
 };
 

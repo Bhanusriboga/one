@@ -45,9 +45,9 @@ const CustomSideBar = () => {
   const RenderContent = () => {
     switch (activeContent) {
       case 'addPreferences':
-        return <AddPreferences />;
+        return <AddPreferences setActiveContent={setActiveContent} />;
       case 'editProfile':
-        return <Editprofile />
+        return <Editprofile setActiveContent={setActiveContent} />
       case 'ignoredUsers':
         return <IgnoreUsers setActiveContent={setActiveContent}/>;
       case 'shortlisted':
@@ -55,7 +55,7 @@ const CustomSideBar = () => {
       case 'settings':
         return <Settings setActiveContent={setActiveContent}/>;
       case 'singleUser':
-        return <Userprofile setActiveContent={setActiveContent}/>
+        return <Userprofile setActiveContent={setActiveContent}/>;
       default:
         return <ProfileList setActiveContent={setActiveContent}/>
     }
@@ -63,8 +63,8 @@ const CustomSideBar = () => {
 
   return (
     <>
-    <Container fluid className='outer-container mt-4 mb-4'>
-      <Row className='w-100'>
+    <Container fluid className='outer-container w-100 mt-4 mb-4'>
+      <Row className='  w-100'>
         <Col xs="12" className="d-flex flex-row justify-content-between d-md-none">
           <Button className="bg-transparent border-0" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             {isSidebarOpen ? <RxCross2 size={30} color='#780024' /> : <FaBarsStaggered size={30} color='#780024' />}

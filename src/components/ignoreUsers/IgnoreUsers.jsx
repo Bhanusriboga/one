@@ -41,7 +41,7 @@ const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) =
     <div>
       <div className="ignore-container">
         <div className='mobile-back-arrow-container'>
-          <FaArrowLeft className='ignore-back-mobile' />
+          <FaArrowLeft onClick={() => props.setActiveContent('')} className='ignore-back-mobile' />
           <h4 className='ignore-heading'>{ignoreUserText.heading}</h4>
         </div>
 

@@ -11,7 +11,6 @@ import { userLogin } from "../../redux/slices/AuthSlice";
 import "./Login.scss";
 import ForgotPassword from '../Forgot/ForgotPassword';
 import {LoginBack,LogoText,WelcomeText} from '../../commonSyles/LoginStyles.js'
-import { pelli } from '../Signup/assets/index.js';
 import { useHistory } from 'react-router-dom';
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -55,7 +54,7 @@ const LoginPage = () => {
   return (
     <LoginBack>
       <Form className="loginContent">
-      <WelcomeText>Welcome back to <LogoText>  <img src={pelli} alt="Pelli Sambandalu" className='pellilogo' /></LogoText></WelcomeText>
+      <WelcomeText>Welcome back to <LogoText>Pellisambandalu</LogoText></WelcomeText>
         <h3 className="d-flex justify-content-center align-items-center loginhead">
           {login.login}
         </h3>
