@@ -1,13 +1,13 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col,Form } from "react-bootstrap";
 import "./Details.css";
 import { MdEdit } from "react-icons/md";
-import { EditProfile } from "../../utils/constants";
-import "./Details.css";
+import { EditProfile } from "../../utils/constants";import "./Details.css";
 
-import { useDispatch } from 'react-redux';
-import { updatebasicdetails } from "../../redux/slices/users";
+import { useDispatch,useSelector } from 'react-redux';
+import { updatebasicdetails,getbasicdetails } from "../../redux/slices/users";
+
 const initialdetails = {
   "Date of Birth": new Date().toISOString().split('T')[0],
   "Place of Birth": "xyzxyzk",
@@ -20,7 +20,7 @@ const initialdetails = {
   "LinkedIn id": "xyz",
 };
 
-const basicdetails = {
+const basicdetailsdata = {
   "Address": {
     "Door no&Street Name": "xyzxyz",
     "City": "xyzxyz",
@@ -32,13 +32,39 @@ const basicdetails = {
 
 const Basicdetails = () => {
   const [details, setDetails] = useState(initialdetails);
-  const [address, setAddress] = useState(basicdetails);
+  const [address, setAddress] = useState(basicdetailsdata);
   const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({});
+  const { basicdetails } = useSelector(state => state.users)
   const dispatch = useDispatch()
   const handleEdit = () => {
     setIsEditing(!isEditing);
   };
+  useEffect( ()=>{
+     dispatch(getbasicdetails());
+  },[])
+  useEffect(()=>{
+    if(basicdetails){
+    setDetails({  "Date of Birth": basicdetails?.dateOfBirth,
+      "Place of Birth": basicdetails?.placeOfBirth,
+      "Time of Birth": basicdetails?.timeOfBirth,
+      "Mother Tongue": basicdetails?.motherTongue,
+      "Religion": basicdetails?.religion,
+      "Citizenship": basicdetails?.citizenShip,
+      "Language Proficiency": basicdetails?.languageProficiency,
+      "Instagram id": basicdetails?.instgramId,
+      "LinkedIn id": basicdetails?.linkedinId,});
+      setAddress({
+        "Address": {
+          "Door no&Street Name": basicdetails?.doorNumber + basicdetails?.streetName,
+          "City": basicdetails?.city,
+          "State": basicdetails?.state,
+          "Country": basicdetails?.country,
+          "Postal code": basicdetails?.postalCode,
+        }
+      })
+    }
+  },[basicdetails])
 
   const handleChange = (e, section, key) => {
     const value = e.target.value;

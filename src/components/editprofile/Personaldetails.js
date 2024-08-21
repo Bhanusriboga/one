@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import './Details.css';
 import { MdEdit } from "react-icons/md";
@@ -380,37 +380,37 @@ const weightOptionsKg = Array.from({ length: 200 }, (_, i) => ({
   value: i + 1,
   label: `${i + 1} kg`,
 }));
-import { useDispatch } from 'react-redux';
-import { updatepersonaldetails } from '../../redux/slices/users';
+import { useDispatch, useSelector } from 'react-redux';
+import { updatepersonaldetails, getpersonaldetails } from '../../redux/slices/users';
 const initialDetails = {
   "Religion": {
-    "Caste": "General",
-    "Sub-Caste": "Sub-caste 1",
-    "Gothra": "xyz",
-    "Star": "Star 1",
-    "Zodiac Sign": "Aries",
-    "About Dosham": "xyz"
+    "Caste": "",
+    "Sub-Caste": "",
+    "Gothra": "",
+    "Star": "",
+    "Zodiac Sign": "",
+    "About Dosham": ""
   },
   "Family Information": {
-    "Family Status": "Middle class",
-    "Family Type": "Nuclear Family",
-    "Father Name": "John Doe",
-    "Father Occupation": "Employed",
-    "Mother Name": "Jane Doe",
-    "Mother Occupation": "Home maker",
-    "Siblings": "2"
+    "Family Status": "",
+    "Family Type": "",
+    "Father Name": "",
+    "Father Occupation": "",
+    "Mother Name": "",
+    "Mother Occupation": "",
+    "Siblings": "1"
   },
   "Personal Information": {
-    "Marital Status": "Single",
-    "Complexion": "Fair",
-    "Any Disabilities": "Visual Impairment",
-    "Body Type": "Slim",
-    "Drinking Habits": "I don’t Drink",
-    "Eating Habits": "Non Veg",
-    "Smoking Habits": "Non-smoker",
-    "Weight": "70",
-    "Height": "5 ft 10 in",
-    "About me": "xyzxyz",
+    "Marital Status": "",
+    "Complexion": "",
+    "Any Disabilities": "",
+    "Body Type": "",
+    "Drinking Habits": "",
+    "Eating Habits": "",
+    "Smoking Habits": "",
+    "Weight": "",
+    "Height": "",
+    "About me": "",
   }
 };
 
@@ -418,8 +418,49 @@ const Personaldetails = () => {
   const [details, setDetails] = useState(initialDetails);
   const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({});
-  const dispatch = useDispatch()
-  const handleEdit = async() => {
+  const dispatch = useDispatch();
+  const { personaldetails } = useSelector(state => state.users)
+  useEffect( () => {
+     dispatch(getpersonaldetails());
+  }, [])
+
+  useEffect(() => {
+    console.log(personaldetails,"personaldetails")
+    if (personaldetails) {
+      setDetails({
+        "Religion": {
+          "Caste": personaldetails?.caste?.toLowerCase(),
+          "Sub-Caste": personaldetails?.subCaste?.toLowerCase(),
+          "Gothra": personaldetails?.gothram?.toLowerCase(),
+          "Star": personaldetails?.star?.toLowerCase(),
+          "Zodiac Sign": personaldetails?.zodiacSign?.toLowerCase(),
+          "About Dosham": personaldetails?.whatTypeOfDosham?.toLowerCase()
+        },
+        "Family Information": {
+          "Family Status": personaldetails?.familyStatus?.toLowerCase(),
+          "Family Type": personaldetails?.familyType?.toLowerCase(),
+          "Father Name": personaldetails?.fatherName?.toLowerCase(),
+          "Father Occupation": personaldetails?.fatherOccupation?.toLowerCase(),
+          "Mother Name": personaldetails?.motherName?.toLowerCase(),
+          "Mother Occupation": personaldetails?.motherOccupation?.toLowerCase(),
+          "Siblings": personaldetails?.noOfSiblings?.toLowerCase()
+        },
+        "Personal Information": {
+          "Marital Status": personaldetails?.maritalStatus?.toLowerCase(),
+          "Complexion": personaldetails?.complexion?.toLowerCase(),
+          "Any Disabilities": personaldetails?.anyDisabilities?.toLowerCase(),
+          "Body Type": personaldetails?.bodyType?.toLowerCase(),
+          "Drinking Habits": personaldetails?.drinkingHabits?.toLowerCase(),
+          "Eating Habits": personaldetails?.eatingHabits?.toLowerCase(),
+          "Smoking Habits": personaldetails?.smokingHabits?.toLowerCase(),
+          "Weight": personaldetails?.weight?.toLowerCase(),
+          "Height": personaldetails?.height?.toLowerCase(),
+          "About me": personaldetails?.description?.toLowerCase(),
+        }
+      })
+    }
+  }, [personaldetails])
+  const handleEdit = async () => {
     if (isEditing) {
       const newErrors = {};
       Object.entries(details).forEach(([section, sectionDetails]) => {
@@ -433,13 +474,13 @@ const Personaldetails = () => {
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
-        const payload={
+        const payload = {
           "caste": details.Religion.Caste,
           "subCaste": details.Religion['Sub-Caste'],
           "gothram": details.Religion.Gothra,
           "star": details.Religion.Star,
           "zodiacSign": details.Religion['Zodiac Sign'],
-          "haveDosham": details.Religion['About Dosham'] !=''? true:false,
+          "haveDosham": details.Religion['About Dosham'] != '' ? true : false,
           "whatTypeOfDosham": details.Religion['About Dosham'],
           "familyStatus": details['Family Information']['Family Status'],
           "familyType": details['Family Information']['Family Type'],
@@ -460,7 +501,7 @@ const Personaldetails = () => {
           "description": details['Personal Information']['About me'],
           "drinkingHabits": details['Personal Information']['Drinking Habits']
         }
-        const editresponse= await dispatch(updatepersonaldetails(payload));
+        const editresponse = await dispatch(updatepersonaldetails(payload));
         console.log(editresponse, 'editresponse')
         setIsEditing(false);
       }
@@ -496,10 +537,10 @@ const Personaldetails = () => {
         <h2 className='main-heading'>{EditProfile.personaldetails}</h2>
         <button className="edit-btn ml-1" onClick={handleEdit}>
           {isEditing ? <>Save</> :
-           <>
-           {EditProfile.edit}
-           <MdEdit className='edit-icon'/>
-          </> }
+            <>
+              {EditProfile.edit}
+              <MdEdit className='edit-icon' />
+            </>}
         </button>
       </div>
       {Object.entries(details).map(([sectionTitle, sectionDetails]) => (
@@ -715,7 +756,7 @@ const Personaldetails = () => {
           
         </div>
       ))}
-      <hr/>
+      <hr />
     </Container>
   );
 };

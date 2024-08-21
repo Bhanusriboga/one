@@ -68,7 +68,7 @@ const ProfileList = () => {
 
   return (
     <div>
-      <Filters handlefilters={handleFilters} handleBasic={handleBasic} />
+      <Filters handleFilters={handleFilters} handleBasic={handleBasic} />
       {loading ? (<Loader />):
         (<Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3 w-100 bcg">
           {filterdata?.slice(currentPage * 12 -12, currentPage * 12)?.map((val, index) => {
