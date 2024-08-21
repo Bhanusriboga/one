@@ -1,30 +1,34 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './Details.css';
 import { MdEdit } from "react-icons/md";
 import { EditProfile } from '../../utils/constants';
-import { useDispatch } from 'react-redux';
-import { updateprofesionaldetails } from '../../redux/slices/users';
+import { useDispatch,useSelector } from 'react-redux';
+import { updateprofesionaldetails, getprofesionaldetails } from '../../redux/slices/users';
 
 
 const initialDetails = {
-  "Highest Education": "B.Tech",
-  "Year Of Passing": "2222",
-  "Name Of the Institute": "abcdefgk",
-  "Occupation": "xyz",
-  "Employment Status": "xyz",
-  "Employed in": "yxzxyz",
-  "Work Location": "India",
-  "State": "yhhhhhhh",
-  "City": "Xyz"
+  "Highest Education": "",
+  "Year Of Passing": "",
+  "Name Of the Institute": "",
+  "Occupation": "",
+  "Employment Status": "",
+  "Employed in": "",
+  "Work Location": "",
+  "State": "",
+  "City": ""
 };
 
 const ProfessionalDetails = () => {
   const [details, setDetails] = useState(initialDetails);
   const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({});
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { profesionalDetails } = useSelector(state => state.users)
+  useEffect( () => {
+    dispatch(getprofesionaldetails());
+  }, [])
   const leftColumnKeys = [
     "Highest Education",
     "Name Of the Institute",
@@ -39,8 +43,20 @@ const ProfessionalDetails = () => {
     "Employed in",
     "State"
   ];
-
-  const handleEdit = async() => {
+  useEffect(() => {
+    // setDetails({
+    //   "Highest Education": profesionalDetails?.,
+    //   "Year Of Passing": profesionalDetails?.,
+    //   "Name Of the Institute": profesionalDetails?.,
+    //   "Occupation": profesionalDetails?.,
+    //   "Employment Status": profesionalDetails?.,
+    //   "Employed in": profesionalDetails?.,
+    //   "Work Location": profesionalDetails?.,
+    //   "State": profesionalDetails?.,
+    //   "City": profesionalDetails?.
+    // })
+  }, [profesionalDetails])
+  const handleEdit = async () => {
     if (isEditing) {
       const newErrors = {};
       Object.keys(details).forEach((key) => {
@@ -51,7 +67,7 @@ const ProfessionalDetails = () => {
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
-        const payload={
+        const payload = {
           "highestEducation": details['Highest Education'],
           "yearOfPassOut": details['Year Of Passing'],
           "nameOfInstitute": details['Name Of the Institute'],
@@ -61,9 +77,9 @@ const ProfessionalDetails = () => {
           "workLocation": details['Work Location'],
           "state": details.State,
           "city": details.City,
-          "annualIncome": details['Employed in']
+          "annualIncome": '123234'
         }
-        const editresponse= await dispatch(updateprofesionaldetails(payload));
+        const editresponse = await dispatch(updateprofesionaldetails(payload));
         console.log(editresponse, 'editresponse')
         setIsEditing(false);
       }
@@ -82,11 +98,11 @@ const ProfessionalDetails = () => {
       <div className='main-head-1'>
         <h2 className='main-heading'>{EditProfile.professionaldetails}</h2>
         <button className="edit-btn" onClick={handleEdit}>
-          {isEditing ?<>Save</>  :
-          <> 
-          {EditProfile.edit} 
-          <MdEdit className='edit-icon' />
-            </> }
+          {isEditing ? <>Save</> :
+            <>
+              {EditProfile.edit}
+              <MdEdit className='edit-icon' />
+            </>}
         </button>
       </div>
       <Row>
