@@ -22,10 +22,10 @@ function UsersCard(userDetails) {
                 }}
             >
                 <div className='user-card-icons-container'>
-                    <button onClick={onMoveToIgnoreList} disabled={user.userStatus === "Ignored"} className='bg-transparent border-0'>
+                    <button onClick={onMoveToIgnoreList} className='bg-transparent border-0'>
                         <img src={ignore} alt='ignore' style={{ width: '25px', height: '25px' }} data-testid="usercard-ignoreicon" />
                     </button>
-                    <button disabled={user.userStatus === "Shortlisted"} className='bg-transparent border-0' onClick={removeUserFromShortList}>
+                    <button  className='bg-transparent border-0' onClick={removeUserFromShortList}>
                         {
                             user.userStatus === "Shortlisted" ?
                                 <AiFillHeart className='usercard-hearticon' style={{ color: 'white' }} data-testid="usercard-hearticon" />

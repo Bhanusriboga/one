@@ -21,7 +21,7 @@ function ShortListedUsers(props) {
 
   useEffect(() => {
     dispatch(getShortListedUsers());
-    setTotalpages(Math.ceil(shortlisted?.length / 10));
+    setTotalpages(Math.ceil(shortlisted?.length / 12));
     setCurrentPage(1);
   }, [dispatch]);
 
@@ -29,6 +29,7 @@ function ShortListedUsers(props) {
 
   const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) => {
     await dispatch(changeUserStatus({ affectedUserId, changeByUserId, userStatus }))
+    setTotalpages(Math.ceil(shortlisted?.length / 12));
   }
 
 
@@ -37,14 +38,14 @@ function ShortListedUsers(props) {
 
 
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <div className="shortlist-container">
         <div className='shortlist-mobile-back-arrow-container'>
-          <FaArrowLeft className='shortlist-back-mobile' />
+          <FaArrowLeft className='shortlist-back-mobile'  onClick={() => setActiveContent("")}/>
           <h4 className='shortlist-heading'>{ignoreUserText.heading1}</h4>
         </div>
         <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3">
-          {shortlisted?.map((user, index) => {
+          {shortlisted?.slice(currentPage * 12 - 12, currentPage * 12)?.map((user, index) => {
             let background;
             let color;
             let buttonBackgroundColor;
@@ -71,7 +72,7 @@ function ShortListedUsers(props) {
                   buttonBackgroundColor={buttonBackgroundColor}
                   viewButtonColor={viewButtonColor}
                   onMoveToIgnoreList={() => changeUSerStateById(user.userId, userId, "Ignored")}
-                removeUserFromShortList={() => changeUSerStateById(user.userId, userId, "Shortlisted")}
+                removeUserFromShortList={() => changeUSerStateById(user.userId, userId, "Active")}
                 setActiveContent={setActiveContent}
                 />
               </Col>

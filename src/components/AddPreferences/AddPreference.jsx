@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
+import PropTypes from "prop-types";
 import { addPreference, toastsuccess } from "../../utils/constants";
 import {
   Button,
@@ -32,7 +33,7 @@ import { useDispatch } from "react-redux";
 import { addPreferencesPost } from "../../redux/slices/AddPreferences";
 import { toast } from "react-toastify";
 
-const AddPreference = () => {
+const AddPreference = (props) => {
   const [validation, setValidation] = useState({
     profileCreatedFor: {
       value: "",
@@ -158,7 +159,7 @@ const AddPreference = () => {
     <div>
       <Form>
         <div className="mobile-view">
-          <FaArrowLeft className="arrow" />
+          <FaArrowLeft className="arrow" onClick={()=>props.setActiveContent("")}/>
           <h2 className="preference">{addPreference.hedding}</h2>
         </div>
         <div className="backgroundImg">
@@ -900,5 +901,7 @@ const AddPreference = () => {
     </div>
   );
 };
-
+AddPreference.propTypes = {
+  setActiveContent: PropTypes.func.isRequired,
+}
 export default AddPreference;
