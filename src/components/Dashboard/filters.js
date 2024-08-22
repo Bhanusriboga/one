@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Dashboard.scss'
 import {
   Form,
@@ -14,12 +14,27 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { useSelector,useDispatch } from 'react-redux';
 import { religion } from '../../utils/constants';
+import {getSubCaste} from "../../redux/slices/users"
+import Select from "react-select"
+
 const Filters = props => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [basicfilers, setBasicfilters] = useState({religion:"",cast:"",subcast:""})
   const [marital, setMarital] = useState('');
   const [occupation, setOccupation] = useState('');
+  const dispatch=useDispatch()
+const {castes,subcast}=useSelector(state=>state.users)
+const [cast,setCast]=useState([])
+const [subCaste,setSubCast]=useState([])
+useEffect(()=>{
+  if(castes){ 
+    const data=castes?.map(item=>({value:item.caste,label:item.caste})) 
+    setCast([...data])
+  }
+},[castes,subcast])
+
 
   const toggle = (e) => {
     e.preventDefault()
@@ -35,13 +50,20 @@ const Filters = props => {
     e.preventDefault()
     props.handleBasic(basicfilers)
   }
-  const handleSelect = (e,type) => {
+  const fetchSubCaste=async(cast)=>{
+   const data=await dispatch(getSubCaste(cast));
+   console.log({data})
+   const subCastesData=data.payload?.object?.map(item=>({value:item.caste,label:item.subCaste}))
+   setSubCast([...subCastesData]) 
+  }
+  const handleSelect = (e,type) => { 
     if(type === 'religion'){
       setBasicfilters({...basicfilers,religion:e.target.value})
     } else if(type === 'cast'){
-      setBasicfilters({...basicfilers,cast:e.target.value})
+      fetchSubCaste(e.value)
+      setBasicfilters({...basicfilers,cast:e.value})
     } else if(type === 'subcast'){
-      setBasicfilters({...basicfilers,subcast:e.target.value})
+      setBasicfilters({...basicfilers,subcast:e.value})
     }
   }
 
@@ -71,14 +93,14 @@ const Filters = props => {
             </FormGroup>
           </Col>
           <Col md={2}>
-            <FormGroup onChange={(e) => handleSelect(e, "cast")} data-testid="cast-input">
+            <FormGroup data-testid="cast-input">
               <Label for="Cast" className='fontSie'>
                 Caste
               </Label>
-              <Input
-                id="Cast"
-                name="Cast"
-                placeholder="Enter Caste"
+              <Select
+                options={cast}
+                onChange={(e) => handleSelect(e, "cast")}
+                placeholder="Select Caste"
                 className='filterInput'
               />
             </FormGroup>
@@ -88,9 +110,10 @@ const Filters = props => {
               <Label for="sub-Caste" className='fontSie'>
                 Sub-Caste
               </Label>
-              <Input
-                id="sub-Caste"
-                name="sub-Caste"
+              <Select
+              id='sub-Caste'
+                options={subCaste}
+                onChange={(e) => handleSelect(e, "subcast")}
                 placeholder="Enter sub-Caste"
                 className='filterInput'
               />
