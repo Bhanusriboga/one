@@ -190,7 +190,6 @@ export const getCaste=createAsyncThunk(
   "users/getCaste",
   async (_, thunkAPI) => {
     const { response, error } = await networkCall(endPoints.getCastes, "GET");
-    console.log({response,error})
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     } else {

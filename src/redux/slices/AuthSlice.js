@@ -12,6 +12,7 @@ export const userSignup = createAsyncThunk(
       userName: props.fullname,
       mobileNumber: props.mobile,
       gender: props.gender.toUpperCase(),
+      role:"USER"
     };
     const { response, error } = await networkCall(
       endPoints.signup,

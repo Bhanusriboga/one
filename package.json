@@ -36,7 +36,8 @@
     "sass": "^1.77.2",
     "styled-components": "^4.0.0",
     "tiny-warning": "^1.0.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "worker-loader": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",
