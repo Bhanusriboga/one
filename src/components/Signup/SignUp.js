@@ -11,13 +11,11 @@ import {
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./signup.css";
 import { useHistory } from "react-router-dom";
-import { Document } from 'react-pdf';
 import { singnup, toastError } from "../../utils/constants";
 import { validateEmail } from "../../utils/validation";
 import { useDispatch } from "react-redux";
 import {registerlogo,tick,pelli} from './assets/index.js'
 import  register2 from "./assets/register2.svg";
-import { terms_conditios} from "./assets"
 import {
   userSignup,
   otpverify,
@@ -113,11 +111,6 @@ const SignUp = () => {
   };
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const togglePasswordVisibilities = () => setRePassError(!rePassError);
-  const RenderTermsAndConditions = () => {
-    return (<Document 
-    file={terms_conditios}
-    />)
-  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     setDisplayOtp(true);
@@ -192,7 +185,6 @@ const SignUp = () => {
   };
   return (
     <div className="main-cont">
-      <RenderTermsAndConditions/>
       <img src={registerlogo} alt="image" className="img-logo-signup" />
       <div className="left-section">
         <Form onSubmit={handleSubmit} className="forms">
