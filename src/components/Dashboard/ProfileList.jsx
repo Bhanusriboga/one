@@ -37,18 +37,20 @@ const ProfileList = () => {
 
   const filters =async (maindata) => {
     let updatedfilteredData = [];
-    const filters = {
-      religion: maindata?.religion,
-      cast: maindata?.cast,
-      subcast: maindata?.subcast,
-      // "martialStatus": maindata?.martialStatus,
-      // "occupation": maindata?.occupation,
-      // "minAge": maindata?.minAge,
-      // "maxAge": maindata?.maxAge,
-      // "city": maindata?.city,
-      // "annualIncome": maindata?.annualIncome
-    }
-    if (maindata?.religion !== '' || maindata?.subcast === '' || maindata?.cast === '') {
+    const filters = Object.fromEntries(
+      Object.entries({
+        religion: maindata?.religion,
+        cast: maindata?.cast,
+        subcast: maindata?.subcast,
+        martialStatus: maindata?.marital,
+        occupation: maindata?.occupation,
+        minAge: maindata?.minAge,
+        maxAge: maindata?.maxAge,
+        city: maindata?.city,
+        annualIncome: maindata?.annualIncome
+      }).filter(([, value]) => value !== "" && value !== undefined && value !== null)
+    );
+    if (maindata?.religion !== '' || maindata?.subcast!== '' || maindata?.cast !== ''|| maindata?.martialStatus !== '' || maindata?.occupation !== '' || maindata?.minAge !== '' || maindata?.maxAge !== '' || maindata?.city !== '' || maindata?.annualIncome !== '') {
       const data = await dispatch(UserFilterApi(filters));
       updatedfilteredData = data?.payload?.object;
       setTotalpages(Math.ceil(updatedfilteredData?.length / 12));

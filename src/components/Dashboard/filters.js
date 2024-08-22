@@ -24,6 +24,10 @@ const Filters = props => {
   const [basicfilers, setBasicfilters] = useState({religion:"",cast:"",subcast:""})
   const [marital, setMarital] = useState('');
   const [occupation, setOccupation] = useState('');
+  const [minAge, setMinAge] = useState('');
+  const [maxAge, setMaxAge] = useState('');
+  const [city, setCity] = useState('');
+  const [annualIncome, setAnnualIncome] = useState('');
   const dispatch=useDispatch()
 const {castes,subcast}=useSelector(state=>state.users)
 const [cast,setCast]=useState([])
@@ -43,16 +47,18 @@ useEffect(()=>{
   const toggleSearch = (e) => {
     e.preventDefault()
     // props.handleFilters()
-    props?.handleFilters({ marital, occupation });//avoid eslint error  have add this so 
+    // props?.handleFilters({ marital, occupation });//avoid eslint error  have add this so 
+    props.handleBasic({...basicfilers,occupation,marital,minAge,maxAge,city,annualIncome})
+    
     setDropdownOpen(false)
   };
   const handleBasicSearch=(e)=>{
     e.preventDefault()
-    props.handleBasic(basicfilers)
+    props.handleBasic({...basicfilers,occupation,marital,minAge,maxAge,city,annualIncome})
+    
   }
   const fetchSubCaste=async(cast)=>{
    const data=await dispatch(getSubCaste(cast));
-   console.log({data})
    const subCastesData=data.payload?.object?.map(item=>({value:item.caste,label:item.subCaste}))
    setSubCast([...subCastesData]) 
   }
@@ -66,7 +72,13 @@ useEffect(()=>{
       setBasicfilters({...basicfilers,subcast:e.value})
     }
   }
-
+  const maritalstatusSet=(value)=>{
+    if(value==marital){
+      setMarital('')
+    }else{
+      setMarital(value)
+    }
+  }
   return (
     <div className='p-2 pl-0'>
       <Form>
@@ -130,7 +142,7 @@ useEffect(()=>{
                   <DropdownItem header>Marital status</DropdownItem>
                   <Form>
                     <FormGroup check={true}
-                      onChange={(e) => { setMarital(e.target.value)}}
+                      onChange={(e)=> maritalstatusSet(e.target.value)}
                       className='d-flex justify-content-between px-2 maritalstatuss'
                     >
 
@@ -140,13 +152,11 @@ useEffect(()=>{
                           type="radio"
                           value={'Single'}
                           data-testid="marital-single"
-                        // checked={marital === 'Single'? true:false}
+                        checked={marital === 'Single'? true:false}
 
                         />
                         {'Single '}
-                        {/* <Label check>
-                          Single
-                        </Label> */}
+
                       </div>
                       <div>
                         <Input
@@ -154,7 +164,7 @@ useEffect(()=>{
                           type="radio"
                           value={'Married'}
                           data-testid="marital-married"
-                        // checked={marital === 'Married'? true:false}
+                        checked={marital === 'Married'? true:false}
                         />
                         {'Married'}
                       </div>
@@ -165,7 +175,7 @@ useEffect(()=>{
                           type="radio"
                           value={'Widowed'}
                           data-testid="marital-widowed"
-                        // checked={marital === 'Widowed'? true:false}
+                        checked={marital === 'Widowed'? true:false}
                         />
                         {' Widowed'}
                       </div>
@@ -176,7 +186,7 @@ useEffect(()=>{
                           type="radio"
                           value={'Diversed'}
                           data-testid="marital-divorced"
-                        // checked={marital === 'Diversed'? true:false}
+                        checked={marital === 'Diversed'? true:false}
                         />
                         {' Diversed'}
                       </div>
@@ -226,6 +236,7 @@ useEffect(()=>{
                             type="radio"
                             value={'Self Employed'}
                             data-testid="occupation-self-employed"
+                            checked={occupation === 'Self Employed'? true:false}
                           />
                           {'Self Employed'}
                         </div>
@@ -235,6 +246,7 @@ useEffect(()=>{
                             type="radio"
                             value={'Celebrity'}
                             data-testid="occupation-celebrity"
+                            checked={occupation === 'Celebrity'? true:false}
                           />
                           {'Celebrity'}
                         </div>
@@ -244,6 +256,7 @@ useEffect(()=>{
                             type="radio"
                             value={'Un Employed'}
                             data-testid="occupation-unemployed"
+                            checked={occupation === 'Un Employed'? true:false}
                           />
                           {'Un Employed'}
                         </div>
@@ -260,6 +273,8 @@ useEffect(()=>{
                       step="0.01"
                         placeholder='Min'
                         data-testid="age-min"
+                        onChange={(event)=>setMinAge(event.target.value)}
+                        value={minAge}
                       />
                     </div>
                     <div className='p-2'>
@@ -268,6 +283,8 @@ useEffect(()=>{
                        step="0.01"
                         placeholder='Max'
                         data-testid="age-max"
+                        onChange={(event)=>setMaxAge(event.target.value)}
+                        value={maxAge}
                       />
                     </div>
                   </div>
@@ -277,12 +294,16 @@ useEffect(()=>{
                      step="0.01"
                       placeholder='annual income'
                       data-testid="annual-income" 
+                      onChange={(event)=>setAnnualIncome(event.target.value)}
+                      value={annualIncome}
                     />
                   </div>
                   <div className='p-2'>
                     <Input
                       placeholder='Enter City'
                       data-testid="city-input"
+                      onChange={(event)=>setCity(event.target.value)}
+                      value={city}
                     />
                   </div>
                           <div className='d-flex justify-content-center px-2'>
