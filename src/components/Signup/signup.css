@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  background-color: #D9D9D9
 }
 .img-logo-signup {
   width: 100px;
@@ -10,6 +11,9 @@
   top: 0;
   left: 0;
   position: absolute;
+}
+.signup-main-tabview-heading{
+  display:none
 }
 
 .left-section {
@@ -68,10 +72,12 @@ padding-left: 1px;
   line-height: 1.5;
 }
 .forms {
+
   width: 85%;
   height: 120vh;
   overflow-y: auto;
 }
+
 .signup-heading {
   font-size: 40px;
   padding-top: 20px;
@@ -381,6 +387,22 @@ input {
     width: 60%;
     margin: auto;
   }
+  .signup-main-tabview-heading{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 35px;
+    font-size: 38px !important;
+    color: #780024;
+  
+  }
+  .signup-main-tabview-heading h3{
+    font-size: 38px;
+  }
+  .signup-main-tabview-heading h4{
+    font-size: 38px;
+  color:#E0AA3E
+  }
   .req {
     color: rgba(253, 89, 89, 1);
     position: absolute;
@@ -462,6 +484,22 @@ input {
 }
 
 @media (min-width: 0px) and (max-width: 768px) {
+  .signup-main-tabview-heading{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 35px;
+    font-size: 38px !important;
+    color: #780024;
+  
+  }
+  .signup-main-tabview-heading h3{
+    font-size: 38px;
+  }
+  .signup-main-tabview-heading h4{
+    font-size: 38px;
+  color:#E0AA3E
+  }
   .left-chakra {
     display: block !important;
     width: 30%;

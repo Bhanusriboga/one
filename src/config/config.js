@@ -29,7 +29,9 @@ const endPoints = {
   requestOtpForgetApi:"request-mobile-otp",
   otpverifyForgetApi:"user-otp-verification",
   changePasswordForgot:"forgot-password",
-  userFilter:"/user-filter?userId="
+  userFilter:"/user-filter?userId=",
+  getprofilepic:"profile-picture",
+  uploadprofilepic:"profile-picture",
 }
 
 export { baseURL, endPoints, encryptionSalt }      
