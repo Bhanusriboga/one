@@ -185,6 +185,31 @@ export const getShortListedUsers = createAsyncThunk(
     }
   }
 )
+
+export const getCaste=createAsyncThunk(
+  "users/getCaste",
+  async (_, thunkAPI) => {
+    const { response, error } = await networkCall(endPoints.getCastes, "GET");
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    } else {
+      return thunkAPI.rejectWithValue(error || "Something went wrong..!");
+    }
+  }
+)
+
+export const getSubCaste=createAsyncThunk(
+  "users/getSubCaste",
+  async (props, thunkAPI) => {
+    const url=`${endPoints.getSubCaste}?caste=${props}`
+    const { response, error } = await networkCall(url, "GET");
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    } else {
+      return thunkAPI.rejectWithValue(error || "Something went wrong..!");
+    }
+  }
+)
 const UserSlice = createSlice({
   name: 'users',
   initialState: {
@@ -195,6 +220,9 @@ const UserSlice = createSlice({
     profesionalDetails:{},
     shortlisted: [],
     ignored: [],
+    castes:[],
+    subcast:[],
+    subLoader:false
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -275,7 +303,28 @@ const UserSlice = createSlice({
         state.loading = false;
         state.profesionalDetails=action.payload?.object;
       })
-      
+      builder.addCase(getCaste.pending, (state) => {
+        state.subLoader = true;
+      })
+      .addCase(getCaste.fulfilled, (state, action) => {
+        state.subLoader = false;
+        state.castes = action.payload?.object;
+      })
+      .addCase(getCaste.rejected, (state, action) => {
+        state.subLoader = false;
+        state.error = action.error.message;
+      });
+      builder.addCase(getSubCaste.pending, (state) => {
+        state.subLoader = true;
+      })
+      .addCase(getSubCaste.fulfilled, (state, action) => {
+        state.subLoader = false;
+        state.subcast = action.payload;
+      })
+      .addCase(getSubCaste.rejected, (state, action) => {
+        state.subLoader = false;
+        state.error = action.error.message;
+      });
   }
 });
 

@@ -16,6 +16,8 @@ import { validateEmail } from "../../utils/validation";
 import { useDispatch } from "react-redux";
 import { registerlogo, tick, pelli } from "./assets/index.js";
 import register2 from "./assets/register2.svg";
+import TermsAndConditions from "./TermsAndConditions.jsx";
+import { terms_conditios} from "./assets"
 import {
   userSignup,
   otpverify,
@@ -66,6 +68,7 @@ const SignUp = () => {
   const [numError, setNumError] = useState(false);
   const [genderError, setGenderError] = useState("");
   const [displayOtp, setDisplayOtp] = useState(false);
+  const [termsCondition, setTermsCondition] = useState(false);
   useEffect(() => {
     if (
       formData.userEmail === "" ||
@@ -201,6 +204,13 @@ const SignUp = () => {
   };
   return (
     <div className="main-cont">
+     {termsCondition&& (
+        <div className="terms-condition-parent overlay" onClick={() => setTermsCondition()}>
+          <div className="terms-condition">
+            <TermsAndConditions pdfUrl={terms_conditios} />
+          </div>
+        </div>
+    )}
       <img src={registerlogo} alt="image" className="img-logo-signup" />
       <div className="left-section">
         <Form onSubmit={handleSubmit} className="forms">
@@ -378,11 +388,13 @@ const SignUp = () => {
               value={isChecked}
               className="check-2-checkin"
             />
-            <p className="para-terms">
+            <p className="para-terms" >
               {singnup.agreeTerms}
+              <button style={{background:"transparent",border:"none"}} onClick={()=>setTermsCondition(true)}>
               <span style={{ color: "#117FFF" }}>{singnup.terms_policy1} </span>
               <b>&</b>{" "}
               <span style={{ color: "#117FFF" }}>{singnup.terms_policy2} </span>
+              </button>
             </p>
           </div>
           <div className="d-flex align-items-center justify-content-center ">

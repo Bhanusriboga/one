@@ -87,6 +87,11 @@
 .filterInput {
     background-color: transparent !important;
     border: 1px solid black !important;
+    border-radius: 5px;
+    .css-13cymwt-control, 
+    .css-t3ipsp-control{
+        background-color: transparent !important;
+    }
 }
 
 .seatchButton {
@@ -188,5 +193,4 @@
     color: #E0AA3E;
     font-weight: 600;
 }
-
 
