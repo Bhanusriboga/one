@@ -4,8 +4,9 @@ import './Details.css';
 import { MdEdit } from "react-icons/md";
 import { EditProfile } from '../../utils/constants';
 
-const maritalStatusOptions = ["Single", "Married", "Divorced", "Widowed"];
+const maritalStatusOptions = ["Select","Single", "Married", "Divorced", "Widowed"];
 const disabilitiesOptions = [
+  "Select",
   "Visual Impairment",
   "Hearing Impairment",
   "Mobility Impairment",
@@ -28,12 +29,14 @@ const generateHeightOptions = () => {
 };
 const heightOptions = generateHeightOptions();
 const bodyTypeOptions = [
+  {value:"Select",label:"Select"},
   { value: "Slim", label: "Slim" },
   { value: "Athletic", label: "Athletic" },
   { value: "Average", label: "Average" },
   { value: "Heavy", label: "Heavy" },
 ];
 const complexionOptions = [
+  {value:"Select",label:"Select"},
   { value: "Pale", label: "Pale" },
   { value: "Fair", label: "Fair" },
   { value: "Medium", label: "Medium" },
@@ -41,6 +44,7 @@ const complexionOptions = [
   { value: "Black", label: "Black" },
 ];
 const drinkingHabitsOptions = [
+  {value:"Select",label:"Select"},
   { value: "I don’t Drink", label: "I don’t Drink" },
   { value: "Once a week", label: "Once a week" },
   { value: "Twice/ thrice a month", label: "Twice/ thrice a month" },
@@ -48,23 +52,27 @@ const drinkingHabitsOptions = [
   { value: "Very rarely", label: "Very rarely" },
 ];
 const smokingHabitsOptions = [
+  {value:"Select",label:"Select"},
   { value: "Non-smoker", label: "Non-smoker" },
   { value: "Occasional smoker", label: "Occasional smoker" },
   { value: "Regular smoker", label: "Regular smoker" },
 ];
 const eatingHabitsOptions = [
+  {value:"Select",label:"Select"},
   { value: "Veg", label: "Veg" },
   { value: "Non Veg", label: "Non Veg" },
   { value: "Vegan", label: "Vegan" },
 ];
-const familyStatusOptions = ["Underclass", "Low class", "Middle class", "Upper class"];
+const familyStatusOptions = ["Select","Underclass", "Low class", "Middle class", "Upper class"];
 const familyTypeOptions = [
+  "Select",
   "Nuclear Family",
   "Single-Parent Family",
   "Joint Family",
   "Blended Family",
 ];
 const occupationsofFatherOptions = [
+  "Select",
   "Business Owner",
   "Employed",
   "Professional",
@@ -74,6 +82,7 @@ const occupationsofFatherOptions = [
   "Others",
 ];
 const occupationsOfMotherOptions = [
+  "Select",
   "Others",
   "Home maker",
   "Employed",
@@ -82,8 +91,8 @@ const occupationsOfMotherOptions = [
   "Unemployed",
   "Passed Away",
 ];
-const noOfSiblingsOptions = ["1", "2", "3", "4", "5"];
-const casteOptions = [ "Abdul",
+const noOfSiblingsOptions = ["Select","1", "2", "3", "4", "5"];
+const casteOptions = ["Select", "Abdul",
   "Achari",
   "Adiandra",
   "Ailceej",
@@ -226,7 +235,7 @@ const casteOptions = [ "Abdul",
   "Yerkula",
   "Yerukala",
   "Yerukula",];
-const subcastOptions = ["Golla",
+const subcastOptions = ["Select","Golla",
   "Shaik",
   "Vaddi",
   "Agni",
@@ -331,7 +340,7 @@ const subcastOptions = ["Golla",
   "Poojagolla",
   "Yelleu",
   "Desai",];
-const starOptions = ["Abhijit",
+const starOptions = ["Select","Abhijit",
   "Anuradha",
   "Ashwini",
   "Bharani",
@@ -364,7 +373,7 @@ const starOptions = ["Abhijit",
   "Utharabhadrapada",
   "Vishakha",
   "Revathi",];
-const zodiacSignOptions = ["Aries",
+const zodiacSignOptions = ["Select","Aries",
   "Taurus",
   "Gemini",
   "Cancer",
@@ -398,7 +407,7 @@ const initialDetails = {
     "Father Occupation": "",
     "Mother Name": "",
     "Mother Occupation": "",
-    "Siblings": "1"
+    "Siblings": ""
   },
   "Personal Information": {
     "Marital Status": "",
@@ -465,10 +474,11 @@ const Personaldetails = () => {
       const newErrors = {};
       Object.entries(details).forEach(([section, sectionDetails]) => {
         Object.entries(sectionDetails).forEach(([key, value]) => {
-          if (!value) {
+          if (key !== 'Any Disabilities' && !value) {
             if (!newErrors[section]) newErrors[section] = {};
             newErrors[section][key] = `${key} is required`;
           }
+          
         });
       });
       setErrors(newErrors);
@@ -557,181 +567,199 @@ const Personaldetails = () => {
                         {key === "Marital Status" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {maritalStatusOptions.map((option, i) => (
-                              <option key={i} value={option}>{option}</option>
+                              <option key={i} disabled={i==0}  value={option}>{option}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Any Disabilities" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                          <option hidden disabled  value=''>Select</option>
                             {disabilitiesOptions.map((option, i) => (
-                              <option key={i} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option}>{option}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Body Type" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {bodyTypeOptions.map((option, i) => (
-                              <option key={i} value={option.value}>{option.label}</option>
+                              <option key={i} disabled={i==0} value={option.value}>{option.label}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Complexion" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {complexionOptions.map((option, i) => (
-                              <option key={i} value={option.value}>{option.label}</option>
+                              <option key={i} disabled={i==0} value={option.value}>{option.label}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Drinking Habits" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {drinkingHabitsOptions.map((option, i) => (
-                              <option key={i} value={option.value}>{option.label}</option>
+                              <option key={i} disabled={i==0} value={option.value}>{option.label}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Smoking Habits" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {smokingHabitsOptions.map((option, i) => (
-                              <option key={i} value={option.value}>{option.label}</option>
+                              <option key={i} disabled={i==0} value={option.value}>{option.label}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Eating Habits" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {eatingHabitsOptions.map((option, i) => (
-                              <option key={i} value={option.value}>{option.label}</option>
+                              <option key={i} disabled={i==0} value={option.value}>{option.label}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Family Status" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {familyStatusOptions.map((option, i) => (
-                              <option key={i} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option}>{option}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Family Type" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {familyTypeOptions.map((option, i) => (
-                              <option key={i} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option}>{option}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Father Occupation" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {occupationsofFatherOptions.map((option, i) => (
-                              <option key={i} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option}>{option}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Mother Occupation" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {occupationsOfMotherOptions.map((option, i) => (
-                              <option key={i} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option}>{option}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Siblings" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {noOfSiblingsOptions.map((option, i) => (
-                              <option key={i} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option}>{option}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Height" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {heightOptions.map((option, i) => (
-                              <option key={i} value={option.value}>{option.label}</option>
+                              <option key={i} disabled={i==0} value={option.value}>{option.label}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Weight" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {weightOptionsKg.map((option, i) => (
-                              <option key={i} value={option.value}>{option.label}</option>
+                              <option key={i} disabled={i==0} value={option.value}>{option.label}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Caste" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {casteOptions.map((option, i) => (
-                              <option key={i} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option}>{option}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Sub-Caste" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {subcastOptions.map((option, i) => (
-                              <option key={i} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option}>{option}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Star" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {starOptions.map((option, i) => (
-                              <option key={i} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option}>{option}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Zodiac Sign" ? (
                           <Form.Control
                             as="select"
-                            value={value}
+                            value={value ||""}
                             onChange={(e) => handleChange(e, sectionTitle, key)}
                           >
+                            <option hidden disabled  value=''>Select</option>
                             {zodiacSignOptions.map((option, i) => (
-                              <option key={i} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option}>{option}</option>
                             ))}
                           </Form.Control>
                         ) : (
@@ -742,14 +770,19 @@ const Personaldetails = () => {
                           />
                         )}
                       </>
-                    ) : (
-                      <p className='valuetext'>{value}</p>
-                    )}
+                    ) 
+                    : 
+                    (
+                      
+                        <p>{value || '-'}</p>
+                       )
+                    
+                      }
+                      {errors[sectionTitle] && errors[sectionTitle][key] && (
+                        <div className='error-text'>{errors[sectionTitle][key]}</div>
+                      )}
                   </Col>
                 </Row>
-                {errors[sectionTitle] && errors[sectionTitle][key] && (
-                  <div className='error-message'>{errors[sectionTitle][key]}</div>
-                )}
               </Col>
             ))}
           </Row>
@@ -758,6 +791,7 @@ const Personaldetails = () => {
       ))}
       <hr />
     </Container>
+
   );
 };
 

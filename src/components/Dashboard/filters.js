@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Dashboard.scss'
 import {
   Form,
@@ -14,12 +14,31 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { useSelector,useDispatch } from 'react-redux';
 import { religion } from '../../utils/constants';
+import {getSubCaste} from "../../redux/slices/users"
+import Select from "react-select"
+
 const Filters = props => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [basicfilers, setBasicfilters] = useState({religion:"",cast:"",subcast:""})
   const [marital, setMarital] = useState('');
   const [occupation, setOccupation] = useState('');
+  const [minAge, setMinAge] = useState('');
+  const [maxAge, setMaxAge] = useState('');
+  const [city, setCity] = useState('');
+  const [annualIncome, setAnnualIncome] = useState('');
+  const dispatch=useDispatch()
+const {castes,subcast}=useSelector(state=>state.users)
+const [cast,setCast]=useState([])
+const [subCaste,setSubCast]=useState([])
+useEffect(()=>{
+  if(castes){ 
+    const data=castes?.map(item=>({value:item.caste,label:item.caste})) 
+    setCast([...data])
+  }
+},[castes,subcast])
+
 
   const toggle = (e) => {
     e.preventDefault()
@@ -28,23 +47,38 @@ const Filters = props => {
   const toggleSearch = (e) => {
     e.preventDefault()
     // props.handleFilters()
-    props?.handleFilters({ marital, occupation });//avoid eslint error  have add this so 
+    // props?.handleFilters({ marital, occupation });//avoid eslint error  have add this so 
+    props.handleBasic({...basicfilers,occupation,marital,minAge,maxAge,city,annualIncome})
+    
     setDropdownOpen(false)
   };
   const handleBasicSearch=(e)=>{
     e.preventDefault()
-    props.handleBasic(basicfilers)
+    props.handleBasic({...basicfilers,occupation,marital,minAge,maxAge,city,annualIncome})
+    
   }
-  const handleSelect = (e,type) => {
+  const fetchSubCaste=async(cast)=>{
+   const data=await dispatch(getSubCaste(cast));
+   const subCastesData=data.payload?.object?.map(item=>({value:item.caste,label:item.subCaste}))
+   setSubCast([...subCastesData]) 
+  }
+  const handleSelect = (e,type) => { 
     if(type === 'religion'){
       setBasicfilters({...basicfilers,religion:e.target.value})
     } else if(type === 'cast'){
-      setBasicfilters({...basicfilers,cast:e.target.value})
+      fetchSubCaste(e.value)
+      setBasicfilters({...basicfilers,cast:e.value})
     } else if(type === 'subcast'){
-      setBasicfilters({...basicfilers,subcast:e.target.value})
+      setBasicfilters({...basicfilers,subcast:e.value})
     }
   }
-
+  const maritalstatusSet=(value)=>{
+    if(value==marital){
+      setMarital('')
+    }else{
+      setMarital(value)
+    }
+  }
   return (
     <div className='p-2 pl-0'>
       <Form>
@@ -71,14 +105,14 @@ const Filters = props => {
             </FormGroup>
           </Col>
           <Col md={2}>
-            <FormGroup onChange={(e) => handleSelect(e, "cast")} data-testid="cast-input">
+            <FormGroup data-testid="cast-input">
               <Label for="Cast" className='fontSie'>
                 Caste
               </Label>
-              <Input
-                id="Cast"
-                name="Cast"
-                placeholder="Enter Caste"
+              <Select
+                options={cast}
+                onChange={(e) => handleSelect(e, "cast")}
+                placeholder="Select Caste"
                 className='filterInput'
               />
             </FormGroup>
@@ -88,9 +122,10 @@ const Filters = props => {
               <Label for="sub-Caste" className='fontSie'>
                 Sub-Caste
               </Label>
-              <Input
-                id="sub-Caste"
-                name="sub-Caste"
+              <Select
+              id='sub-Caste'
+                options={subCaste}
+                onChange={(e) => handleSelect(e, "subcast")}
                 placeholder="Enter sub-Caste"
                 className='filterInput'
               />
@@ -107,7 +142,7 @@ const Filters = props => {
                   <DropdownItem header>Marital status</DropdownItem>
                   <Form>
                     <FormGroup check={true}
-                      onChange={(e) => { setMarital(e.target.value)}}
+                      onChange={(e)=> maritalstatusSet(e.target.value)}
                       className='d-flex justify-content-between px-2 maritalstatuss'
                     >
 
@@ -117,13 +152,11 @@ const Filters = props => {
                           type="radio"
                           value={'Single'}
                           data-testid="marital-single"
-                        // checked={marital === 'Single'? true:false}
+                        checked={marital === 'Single'? true:false}
 
                         />
                         {'Single '}
-                        {/* <Label check>
-                          Single
-                        </Label> */}
+
                       </div>
                       <div>
                         <Input
@@ -131,7 +164,7 @@ const Filters = props => {
                           type="radio"
                           value={'Married'}
                           data-testid="marital-married"
-                        // checked={marital === 'Married'? true:false}
+                        checked={marital === 'Married'? true:false}
                         />
                         {'Married'}
                       </div>
@@ -142,7 +175,7 @@ const Filters = props => {
                           type="radio"
                           value={'Widowed'}
                           data-testid="marital-widowed"
-                        // checked={marital === 'Widowed'? true:false}
+                        checked={marital === 'Widowed'? true:false}
                         />
                         {' Widowed'}
                       </div>
@@ -153,7 +186,7 @@ const Filters = props => {
                           type="radio"
                           value={'Diversed'}
                           data-testid="marital-divorced"
-                        // checked={marital === 'Diversed'? true:false}
+                        checked={marital === 'Diversed'? true:false}
                         />
                         {' Diversed'}
                       </div>
@@ -203,6 +236,7 @@ const Filters = props => {
                             type="radio"
                             value={'Self Employed'}
                             data-testid="occupation-self-employed"
+                            checked={occupation === 'Self Employed'? true:false}
                           />
                           {'Self Employed'}
                         </div>
@@ -212,6 +246,7 @@ const Filters = props => {
                             type="radio"
                             value={'Celebrity'}
                             data-testid="occupation-celebrity"
+                            checked={occupation === 'Celebrity'? true:false}
                           />
                           {'Celebrity'}
                         </div>
@@ -221,6 +256,7 @@ const Filters = props => {
                             type="radio"
                             value={'Un Employed'}
                             data-testid="occupation-unemployed"
+                            checked={occupation === 'Un Employed'? true:false}
                           />
                           {'Un Employed'}
                         </div>
@@ -237,6 +273,8 @@ const Filters = props => {
                       step="0.01"
                         placeholder='Min'
                         data-testid="age-min"
+                        onChange={(event)=>setMinAge(event.target.value)}
+                        value={minAge}
                       />
                     </div>
                     <div className='p-2'>
@@ -245,6 +283,8 @@ const Filters = props => {
                        step="0.01"
                         placeholder='Max'
                         data-testid="age-max"
+                        onChange={(event)=>setMaxAge(event.target.value)}
+                        value={maxAge}
                       />
                     </div>
                   </div>
@@ -254,12 +294,16 @@ const Filters = props => {
                      step="0.01"
                       placeholder='annual income'
                       data-testid="annual-income" 
+                      onChange={(event)=>setAnnualIncome(event.target.value)}
+                      value={annualIncome}
                     />
                   </div>
                   <div className='p-2'>
                     <Input
                       placeholder='Enter City'
                       data-testid="city-input"
+                      onChange={(event)=>setCity(event.target.value)}
+                      value={city}
                     />
                   </div>
                           <div className='d-flex justify-content-center px-2'>

@@ -1,5 +1,5 @@
 const baseURL = "https://pr-pellisambanalu-springboot-service.azurewebsites.net/api/v1";//need to replace actual base url
-//  const baseURL = "http://192.168.29.170:8082/api/v1"
+//  const baseURL = "http://192.168.29.169:8082/api/v1"
 const encryptionSalt="palisamandalu"
 const endPoints = {
   regester: "/register",
@@ -29,7 +29,9 @@ const endPoints = {
   requestOtpForgetApi:"request-mobile-otp",
   otpverifyForgetApi:"user-otp-verification",
   changePasswordForgot:"forgot-password",
-  userFilter:"/user-filter?userId=",
+  userFilter:"user-filter?userId=",
+  getCastes:"getCaste",
+  getSubCaste:"getSubCaste",
   getprofilepic:"profile-picture",
   uploadprofilepic:"profile-picture",
 }
