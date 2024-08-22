@@ -214,6 +214,11 @@ const SignUp = () => {
       <img src={registerlogo} alt="image" className="img-logo-signup" />
       <div className="left-section">
         <Form onSubmit={handleSubmit} className="forms">
+          <div className="signup-main-tabview-heading">
+          <h3>welcome to </h3>
+          <h4>pellisambadalu </h4>
+          </div>
+          
           <p className="signup-heading">{singnup.title}</p>
           <div className="position-relative">
             <FormGroup className="signup-form-input">

@@ -31,7 +31,9 @@ const endPoints = {
   changePasswordForgot:"forgot-password",
   userFilter:"user-filter?userId=",
   getCastes:"getCaste",
-  getSubCaste:"getSubCaste"
+  getSubCaste:"getSubCaste",
+  getprofilepic:"profile-picture",
+  uploadprofilepic:"profile-picture",
 }
 
 export { baseURL, endPoints, encryptionSalt }      
