@@ -3,7 +3,7 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import './Details.css';
 import { MdEdit } from "react-icons/md";
 import { EditProfile } from '../../utils/constants';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateprofesionaldetails, getprofesionaldetails } from '../../redux/slices/users';
 
 
@@ -19,8 +19,9 @@ const initialDetails = {
   "City": ""
 };
 
-const educationOptions = ["PhD", "Masters", "Bachelors", "Others"];
+const educationOptions = ["Select", "PhD", "Masters", "Bachelors", "Others"];
 const occupationOptions = [
+  "Select",
   "Business Owner",
   "Celebrity",
   "Self Employed",
@@ -29,7 +30,8 @@ const occupationOptions = [
   "Unemployed",
   "Others",
 ];
-const employmentStatusOptions = ["Full Time", "Part Time", "Contract"];
+
+const employmentStatusOptions = ["Select", "Full Time", "Part Time", "Contract"];
 
 const ProfessionalDetails = () => {
   const [details, setDetails] = useState(initialDetails);
@@ -37,7 +39,7 @@ const ProfessionalDetails = () => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const { profesionalDetails } = useSelector(state => state.users)
-  useEffect( () => {
+  useEffect(() => {
     dispatch(getprofesionaldetails());
   }, [])
   const leftColumnKeys = [
@@ -104,7 +106,7 @@ const ProfessionalDetails = () => {
   const handleChange = (e, key) => {
     const value = e.target.value;
     console.log(`Changing ${key} to ${value}`);
-    
+
     if (key === "Year Of Passing" && !/^\d{0,4}$/.test(value)) {
       return;
     }
@@ -134,34 +136,27 @@ const ProfessionalDetails = () => {
                   key === "Highest Education" ? (
                     <Form.Control
                       as="select"
-                      value={details[key]}
+                      value={details[key] || ""}
                       onChange={(e) => handleChange(e, key)}
                     >
+                      <option hidden disabled value=''>Select</option>
                       {educationOptions.map((option, i) => (
-                        <option key={i} value={option}>{option}</option>
-                      ))}
-                    </Form.Control>
-                  ) : key === "Occupation" ? (
-                    <Form.Control
-                      as="select"
-                      value={details[key]}
-                      onChange={(e) => handleChange(e, key)}
-                    >
-                      {occupationOptions.map((option, i) => (
-                        <option key={i} value={option}>{option}</option>
+                        <option key={i} disabled={i == 0} value={option}>{option}</option>
                       ))}
                     </Form.Control>
                   ) : key === "Employment Status" ? (
                     <Form.Control
                       as="select"
-                      value={details[key]}
+                      value={details[key] || ""}
                       onChange={(e) => handleChange(e, key)}
                     >
+                      <option hidden disabled value=''>Select</option>
                       {employmentStatusOptions.map((option, i) => (
-                        <option key={i} value={option}>{option}</option>
+                        <option key={i} disabled={i == 0} value={option}>{option}</option>
                       ))}
                     </Form.Control>
-                  ) : (
+                  ) 
+                   : (
                     <input
                       type="text"
                       className='form-control'
@@ -170,8 +165,7 @@ const ProfessionalDetails = () => {
                     />
                   )
                 ) : (
-                  <p className='valtext'>{details[key]}</p>
-                )}
+                  <p>{details[key] || '-'}</p>)}
                 {errors[key] && <p className="error-text">{errors[key]}</p>}
               </Col>
             </Row>
@@ -191,7 +185,25 @@ const ProfessionalDetails = () => {
                       onChange={(e) => handleChange(e, key)}
                       maxLength="4"
                     />
-                  ) : (
+                  ) : key == "Occupation" ? (
+                    <Form.Control
+                      as="select"
+                      value={details[key] || ""}
+                      onChange={(e) => handleChange(e, key)}
+                    >
+                      {console.log(occupationOptions)}
+                      <option hidden disabled value="">
+                        Select
+                      </option>
+                      {occupationOptions.map((option, i) => (
+                        <option key={i} disabled={i == 0} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Form.Control>
+
+                  )
+                  : (
                     <input
                       type="text"
                       className='form-control'
@@ -200,7 +212,7 @@ const ProfessionalDetails = () => {
                     />
                   )
                 ) : (
-                  <p className='valtext'>{details[key]}</p>
+                  <p>{details[key] || '-'}</p>
                 )}
                 {errors[key] && <p className="error-text">{errors[key]}</p>}
               </Col>

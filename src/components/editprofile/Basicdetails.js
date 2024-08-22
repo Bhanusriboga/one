@@ -4,29 +4,28 @@ import { Container, Row, Col,Form } from "react-bootstrap";
 import "./Details.css";
 import { MdEdit } from "react-icons/md";
 import { EditProfile } from "../../utils/constants";import "./Details.css";
-
 import { useDispatch,useSelector } from 'react-redux';
 import { updatebasicdetails,getbasicdetails } from "../../redux/slices/users";
 
 const initialdetails = {
   "Date of Birth": new Date().toISOString().split('T')[0],
-  "Place of Birth": "xyzxyzk",
-  "Time of Birth": "xyz",
-  "Mother Tongue": "Telugu", 
-  "Religion": "Hindu", 
-  "Citizenship": "xyz",
-  "Language Proficiency": "xyz",
-  "Instagram id": "xyz",
-  "LinkedIn id": "xyz",
+  "Place of Birth": "",
+  "Time of Birth": "",
+  "Mother Tongue": "", 
+  "Religion": "", 
+  "Citizenship": "",
+  "Language Proficiency": "",
+  "Instagram id": "",
+  "LinkedIn id": "",
 };
 
 const basicdetailsdata = {
   "Address": {
-    "Door no&Street Name": "xyzxyz",
-    "City": "xyzxyz",
-    "State": "xyz",
-    "Country": "xyz",
-    "Postal code": "123456", 
+    "Door no&Street Name": "",
+    "City": "",
+    "State": "",
+    "Country": "",
+    "Postal code": "", 
   }
 };
 
