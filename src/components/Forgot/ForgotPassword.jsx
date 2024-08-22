@@ -9,6 +9,7 @@ import { requestOtpForgetApi,otpverifyForgetApi ,changePasswordForgotApi } from 
 
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { toastError, toastsuccess } from '../../utils/constants';
 
 const ForgotPassword = (props) => {
   const {  modal, toggle } = props
@@ -132,9 +133,9 @@ const ForgotPassword = (props) => {
     }
     const data= await dispatch(otpverifyForgetApi(formData));
     if('User registered successfully'==data?.payload?.message){
-      toast.success("OTP  Verified successfully")
+      toast.success("OTP  Verified successfully",toastsuccess)
     }else{
-      toast.error("Something went wrong..!")
+      toast.error("Something went wrong..!",toastError)
     }
 
   };
@@ -161,10 +162,10 @@ const ForgotPassword = (props) => {
     }
     const data =  await dispatch(changePasswordForgotApi(formData));
     if('Password Changed Successfully'==data?.payload?.message){
-      toast.success("password updated successfully")
+      toast.success("password updated successfully",toastsuccess)
       toggle();
     }else{
-      toast.error("Something went wrong..!")
+      toast.error("Something went wrong..!",toastError)
     }
 
    
@@ -178,11 +179,11 @@ const ForgotPassword = (props) => {
     }
    const data=await dispatch(requestOtpForgetApi(formData))
     if ("OTP sent to mobile successfully" == data?.payload?.message) {
-      toast.success('OTP sent successfully!')
+      toast.success('OTP sent successfully!', toastsuccess)
     }else if("User Not Found try SignUp"==data?.payload?.message){
-      toast.error("User Not Found try SignUp")
+      toast.error("User Not Found try SignUp",toastError)
     } else {
-      toast.error("Something went wrong..!")
+      toast.error("Something went wrong..!",toastError)
     }
   };
 

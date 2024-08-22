@@ -226,7 +226,8 @@ export const settings={
   foundAMatch:"Found a Match",
   financeIssue:"Finance issue",
   trustIssue:"Trust issue",
-  validPhoneError:"Please enter a valid phone number"
+  validPhoneError:"Please enter a valid phone number",
+  changePhoneTitle:"Change your mobile number",
 }
 export const EditProfile={
   editprofile:"Edit Profile",

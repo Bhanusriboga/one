@@ -1,8 +1,10 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
-import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
+import { Route, Switch, useHistory, Redirect,BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMyDetails } from './redux/slices/AuthSlice';
+import { getMyDetails, logout } from './redux/slices/AuthSlice';
 import Loader from './common-components/Loader';
+import { toast } from 'react-toastify';
+import { toastError } from './utils/constants';
 
 // Lazy loading the components
 const LoginPage = lazy(() => import('./components/Login/LoginPage'));
@@ -15,8 +17,10 @@ const UPIPayment = lazy(() => import('./components/payment/Payment'));
 
 // Main Routes don't change anything
 const Routes = () => {
-    const { token } = useSelector(state => state.auth); 
-    return token ? <AppRoutes /> : <UnAuthorizedRoutes />;
+    const { token } = useSelector(state => state.auth);
+    return (<BrowserRouter>
+        {token ? <AppRoutes /> : <UnAuthorizedRoutes />}
+    </BrowserRouter>);
 };
 
 // Mention Authorized Routes
@@ -29,7 +33,12 @@ const AppRoutes = () => {
     useEffect(() => {
         const fetchMyDetails = async () => {
             const data = await dispatch(getMyDetails());
-            if (data?.payload?.object?.basicDetailsAvailable) {
+            if(data.payload?.status>=400||data.payload?.object?.message=="Invalid User ReCheck Your MobileNumber"||data.payload?.object?.message=="JWT token has expired"){//after ai change need to change this as exact status code
+                toast.error(data?.payload?.message,toastError)
+                await dispatch(logout())
+                setBasicDetails(false);
+            }
+            else if (data?.payload?.object?.basicDetailsAvailable) {
                 setBasicDetails(true);
             } else {
                 setBasicDetails(false);
@@ -42,6 +51,15 @@ const AppRoutes = () => {
     useEffect(() => {
         if (basicDetails !== undefined) {
             if (basicDetails) {
+                const currentPath = history.location.pathname;
+            // for testing perpose this was added need to remove while deploy after testing
+            //removed for start
+            if(currentPath.startsWith("/register"))
+                history.push('/register');
+            //removed for end
+            else if(currentPath.startsWith('/dashboard'))
+                history.push(`/dashboard${history.location.pathname.substr(10)}`);
+            else
                 history.push('/dashboard');
             } else {
                 history.push('/register');

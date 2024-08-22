@@ -8,15 +8,14 @@ import UsersCard from '../../common-components/UserCard';
 import Loader from '../../common-components/Loader';
 import { changeUserStatus, getAllUsers,UserFilterApi } from '../../redux/slices/users';
 import PaginationComponent from '../../common-components/pagination/PaginationComponent';
-import PropTypes from 'prop-types';
-const ProfileList = (props) => {
+
+const ProfileList = () => {
   const [filterdata, setfilterData] = useState([])
   const { data, loading } = useSelector(state => state.users)
   const { userId } = useSelector(state => state.auth)
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const dispatch = useDispatch()
-  const {setActiveContent}=props;
   const handleFilters = () => {
 
   }
@@ -27,7 +26,7 @@ const ProfileList = (props) => {
   const getAllUsersData = async () => {
     const data=await dispatch(getAllUsers());
     setfilterData(data?.payload?.object)
-    setTotalpages(Math.ceil(data?.payload?.object?.length / 10));
+    setTotalpages(Math.ceil(data?.payload?.object?.length / 12));
     setCurrentPage(1);
   }
   useEffect(() => {
@@ -52,6 +51,7 @@ const ProfileList = (props) => {
     if (maindata?.religion !== '' || maindata?.subcast === '' || maindata?.cast === '') {
       const data = await dispatch(UserFilterApi(filters));
       updatedfilteredData = data?.payload?.object;
+      setTotalpages(Math.ceil(updatedfilteredData?.length / 12));
     }
     return updatedfilteredData
   }
@@ -71,7 +71,7 @@ const ProfileList = (props) => {
       <Filters handleFilters={handleFilters} handleBasic={handleBasic} />
       {loading ? (<Loader />):
         (<Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3 w-100 bcg">
-          {filterdata?.map((val, index) => {
+          {filterdata?.slice(currentPage * 12 -12, currentPage * 12)?.map((val, index) => {
             let background;
             let color;
             let buttonBackgroundColor;
@@ -97,13 +97,12 @@ const ProfileList = (props) => {
                 color={color}
                 viewButtonColor={viewButtonColor}
                 buttonBackgroundColor={buttonBackgroundColor} 
-                setActiveContent={setActiveContent}
                 />
             )
           })}
         </Row>)}
         <div className='d-flex justify-content-center pt-2'>
-        {totalpages>1 && <PaginationComponent
+        {totalpages>1 &&<PaginationComponent
             totalPages={totalpages}
             currentPage={currentPage}
             onPageChange={handlePageChange}
@@ -113,7 +112,5 @@ const ProfileList = (props) => {
   )
 
 }
-ProfileList.propTypes ={
-  setActiveContent:PropTypes.func.isRequired
-}
+
 export default ProfileList

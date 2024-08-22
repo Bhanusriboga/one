@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
+import {useHistory} from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa6";
 import { ignoreUserText } from '../../utils/constants';
 import PaginationComponent from '../../common-components/pagination/PaginationComponent';
@@ -10,17 +10,17 @@ import { getShortListedUsers } from '../../redux/slices/users';
 import { changeUserStatus } from '../../redux/slices/users';
 
 
-function ShortListedUsers(props) {
+function ShortListedUsers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const { userId } = useSelector(state => state.auth)
   const dispatch = useDispatch();
-  const {setActiveContent}=props;
+  const history=useHistory();
   const { shortlisted } = useSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(getShortListedUsers());
-    setTotalpages(Math.ceil(shortlisted?.length / 10));
+    setTotalpages(Math.ceil(shortlisted?.length / 12));
     setCurrentPage(1);
   }, [dispatch]);
 
@@ -28,6 +28,7 @@ function ShortListedUsers(props) {
 
   const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) => {
     await dispatch(changeUserStatus({ affectedUserId, changeByUserId, userStatus }))
+    setTotalpages(Math.ceil(shortlisted?.length / 12));
   }
 
 
@@ -36,14 +37,14 @@ function ShortListedUsers(props) {
 
 
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <div className="shortlist-container">
         <div className='shortlist-mobile-back-arrow-container'>
-          <FaArrowLeft onClick={() => props.setActiveContent('')} className='shortlist-back-mobile' />
+          <FaArrowLeft className='shortlist-back-mobile'  onClick={() => history.goBack()}/>
           <h4 className='shortlist-heading'>{ignoreUserText.heading1}</h4>
         </div>
         <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3">
-          {shortlisted?.map((user, index) => {
+          {shortlisted?.slice(currentPage * 12 - 12, currentPage * 12)?.map((user, index) => {
             let background;
             let color;
             let buttonBackgroundColor;
@@ -70,8 +71,7 @@ function ShortListedUsers(props) {
                   buttonBackgroundColor={buttonBackgroundColor}
                   viewButtonColor={viewButtonColor}
                   onMoveToIgnoreList={() => changeUSerStateById(user.userId, userId, "Ignored")}
-                removeUserFromShortList={() => changeUSerStateById(user.userId, userId, "Shortlisted")}
-                setActiveContent={setActiveContent}
+                removeUserFromShortList={() => changeUSerStateById(user.userId, userId, "Active")}
                 />
               </Col>
             );
@@ -88,7 +88,5 @@ function ShortListedUsers(props) {
     </div>
   );
 }
-ShortListedUsers.propTypes = {
-  setActiveContent: PropTypes.func.isRequired,
-}
+
 export default ShortListedUsers;

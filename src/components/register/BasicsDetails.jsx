@@ -12,7 +12,7 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
-import { registration1 } from "../../utils/constants";
+import { registration1, toastError, toastsuccess } from "../../utils/constants";
 import "./BasicsDetails.css";
 // import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -129,27 +129,11 @@ function BasicsDetails() {
       const data = await dispatch(BasicDetailsAPICall(formData));
       if(data?.payload?.message === "Basic details added successfully" || data?.payload?.message ==="Basic Details Already Exists Please Updated your Details"){
         dispatch(updateMydata());
-        toast.success("User Basic Details Registered Successfully", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success("User Basic Details Registered Successfully",toastsuccess);
         dispatch(saveFormData(formData));
         dispatch(nextStep());
       }else{
-        toast.error("Something went wrong", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error("Something went wrong",toastError);
       }
     }
   };

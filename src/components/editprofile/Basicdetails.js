@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col,Form } from "react-bootstrap";
 import "./Details.css";
 import { MdEdit } from "react-icons/md";
-import { EditProfile } from "../../utils/constants";
-import "./Details.css";
+import { EditProfile } from "../../utils/constants";import "./Details.css";
 
 import { useDispatch,useSelector } from 'react-redux';
 import { updatebasicdetails,getbasicdetails } from "../../redux/slices/users";

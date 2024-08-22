@@ -11,7 +11,7 @@ import {
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./signup.css";
 import { useHistory } from "react-router-dom";
-import { singnup } from "../../utils/constants";
+import { singnup, toastError } from "../../utils/constants";
 import { validateEmail } from "../../utils/validation";
 import { useDispatch } from "react-redux";
 import { registerlogo, tick, pelli } from "./assets/index.js";
@@ -134,7 +134,7 @@ const SignUp = () => {
         data?.payload.message ==
         "User Already Exists with MobileNumber Please Login"
       ) {
-        toast.error("User Already Exists with MobileNumber Please Login");
+        toast.error("User Already Exists with MobileNumber Please Login",toastError);
       } else if (data?.payload.message == "OTP Verification Is Pending") {
         setPasswordError("");
         setModal(true);
@@ -142,7 +142,7 @@ const SignUp = () => {
         setDisplayOtp(true);
         toggle();
       } else {
-        toast.error("Something went wrong");
+        toast.error("Something went wrong",toastError);
       }
     }
   };

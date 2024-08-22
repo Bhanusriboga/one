@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { registration1 } from "../../utils/constants";
+import { registration1, toastError } from "../../utils/constants";
 import "./BasicsDetails.css";
 import { Row, Col, FormGroup, Input, FormFeedback, Form } from "reactstrap";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -136,10 +136,7 @@ function Professional() {
         dispatch(saveProfessionalData(formData));
         dispatch(nextStep());
       }else{
-        toast.error("Something went wrong", {
-          position: "top-center",
-          autoClose: 2000,
-        })
+        toast.error("Something went wrong", toastError)
       }
     }
   };

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
-import { addPreference } from "../../utils/constants";
+import {useHistory} from "react-router-dom"
+import { addPreference, toastsuccess } from "../../utils/constants";
 import Select from "react-select";
-import PropTypes from "prop-types";
 import {
   Button,
   Form,
@@ -35,7 +35,7 @@ import { useDispatch } from "react-redux";
 import { addPreferencesPost } from "../../redux/slices/AddPreferences";
 import { toast } from "react-toastify";
 
-const AddPreference = (props) => {
+const AddPreference = () => {
   const [validation, setValidation] = useState({
     profileCreatedFor: {
       value: "",
@@ -101,8 +101,8 @@ const AddPreference = (props) => {
     },
   });
   const [errorMessage, setErrorMessage] = useState("");
-  const dispatch = useDispatch();
-
+  const dispatch=useDispatch();
+  const history=useHistory();
   const handleBlur = () => {
     let newValidation = { ...validation };
     const firstInvalidField = Object.keys(newValidation).find((key) => {
@@ -160,16 +160,8 @@ const AddPreference = (props) => {
     //   }
     // }
     const data = await dispatch(addPreferencesPost(validation));
-    if (data.payload.message == "Preferences Updated Successfully") {
-      toast.success("Preferences Updated Successfully", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+    if(data.payload.message=="Preferences Updated Successfully"){
+      toast.success("Preferences Updated Successfully", toastsuccess);
     }
     // setValidation(newValidation);
     // setErrorMessage(
@@ -181,10 +173,7 @@ const AddPreference = (props) => {
     <div>
       <Form>
         <div className="mobile-view">
-          <FaArrowLeft
-            onClick={() => props.setActiveContent("")}
-            className="arrow"
-          />
+          <FaArrowLeft className="arrow" onClick={()=>history.goBack()}/>
           <h2 className="preference">{addPreference.hedding}</h2>
         </div>
         <div className="backgroundImg">
@@ -911,8 +900,6 @@ const AddPreference = (props) => {
     </div>
   );
 };
-AddPreference.propTypes = {
-  setActiveContent: PropTypes.func.isRequired,
-};
+
 
 export default AddPreference;

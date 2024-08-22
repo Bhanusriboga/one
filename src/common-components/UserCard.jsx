@@ -1,19 +1,20 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom'
 import { GoHeart } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
 import { ignoreUserText } from '../utils/constants';
+import { useHistory } from "react-router-dom";
+// import ignore from '../Assets/Ignore.svg'
 import ignore from '../Assets/ignore.svg'
 import './UserCard.scss'
 
 
 function UsersCard(userDetails) {
-    const { user, background, color, viewButtonColor, buttonBackgroundColor, onMoveToIgnoreList, removeUserFromShortList,setActiveContent } = userDetails
-   const renderUserId=(userId)=>{
+    const { user, background, color, viewButtonColor, buttonBackgroundColor, onMoveToIgnoreList, removeUserFromShortList } = userDetails
+   const history=useHistory();
+    const renderUserId=(userId)=>{
     //need to write the dispath method to call api for getting single user details
-    console.log("userid --- ",userId)
-    setActiveContent("singleUser")
+    history.push(`/dashboard/user-details/${userId}`)
    }
     return (
         <div className='user-card-maincontainer'>
@@ -24,10 +25,10 @@ function UsersCard(userDetails) {
                 }}
             >
                 <div className='user-card-icons-container'>
-                    <button onClick={onMoveToIgnoreList} disabled={user.userStatus === "Ignored"} className='bg-transparent border-0'>
+                    <button onClick={onMoveToIgnoreList} className='bg-transparent border-0'>
                         <img src={ignore} alt='ignore' style={{ width: '25px', height: '25px' }} data-testid="usercard-ignoreicon" />
                     </button>
-                    <button disabled={user.userStatus === "Shortlisted"} className='bg-transparent border-0' onClick={removeUserFromShortList}>
+                    <button  className='bg-transparent border-0' onClick={removeUserFromShortList}>
                         {
                             user.userStatus === "Shortlisted" ?
                                 <AiFillHeart className='usercard-hearticon' style={{ color: 'white' }} data-testid="usercard-hearticon" />
@@ -42,8 +43,8 @@ function UsersCard(userDetails) {
                     </div>
                     <div>
                         <h6 className='usercard-name'>{user?.username}</h6>
-                        <button className='usercard-button-mobile' style={{ backgroundColor: buttonBackgroundColor, color: viewButtonColor }}>
-                            <Link to={`/user/${user.userId}`} style={{ color: viewButtonColor, textDecoration: 'none' }}>View Profile</Link>
+                        <button className='usercard-button-mobile' style={{ backgroundColor: buttonBackgroundColor, color: viewButtonColor }}  onClick={() => renderUserId(user.userId)}>
+                            <text  style={{ color: viewButtonColor }}>View Profile</text>
                         </button>
                         <div className='usercard-only-mobileview'>
                             <div className='usercard-text'>
