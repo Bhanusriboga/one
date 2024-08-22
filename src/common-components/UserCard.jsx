@@ -4,8 +4,10 @@ import { GoHeart } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
 import { ignoreUserText } from '../utils/constants';
 import { useHistory } from "react-router-dom";
-import ignore from '../Assets/Ignore.svg'
+// import ignore from '../Assets/Ignore.svg'
+import ignore from '../Assets/ignore.svg'
 import './UserCard.scss'
+
 
 function UsersCard(userDetails) {
     const { user, background, color, viewButtonColor, buttonBackgroundColor, onMoveToIgnoreList, removeUserFromShortList } = userDetails
@@ -16,7 +18,7 @@ function UsersCard(userDetails) {
    }
     return (
         <div className='user-card-maincontainer'>
-            <div className='usercard'
+            <div className='usercard' 
                 style={{
                     background: background,
                     color: color

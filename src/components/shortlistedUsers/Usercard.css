@@ -21,8 +21,8 @@ right:0;
 
 }
 .shortlist-heading{
-    padding-top: 30px;
-    padding-bottom: 16px;
+
+    /* padding-bottom: 16px; */
     color:#780024;
     font-size: 34px;
     font-weight: 500;
@@ -86,7 +86,7 @@ align-items:center;
     font-weight: 510;
    justify-content: center;
    padding-top: 10px;
-   padding-bottom: 10px;
+ height:45px
 }
 .usercard-text{
     font-size: 15px;
@@ -166,15 +166,16 @@ justify-content: space-between;
 
     }
      .user-card-maincontainer{
-        max-width: 360px;
+        max-width: 400px ;
         margin: auto;
-        padding: 4px;
+        align-items: center !important;
+        align-self: center;
      }
      .shortlist-mobile{
         display:flex;
         flex-direction: row;
         /* align-items: center; */
-        gap:20px
+        gap:10px
      }
      .usercard-button-mobile{
         display:flex;
@@ -218,7 +219,7 @@ justify-content: space-between;
         display:flex;
         color: #780024;
         align-self: center;
-        margin-top: 15px;
+        /* margin-top: 15px; */
         margin-right: 15px;
     }
     .shortlist-rightsize-image{
@@ -239,6 +240,20 @@ justify-content: space-between;
    
     .shortlist-container{
     max-width: 500px;
+    margin: auto;
+    }
+    .shortlist-mobile-back-arrow-container{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .shortlist-back-mobile{
+        font-size: 22px;
+        display:flex;
+        color: #780024;
+        align-self: center;
+        /* margin-top: 15px; */
+        margin-right: 15px;
     }
     
 

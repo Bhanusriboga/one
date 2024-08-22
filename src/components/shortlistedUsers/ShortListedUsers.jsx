@@ -8,7 +8,6 @@ import PaginationComponent from '../../common-components/pagination/PaginationCo
 import UsersCard from '../../common-components/UserCard';
 import { getShortListedUsers } from '../../redux/slices/users';
 import { changeUserStatus } from '../../redux/slices/users';
-import './Usercard.css';
 
 
 function ShortListedUsers() {

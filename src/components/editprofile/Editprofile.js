@@ -6,6 +6,7 @@ import Professionaldetails from './Professionaldetails'
 import Mediadetails from './Mediadetails'
 import { FaArrowLeft } from "react-icons/fa6"
 import { EditProfile } from '../../utils/constants'
+
 import { useSelector } from 'react-redux'
  
 const Editprofile = () => {
@@ -33,5 +34,6 @@ const Editprofile = () => {
     </div>
   )
 }
+
 
 export default Editprofile

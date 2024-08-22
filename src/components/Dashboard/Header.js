@@ -12,10 +12,19 @@ import logo from '../../Assets/icon.svg'
 import UPIPayment from '../payment/Payment';
 import { useDispatch } from 'react-redux';
 import {logout as logoutAction} from '../../redux/slices/AuthSlice';
+// import CustomWidget from '../ChatBot/CustomWidget';
 const Header = () => {
   const dispatch =useDispatch()
 const [paymentPopup,setPaymentPopup]=useState(false);
-const toggle=()=>setPaymentPopup(!paymentPopup)
+const toggle=()=>setPaymentPopup(!paymentPopup);
+
+//  const chatBox= ()=>{
+//   if(paymentPopup){
+//     return <CustomWidget />
+//   }else{
+//     setPaymentPopup(true)
+//   }
+//  }
 const logout=async()=>{
   await dispatch(logoutAction());
 }
@@ -30,7 +39,8 @@ const logout=async()=>{
           <NavLink onClick={toggle} className='navBtn'>Pricing</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="/components" className='navBtn'>Chat with Us</NavLink>
+          <NavLink //onClick={chatBox}
+           className='navBtn'>Chat with Us</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="/components" className='navBtn'>Contact Us</NavLink>
