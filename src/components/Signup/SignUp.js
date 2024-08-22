@@ -16,8 +16,8 @@ import { validateEmail } from "../../utils/validation";
 import { useDispatch } from "react-redux";
 import { registerlogo, tick, pelli } from "./assets/index.js";
 import register2 from "./assets/register2.svg";
-import TermsAndConditions from "./TermsAndConditions.jsx";
-import { terms_conditios} from "./assets"
+// import TermsAndConditions from "./TermsAndConditions.jsx";
+// import { terms_conditios} from "./assets"
 import {
   userSignup,
   otpverify,
@@ -206,9 +206,9 @@ const SignUp = () => {
     <div className="main-cont">
      {termsCondition&& (
         <div className="terms-condition-parent overlay" onClick={() => setTermsCondition()}>
-          <div className="terms-condition">
+          {/* <div className="terms-condition">
             <TermsAndConditions pdfUrl={terms_conditios} />
-          </div>
+          </div> */}
         </div>
     )}
       <img src={registerlogo} alt="image" className="img-logo-signup" />
