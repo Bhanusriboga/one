@@ -41,14 +41,12 @@ export const updateProfilePic = createAsyncThunk(
       );
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Upload error:", errorData);
         return thunkAPI.rejectWithValue(errorData || "Something went wrong..!");
       }
 
       const responseData = await response.json();
       return thunkAPI.fulfillWithValue(responseData);
     } catch (error) {
-      console.error("Upload error:", error);
       return thunkAPI.rejectWithValue(
         error.message || "Something went wrong..!"
       );
