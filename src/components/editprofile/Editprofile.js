@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import Basicdetails from './Basicdetails'
 import Personaldetails from './Personaldetails'
 import Professionaldetails from './Professionaldetails'
@@ -7,8 +7,16 @@ import { FaArrowLeft } from "react-icons/fa6"
 import { EditProfile } from '../../utils/constants'
 import PropTypes from 'prop-types';
 
+import { useSelector } from 'react-redux'
  
 const Editprofile = (props) => {
+  const { Mydata } = useSelector(state => state.auth)
+  const [userData, setUserData] = useState()
+
+  useEffect(()=>{
+    console.log(Mydata.object,"testing")
+    setUserData(Mydata.object)
+  },[Mydata])
   return (
     <div> 
       <div className='editprofile-tittle mb-2 mt-3 d-flex '>
@@ -16,7 +24,7 @@ const Editprofile = (props) => {
         <h1>{EditProfile.editprofile}</h1>
       </div>
       <div className='edit-details'>
-    <Basicdetails/>
+    <Basicdetails userbasicdetails={userData}/>
     <Personaldetails/>
     <Professionaldetails/>
     <Mediadetails/>

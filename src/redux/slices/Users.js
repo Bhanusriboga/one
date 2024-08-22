@@ -66,13 +66,52 @@ export const getIgnoredUsers = createAsyncThunk(
   }
 )
 export const updatebasicdetails = createAsyncThunk(
-  "users/updatebasicdetails",
+  "users/getbasicdetails",
   async (props, thunkAPI) => {
     const userId = Storage.get("userId")
+    const token=Storage.get("token")
+    const header={
+      Authorization: `Bearer ${token}`
+    }
     const url = `${endPoints.editUserbasicdetails}?userId=${userId}`
-    const { response } = await networkCall(url, "PUT", JSON.stringify(props));
+    const { response } = await networkCall(url, "PUT", JSON.stringify(props),header);
     if (response) {
-      console.logI(response,"testing response")
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue("Something went wrong..!")
+    }
+  }
+)
+export const getbasicdetails = createAsyncThunk(
+  "users/getbasicdetails",
+  async (_, thunkAPI) => {
+    const userId = Storage.get("userId")
+    const token=Storage.get("token")
+    const header={
+      Authorization: `Bearer ${token}`
+    }
+    const url = `${endPoints.editUserbasicdetails}?userId=${userId}`
+    const { response } = await networkCall(url, "GET",_, header);
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue("Something went wrong..!")
+    }
+  }
+)
+export const getpersonaldetails = createAsyncThunk(
+  "users/updatepersonaldetails",
+  async (_, thunkAPI) => {
+    const userId = Storage.get("userId")
+    const token=Storage.get("token")
+    const header={
+      Authorization: `Bearer ${token}`
+    }
+    const url = `${endPoints.editUserpersonaldetails}?userId=${userId}`
+    const { response } = await networkCall(url, "GET",_,header);
+    if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
     else {
@@ -84,10 +123,13 @@ export const updatepersonaldetails = createAsyncThunk(
   "users/updatepersonaldetails",
   async (props, thunkAPI) => {
     const userId = Storage.get("userId")
+    const token=Storage.get("token")
+    const header={
+      Authorization: `Bearer ${token}`
+    }
     const url = `${endPoints.editUserpersonaldetails}?userId=${userId}`
-    const { response } = await networkCall(url, "POST", JSON.stringify(props));
+    const { response } = await networkCall(url, "POST", JSON.stringify(props),header);
     if (response) {
-      console.logI(response,"testing response")
       return thunkAPI.fulfillWithValue(response);
     }
     else {
@@ -99,10 +141,31 @@ export const updateprofesionaldetails = createAsyncThunk(
   "users/updateprofesionaldetails",
   async (props, thunkAPI) => {
     const userId = Storage.get("userId")
+    const token=Storage.get("token")
+    const header={
+      Authorization: `Bearer ${token}`
+    }
     const url = `${endPoints.editUserprofessionaldetails}?userId=${userId}`
-    const { response } = await networkCall(url, "POST", JSON.stringify(props));
+    const { response } = await networkCall(url, "POST", JSON.stringify(props),header);
     if (response) {
-      console.logI(response,"testing response")
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue("Something went wrong..!")
+    }
+  }
+)
+export const getprofesionaldetails = createAsyncThunk(
+  "users/updateprofesionaldetails",
+  async (_, thunkAPI) => {
+    const userId = Storage.get("userId")
+    const token=Storage.get("token")
+    const header={
+      Authorization: `Bearer ${token}`
+    }
+    const url = `${endPoints.editUserprofessionaldetails}?userId=${userId}`
+    const { response } = await networkCall(url, "GET",_,header);
+    if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
     else {
@@ -129,6 +192,9 @@ const UserSlice = createSlice({
   initialState: {
     loading: false,
     data: [],
+    basicdetails:{},
+    personaldetails:{},
+    profesionalDetails:{},
     shortlisted: [],
     ignored: [],
   },
@@ -189,6 +255,31 @@ const UserSlice = createSlice({
         state.loading = false;
         Showtoast("Filters not applyed, Something went wrong..!")
     })
+      builder.addCase(getbasicdetails.rejected, (state) => {
+        state.loading = false;
+      });
+      builder.addCase(getbasicdetails.fulfilled, (state, action) => {
+        console.log(action,"testing")
+        state.loading = false;
+        state.basicdetails=action.payload?.object;
+      })
+      builder.addCase(updatepersonaldetails.rejected, (state) => {
+        state.loading = false;
+      });
+      builder.addCase(updatepersonaldetails.fulfilled, (state, action) => {
+        console.log(action,"testing")
+        state.loading = false;
+        state.personaldetails=action.payload?.object;
+      })
+      builder.addCase(updateprofesionaldetails.rejected, (state) => {
+        state.loading = false;
+      });
+      builder.addCase(updateprofesionaldetails.fulfilled, (state, action) => {
+        console.log(action,"testing")
+        state.loading = false;
+        state.profesionalDetails=action.payload?.object;
+      })
+      
   }
 });
 

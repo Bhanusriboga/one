@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import networkCall from "../../utils/NetworkCall";
 import { endPoints } from "../../config/config";
 import Storage from "../../utils/Storage";
-
+// import { useDispatch } from 'react-redux'
 export const userSignup = createAsyncThunk(
   "auth/signup",
   async (props, thunkAPI) => {
@@ -50,6 +50,7 @@ export const fetchUserInfo = createAsyncThunk(
   "user/fetchUserInfo",
   async (_, thunkAPI) => {
     const token=Storage.get("token")
+    // const dispatch = useDispatch()
     if(token){
       const  userId  = Storage.get("userId");
       const header={
@@ -57,6 +58,7 @@ export const fetchUserInfo = createAsyncThunk(
       }
       const { response, error } = await networkCall(endPoints.userInfo+userId, 'GET',_,header);
       if (response) {
+        // dispatch(updateMydata(response))
         return thunkAPI.fulfillWithValue(response);
       } else {
         return thunkAPI.rejectWithValue(error || "Something went wrong..!");
@@ -164,6 +166,7 @@ const AuthSlice = createSlice({
       state.userId = Storage.get("userId");
     },
     updateMydata: (state) => {
+      console.log(state,"testing redux state")
       state.Mydata = { ...state.Mydata,basicDetailsAvailable:true };
     }},
   extraReducers: (builder) => {
