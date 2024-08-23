@@ -1,0 +1,61 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "nithin",
+            "mobile": 9848765432,
+            "mailid": "john098@gmail.com",
+            "caste": "General",
+            "status": "Active"
+        },
+        {
+            "id": 2,
+            "name": "ramya",
+            "mobile": 108,
+            "mailid": "john098@gmail.com",
+            "caste": "General",
+            "status": "Active"
+        },
+        {
+            "id": 3,
+            "name": "sandya",
+            "mobile": 123445567889,
+            "mailid": "john098@gmail.com",
+            "caste": "General",
+            "status": "Inactive"
+        },
+        {
+            "id": 4,
+            "name": "siva",
+            "mobile": 4444444444,
+            "mailid": "john098@gmail.com",
+            "caste": "General",
+            "status": "Inactive"
+        },
+        {
+            "id": 5,
+            "name": "kareem",
+            "mobile": 5555555555,
+            "mailid": "john098@gmail.com",
+            "caste": "General",
+            "status": "Active"
+        },
+        {
+            "id": 6,
+            "name": "raheem",
+            "mobile": 6666666666,
+            "mailid": "john098@gmail.com",
+            "caste": "General",
+            "status": "Inactive"
+        },
+        {
+            "id": 7,
+            "name": "kareem",
+            "mobile": 5555555555,
+            "mailid": "john098@gmail.com",
+            "caste": "General",
+            "status": "Active"
+        }
+       
+    ]
+}

@@ -1,0 +1,101 @@
+
+#active {
+  width: 93px;
+  height: 27px;
+  background: rgba(0, 182, 155, 0.2);
+  border-radius: 5px;
+  font-family: Nunito Sans;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  color: rgba(0, 182, 155, 1); 
+}
+#inactive {
+  width: 93px;
+  height: 27px;
+  background: rgba(239, 56, 38, 0.2);
+  border-radius: 5px;
+  font-family: Nunito Sans;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  color: rgba(239, 56, 38, 1); 
+}
+.container-fluid {
+  height: 100vh;
+  background: rgba(245, 246, 250, 1);
+}
+.text{
+font-family: Nunito Sans;
+font-size: 24px;
+font-weight: 700;
+line-height: 33px;
+letter-spacing: 0px;
+text-align: left;
+padding-left:2%;
+padding-top: 2%;
+color: rgba(0, 0, 0, 1);
+}
+.tab {
+  text-align: center;
+  border: 0.50px solid rgb(231, 10, 10);
+  background: rgba(255, 255, 255, 1);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px; 
+  width: 96% !important;
+margin-left: 2%;
+  border: 0.6px solid rgba(213, 213, 213, 1)  !important;
+}
+.tab thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+.tab thead tr:first-child th:last-child {
+  border-top-right-radius: 10px; 
+}
+.tab tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+.tab tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+.eye {
+  color: blue !important;
+  cursor: pointer !important;
+}
+th {
+  font-family: Nunito Sans;
+  font-size: 14px;
+  width: 42px;
+  height: 19px;
+}
+tr {
+  font-family: Nunito Sans;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 25px;
+  text-align: center;
+
+}
+.delete-user-vendor{
+  font-size: 22px;
+  color :red
+}
+.approve-user{
+  background-color:hsl(171, 82%, 85%);
+  color: #00B69B;
+  border:none;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .table-1 {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+  }
+
+  .tab {
+    min-width: 600px; /* Adjust width as needed to fit your content */
+  }
+}

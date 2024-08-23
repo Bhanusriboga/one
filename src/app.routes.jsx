@@ -5,7 +5,7 @@ import { getMyDetails, logout } from './redux/slices/AuthSlice';
 import Loader from './common-components/Loader';
 import { toast } from 'react-toastify';
 import { toastError } from './utils/constants';
-
+// import VendorSignup from './vendor/SignUp/VendorSignup';
 // Lazy loading the components
 const LoginPage = lazy(() => import('./components/Login/LoginPage'));
 const ForgotPage = lazy(() => import('./components/Forgot/ForgotPage'));
@@ -15,6 +15,10 @@ const RegisterMain = lazy(() => import('./components/register/RegisterMain'));
 const Home = lazy(() => import('./components/home/Home'));
 const UPIPayment = lazy(() => import('./components/payment/Payment'));
 
+// admin
+const SignupForm = lazy(() => import('./vendor/SignUp/SignupForm'));
+const Sidebar = lazy(() => import('./vendor/Sidebar'));
+const Signup = lazy(() => import('./vendor/SignUp/SignupForm'));
 // Main Routes don't change anything
 const Routes = () => {
     const { token } = useSelector(state => state.auth);
@@ -104,10 +108,21 @@ const UnAuthorizedRoutes = () => {
                 <Route path="/signUp">
                     <SignUp />
                 </Route>
+                <Route path="/admin">
+                    <Sidebar />
+                </Route>
+                <Route path="/admin-signup">
+                    <SignupForm />
+                </Route>
+            <Route path="/AdminSignup">
+            <Signup/>
+            </Route>
                 <Redirect path="/" to="home" />
             </Switch>
         </Suspense>
     );
 };
+
+
 
 export default Routes;

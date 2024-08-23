@@ -1,0 +1,13 @@
+.popup_content {
+    width: 28vw!important;
+    height: 22vh!important;
+   background-color: white!important;
+  color: black;
+   font-weight: 700;
+   display: flex;
+   justify-content: center;
+   
+}.card-body {
+    margin-bottom: 1.5rem !important; 
+  }
+ 
