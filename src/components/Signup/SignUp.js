@@ -14,8 +14,10 @@ import { useHistory } from "react-router-dom";
 import { singnup, toastError } from "../../utils/constants";
 import { validateEmail } from "../../utils/validation";
 import { useDispatch } from "react-redux";
-import {registerlogo,tick,pelli} from './assets/index.js'
-import  register2 from "./assets/register2.svg";
+import { registerlogo, tick, pelli } from "./assets/index.js";
+import register2 from "./assets/register2.svg";
+// import TermsAndConditions from "./TermsAndConditions.jsx";
+// import { terms_conditios} from "./assets"
 import {
   userSignup,
   otpverify,
@@ -66,6 +68,8 @@ const SignUp = () => {
   const [numError, setNumError] = useState(false);
   const [genderError, setGenderError] = useState("");
   const [displayOtp, setDisplayOtp] = useState(false);
+  const [termsCondition, setTermsCondition] = useState(false);
+  console.log({termsCondition})
   useEffect(() => {
     if (
       formData.userEmail === "" ||
@@ -73,13 +77,14 @@ const SignUp = () => {
       formData.gender === "" ||
       formData.userPass === "" ||
       formData.repeatPass === "" ||
-      formData.mobile === ""
+      formData.mobile === "" ||
+      isChecked === false
     ) {
       setBtnCondition(true);
     } else {
       setBtnCondition(false);
     }
-  }, [formData]);
+  }, [formData, isChecked]);
   const toggle = async () => {
     setModal(!modal);
   };
@@ -116,6 +121,8 @@ const SignUp = () => {
     setDisplayOtp(true);
     if (!validateEmail(formData.userEmail)) {
       setEmailIdError(true);
+    } else {
+      setEmailIdError(false);
     }
     if (formData.userPass !== formData.repeatPass) {
       setPasswordError("Passwords do not match");
@@ -173,7 +180,20 @@ const SignUp = () => {
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === "fullname") {
+      const alphabetRegex = /^[A-Za-z\s]*$/;
+      if (alphabetRegex.test(value)) {
+        setFormData({ ...formData, [name]: value });
+      }
+    } else if (name === "mobile") {
+      const numberRegex = /^[0-9]*$/;
+      if (numberRegex.test(value) && value.length <= 10) {
+        setFormData({ ...formData, [name]: value });
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
   const closeBtn = (
     <button className="close" onClick={closeBox} type="button">
@@ -185,9 +205,21 @@ const SignUp = () => {
   };
   return (
     <div className="main-cont">
+     {/* {termsCondition&& (
+        <div className="terms-condition-parent overlay" onClick={() => setTermsCondition()}>
+          <div className="terms-condition">
+            <TermsAndConditions pdfUrl={terms_conditios} />
+          </div>
+        </div>
+    )} */}
       <img src={registerlogo} alt="image" className="img-logo-signup" />
       <div className="left-section">
         <Form onSubmit={handleSubmit} className="forms">
+          <div className="signup-main-tabview-heading">
+          <h3>welcome to </h3>
+          <h4>pellisambadalu </h4>
+          </div>
+          
           <p className="signup-heading">{singnup.title}</p>
           <div className="position-relative">
             <FormGroup className="signup-form-input">
@@ -224,15 +256,17 @@ const SignUp = () => {
                 value={formData.gender}
                 onChange={handleChange}
                 name="gender">
-                <option value="">{singnup.gender}</option>
+                <option value="" selected={formData.gender === ""} hidden>
+                  &nbsp;I am
+                </option>
                 <option value="MALE" className="opt-color">
-                  male
+                  Male
                 </option>
                 <option value="Female" className="opt-color">
-                  female
+                  Female
                 </option>
                 <option value="Others" className="opt-color">
-                  others
+                  Others
                 </option>
               </Input>
               {formData.gender === "I am" ? <p className="req">*</p> : null}
@@ -248,7 +282,7 @@ const SignUp = () => {
                 type="email"
                 className={
                   !emailIdError
-                    ? "form-control-genderss mb-3"
+                    ? "form-control-genderss"
                     : "form-control-genderss"
                 }
                 onChange={handleChange}
@@ -262,7 +296,7 @@ const SignUp = () => {
             </FormGroup>
           </div>
           {emailIdError && (
-            <p className="email-error">please enter a valid email</p>
+            <p className="email-error mb-3">please enter a valid email</p>
           )}
           <div>
             <div className="position-relative">
@@ -274,7 +308,7 @@ const SignUp = () => {
                       ? "form-control-genderss mb-3"
                       : "form-control-genderss mb-3"
                   }
-                  type={showPassword ? "singnup" : "password"}
+                  type={showPassword ? "text" : "password"}
                   id="passwo"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -291,7 +325,7 @@ const SignUp = () => {
                 type="button"
                 onClick={togglePasswordVisibility}
                 className="eye eye-icon-1">
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
           </div>
@@ -304,7 +338,7 @@ const SignUp = () => {
                     ? "form-control-genderss mb-3"
                     : "form-control-genderss mb-3"
                 }
-                type={rePassError ? "singnup" : "password"}
+                type={rePassError ? "text" : "password"}
                 id="reenter"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -322,7 +356,7 @@ const SignUp = () => {
               type="button"
               onClick={togglePasswordVisibilities}
               className="eye eye-icon-2">
-              {rePassError ? <FaEyeSlash /> : <FaEye />}
+              {rePassError ? <FaEye /> : <FaEyeSlash />}
             </button>
           </div>
           {passwordError && <div className="pass-err">{passwordError}</div>}
@@ -337,16 +371,18 @@ const SignUp = () => {
               </Input>
             </FormGroup>
             <FormGroup className="signup-phone-nbr">
-              <Input
-                bsSize="lg"
-                type="number"
-                onChange={handleChange}
-                value={formData.mobile}
-                name="mobile"
-                onBlur={handleBlur}
-                placeholder={singnup.enterNumber}
-                required
-              />
+              <div className="input-wrapper">
+                <span className="required-asterisk">*</span>
+                <Input
+                  bsSize="lg"
+                  type="number"
+                  onChange={handleChange}
+                  value={formData.mobile}
+                  name="mobile"
+                  placeholder="Enter Number"
+                  required
+                />
+              </div>
             </FormGroup>
           </div>
 
@@ -358,9 +394,13 @@ const SignUp = () => {
               value={isChecked}
               className="check-2-checkin"
             />
-            <p className="para-terms">
+            <p className="para-terms" >
               {singnup.agreeTerms}
-              <span style={{ color: "#117FFF" }}>{singnup.terms_policy}</span>
+              <button style={{background:"transparent",border:"none"}} onClick={()=>setTermsCondition(true)}>
+              <span style={{ color: "#117FFF" }}>{singnup.terms_policy1} </span>
+              <b>&</b>{" "}
+              <span style={{ color: "#117FFF" }}>{singnup.terms_policy2} </span>
+              </button>
             </p>
           </div>
           <div className="d-flex align-items-center justify-content-center ">

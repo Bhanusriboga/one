@@ -52,13 +52,13 @@ function Home() {
                 <a className="navbar-brand" href="#">
                     <img src={newlogos} className="nav-logo" alt="Company Logo" />
                 </a>
-               
-                {burger?<AiOutlineClose className='close-icon mt-3'  onClick={() => setBurger(!burger)} />:<button
-                    className="navbar-toggler"
-                    type="button"
-                    onClick={() => setBurger(!burger)}
-                    aria-controls="navbarNav"
-                    aria-expanded={burger ? 'true' : 'false'}
+                
+                {burger?<AiOutlineClose className='close-icon mt-3'  onClick={() => setBurger(!burger)} />:<button 
+                    className="navbar-toggler" 
+                    type="button" 
+                    onClick={() => setBurger(!burger)} 
+                    aria-controls="navbarNav" 
+                    aria-expanded={burger ? 'true' : 'false'} 
                     aria-label="Toggle navigation"
                 >
                     <GiHamburgerMenu className='navbar-toggler-icon' />
@@ -78,7 +78,7 @@ function Home() {
                 </div>
             </div>
         </nav>
-     
+      
       <div className='content11 d-flex flex-column justify-content-center align-items-center'>
      
         <Couple />
@@ -93,7 +93,7 @@ function Home() {
         <Endorse />
         <img src={rightchakra} className='position-absolute right-chakra'/>
         <Destination />
- 
+
         <div className='footer-1 mt-5 d-flex flex-column align-items-center justify-content-evenly' id="footer" ref={bottomRef}>
               <div className='first-footer d-flex flex-column justify-content-evenly align-items-center'>
               <div className='d-flex justify-content-center align-items-center'>
@@ -110,7 +110,7 @@ function Home() {
           <hr className="hor-line"/>
           <div className='pageFooter'>
             <FooterBar />
- 
+
           </div>
         </div>
       </div>

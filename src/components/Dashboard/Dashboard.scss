@@ -2,6 +2,20 @@
     height: 90%;
     overflow-y: scroll;
 }
+.pageContainer::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE, Edge (Legacy) */
+.pageContainer {
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Firefox */
+.pageContainer {
+    scrollbar-width: none; /* Firefox */
+}
 .navBtn{
     color: #FFFFFF !important;
     font-size: 15px !important;
@@ -22,6 +36,7 @@
 .margindata{
     width: 90% !important;
     margin-left: 10% !important;
+    
 }
 .info-text{
     width: 25vw !important;
@@ -72,6 +87,11 @@
 .filterInput {
     background-color: transparent !important;
     border: 1px solid black !important;
+    border-radius: 5px;
+    .css-13cymwt-control, 
+    .css-t3ipsp-control{
+        background-color: transparent !important;
+    }
 }
 
 .seatchButton {
@@ -173,5 +193,4 @@
     color: #E0AA3E;
     font-weight: 600;
 }
-
 

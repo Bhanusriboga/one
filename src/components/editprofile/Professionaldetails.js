@@ -191,7 +191,6 @@ const ProfessionalDetails = () => {
                       value={details[key] || ""}
                       onChange={(e) => handleChange(e, key)}
                     >
-                      {console.log(occupationOptions)}
                       <option hidden disabled value="">
                         Select
                       </option>
