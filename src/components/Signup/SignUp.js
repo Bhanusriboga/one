@@ -69,6 +69,7 @@ const SignUp = () => {
   const [genderError, setGenderError] = useState("");
   const [displayOtp, setDisplayOtp] = useState(false);
   const [termsCondition, setTermsCondition] = useState(false);
+  console.log({termsCondition})
   useEffect(() => {
     if (
       formData.userEmail === "" ||
@@ -204,13 +205,13 @@ const SignUp = () => {
   };
   return (
     <div className="main-cont">
-     {termsCondition&& (
+     {/* {termsCondition&& (
         <div className="terms-condition-parent overlay" onClick={() => setTermsCondition()}>
-          {/* <div className="terms-condition">
+          <div className="terms-condition">
             <TermsAndConditions pdfUrl={terms_conditios} />
-          </div> */}
+          </div>
         </div>
-    )}
+    )} */}
       <img src={registerlogo} alt="image" className="img-logo-signup" />
       <div className="left-section">
         <Form onSubmit={handleSubmit} className="forms">
