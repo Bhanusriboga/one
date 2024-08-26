@@ -13,6 +13,7 @@ const endPoints = {
   editUserprofessionaldetails: "professional-details",
   userStatus:"user-status",
   userInfo:"user-info?userId=",
+  singleuserInfo:"user-single-info",
   otpverify:"user-otp-verification",
   reSendOtp:"request-mobile-otp",
   requestMobileOtp:"request-mobile-otp?mobile=",

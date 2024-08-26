@@ -8,11 +8,11 @@ import ignore from '../Assets/Ignore.svg'
 // import ignore from '../Assets/ignore.svg'
 import './UserCard.scss'
 
-
 function UsersCard(userDetails) {
+
+    const history= useHistory();
     const { user, background, color, viewButtonColor, buttonBackgroundColor, onMoveToIgnoreList, removeUserFromShortList } = userDetails
-   const history=useHistory();
-    const renderUserId=(userId)=>{
+   const renderUserId=(userId)=>{
     //need to write the dispath method to call api for getting single user details
     history.push(`/dashboard/user-details/${userId}`)
    }
