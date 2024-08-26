@@ -15,21 +15,18 @@
   align-items: center;
   justify-content: center;
   height: fit-content;
-  margin-top: 20px;
-  margin-left: 4px;
-  margin-right: 4px;
   transition: transform 0.3s ease;
   max-width: 500px;
   &.open {
     transform: translateX(0);
   }
 }
-.sidebar.col-3 {
+.sidebar.col-lg-3 {
   width: 20% !important;
 }
 
 .content {
-  padding: 20px 0 20px 30px;
+  padding-right: 0px;
   background-color: transparent;
 }
 
