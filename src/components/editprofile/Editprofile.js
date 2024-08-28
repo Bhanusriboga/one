@@ -30,7 +30,6 @@ const Editprofile = () => {
     <Professionaldetails/>
     <Mediadetails/>
     </div>
-    <button className='save-btn mt-4'>{EditProfile.save}</button>
     </div>
   )
 }
