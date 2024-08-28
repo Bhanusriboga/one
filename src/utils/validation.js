@@ -12,6 +12,5 @@ export const validatePassword = (password) => {
 
 // Validate phone number (e.g., US phone numbers)
 export const validatePhoneNumber = (phoneNumber) => {
-  const phoneRegex = /^\d{10}$/;
-  return phoneRegex.test(phoneNumber);
+  return phoneNumber?.match(/\d/g)?.length===10;
 };

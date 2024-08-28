@@ -43,12 +43,16 @@ const LoginPage = () => {
   }
 
   const handleMobile = (event) => {
+    let val = event.target.value
+let maxLength = 10 // <===
+let newValue = val < maxLength ? val : parseInt(val.toString().substring(0, maxLength));
     if (validatePhoneNumber(event.target.value)) {
       setMobileValid(true);
     } else {
       setMobileValid(false);
     }
-    setMobile(event.target.value);
+    setMobileValid(true);
+    setMobile(newValue);
   };
 
   const handlePassword = (event) => {
@@ -70,6 +74,7 @@ const LoginPage = () => {
               placeholder={login.mobilePlaceholder}
               onChange={handleMobile}
               value={mobile}
+              max="10"
               type="number"
               className="mobileinput"
               invalid={!mobileValid}

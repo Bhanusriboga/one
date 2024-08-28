@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { Container, Card, CardBody, CardText } from "reactstrap";
 import { CiSquareMinus, CiHeart } from "react-icons/ci";
-import { FaArrowLeft, FaHeart, FaMinusSquare } from "react-icons/fa";
-import { personalData, userName } from "./Data";
+import { FaHeart, FaMinusSquare } from "react-icons/fa";
+import { User } from "./Data";
 import Userinnerpeofile from "./Userinnerprofile";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Userprofile.css";
-
+import { useSelector } from 'react-redux';
+import { 
+    //ImgIcons, 
+    UserName, 
+    // UserPrimeImage 
+} from '../../commonSyles/VewProfilestles';
+import { useDispatch } from 'react-redux';
+import { getSelectedUserInfo} from '../../redux/slices/users'
+import { useParams } from "react-router-dom";
 const Userprofile = () => {
   const [imageSrc, setImageSrc] = useState("Image1.jpeg");
   const image = ["Image2.jpeg", "Image3.jpeg", "Image4.jpeg", "Image5.jpeg"];
-  const [isMobileView, setIsMobileView] = useState(false);
+  // const [isMobileView, setIsMobileView] = useState(false);
   const [isHeartClicked, setIsHeartClicked] = useState(false);
   const [isMinusClicked, setIsMinusClicked] = useState(false);
+  const { selelectedUserInfo } = useSelector(state => state.users);
+  const [userInfo, setUserInfo]= useState()
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
-  const handleResize = () => {
-    setIsMobileView(window.innerWidth <= 768);
-  };
+  useEffect(()=>{
+    if(id){
+      dispatch(getSelectedUserInfo(id));
+    }
+  },[id])
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  useEffect(()=>{
+      if(selelectedUserInfo){
+        setUserInfo(User(selelectedUserInfo))
+      }
+    },[selelectedUserInfo])
+
   const handleCardClick = (image) => {
     setImageSrc(image);
   };
@@ -65,7 +80,7 @@ const Userprofile = () => {
   const Datac = () => (
     <CardBody className="body">
       <div className="row">
-        {personalData.map((user, ind) => {
+        {userInfo?.personalData?.map((user, ind) => {
           return (
             <div className="d-flex justify-content-between" key={ind}>
               <CardText className="mb-3 w-50">{user.key}</CardText>
@@ -77,17 +92,13 @@ const Userprofile = () => {
     </CardBody>
   );
   return (
+    <>
+              <UserName>{userInfo?.userName}</UserName>
     <Container className="main">
-      {isMobileView ? (
+      {/* {isMobileView ? (
         <>
-          <div className="d-flex align-items-center justify-content-left">
-            <FaArrowLeft className="pt-1 title" />
-            {userName.map((item, ind) => (
-              <div className="title" key={ind}>
-                {item.value}
-              </div>
-            ))}
-          </div>
+        <FaArrowLeft className="pt-1 title" />
+          <UserName>{userInfo?.userName}</UserName>
           <div className="row">
             <div className="col-12 m-1">
               <CardComponent />
@@ -117,14 +128,8 @@ const Userprofile = () => {
           </div>
         </>
       ) : (
-        <>
-          <div className="d-flex justify-content-between align-items-center">
-            {userName.map((item, ind) => (
-              <span className="text title pt-5 m-1" key={ind}>
-                {item.value}
-              </span>
-            ))}
-          </div>
+        <> */}
+
           <div className="row">
             <div className="col-md-5 m-1">
               <CardComponent />
@@ -150,10 +155,11 @@ const Userprofile = () => {
               </div>
             ))}
           </div>
-        </>
-      )}
-      <Userinnerpeofile />
+        {/* </>
+      )} */}
+      <Userinnerpeofile userData={userInfo}/>
     </Container>
+    </>
   );
 };
 
