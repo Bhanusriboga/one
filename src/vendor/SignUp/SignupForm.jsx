@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { FormGroup } from "reactstrap";
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import "./SignupForm.css";
- 
+
 const VendorSignup = () => {
-  // const history = useNavigate()
   const history = useHistory()
   const [formData, setFormData] = useState({
     name: "",
@@ -14,14 +13,14 @@ const VendorSignup = () => {
     password: "",
     confirmPassword: ""
   });
- 
+
   const [errors, setErrors] = useState({});
- 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     const alphabetOnlyFields = ["fatherName", "name"]; // Add the name field here
     if (alphabetOnlyFields.includes(name)) {
-      const regex = /^[A-Za-z\s]*$/; // Allows only alphabets and spaces
+      const regex = /^[A-Za-z\s]*$/;
       if (!regex.test(value)) {
         return;
       }
@@ -31,22 +30,22 @@ const VendorSignup = () => {
     if (/^\d*$/.test(value)) {
       setFormData({ ...formData, [name]: value });
     }
-    else{
+    else {
       setFormData((prevData) => ({
         ...prevData,
         [name]: value
       }));
     }
-   
+
   };
- 
+
   const validateForm = () => {
     let tempErrors = {};
     const namePattern = /^[A-Za-z]+$/;
     const mobilePattern = /^\d{10}$/;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
- 
- 
+
+
     if (!formData.name) {
       tempErrors.name = "Name is required";
     } else if (!namePattern.test(formData.name)) {
@@ -66,24 +65,24 @@ const VendorSignup = () => {
     } else if (formData.password !== formData.confirmPassword) {
       tempErrors.confirmPassword = "Passwords do not match";
     }
- 
+
     return tempErrors;
   };
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(formData.password!=""){
+    if (formData.password != "") {
       setErrors({});
     }
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
-      history("/VendorSignup")
+      history.push("/AdminSignup")
     } else {
       setErrors(validationErrors);
- 
+
     }
   };
- 
+
   return (
     <div className="d-flex justify-content-center align-items-center">
       <div className="p-4 shadow-sm rounded p-5 bg-white backg">
@@ -123,29 +122,29 @@ const VendorSignup = () => {
                         type="text"
                         name="mobile"
                         placeholder="+91"
-                        className="custom-input"/>
+                        className="custom-input" />
                     </FormGroup>
                     <FormGroup className="admn-signup-phn">
-  <Form.Control
-    type="number"
-    name="mobile"
-    placeholder="Enter Mobile Number"
-    className="custom-input"
-    value={formData.mobile}
-    onChange={handleChange}
-    maxLength={10}
-    onInput={(e) => {
-      if (e.target.value.length > 10) {
-        e.target.value = e.target.value.slice(0, 10);
-      }
-    }}
-    onKeyDown={(e) => {
-      if (e.key === 'e' || e.key === '+' || e.key === '-' || e.key === '.' || e.key === ',') {
-        e.preventDefault();
-      }
-    }}
-  />
-</FormGroup>
+                      <Form.Control
+                        type="number"
+                        name="mobile"
+                        placeholder="Enter Mobile Number"
+                        className="custom-input"
+                        value={formData.mobile}
+                        onChange={handleChange}
+                        maxLength={10}
+                        onInput={(e) => {
+                          if (e.target.value.length > 10) {
+                            e.target.value = e.target.value.slice(0, 10);
+                          }
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'e' || e.key === '+' || e.key === '-' || e.key === '.' || e.key === ',') {
+                            e.preventDefault();
+                          }
+                        }}
+                      />
+                    </FormGroup>
                   </div>
                   {errors.mobile && <div className="text-danger">{errors.mobile}</div>}
                 </Form.Group>
@@ -216,5 +215,5 @@ const VendorSignup = () => {
     </div>
   );
 };
- 
+
 export default VendorSignup;

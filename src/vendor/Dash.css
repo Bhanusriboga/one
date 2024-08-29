@@ -1,91 +1,68 @@
 .dashboard-container {
-  padding: 20px;
+  padding:25px;
+  background-color: #F5F6FA;
 }
 
-.Graphdiv{
-  background-color: #fff !important;
-}
 .dashboard-title {
-  width: 162px;
-  height: 44px;
-  font-family: Nunito Sans;
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 43.65px;
-  letter-spacing: -0.11428570002317429px;
-  text-align: left;
-  margin-bottom: 1rem !important;
-  color: #202224;
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
-.dashboard-col {
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  background-color: #fff; 
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.dashboard-card {
+  border-radius: 12px !important;
+  border: none !important;
+  height: 120px !important;
+  width: 150px !important;
+
 }
 
-.Graphdiv {
-  background-color: #fff !important;
-}
-
-.today-users-col {
-  background-color: rgba(0, 182, 155, 0.1);
-}
-
-.total-users-col {
-  background-color: rgba(239, 56, 38, 0.1);
-}
 
 .dashboard-card-text {
-  font-family: Nunito Sans;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  color: #7a7a7a;
+  line-height: 1.2;
 }
 
 .dashboard-card-number {
-  font-family: Nunito Sans;
-  font-size: 24px;
-  font-weight: 700;
-  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  color: #2d2d2d;
+  line-height: 1.2;
+  
 }
 
 .dashboard-icon {
   font-size: 48px;
-  color: rgba(0, 182, 155, 0.6);
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+ 
+  border-radius: 45%;
+  padding: 10px;
+  top: 10px;       /* Position towards the top */
+  right: 10px;     /* Position towards the right */
 }
 
-.today-users-icon {
-  color: rgba(0, 182, 155, 0.6);
+.today-users-card {
+  background-color: #FFFFFF;
 }
-
-.total-users-icon {
-  color: rgba(239, 56, 38, 0.6);
-}
-
-.SalesDetails {
-  width: 146px;
-  height: 20px;
+.sales-head{
   font-family: Nunito Sans;
   font-size: 24px;
   font-weight: 700;
   line-height: 20px;
+  padding-left: 5vw;
 }
 
-@media (max-width: 768px) {
-  .dashboard-col {
-    margin-bottom: 20px;
-  }
+.total-users-card {
+  background-color: #FFFFFF;
 }
 
-.gx-3 {
-  --bs-gutter-x: 1rem;
+.today-users-icon {
+  color: #a2a2ff;
+  background-color: #e0e0ff;
+ 
+}
+
+.total-users-icon {
+  color: #ffc107;
+  background-color: #ffe5b4;
 }
