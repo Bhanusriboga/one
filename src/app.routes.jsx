@@ -1,11 +1,11 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
-import { Route, Switch, useHistory, Redirect,BrowserRouter } from 'react-router-dom';
+import { Route, Switch, useHistory, Redirect, BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyDetails, logout } from './redux/slices/AuthSlice';
 import Loader from './common-components/Loader';
 import { toast } from 'react-toastify';
 import { toastError } from './utils/constants';
-// import VendorSignup from './vendor/SignUp/VendorSignup';
+import Storage from './utils/Storage';
 // Lazy loading the components
 const LoginPage = lazy(() => import('./components/Login/LoginPage'));
 const ForgotPage = lazy(() => import('./components/Forgot/ForgotPage'));
@@ -18,13 +18,17 @@ const UPIPayment = lazy(() => import('./components/payment/Payment'));
 // admin
 const SignupForm = lazy(() => import('./vendor/SignUp/SignupForm'));
 const Sidebar = lazy(() => import('./vendor/Sidebar'));
-const AdminSignup = lazy(() => import('./vendor/SignUp/VendorSignup'));
+const AdminDashboard = lazy(() => import('./vendor/Sidebar')); // Add AdminDashboard component
+const VendorDashboard = lazy(() => import('./vendor/Sidebar')); // Add VendorDashboard component
+
 // Main Routes don't change anything
 const Routes = () => {
     const { token } = useSelector(state => state.auth);
-    return (<BrowserRouter>
-        {token ? <AppRoutes /> : <UnAuthorizedRoutes />}
-    </BrowserRouter>);
+    return (
+        <BrowserRouter>
+            {token ? <AppRoutes /> : <UnAuthorizedRoutes />}
+        </BrowserRouter>
+    );
 };
 
 // Mention Authorized Routes
@@ -56,26 +60,29 @@ const AppRoutes = () => {
         if (basicDetails !== undefined) {
             if (basicDetails) {
                 const currentPath = history.location.pathname;
-            // for testing perpose this was added need to remove while deploy after testing
-            //removed for start
-            if(currentPath.startsWith("/register"))
-                history.push('/register');
-            //removed for end
-            else if(currentPath.startsWith('/dashboard'))
-                history.push(`/dashboard${history.location.pathname.substr(10)}`);
-            else
-                history.push('/dashboard');
+                if (currentPath.startsWith("/register")) {
+                    history.push('/register');
+                } else {
+                    const role = Mydata?.role||Storage.get("role"); 
+                    if (role === "ADMIN") {
+                        history.push('/admin');
+                    } else if (role === "VENDOR") {
+                        history.push('/vendor');
+                    } else {
+                        history.push('/');
+                    }
+                }
             } else {
                 history.push('/register');
             }
         }
-    }, [basicDetails, history]);
+    }, [basicDetails, history, Mydata]);
 
     return (
         <Suspense fallback={<Loader />}>
             {basicDetails === true || basicDetails === false ? (
                 <Switch>
-                    <Route path="/dashboard">
+                    <Route path="/" exact>
                         <Dashboard />
                     </Route>
                     <Route path="/register">
@@ -84,9 +91,14 @@ const AppRoutes = () => {
                     <Route path="/payment">
                         <UPIPayment />
                     </Route>
-                    <Redirect path="/" to="/dashboard" />
+                    <Route path="/admin">
+                        <AdminDashboard />
+                    </Route>
+                    <Route path="/vendor">
+                        <VendorDashboard />
+                    </Route>
                 </Switch>
-            ):<Loader/> }
+            ) : <Loader />}
         </Suspense>
     );
 };
@@ -114,10 +126,7 @@ const UnAuthorizedRoutes = () => {
                 <Route path="/admin-signup">
                     <SignupForm />
                 </Route>
-            <Route path="/AdminSignup">
-            <AdminSignup/>
-            </Route>
-                <Redirect path="/" to="home" />
+                <Redirect path="/" to="/home" />
             </Switch>
         </Suspense>
     );

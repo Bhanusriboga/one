@@ -1,29 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Card, CardBody, CardTitle, CardText } from 'reactstrap';
-import {
-    Personal,
-    familyInformation,
-    PersonalInformation,
-    ProfessionalDetails,
-    ReligionDetails,
-    family,
-    Personals,
-    professionals,
-
-} from "./Data"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Userprofile.css'
+import PropTypes from 'prop-types';
+const Userinnerprofile = props => {
+    const {userData} = props;
+    const [useInfo, setUserInfo]= useState()
+    useEffect(()=>{
+        console.log(userData,"testing")
+        if(userData){
 
-const Userinnerprofile = () => {
+        setUserInfo(userData)
+        }
+    },[userData])
+   
     return (
         <Row className='mt-1'>
             <Col md="5" >
-                <Card>
+                <Card className='mb-2'>
                     <CardBody>
-                        {ReligionDetails.map((item ,ind) => (
+                        {useInfo?.ReligionDetails?.map((item ,ind) => (
                             <CardTitle className="titles" key={ind}>{item.value}</CardTitle>))}
                         <div className="row">
-                            {Personal.map((user) => {
+                            {useInfo?.Personal?.map((user) => {
                                 return (
                                     <div className='d-flex justify-content-between' key={user.key}>
                                         <CardText className='mb-3 w-50'>{user.key}</CardText>
@@ -34,12 +33,12 @@ const Userinnerprofile = () => {
                         </div>
                     </CardBody>
                 </Card>
-                <Card>
+                <Card className='mb-2'>
                     <CardBody>
-                        {family.map((item ,ind) => (
+                        {useInfo?.family?.map((item ,ind) => (
                             <CardTitle className="titles" key={ind}>{item.value}</CardTitle>))}
                         <div className="row">
-                            {familyInformation.map((user) => {
+                            {useInfo?.familyInformation?.map((user) => {
                                 return (
                                     <div className='d-flex justify-content-between' key={user.key}>
                                         <CardText className='mb-3 w-50'>{user.key}</CardText>
@@ -50,12 +49,12 @@ const Userinnerprofile = () => {
                         </div>
                     </CardBody>
                 </Card>
-                <Card>
+                <Card className='mb-2'>
                     <CardBody>
-                        {Personals.map((item,ind) => (
+                        {useInfo?.Personals?.map((item,ind) => (
                             <CardTitle className="titles" key={ind}>{item.value}</CardTitle>))}
                         <div className="row">
-                            {PersonalInformation.map((user) => {
+                            {useInfo?.PersonalInformation?.map((user) => {
                                 return (
                                     <div className='d-flex justify-content-between' key={user.key}>
                                         <CardText className='mb-3 w-50'>{user.key}</CardText>
@@ -77,10 +76,10 @@ const Userinnerprofile = () => {
             <Col md="5">
                 <Card>
                     <CardBody>
-                        {professionals.map((item,ind) => (
+                        {useInfo?.professionals?.map((item,ind) => (
                             <CardTitle className="titles" key={ind} >{item.value}</CardTitle>))}
                         <div className="row">
-                            {ProfessionalDetails.map((user) => {
+                            {useInfo?.ProfessionalDetails?.map((user) => {
                                 return (
                                     <div className='d-flex justify-content-between' key={user.key}>
                                         <CardText className='mb-3 w-50'>{user.key}</CardText>
@@ -95,5 +94,8 @@ const Userinnerprofile = () => {
         </Row>
     );
 };
+Userinnerprofile.propTypes = {
+    userData: PropTypes.func.isRequired,
+  };
 
 export default Userinnerprofile;

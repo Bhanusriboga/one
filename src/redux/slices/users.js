@@ -126,7 +126,7 @@ export const updatepersonaldetails = createAsyncThunk(
       Authorization: `Bearer ${token}`
     }
     const url = `${endPoints.editUserpersonaldetails}?userId=${userId}`
-    const { response } = await networkCall(url, "POST", JSON.stringify(props),header);
+    const { response } = await networkCall(url, "PUT", JSON.stringify(props),header);
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
@@ -144,7 +144,7 @@ export const updateprofesionaldetails = createAsyncThunk(
       Authorization: `Bearer ${token}`
     }
     const url = `${endPoints.editUserprofessionaldetails}?userId=${userId}`
-    const { response } = await networkCall(url, "POST", JSON.stringify(props),header);
+    const { response } = await networkCall(url, "PUT", JSON.stringify(props),header);
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
@@ -171,6 +171,7 @@ export const getprofesionaldetails = createAsyncThunk(
     }
   }
 )
+
 export const getShortListedUsers = createAsyncThunk(
   "users/getShortListedUsers",
   async (_, thunkAPI) => {
@@ -207,6 +208,17 @@ export const getSubCaste=createAsyncThunk(
       return thunkAPI.fulfillWithValue(response);
     } else {
       return thunkAPI.rejectWithValue(error || "Something went wrong..!");
+    }})
+export const getSelectedUserInfo = createAsyncThunk(
+  "users/getSelectedUserInfo",
+  async (props, thunkAPI) => {
+    const url = `${endPoints.singleuserInfo}?userId=${props}`
+    const { response } = await networkCall(url, "GET");
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue("Something went wrong..!")
     }
   }
 )
@@ -217,6 +229,7 @@ const UserSlice = createSlice({
     data: [],
     basicdetails:{},
     personaldetails:{},
+    selelectedUserInfo:{},
     profesionalDetails:{},
     shortlisted: [],
     ignored: [],
@@ -299,7 +312,6 @@ const UserSlice = createSlice({
         state.loading = false;
       });
       builder.addCase(updateprofesionaldetails.fulfilled, (state, action) => {
-        console.log(action,"testing")
         state.loading = false;
         state.profesionalDetails=action.payload?.object;
       })
@@ -325,6 +337,14 @@ const UserSlice = createSlice({
         state.subLoader = false;
         state.error = action.error.message;
       });
+      builder.addCase(getSelectedUserInfo.rejected, (state) => {
+        state.loading = false;
+      });
+      builder.addCase(getSelectedUserInfo.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selelectedUserInfo=action.payload?.object;
+      })
+      
   }
 });
 

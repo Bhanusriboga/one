@@ -57,17 +57,19 @@ const ProfessionalDetails = () => {
     "State"
   ];
   useEffect(() => {
-    // setDetails({
-    //   "Highest Education": profesionalDetails?.,
-    //   "Year Of Passing": profesionalDetails?.,
-    //   "Name Of the Institute": profesionalDetails?.,
-    //   "Occupation": profesionalDetails?.,
-    //   "Employment Status": profesionalDetails?.,
-    //   "Employed in": profesionalDetails?.,
-    //   "Work Location": profesionalDetails?.,
-    //   "State": profesionalDetails?.,
-    //   "City": profesionalDetails?.
-    // })
+    if(profesionalDetails){
+    setDetails({
+      "Highest Education": profesionalDetails?.highestEducation,
+      "Year Of Passing": profesionalDetails?.yearOfPassOut,
+      "Name Of the Institute": profesionalDetails?.nameOfInstitute,
+      "Occupation": profesionalDetails?.occupation,
+      "Employment Status": profesionalDetails?.employmentType,
+      "Employed in": profesionalDetails?.employedIn,
+      "Work Location": profesionalDetails?.workLocation,
+      "State": profesionalDetails?.state,
+      "City": profesionalDetails?.city
+    })
+  }
   }, [profesionalDetails])
   const handleEdit = async () => {
     if (isEditing) {
@@ -87,7 +89,7 @@ const ProfessionalDetails = () => {
           "yearOfPassOut": details['Year Of Passing'],
           "nameOfInstitute": details['Name Of the Institute'],
           "occupation": details.Occupation,
-          "employmentStatus": details['Employment Status'],
+          "employmentType": details['Employment Status'],
           "employedIn": details['Employed in'],
           "workLocation": details['Work Location'],
           "state": details.State,
