@@ -153,7 +153,7 @@ const AuthSlice = createSlice({
     Mydata: {},
     userId: Storage.get("userId") || null,
     token: Storage.get("token") || null,
-    role: Storage.get("role") || "USER",
+    role: Storage.get("role") || null,
     message: null,
   },
   reducers: {

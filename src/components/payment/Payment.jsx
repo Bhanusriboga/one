@@ -1,25 +1,30 @@
 import React from "react";
 import "./Payment.css";
-
+import { useSelector } from "react-redux";
+import { toast } from 'react-toastify';
+import { toastsuccess } from "../../utils/constants";
 const UPIPayment = () => {
+  const {Mydata}=useSelector(state=>state.auth)
 
   const handlePayment = () => {
     const options = {
       key: "rzp_test_NW4wGI973WWT4O", // Enter the Key ID generated from the Razorpay Dashboard
       amount: 50000, // Amount is in currency subunits. Default currency is INR. Hence, 10000 means 100 INR
       currency: "INR",
-      name: "Your Company Name",
+      name: "Pellisambandalu",
       description: "Test Transaction",
       image: "https://example.com/your_logo",
       handler: function(response) {
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature);
+        console.log("paymnent id -----",response)// need to check this and handle when realtime payment is done
+        toast.success("Payment Successfull",toastsuccess);
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature);
       },
       prefill: {
-        name: "Your Name",
-        email: "your.email@example.com",
-        contact: "9999999999",
+        name: Mydata?.userName||"Pellisambandalu",
+        email: Mydata?.email||"pD5k5@example.com",
+        contact: Mydata?.mobileNumber||"9999999999",
       },
       notes: {
         address: "Razorpay Corporate Office",

@@ -5,7 +5,7 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { MdEdit } from "react-icons/md";
 import { FaArrowLeft } from "react-icons/fa6";
-import { Switch, Route, useHistory, useLocation } from "react-router-dom";
+import { Switch, Route, useHistory, useLocation,Redirect } from "react-router-dom";
 import Settings from "../settings/Settings";
 import IgnoreUsers from "../ignoreUsers/IgnoreUsers";
 import ShortListedUsers from "../shortlistedUsers/ShortListedUsers";
@@ -19,14 +19,20 @@ import { logout as logoutAction } from "../../redux/slices/AuthSlice";
 import CustomWidget from "../ChatBot/CustomWidget";
 import Userprofile from "../UserProfile/Userprofile";
 import { getProfilePic, updateProfilePic } from "../../redux/slices/ProfilePic";
-
+import UPIPayment from "../payment/Payment";
+import { setIsOpen } from "../../redux/slices/users";
 const CustomSideBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [image, setImg] = useState("");
   const fileInputRef = useRef(null);
-
+  const [paymentPopup,setPaymentPopup]=useState(false);
+  const togglePayment=()=>setPaymentPopup(!paymentPopup);
+  const scrollToBottom=()=>{
+    botRef?.current?.scrollIntoView({behavior:'smooth'})
+  }
   const history = useHistory();
   const location = useLocation();
+  const botRef=useRef(null)
   const dispatch = useDispatch();
   const logout = async () => {
     await dispatch(logoutAction());
@@ -66,20 +72,23 @@ const CustomSideBar = () => {
   };
 
   const extraButtons = [
-    { id: "Pricing", label: "Pricing", path: "pricing" },
-    { id: "Chat with Us", label: "Chat with Us", path: "chat" },
-    { id: "Contact Us", label: "Contact Us", path: "contact" },
+    { id: "Pricing", label: "Pricing", path: "payment",onclick:togglePayment },
+    { id: "Chat with Us", label: "Chat with Us", path: "chat",onclick:()=>{
+      dispatch(setIsOpen(true))
+    } },
+    { id: "Contact Us", label: "Contact Us", path: "contact",onclick:scrollToBottom },
   ];
   const RenderContent = () => {
     return (
       <Switch>
-        <Route path="/dashboard/add-preferences" component={AddPreferences} />
-        <Route path="/dashboard/edit-profile" component={Editprofile} />
-        <Route path="/dashboard/ignored-users" component={IgnoreUsers} />
-        <Route path="/dashboard/shortlisted" component={ShortListedUsers} />
-        <Route path="/dashboard/settings" component={Settings} />
-        <Route path="/dashboard/user-details/:id" component={Userprofile} />
-        <Route exact path="/dashboard" component={ProfileList} />
+        <Route path="/dashboard" component={ProfileList} />
+        <Route path="/add-preferences" component={AddPreferences} />
+        <Route path="/edit-profile" component={Editprofile} />
+        <Route path="/ignored-users" component={IgnoreUsers} />
+        <Route path="/shortlisted" component={ShortListedUsers} />
+        <Route path="/settings" component={Settings} />
+        <Route path="/user-details/:id" component={Userprofile} />
+        <Redirect path="/" to="/dashboard" /> 
       </Switch>
     );
   };
@@ -87,6 +96,9 @@ const CustomSideBar = () => {
   return (
     <Container fluid className="outer-container mt-4 mb-4">
       <Row className=" w-100">
+      <button onClick={togglePayment} className='border-0 bg-transparent'>
+        {paymentPopup&&<UPIPayment/>}
+        </button>
         <Col
           xs="12"
           className="d-flex flex-row justify-content-between d-md-none">
@@ -154,7 +166,10 @@ const CustomSideBar = () => {
                 <Button
                   block="true"
                   className="bg-transparent border-0 text-color"
-                  onClick={() => history.push(`/dashboard/${button.path}`)}>
+                  onClick={() => {
+                    history.push(`/${button.path}`);
+                    setIsSidebarOpen(false);
+                  }}>
                   {button.label}
                 </Button>
                 {index !== buttonData.length - 2 && <hr className="hr" />}
@@ -165,17 +180,19 @@ const CustomSideBar = () => {
           <div className="w-100 d-block d-md-none justify-content-end sidebar-nav">
             <hr className="hr" />
             {extraButtons.map((button, index) => (
-              <React.Fragment key={button.id}>
-                <div className="button-parent">
+                <div className="button-parent" key={button.id}>
                   <Button
                     block
                     className="bg-transparent border-0 text-color"
-                    onClick={() => history.push(`/dashboard/${button.path}`)}>
+                    onClick={() => {
+                      // history.push(`/${button.path}`)
+                      button.onclick();
+                      setIsSidebarOpen(false);
+                      }}>
                     {button.label}
                   </Button>
                   {index !== extraButtons.length - 1 && <hr className="hr" />}
                 </div>
-              </React.Fragment>
             ))}
             <div className="button-parent">
               <hr className="hr" />
@@ -202,6 +219,7 @@ const CustomSideBar = () => {
         </Col>
       </Row>
       <CustomWidget />
+      <div ref={botRef}/>
     </Container>
   );
 };
