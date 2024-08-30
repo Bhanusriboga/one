@@ -153,6 +153,7 @@ const AuthSlice = createSlice({
     Mydata: {},
     userId: Storage.get("userId") || null,
     token: Storage.get("token") || null,
+    role: Storage.get("role") || null,
     message: null,
   },
   reducers: {
@@ -193,9 +194,11 @@ const AuthSlice = createSlice({
       .addCase(userLogin.fulfilled, (state, action) => {
         state.loading = false;
         state.Mydata = action.payload;
-        state.token = action.payload.jwt
-        Storage.set("token", action.payload.jwt);
-        Storage.set("userId", action.payload.userId);
+        state.token = action.payload?.jwt
+        state.role = action.payload?.role
+        Storage.set("token", action.payload?.jwt);
+        Storage.set("userId", action.payload?.userId);
+        Storage.set("role", action.payload?.role);
       })
       .addCase(userLogin.rejected, (state, action) => {
         state.loading = false;
@@ -222,8 +225,8 @@ const AuthSlice = createSlice({
       .addCase(otpverify.fulfilled, (state, action) => {
         state.loading = false;
         state.Mydata = action.payload;
-        Storage.set("token", action.payload.jwt);
-        Storage.set("userId", action.payload.userId);
+        Storage.set("token", action.payload?.jwt);
+        Storage.set("userId", action.payload?.userId);
       })
       .addCase(otpverify.rejected, (state, action) => {
         state.loading = false;

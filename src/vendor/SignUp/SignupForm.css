@@ -1,0 +1,165 @@
+h3 {
+    font-family: Nunito Sans;
+    font-size: 43.29px;
+    font-weight: 700;
+    line-height: 59.04px;
+    letter-spacing: -0.15459632873535156px;
+    text-align: left;
+    margin-top: 50px;
+}
+p {
+    font-family: Nunito Sans;
+    font-size: 15px;
+    font-weight: 40;
+    letter-spacing: -0.08696042746305466px;
+    text-align: left;
+}
+.backg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url("./Assets/back.png");
+    width: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #FFFFFF;
+}
+.dash-bord-form {
+    width: 100%;
+    border: 6px;
+    padding: 20px;
+    border-radius: 10px !important;
+}
+.custom-input{
+    background-color: #F1F4F9 !important;
+    
+}
+.custom-file-input-wrapper {
+    display: inline-flex;
+    align-items: center ;
+    justify-content: center !important;
+    position: relative;
+    width: 300px; /* Adjust width as necessary */
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0 10px;
+    background-color: #f9f9f9;
+  }
+   
+  .custom-file-input {
+   
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+   
+  .custom-file-label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+   
+  .custom-file-label Button {
+    color:black;
+   
+  height:40px !important;
+    border-radius: 5px 0 0 5px;
+    padding: 0 15px;
+    margin-top: 8px;
+     background: linear-gradient(180deg, #FFFFFF 0%, #CBCBCB 141.25%);
+     border:none;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+   
+  }
+   
+  .custom-file-label span {
+   
+    margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; 
+    margin-top: 8px;
+  }
+label {
+    font-family: Nunito Sans;
+    width: 279px;
+    height: 33px;
+    top: 381.34px;
+    left: 177.9px;
+    gap: 0px;
+    opacity: 0.8px;
+    text-align: left;
+}
+.form-control::placeholder {
+    color: #A6A6A6;
+    opacity: 0.8; 
+}
+.dash-btn{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+    text-align: center;
+}
+input::placeholder {
+    color:#A6A6A6 !important
+}  
+.admn-signup-country{
+    width:24% !important;
+    padding-right: 2% !important;
+}
+.admn-signup-phn{
+    width:74% !important
+}
+.custom-file-input {
+    display: flex;
+    align-items: center;
+  }
+  
+  .custom-file-label {
+    display: flex;
+    align-items: center;
+    height:40px;
+    padding: 6px 0px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    cursor: pointer;
+    width: fit-content;
+  }
+  
+  .custom-file-label input[type="file"] {
+    display: none;
+  }
+  
+  .custom-file-label span {
+    margin: 0 5px;
+  }
+  
+  .file-name {
+    color: #6c757d;
+  }
+  .file-name-vendor{
+color:red;
+width:120px;
+height:40px;
+border-radius:10.82px;
+box-shadow: rgba(111, 111, 111, 0.25);
+display:flex;
+align-items:center;
+justify-content:center;
+  }
+  .form-control-vendor{
+height:50px;
+background-color:#F1F4F9 !important
+  }

@@ -3,49 +3,49 @@ import { userProfile as title } from '../../utils/constants';
 export const User=(userData) => {
  return {
   Personal: [
-    { key: 'Caste :', value: userData?.personalDetails?.caste },
-    { key: 'Gothra :', value: userData?.personalDetails?.gothram},
-    { key: 'Zodiac Sign :', value: userData?.personalDetails?.zodiacSign},
-    { key: 'Dosham :', value: userData?.personalDetails?.haveDosham }
+    { key: 'Caste :', value: userData?.caste },
+    { key: 'Gothra :', value: userData?.gothram},
+    { key: 'Zodiac Sign :', value: userData?.zodiacSign},
+    { key: 'Dosham :', value: userData?.haveDosham }
   ],
   familyInformation: [
-    { key: 'Family Status:', value: userData?.personalDetails?.familyStatus },
-    { key: 'Father:', value: userData?.personalDetails?.fatherName },
-    { key: 'Mother Name', value: userData?.personalDetails?.motherName },
-    { key: 'Siblings:', value: userData?.personalDetails?.noOfSiblings }
+    { key: 'Family Status:', value: userData?.familyStatus },
+    { key: 'Father:', value: userData?.fatherName },
+    { key: 'Mother Name', value: userData?.motherName },
+    { key: 'Siblings:', value: userData?.noOfSiblings }
   ],
   PersonalInformation:[
-    { key: 'Marital Status :', value: userData?.personalDetails?.maritalStatus },
-    { key: 'Complexion :', value: userData?.personalDetails?.complexion },
-    { key: 'Any Disabilities:', value: userData?.personalDetails?.anyDisabilities },
-    { key: 'Body Type:', value: userData?.personalDetails?.bodyType },
-    { key: 'Drinking Habits:', value: userData?.personalDetails?.drinkingHabits },
-    { key: 'Eating Habits:', value: userData?.personalDetails?.eatingHabits },
-    { key: 'Smoking Habits:', value: userData?.personalDetails?.smokingHabits },
-    { key: 'Weight :', value: userData?.personalDetails?.weight },
-    { key: 'Height :', value: userData?.personalDetails?.height },
+    { key: 'Marital Status :', value: userData?.maritalStatus },
+    { key: 'Complexion :', value: userData?.complexion },
+    { key: 'Any Disabilities:', value: userData?.anyDisabilities },
+    { key: 'Body Type:', value: userData?.bodyType },
+    { key: 'Drinking Habits:', value: userData?.drinkingHabits },
+    { key: 'Eating Habits:', value: userData?.eatingHabits },
+    { key: 'Smoking Habits:', value: userData?.smokingHabits },
+    { key: 'Weight :', value: userData?.weight },
+    { key: 'Height :', value: userData?.height },
   ],
   ProfessionalDetails:[
-    { key: 'Highest Education :', value: userData?.professionalDetails?.highestEducation },
-    { key: 'Year Of Passing:', value: userData?.professionalDetails?.yearOfPassOut },
-    { key: 'Name Of the Institute :', value: userData?.professionalDetails?.nameOfInstitute },
-    { key: 'Occupation :', value: userData?.professionalDetails?.occupation },
-    { key: 'Employment Status :', value: userData?.professionalDetails?.employmentType },
-    { key: 'Employed in :', value: userData?.professionalDetails?.employedIn },
-    { key: 'Work Location :', value: userData?.professionalDetails?.workLocation },
-    { key: 'City :', value: userData?.professionalDetails?.city },
-    { key: 'State :', value: userData?.professionalDetails?.state }
+    { key: 'Highest Education :', value: userData?.highestEducation },
+    { key: 'Year Of Passing:', value: userData?.yearOfPassOut },
+    { key: 'Name Of the Institute :', value: userData?.nameOfInstitute },
+    { key: 'Occupation :', value: userData?.occupation },
+    { key: 'Employment Status :', value: userData?.employmentType },
+    { key: 'Employed in :', value: userData?.employedIn },
+    { key: 'Work Location :', value: userData?.workLocation },
+    { key: 'City :', value: userData?.basicDetailsCity },
+    { key: 'State :', value: userData?.basicDetailsState }
   ],
   personalData: [
-    { key: "Date of birth:", value: userData?.basicDetails?.dateOfBirth },
-    { key: "time of birth:", value: userData?.basicDetails?.timeOfBirth },
-    { key: "Religion:", value: userData?.basicDetails?.religion },
-    { key: "Mother Tongue:", value: userData?.basicDetails?.motherTongue},
-    { key: 'Language Proficiency:', value: userData?.basicDetails?.languageProficiency},
-    { key: 'Instagram id:', value: userData?.basicDetails?.instgramId },
-    { key: 'LinkedIn id:', value: userData?.basicDetails?.linkedinId },
-    { key: 'Address:', value: userData?.basicDetails?.doorNumber },
-    { key: 'Citizenship:', value: userData?.basicDetails?.citizenShip }
+    { key: "Date of birth:", value: userData?.dateOfBirth },
+    { key: "time of birth:", value: userData?.timeOfBirth },
+    { key: "Religion:", value: userData?.religion },
+    { key: "Mother Tongue:", value: userData?.motherTongue},
+    { key: 'Language Proficiency:', value: userData?.languageProficiency},
+    { key: 'Instagram id:', value: userData?.instgramId },
+    { key: 'LinkedIn id:', value: userData?.linkedinId },
+    { key: 'Address:', value: userData?.doorNumber },
+    { key: 'Citizenship:', value: userData?.citizenShip }
   ],
   userName: userData?.userName,
   buttons:userData?.button?.back
@@ -90,7 +90,7 @@ export const ReligionDetails = [
 ]
 export const family = [{ value: title?.Family?.FamilyInformation }]
 export const Personals = [{ value: title?.personal?.PersonalInformation }]
-export const professionals = [{ value: title?.Professional?.ProfessionalDetail }]
+export const professionals = [{ value: title?.ProfessionalDetail }]
 export const personalData = [
   { key: "Date of birth:", value: User?.Data_of_birth },
   { key: "time of birth:", value: User?.time_of_birth },
