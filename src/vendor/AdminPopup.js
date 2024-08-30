@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './admin.css';
-
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/slices/AuthSlice';
 const AdminPopup = () => {
     const [isPopupVisible, setIsPopupVisible] = useState(true);
     const [ setButtonName] = useState("Showpopup");
-
+    const history=useHistory();
+    const dispatch = useDispatch();
     const handlePopupVisibility = (action) => {
         if (action === 'hide') {
 
@@ -17,9 +20,9 @@ const AdminPopup = () => {
         }
     };
 
-    const handleLogoutClick = () => {
-        setIsPopupVisible(false);
-        setButtonName("Login");
+    const handleLogoutClick = async() => {
+        await dispatch(logout())
+        history.push('/home')
     };
 
     return (
