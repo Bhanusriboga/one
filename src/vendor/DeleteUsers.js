@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 import { MdDeleteOutline } from "react-icons/md";
 import "./Dashboard.css";
 import PropTypes from 'prop-types';
+import { useDispatch } from "react-redux";
+import { getAllAdminDeleteUsers } from "../redux/slices/AdminUsers";
 
 const DeleteUsers= (props) => {
   const { isShown, setIsShown, searchTerm } = props;
   const [data, setData] = useState([]);
+ const dispatch = useDispatch()
 
   const fetchUser = async () => {
-    const resp = await axios.get("http://localhost:8000/users");
-    setData(resp.data);
+    const resp = await dispatch(getAllAdminDeleteUsers())
+    setData(resp.payload?.object);
   };
 
   useEffect(() => {
