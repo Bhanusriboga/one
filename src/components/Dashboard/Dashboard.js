@@ -5,15 +5,13 @@ import FooterBar from './FooterBar'
 import PageContainer from './PageContainer'
 import { fetchUserInfo } from '../../redux/slices/AuthSlice'
 import './Dashboard.scss'
-import { getIgnoredUsers, getShortListedUsers,getCaste } from '../../redux/slices/users'
+import { getCaste } from '../../redux/slices/users'
 // import ComingSoon from '../ComingSoon/ComingSoon'
 
 const Dashboard = () => {
   const dispatch=useDispatch()
   const getUSerInfo=async()=>{
     await dispatch(fetchUserInfo())
-    await dispatch(getIgnoredUsers())
-    await dispatch(getShortListedUsers())
     await dispatch(getCaste())
    }
   useEffect(() => {

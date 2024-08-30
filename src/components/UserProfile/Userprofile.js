@@ -13,11 +13,12 @@ import {
     // UserPrimeImage 
 } from '../../commonSyles/VewProfilestles';
 import { useDispatch } from 'react-redux';
-import { getSelectedUserInfo} from '../../redux/slices/users'
+import { getSelectedUserInfo,setSelectedUserInfoEmpty} from '../../redux/slices/users'
 import { useParams } from "react-router-dom";
 const Userprofile = () => {
-  const [imageSrc, setImageSrc] = useState("Image1.jpeg");
-  const image = ["Image2.jpeg", "Image3.jpeg", "Image4.jpeg", "Image5.jpeg"];
+  const [imageSrc, setImageSrc] = useState("");
+  // const image = ["Image2.jpeg", "Image3.jpeg", "Image4.jpeg", "Image5.jpeg"];
+  const [image,setImage]=useState(["","",""])
   // const [isMobileView, setIsMobileView] = useState(false);
   const [isHeartClicked, setIsHeartClicked] = useState(false);
   const [isMinusClicked, setIsMinusClicked] = useState(false);
@@ -32,12 +33,26 @@ const Userprofile = () => {
     }
   },[id])
 
-  useEffect(()=>{
-      if(selelectedUserInfo){
-        setUserInfo(User(selelectedUserInfo))
+  useEffect(() => {
+    if(selelectedUserInfo){
+      setUserInfo(User(selelectedUserInfo))
+      setImage(selelectedUserInfo?.imageUrls || []);
+      if (selelectedUserInfo?.imageUrls && selelectedUserInfo.imageUrls.length > 0) {
+        setImageSrc(selelectedUserInfo.imageUrls[0]);
+      } else {
+        setImageSrc('');
       }
-    },[selelectedUserInfo])
+    }
+  }, [selelectedUserInfo]);
 
+  useEffect(() => {
+    return () => {
+      removedata() 
+    };
+  }, [id, dispatch]);
+const removedata=async()=>{
+  await dispatch(setSelectedUserInfoEmpty());
+}
   const handleCardClick = (image) => {
     setImageSrc(image);
   };
@@ -141,7 +156,7 @@ const Userprofile = () => {
             </div>
           </div>
           <div className="row justify-content-left">
-            {image.map((image, index) => (
+            {image?.map((image, index) => (
               <div key={index} className="col-12 col-sm-6 col-md-3 custom-card">
                 <button
                   className="ratio ratio-4x3 border-0 "

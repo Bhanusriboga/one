@@ -46,7 +46,7 @@ const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) =
           <h4 className='ignore-heading'>{ignoreUserText.heading}</h4>
         </div>
 
-        {loader?<Loader/>:<Row xs={1} sm={2} md={3} lg={4} className="">
+        {loader?<Loader/>:<Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3">
           {ignored?.slice(currentPage * 12 - 12, currentPage * 12)?.map((user, index) => {
             const even = index % 2 === 0;
             const styles = {

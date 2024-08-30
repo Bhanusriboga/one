@@ -8,21 +8,15 @@ import ChatBotIcon from "./Assets/ChatBotIcon.png";
 import ChatBotCloseButton from "./Assets/ChatBotCloseButton.png";
 import mobileCloseButton from "./Assets/mobileClosebutton.png";
 import './CustomWidget.css';
-
+import { useSelector } from 'react-redux';
+import { setIsOpen } from '../../redux/slices/users';
+import { useDispatch } from 'react-redux';
 const CustomWidget = () => {
+  const {isOpen}=useSelector(state => state.auth);
   const [key, setKey] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
   const [isChatBotOpen, setIsChatBotOpen] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
-
-  const profilePic = useSelector((state) => state.profilePic.profilePic);
-  console.log(profilePic)
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProfilePic());
-  }, [dispatch]);
-
   const toggleChatbot = () => {
     setIsChatBotOpen(!isChatBotOpen);
     if (!isOpen) {
@@ -31,7 +25,7 @@ const CustomWidget = () => {
       setIsButtonVisible(true);
       setKey(prevKey => prevKey + 1);
     }
-    setIsOpen(prevState => !prevState);
+   dispatch(setIsOpen( !isOpen));
   };
 
   const steps = [
