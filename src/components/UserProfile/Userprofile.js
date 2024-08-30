@@ -31,7 +31,6 @@ const Userprofile = () => {
     if(id){
       dispatch(getSelectedUserInfo(id));
     }
-    
   },[id])
 
   useEffect(() => {
