@@ -14,7 +14,7 @@ function UsersCard(userDetails) {
     const { user, background, color, viewButtonColor, buttonBackgroundColor, onMoveToIgnoreList, removeUserFromShortList } = userDetails
    const renderUserId=(userId)=>{
     //need to write the dispath method to call api for getting single user details
-    history.push(`/dashboard/user-details/${userId}`)
+    history.push(`/user-details/${userId}`)
    }
     return (
         <div className='user-card-maincontainer'>

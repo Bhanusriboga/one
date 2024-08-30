@@ -35,6 +35,7 @@ const endPoints = {
   getSubCaste:"getSubCaste",
   getprofilepic:"profile-picture",
   uploadprofilepic:"profile-picture",
+  media:"media-files"
 }
 
 export { baseURL, endPoints, encryptionSalt }      

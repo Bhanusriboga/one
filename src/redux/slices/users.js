@@ -7,7 +7,7 @@ import Showtoast from '../../common-components/showToast';
 export const getAllUsers = createAsyncThunk(
   "users/getAllUsers",
   async (_, thunkAPI) => {
-    const { response } = await networkCall(endPoints.userFilter+Storage.get("userId"), "POST");
+    const { response } = await networkCall(endPoints.userFilter+Storage.get("userId"), "POST",JSON.stringify({}));
     if (response) {
       return thunkAPI.fulfillWithValue(response);
     }
@@ -222,6 +222,71 @@ export const getSelectedUserInfo = createAsyncThunk(
     }
   }
 )
+export const getPhotos = createAsyncThunk(
+  "users/getPhotos",
+  async (_, thunkAPI) => {
+    const url = `${endPoints.media}/${Storage.get("userId")}`
+    const header={
+      Authorization: `Bearer ${Storage.get("token")}`
+    }
+    const { response } = await networkCall(url, "GET",_,header);
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue("Something went wrong..!")
+    }
+  }
+)
+export const uploadPic=createAsyncThunk(
+  "users/uploadPic",
+  async (formData, thunkAPI) => {
+    const config = {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${Storage.get("token")}`,
+      },
+    };
+
+    try {
+      const response = await fetch(
+        `https://pr-pellisambanalu-springboot-service.azurewebsites.net/api/v1/media-files/${Storage.get(
+          "userId"
+        )}`,
+        config
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        return thunkAPI.rejectWithValue(errorData || "Something went wrong..!");
+      }
+
+      const responseData = await response.json();
+      return thunkAPI.fulfillWithValue(responseData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.message || "Something went wrong..!"
+      );
+    }
+  }
+)
+export const deletePic=createAsyncThunk(
+  "users/deletePic",
+  async (props, thunkAPI) => {
+    const url = `${endPoints.media}/${Storage.get("userId")}/${props}`
+    const header={
+      Authorization: `Bearer ${Storage.get("token")}`
+    }
+    const { response } = await networkCall(url, "DELETE",null,header);
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    }
+    else {
+      return thunkAPI.rejectWithValue("Something went wrong..!")
+    }
+  }
+)
+
 const UserSlice = createSlice({
   name: 'users',
   initialState: {
@@ -235,9 +300,18 @@ const UserSlice = createSlice({
     ignored: [],
     castes:[],
     subcast:[],
-    subLoader:false
+    subLoader:false,
+    photos:[],
+    isOpen:false
   },
-  reducers: {},
+  reducers: {
+    setIsOpen:(state,action)=>{
+      state.isOpen=action.payload
+    },
+    setSelectedUserInfoEmpty:(state)=>{
+      state.selelectedUserInfo={}
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllUsers.pending, (state) => {
@@ -344,9 +418,41 @@ const UserSlice = createSlice({
         state.loading = false;
         state.selelectedUserInfo=action.payload?.object;
       })
-      
+      builder.addCase(getPhotos.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getPhotos.fulfilled, (state, action) => {
+        state.loading = false;
+        state.photos = action.payload?.object;
+      })
+      .addCase(getPhotos.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      builder.addCase(deletePic.pending, (state) => {
+        state.loading = true;        
+      })
+      .addCase(deletePic.fulfilled, (state, action) => {
+        state.loading = false;
+        state.photos = action.payload?.object;
+      })
+      .addCase(deletePic.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      builder.addCase(uploadPic.pending, (state) => {
+        state.loading = true;        
+      })
+      .addCase(uploadPic.fulfilled, (state, action) => {
+        state.loading = false;
+        state.photos = action.payload?.object;
+      })
+      .addCase(uploadPic.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
   }
 });
 
-// export const {  } = UserSlice.actions;
+export const { setIsOpen,setSelectedUserInfoEmpty } = UserSlice.actions;
 export default UserSlice.reducer;

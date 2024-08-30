@@ -8,12 +8,12 @@ import PaginationComponent from '../../common-components/pagination/PaginationCo
 import UsersCard from '../../common-components/UserCard';
 import { getShortListedUsers } from '../../redux/slices/users';
 import { changeUserStatus } from '../../redux/slices/users';
-
+import Loader from '../../common-components/Loader';
 
 function ShortListedUsers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
-  const { userId } = useSelector(state => state.auth)
+  const { userId,loader } = useSelector(state => state.auth)
   const dispatch = useDispatch();
   const history=useHistory();
   const { shortlisted } = useSelector((state) => state.users);
@@ -43,7 +43,7 @@ function ShortListedUsers() {
           <FaArrowLeft className='shortlist-back-mobile'  onClick={() => history.goBack()}/>
           <h4 className='shortlist-heading'>{ignoreUserText.heading1}</h4>
         </div>
-        <Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3">
+        {loader?<Loader/>:<Row xs={1} sm={2} md={3} lg={4} className="g-2 g-sm-2 g-md-3">
           {shortlisted?.slice(currentPage * 12 - 12, currentPage * 12)?.map((user, index) => {
             let background;
             let color;
@@ -76,7 +76,7 @@ function ShortListedUsers() {
               </Col>
             );
           })}
-        </Row>
+        </Row>}
         <div className='shortlisted-pagination'>
          {totalpages>1&& <PaginationComponent
             totalPages={totalpages}
