@@ -17,16 +17,19 @@ const Dashboard = () => {
   useEffect(() => {
     getUSerInfo()
   },[])
-
+  const botRef=React.createRef(null)
+  const scrollToBottom=()=>{
+    botRef?.current?.scrollIntoView({behavior:'smooth'})
+  }
   return (
     <div className='h-100 w-100 pgback'>
       <div className='pageHeader'>
-        <Header/>
+        <Header scrollToBottom={scrollToBottom}/>
       </div>
       <div className='pageContainer conwidth'>
         {/* <ComingSoon/> */}
         <PageContainer/>
-        <div className='pageFooter'>
+        <div className='pageFooter' ref={botRef}>
         <FooterBar/>
       </div>
       </div>
