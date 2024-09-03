@@ -18,7 +18,7 @@ const AdminPopup = () => {
 
     const handleLogoutClick = async() => {
         await dispatch(logout())
-        history.push('/home')
+        history.go(0)
     };
 
     return (

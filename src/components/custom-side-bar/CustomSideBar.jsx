@@ -14,7 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./CustomSideBar.scss";
 import Editprofile from "../editprofile/Editprofile";
 import AddPreferences from "../AddPreferences/AddPreference";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout as logoutAction } from "../../redux/slices/AuthSlice";
 import CustomWidget from "../ChatBot/CustomWidget";
 import Userprofile from "../UserProfile/Userprofile";
@@ -26,6 +26,7 @@ const CustomSideBar = () => {
   const [image, setImg] = useState("");
   const fileInputRef = useRef(null);
   const [paymentPopup,setPaymentPopup]=useState(false);
+  const { Mydata } = useSelector(state => state.auth);
   const togglePayment=()=>setPaymentPopup(!paymentPopup);
   const scrollToBottom=()=>{
     botRef?.current?.scrollIntoView({behavior:'smooth'})
@@ -88,7 +89,7 @@ const CustomSideBar = () => {
         <Route path="/shortlisted" component={ShortListedUsers} />
         <Route path="/settings" component={Settings} />
         <Route path="/user-details/:id" component={Userprofile} />
-        <Redirect path="/" to="/dashboard" /> 
+        {Mydata?.object?.basicDetailsAvailable ? <Redirect from="/" to="/dashboard" /> : <Redirect path="/register" to="/register" /> }
       </Switch>
     );
   };
