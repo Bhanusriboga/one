@@ -330,7 +330,6 @@ const AuthSlice = createSlice({
       .addCase(otpverify.fulfilled, (state, action) => {
         state.loading = false;
         state.Mydata = action.payload;
-<<<<<<< HEAD
         if(action.payload.role=="USER"){
           Storage.set("token", action.payload?.jwt);
           Storage.set("userId", action.payload?.userId);
@@ -339,12 +338,10 @@ const AuthSlice = createSlice({
           Storage.set("userId", action?.payload?.userId);
         }
         Storage.set("role", action.payload.role);
-=======
         state.role = action.payload?.role
         Storage.set("token", action.payload?.jwt);
         Storage.set("userId", action.payload?.userId);
         Storage.set("role", action.payload?.role);
->>>>>>> 53ddbee96dfb70ada33c19e8260389d8847d5fba
       })
       .addCase(otpverify.rejected, (state, action) => {
         state.loading = false;
