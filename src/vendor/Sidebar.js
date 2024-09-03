@@ -64,7 +64,7 @@ const roleList = Storage.get("role");
 </div>
 
         <ul className="nav flex-column">
-          {buttonData.map((button) => (
+          {buttonData?.map((button) => (
             <li
               key={button.id}
               className={`nav-item ${activeContent === button.id ? "active" : ""}`}

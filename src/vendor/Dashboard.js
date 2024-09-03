@@ -62,7 +62,7 @@ const Dashboard = (props) => {
           <SingleUser />
         ) : (
           <>
-          {data.length ===0 ? <h1 className="text-center pt-5">No Users Found</h1> :             
+          {data?.length ===0 ? <h1 className="text-center pt-5">No Users Found</h1> :             
             <table className="table tab">
               <thead>
                 <tr>

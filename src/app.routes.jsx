@@ -19,6 +19,7 @@ const UPIPayment = lazy(() => import('./components/payment/Payment'));
 // admin and vendor
 const SignupForm = lazy(() => import('./vendor/SignUp/SignupForm'));
 const Sidebar = lazy(() => import('./vendor/Sidebar'));
+const VenderForm = lazy(() => import('./vendor/SignUp/VendorSignup'));
 
 const Routes = () => {
     const { token, role } = useSelector(state => state.auth);
@@ -135,6 +136,12 @@ const UnAuthorizedRoutes = () => {
                 </Route>
                 <Route path="/signUp">
                     <SignUp />
+                </Route>
+                <Route path="/admin-signup2">
+                <SignupForm />
+                </Route>
+                <Route path="/admin-signup">
+                    <VenderForm />
                 </Route>
                 <Redirect to="/home" />
             </Switch>
