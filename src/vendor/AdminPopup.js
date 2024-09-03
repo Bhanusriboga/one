@@ -6,15 +6,11 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../redux/slices/AuthSlice';
 const AdminPopup = () => {
     const [isPopupVisible, setIsPopupVisible] = useState(true);
-    const [ setButtonName] = useState("Showpopup");
     const history=useHistory();
     const dispatch = useDispatch();
     const handlePopupVisibility = (action) => {
         if (action === 'hide') {
-
-            
             setIsPopupVisible(false);
-            setButtonName("Showpopup");
         } else {
             setIsPopupVisible(true);
         }
