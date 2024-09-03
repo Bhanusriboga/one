@@ -1,33 +1,38 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 // import { MdDeleteOutline } from "react-icons/md";
 import "./Dashboard.css";
 import PropTypes from 'prop-types';
+import { useDispatch } from "react-redux";
+import { getAllVendorApproveUsers } from "../redux/slices/AdminUsers";
 
 const ApprovalUsers = (props) => {
-  const { isShown,  searchTerm } = props;
+  const { isShown,  //searchTerm 
+
+  } = props;
   const [data, setData] = useState([]);
+  const dispatch = useDispatch()
 
   const fetchUser = async () => {
-    const resp = await axios.get("http://localhost:8000/users");
-    setData(resp.data);
+    const resp = await dispatch(getAllVendorApproveUsers())
+    setData(resp?.payload?.object||[]);
   };
 
   useEffect(() => {
     fetchUser();
   }, []);
 
-  const filteredData = data.filter((user) =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredData = data.filter((user) =>
+  //   user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   return (
     <div className="container-fluid">
       {!isShown && <h4 className="text"> Approve Users</h4>}
       <div className="table-1">
        
-          <>
-            <table className="table tab">
+          {data?.length == 0 ? <h1 className="text-center pt-5">No  Users Data Found </h1>:
+            (<table className="table tab">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -40,16 +45,16 @@ const ApprovalUsers = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {filteredData.map((user) => (
-                  <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.name}</td>
-                    <td>{user.mobile}</td>
-                    <td>{user.mailid}</td>
-                    <td>{user.caste}</td>
+                {data?.map((user ,ind) => (
+                  <tr key={ind+1}>
+                    <td>{user?.id}</td>
+                    <td>{user?.name}</td>
+                    <td>{user?.mobile}</td>
+                    <td>{user?.mailid}</td>
+                    <td>{user?.caste}</td>
                     <td>
                       <text>
-                        {user.status}
+                        {user?.status}
                       </text>
                     </td>
                     <td>
@@ -60,8 +65,8 @@ const ApprovalUsers = (props) => {
                   </tr>
                 ))}
               </tbody>
-            </table>
-          </>
+            </table>)
+          }
        
       </div>
     </div>

@@ -428,7 +428,6 @@ const AuthSlice = createSlice({
       state.loading = true;
     })
     .addCase(vendorSignup2.fulfilled, (state, action) => {
-      console.log({action})
       state.loading = false;
       state.Mydata = action.payload;
       if(action?.payload?.jwt){

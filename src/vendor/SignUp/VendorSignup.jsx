@@ -169,8 +169,7 @@ const VendorSignup = () => {
     }
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
-      const data=await dispatch(vendorSignup(formData))
-      console.log("----- ",{data})
+      await dispatch(vendorSignup(formData))
       toggle()
     } else {
       setErrors(validationErrors);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     AreaChart,
     Area,
@@ -12,23 +12,23 @@ import { Card, CardBody, Row, Col } from 'reactstrap';
 import { FaUsers } from "react-icons/fa";
 import { HiMiniUsers } from "react-icons/hi2";
 import './Dash.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { graphApi } from '../redux/slices/AdminUsers';
 
-const data = [
-    { name: '5k', sales: 20 },
-    { name: '10k', sales: 40 },
-    { name: '15k', sales: 35 },
-    { name: '20k', sales: 64 },
-    { name: '25k', sales: 50 },
-    { name: '30k', sales: 42 },
-    { name: '35k', sales: 60 },
-    { name: '40k', sales: 45 },
-    { name: '45k', sales: 62 },
-    { name: '50k', sales: 55 },
-    { name: '55k', sales: 50 },
-    { name: '60k', sales: 54 },
-];
 
 const CustomWidget = () => {
+    const dispatch =useDispatch()
+    const {data} = useSelector(state=>state.adminUsers)
+    const fetchusersData = async()=>{
+       await dispatch(graphApi())
+    }
+    useEffect(()=>{
+        fetchusersData()
+    },[])
+    const formattedData = data?.graphDtos?.map(item => ({
+        name: item?.date,
+        sales: item?.noOfUsers
+    }));
     return (
         <div className='graphmaindiv'>
             {/* <div className="dashboard-container">
@@ -57,21 +57,21 @@ const CustomWidget = () => {
             <div className="dashboard-container">
       <h1 className="dashboard-title mb-3">Dashboard</h1>
       <Row>
-        <Col md="3" sm="2" xs="6">
+        <Col md="3" sm="2" xs="6" className='me-md-5'>
           <Card className="dashboard-card today-users-card position-relative">
             <CardBody className="text-left">
               <div className="dashboard-card-text mb-1">Today Users</div>
-              <div className="dashboard-card-number mb-0">40,689</div>
+              <div className="dashboard-card-number mb-0">{data?.totalTodayUsers}</div>
               <HiMiniUsers className="dashboard-icon today-users-icon position-absolute" />
             </CardBody>
           </Card>
         </Col>
-        <Col md="2" sm="2" xs="6" >
+        <Col md="3" sm="2" xs="6" >
 
           <Card className="dashboard-card total-users-card position-relative">
             <CardBody className="text-left">
               <div className="dashboard-card-text mb-1">Total Users</div>
-              <div className="dashboard-card-number mb-0">10,293</div>
+              <div className="dashboard-card-number mb-0">{data?.totalNoOfUsers}</div>
               <FaUsers className="dashboard-icon total-users-icon position-absolute" />
             </CardBody>
           </Card>
@@ -86,7 +86,7 @@ const CustomWidget = () => {
                             <ResponsiveContainer width="95%" height={300} ml-5 >
                             <h3 className='sales-head mb-4 pt-4'>Sales Details</h3>
                                 <AreaChart
-                                    data={data}
+                                    data={formattedData}
                                     margin={{ top: 20, right: 30, left: 40, bottom: 20 }}
                                 >
                                     <defs>

@@ -6,6 +6,7 @@ import ProfilePicReducer from './ProfilePic';
 
 import RegistrationDetails from './RegistrationDetails';
 import addPreferences from './AddPreferences'
+import adminUsersReducer from './AdminUsers'
 const rootReducer = combineReducers({
   auth: AuthReducer,
   // Add other reducers here
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   settings:SettingsReducer,
   addPreferences:addPreferences,
   profilePic:ProfilePicReducer,
+  adminUsers:adminUsersReducer
   
 
 });

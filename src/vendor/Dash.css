@@ -1,5 +1,6 @@
+/* Base Styles */
 .dashboard-container {
-  padding:25px;
+  padding: 25px;
   background-color: #F5F6FA;
 }
 
@@ -12,11 +13,10 @@
 .dashboard-card {
   border-radius: 12px !important;
   border: none !important;
-  height: 120px !important;
-  width: 150px !important;
-
+  height: 100px !important; /* Increased size */
+  width: 170px !important;  /* Increased size */
+  margin-bottom: 10px; /* Reduced space between cards */
 }
-
 
 .dashboard-card-text {
   font-size: 14px;
@@ -29,29 +29,18 @@
   font-weight: bold;
   color: #2d2d2d;
   line-height: 1.2;
-  
 }
 
 .dashboard-icon {
   font-size: 48px;
- 
   border-radius: 45%;
   padding: 10px;
-  top: 10px;       /* Position towards the top */
-  right: 10px;     /* Position towards the right */
+  position: absolute;
+  top: 10px;       
+  right: 10px;
 }
 
-.today-users-card {
-  background-color: #FFFFFF;
-}
-.sales-head{
-  font-family: Nunito Sans;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 20px;
-  padding-left: 5vw;
-}
-
+.today-users-card,
 .total-users-card {
   background-color: #FFFFFF;
 }
@@ -59,10 +48,144 @@
 .today-users-icon {
   color: #a2a2ff;
   background-color: #e0e0ff;
- 
 }
 
 .total-users-icon {
   color: #ffc107;
   background-color: #ffe5b4;
+}
+
+.sales-head {
+  font-family: Nunito Sans;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 20px;
+  padding-left: 5vw;
+}
+
+/* Custom Modal Footer */
+.custom-modal-footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  border-top: 1px solid #ccc;
+  align-items: center;
+}
+
+.horizontal-line {
+  width: 102%;
+  height: 1px;
+  background-color: rgb(226, 223, 223);
+  margin-bottom: 8px!important;
+  margin-top: 20px!important;
+}
+
+.footer-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 30px;
+}
+
+.text {
+  padding-left: 16% !important;
+  font-family: Nunito Sans;
+  font-weight: 400;
+}
+
+.text1 {
+  padding-left: 16% !important;
+}
+
+.cancel-text, .delete-text {
+  width: 50%;
+  height: 50px;
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #ccc;
+  border-left: none;
+  border-bottom: none;
+  border-right: 1px solid #ccc;
+  background-color: none !important;
+}
+
+.modelbody1 {
+  padding: 0 !important;
+}
+
+/* Tablet Styles */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .dashboard-title {
+    font-size: 22px;
+  }
+
+  .dashboard-card {
+    height: 130px !important; 
+    width: 160px !important;  
+    margin-bottom: 8px; 
+  }
+
+  .dashboard-card-number {
+    font-size: 26px;
+  }
+
+  .dashboard-icon {
+    font-size: 40px;
+    padding: 8px;
+  }
+
+  .sales-head {
+    font-size: 22px;
+    padding-left: 4vw;
+  }
+
+  .text, .text1 {
+    padding-left: 12% !important;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 576px) {
+  .dashboard-container {
+    padding: 15px;
+  }
+
+  .dashboard-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .dashboard-card {
+    height: 120px !important; /* Adjusted size */
+    width: 140px !important;  /* Adjusted size */
+    margin-bottom: 6px; /* Reduced space between cards */
+  }
+
+  .dashboard-card-number {
+    font-size: 22px;
+  }
+
+  .dashboard-icon {
+    font-size: 36px;
+    padding: 6px;
+  }
+
+  .sales-head {
+    font-size: 20px;
+    padding-left: 3vw;
+  }
+
+  .text, .text1 {
+    padding-left: 8% !important;
+  }
 }

@@ -37,6 +37,12 @@ const endPoints = {
   uploadprofilepic:"profile-picture",
   media:"media-files",
   adminSignup:"admin/add-details",
+  getadminallusers:"all-users",
+  getAllDeleteUsers:"delete-requests",
+  getAllVendorApproveUsers:"vendor-approvals",
+  adminDeleteUser:"delete-request",
+  graphapi:'users-analytics'
+ 
 }
 
 export { baseURL, endPoints, encryptionSalt }      

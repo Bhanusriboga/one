@@ -9,13 +9,14 @@ import AdminPopup from "./AdminPopup";
 import DeleteUsers from "./DeleteUsers";
 import { AiOutlineStop } from "react-icons/ai";
 import ApprovalUsers from "./ApprovalUsers";
-import Storage from "../utils/Storage";
+import Storage from "../utils/Storage";import { useSelector } from "react-redux";
+
 const Sidebar = () => {
   const [activeContent, setActiveContent] = useState("DashBoard");
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const {Mydata}=useSelector((state) => state.auth)
   const RenderContent = () => {
     switch (activeContent) {
       case "DashBoard":
@@ -63,7 +64,7 @@ const roleList = Storage.get("role");
 </div>
 
         <ul className="nav flex-column">
-          {buttonData.map((button) => (
+          {buttonData?.map((button) => (
             <li
               key={button.id}
               className={`nav-item ${activeContent === button.id ? "active" : ""}`}
@@ -103,8 +104,8 @@ const roleList = Storage.get("role");
             >
               <IoPower />
             </button>
-            <div className="profile-circle">M</div>
-            <span className="profile-name">Moni Roy</span>
+            <div className="profile-circle">{Mydata?.userName?.charAt(0)}</div>
+            <span className="profile-name">{Mydata?.userName}</span>
           </div>
         </div>
         <RenderContent />

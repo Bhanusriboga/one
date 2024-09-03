@@ -179,7 +179,8 @@ const SignupForm = () => {
       setErrors({ [firstErrorField]: newErrors[firstErrorField] });
     } else {
       setErrors({});
-      const data = await dispatch(vendorSignup2(formData));
+      const data =await dispatch(vendorSignup2(formData));
+      console.log(data)
       const formDataObj1 = new FormData();
       formDataObj1.append("file", formData.aadharFile);
        await dispatch(uploadvendorFiles(formDataObj1));
@@ -191,9 +192,8 @@ const SignupForm = () => {
 
       formDataObj3.append("file", formData.voterIdFile);
        await dispatch(uploadvendorFiles(formDataObj3));
-      console.log("----- ", { data });
     }
-    history.push("/admin")
+    history.push("/vendor")
 
   };
 

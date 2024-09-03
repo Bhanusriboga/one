@@ -4,8 +4,7 @@ import { GoHeart } from "react-icons/go";
 import { AiFillHeart } from "react-icons/ai";
 import { ignoreUserText } from '../utils/constants';
 import { useHistory } from "react-router-dom";
-import ignore from '../Assets/Ignore.svg'
-// import ignore from '../Assets/ignore.svg'
+import ignore from "../Assets/Ignore.svg"
 import './UserCard.scss'
 
 function UsersCard(userDetails) {
