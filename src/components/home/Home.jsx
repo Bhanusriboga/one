@@ -17,11 +17,19 @@ import  googleplay from "./assets/googleplay.svg"
 import appstore from "./assets/apple.svg";
 import chakra from "./assets/chakraa.svg"
 import FooterBar from "../Dashboard/FooterBar"
+import TermsAndConditions from "../Signup/TermsAndConditions.jsx";
+import { terms_conditios} from "../Signup/assets"
+import * as pdfWorker from 'pdfjs-dist/build/pdf.worker.mjs';
+import { pdfjs } from "react-pdf";
+pdfjs.GlobalWorkerOptions.workerSrc = URL.createObjectURL(new Blob([pdfWorker], { type: 'application/javascript' }));
+
+
 function Home() {
   const [burger,setBurger]=useState(false)
   const bottomRef=useRef()
   const [scrolled, setScrolled] = useState(false)
   const [width, setWidth] = useState(window.innerWidth)
+  const [termsCondition, setTermsCondition] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 0) {
@@ -44,6 +52,9 @@ function Home() {
           bottomRef.current.scrollIntoView({behaviour:"smooth"})
         }
          
+  }
+  const setTrueTermAndConditions=()=>{
+    setTermsCondition(true)
   }
   return (
     <div className='home-page-div d-flex flex-column justify-content-between align-items-center w-100 ' >
@@ -106,10 +117,19 @@ function Home() {
                <img src={googleplay} className='appstore '/>
                <img src={appstore} className='appstore'/>
               </div>
-              </div>
+            <div style={{ position: "relative" }}>
+              {termsCondition && (
+                <button className="terms-condition-parent overlay " onClick={() => setTermsCondition(false)}>
+                  <div className="terms-condition">
+                    <TermsAndConditions pdfUrl={terms_conditios} />
+                  </div>
+                </button>
+              )}
+            </div>
+          </div>
           <hr className="hor-line"/>
           <div className='pageFooter'>
-            <FooterBar />
+            <FooterBar setTermsCondition={setTrueTermAndConditions}/>
 
           </div>
         </div>

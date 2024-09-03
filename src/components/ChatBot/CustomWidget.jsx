@@ -27,7 +27,7 @@ const CustomWidget = () => {
       setIsButtonVisible(true);
       setKey(prevKey => prevKey + 1);
     }
-   dispatch(setIsOpen( !isOpen));
+   dispatch(setIsOpen(!isOpen));
   };
 
   const steps = [

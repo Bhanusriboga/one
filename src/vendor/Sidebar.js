@@ -9,7 +9,7 @@ import AdminPopup from "./AdminPopup";
 import DeleteUsers from "./DeleteUsers";
 import { AiOutlineStop } from "react-icons/ai";
 import ApprovalUsers from "./ApprovalUsers";
-
+import Storage from "../utils/Storage";
 const Sidebar = () => {
   const [activeContent, setActiveContent] = useState("DashBoard");
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -32,13 +32,15 @@ const Sidebar = () => {
   };
 
   const logo = { id: "Logo", title: "LOGO" };
-
-  const buttonData = [
+const roleList = Storage.get("role");
+  const buttonData = roleList=="ADMIN"?[
     { id: "DashBoard", label: "Dashboard", icon: <RiCompass2Line /> },
     { id: "Filter", label: "All Users", icon: <LuUsers /> },
     { id: "Delete Users", label: "Delete Users", icon: <AiOutlineStop /> },
     { id: "Approvals", label: "Approvals", icon: <AiOutlineStop /> }
-  ];
+  ]:[
+    { id: "Filter", label: "All Users", icon: <LuUsers /> },
+  ]
 
   const handlePopupVisibility = (action) => {
     setIsPopupVisible(action === "show");
