@@ -14,14 +14,16 @@ const Dashboard = lazy(() => import('./components/Dashboard/Dashboard'));
 const RegisterMain = lazy(() => import('./components/register/RegisterMain'));
 const Home = lazy(() => import('./components/home/Home'));
 const UPIPayment = lazy(() => import('./components/payment/Payment'));
-
+import Storage from './utils/Storage';
 // admin and vendor
-const SignupForm = lazy(() => import('./vendor/SignUp/SignupForm'));
+const SignupForm = lazy(() => import('./vendor/SignUp/VendorSignup'));
+const SignupForm2 = lazy(() => import('./vendor/SignUp/SignupForm'));
 const Sidebar = lazy(() => import('./vendor/Sidebar'));
 // const Signup = lazy(() => import('./vendor/SignUp/SignupForm'));
 
 const Routes = () => {
     const { token,role } = useSelector(state => state.auth);
+    console.log( token,role , 'token',Storage.get('userId'))
     return (
         <BrowserRouter>
             {token ? <RoleBasedRoutes role={role} /> : <UnAuthorizedRoutes />}
@@ -85,7 +87,7 @@ const RoleBasedRoutes = ({ role }) => {
                         </Route>
                         {basicDetails===false ? (
                             <Redirect path="/" to="/register" />
-                        ) : (
+                        ) : ( 
                             <Redirect path="/" to="/" />
                         )}
                     </Switch>
@@ -94,9 +96,9 @@ const RoleBasedRoutes = ({ role }) => {
                     <Route path="/admin" exact>
                         <Sidebar />
                     </Route>
-                    <Route path="/admin-signup">
+                    {/* <Route path="/admin-signup">
                         <SignupForm />
-                    </Route>
+                    </Route> */}
                     <Redirect path="/" to="/admin" />
                 </Switch>
             )}
@@ -122,6 +124,12 @@ const UnAuthorizedRoutes = () => {
                 <Route path="/signUp">
                     <SignUp />
                 </Route>
+                <Route path="/admin-signup">
+                        <SignupForm />
+                    </Route>
+                <Route path="/admin-signup2">
+                        <SignupForm2 />
+                    </Route>
                 <Redirect path="/" to="/home" />
             </Switch>
         </Suspense>
