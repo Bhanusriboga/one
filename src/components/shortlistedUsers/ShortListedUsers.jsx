@@ -9,11 +9,12 @@ import UsersCard from '../../common-components/UserCard';
 import { getShortListedUsers } from '../../redux/slices/users';
 import { changeUserStatus } from '../../redux/slices/users';
 import Loader from '../../common-components/Loader';
-
+import Storage from '../../utils/Storage';
 function ShortListedUsers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
-  const { userId,loader } = useSelector(state => state.auth)
+  const { loader } = useSelector(state => state.auth)
+  const userId=Storage.get("userId")
   const dispatch = useDispatch();
   const history=useHistory();
   const { shortlisted } = useSelector((state) => state.users);

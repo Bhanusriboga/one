@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { setIsOpen } from '../../redux/slices/users';
 import { useDispatch } from 'react-redux';
 const CustomWidget = () => {
-  const {isOpen}=useSelector(state => state.auth);
+  const {isOpen}=useSelector(state => state.users);
   const [key, setKey] = useState(0);
   const [isChatBotOpen, setIsChatBotOpen] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
@@ -23,7 +23,7 @@ const CustomWidget = () => {
       setIsButtonVisible(true);
       setKey(prevKey => prevKey + 1); 
     }
-   dispatch(setIsOpen( !isOpen));
+   dispatch(setIsOpen(!isOpen));
   };
 
   const steps = [
