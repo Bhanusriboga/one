@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     AreaChart,
     Area,
@@ -12,23 +12,23 @@ import { Card, CardBody, Row, Col } from 'reactstrap';
 import { FaUsers } from "react-icons/fa";
 import { HiMiniUsers } from "react-icons/hi2";
 import './Dash.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { graphApi } from '../redux/slices/AdminUsers';
 
-const data = [
-    { name: '5k', sales: 20 },
-    { name: '10k', sales: 40 },
-    { name: '15k', sales: 35 },
-    { name: '20k', sales: 64 },
-    { name: '25k', sales: 50 },
-    { name: '30k', sales: 42 },
-    { name: '35k', sales: 60 },
-    { name: '40k', sales: 45 },
-    { name: '45k', sales: 62 },
-    { name: '50k', sales: 55 },
-    { name: '55k', sales: 50 },
-    { name: '60k', sales: 54 },
-];
 
 const CustomWidget = () => {
+    const dispatch =useDispatch()
+    const {data} = useSelector(state=>state.adminUsers)
+    const fetchusersData = async()=>{
+       await dispatch(graphApi())
+    }
+    useEffect(()=>{
+        fetchusersData()
+    },[])
+    const formattedData = data?.map(item => ({
+        name: item?.date,
+        sales: item?.noOfUsers
+    }));
     return (
         <div className='graphmaindiv'>
             {/* <div className="dashboard-container">
@@ -84,7 +84,7 @@ const CustomWidget = () => {
                         <div className="chart-container-fluid">
                             <ResponsiveContainer width="100%" height={300} style={{backgroundColor:'white'}}>
                                 <AreaChart
-                                    data={data}
+                                    data={formattedData}
                                     margin={{ top: 20, right: 30, left: 40, bottom: 20 }}
                                 >
                                     <defs>

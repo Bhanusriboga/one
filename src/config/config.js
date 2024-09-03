@@ -35,7 +35,13 @@ const endPoints = {
   getSubCaste:"getSubCaste",
   getprofilepic:"profile-picture",
   uploadprofilepic:"profile-picture",
-  media:"media-files"
+  media:"media-files",
+  getadminallusers:"all-users",
+  getAllDeleteUsers:"delete-requests",
+  getAllVendorApproveUsers:"vendor-approvals",
+  adminDeleteUser:"delete-request",
+  graphapi:'users-analytics'
+ 
 }
 
 export { baseURL, endPoints, encryptionSalt }      
