@@ -38,7 +38,9 @@ const endPoints = {
   media:"media-files",
   getadminallusers:"all-users",
   getAllDeleteUsers:"delete-requests",
-  getAllVendorApproveUsers:"vendor-approvals"
+  getAllVendorApproveUsers:"vendor-approvals",
+  adminDeleteUser:"delete-request",
+  graphapi:'users-analytics'
  
 }
 

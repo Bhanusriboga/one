@@ -5,7 +5,7 @@ import "./Dashboard.css";
 import SingleUser from "./SingleUser";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { getAllAdminUsers } from "../redux/slices/AdminUsers";
+import { adminDeleteRequest, getAllAdminUsers } from "../redux/slices/AdminUsers";
 import { MdDeleteOutline } from "react-icons/md";
 import { Modal, ModalHeader, ModalBody, Input,  } from "reactstrap";
 
@@ -18,12 +18,17 @@ const Dashboard = (props) => {
 
   const [modal, setModal] = useState(false);
   const [reason, setReason] = useState("");
+  const [selectedUserId,setSelectedUserId]=useState(null)
   const dispatch = useDispatch();
 
   const toggle = () => setModal(!modal);
 
-  const handleDelete = () => {
-    console.log("Reason for deleting user:", reason);
+  const handleDelete = async() => {
+    const deleteData = {
+      selectedUserId,
+      reason
+    };
+   await dispatch(adminDeleteRequest(deleteData))
     toggle();
   };
   const changehandler = (e)=>{
@@ -32,16 +37,22 @@ const Dashboard = (props) => {
 
   const fetchUser = async () => {
     const data = await dispatch(getAllAdminUsers());
-    setData(data.payload?.object);
+    setData(data.payload?.object||[]);
   };
 
   useEffect(() => {
     fetchUser();
   }, []);
+ 
 
   // const filteredData = data.filter((user) =>
   //   user.name.toLowerCase().includes(searchTerm.toLowerCase())
   // );
+  const deleteRequest = (userId) => {
+    setSelectedUserId(userId);
+    toggle();
+  };
+  
 
   return (
     <div className="container-fluid">
@@ -51,6 +62,7 @@ const Dashboard = (props) => {
           <SingleUser />
         ) : (
           <>
+          {data.length ===0 ? <h1 className="text-center pt-5">No Users Found</h1> :             
             <table className="table tab">
               <thead>
                 <tr>
@@ -63,8 +75,8 @@ const Dashboard = (props) => {
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                {data.map((user, ind) => (
+              <tbody>                
+                {data?.map((user, ind) => (
                   <tr key={user?.id}>
                     <td>{ind + 1}</td>
                     <td>{user?.name}</td>
@@ -86,7 +98,7 @@ const Dashboard = (props) => {
                           <IoEyeOutline onClick={() => setIsShown(!isShown)} />
                         </i>
                         <MdDeleteOutline
-                          onClick={toggle}
+                          onClick={()=>deleteRequest(user?.userId)}
                           className="delete-user-vendor"
                         />
                       </div>
@@ -95,6 +107,7 @@ const Dashboard = (props) => {
                 ))}
               </tbody>
             </table>
+          }
           </>
         )}
       </div>

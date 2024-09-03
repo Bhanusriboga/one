@@ -15,7 +15,7 @@ const ApprovalUsers = (props) => {
 
   const fetchUser = async () => {
     const resp = await dispatch(getAllVendorApproveUsers())
-    setData(resp?.payload?.object);
+    setData(resp?.payload?.object||[]);
   };
 
   useEffect(() => {
@@ -31,8 +31,8 @@ const ApprovalUsers = (props) => {
       {!isShown && <h4 className="text"> Approve Users</h4>}
       <div className="table-1">
        
-          <>
-            <table className="table tab">
+          {data.length == 0 ? <h1 className="text-center pt-5">No  Users Data Found </h1>:
+            (<table className="table tab">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -65,8 +65,8 @@ const ApprovalUsers = (props) => {
                   </tr>
                 ))}
               </tbody>
-            </table>
-          </>
+            </table>)
+          }
        
       </div>
     </div>

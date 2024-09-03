@@ -7,22 +7,23 @@ import { useDispatch } from "react-redux";
 import { getAllAdminDeleteUsers } from "../redux/slices/AdminUsers";
 
 const DeleteUsers= (props) => {
-  const { isShown, setIsShown, searchTerm } = props;
+  const { isShown, setIsShown, //searchTerm
+   } = props;
   const [data, setData] = useState([]);
  const dispatch = useDispatch()
 
   const fetchUser = async () => {
     const resp = await dispatch(getAllAdminDeleteUsers())
-    setData(resp.payload?.object);
+    setData(resp.payload?.object || []);
   };
 
   useEffect(() => {
     fetchUser();
   }, []);
 
-  const filteredData = data.filter((user) =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredData = data?.filter((user) =>
+  //   user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   return (
     <div className="container-fluid">
@@ -30,6 +31,7 @@ const DeleteUsers= (props) => {
       <div className="table-1">
        
           <>
+          {data.length == 0 ? <h1 className="text-center pt-5">No  Users Data Found</h1>:           
             <table className="table tab">
               <thead>
                 <tr>
@@ -43,7 +45,7 @@ const DeleteUsers= (props) => {
                 </tr>
               </thead>
               <tbody>
-                {filteredData.map((user) => (
+                {data?.map((user) => (
                   <tr key={user.id}>
                     <td>{user.id}</td>
                     <td>{user.name}</td>
@@ -64,6 +66,7 @@ const DeleteUsers= (props) => {
                 ))}
               </tbody>
             </table>
+          }
           </>
        
       </div>
