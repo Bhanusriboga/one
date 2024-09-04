@@ -1,17 +1,43 @@
 import React, { useState, useEffect } from "react";
-
+import { Modal, ModalHeader, ModalBody, Input,  } from "reactstrap";
 import { MdDeleteOutline } from "react-icons/md";
 import "./Dashboard.css";
 import PropTypes from 'prop-types';
 import { useDispatch } from "react-redux";
-import { getAllAdminDeleteUsers } from "../redux/slices/AdminUsers";
+import { adminDirectDeleteUser, getAllAdminDeleteUsers } from "../redux/slices/AdminUsers";
+import { toast } from "react-toastify";
+import { toastError, toastsuccess } from "../utils/constants";
 
 const DeleteUsers= (props) => {
-  const { isShown, setIsShown, //searchTerm
+  const { isShown, //setIsShown, //searchTerm
    } = props;
   const [data, setData] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [reason, setReason] = useState("");
+  const [selectedUserId,setSelectedUserId]=useState(null)
  const dispatch = useDispatch()
+ const toggle = () => setModal(!modal);
+ const changehandler = (e)=>{
+  setReason(e.target.value)
+}
+const deleteRequest = (userId) => {
+  setSelectedUserId(userId);
+  toggle();
+};
+ const handleDelete =async() => {
+  const deleteData = {
+    selectedUserId,
+    reason
+  };
+  const data = await dispatch(adminDirectDeleteUser(deleteData))
+  if(data.payload?.message == "User Profile Deleted Successfully"){
+    toast.success("User Profile Deleted Successfully",toastsuccess)  
+     }else{
+       toast.error('something went wrong',toastError)
+     }
 
+  toggle();
+ }
   const fetchUser = async () => {
     const resp = await dispatch(getAllAdminDeleteUsers())
     setData(resp.payload?.object || []);
@@ -45,21 +71,18 @@ const DeleteUsers= (props) => {
                 </tr>
               </thead>
               <tbody>
-                {data?.map((user) => (
-                  <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.name}</td>
-                    <td>{user.mobile}</td>
-                    <td>{user.mailid}</td>
-                    <td>{user.caste}</td>
-                    <td>
-                      <text>
-                        {user.status}
-                      </text>
-                    </td>
+                {data?.map((user ,index) => (
+                  <tr key={user?.id}>
+                    <td>{index+1}</td>
+                    <td>{user?.vendorName}</td>
+                    <td>{user?.mobileNumber}</td>
+                    <td>{user?.email}</td>
+                    <td>{user?.userId}</td>
+                    <td>{user?.reason}</td>
+                    
                     <td>
                       <i className="eye">
-                        <MdDeleteOutline className="delete-user-vendor" onClick={() => setIsShown(!isShown)} />
+                        <MdDeleteOutline className="delete-user-vendor"   onClick={()=>deleteRequest(user?.userId)} />
                       </i>
                     </td>
                   </tr>
@@ -70,6 +93,35 @@ const DeleteUsers= (props) => {
           </>
        
       </div>
+      <Modal isOpen={modal} toggle={toggle} centered>
+        <ModalHeader toggle={toggle} className="border-0 text1 ">
+          Are you sure you want to Delete?
+        </ModalHeader>
+        <ModalBody className="modelbody1">
+          <p className="border-0 text ">
+            Please type the reason for deleting the user
+          </p>
+          <div className="container">
+            <Input
+              type="text"
+              value={reason}
+
+              onChange={changehandler}
+              placeholder=""
+              style={{ height: "140px", width: "410px", marginLeft: "7%" }}
+            />
+          </div>
+        </ModalBody>
+
+        <div className="footer-content">
+          <span className="cancel-text" onClick={toggle}>
+            Cancel
+          </span>
+          <span className="delete-text" onClick={handleDelete}>
+            Delete
+          </span>
+        </div>
+      </Modal>
     </div>
   );
 };

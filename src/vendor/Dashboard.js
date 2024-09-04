@@ -4,31 +4,56 @@ import { IoEyeOutline } from "react-icons/io5";
 import "./Dashboard.css";
 import SingleUser from "./SingleUser";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { adminDeleteRequest, getAllAdminUsers } from "../redux/slices/AdminUsers";
+import { useDispatch} from "react-redux";
+import { adminDirectDeleteUser, getAllAdminUsers,adminDeleteRequest } from "../redux/slices/AdminUsers";
 import { MdDeleteOutline } from "react-icons/md";
 import { Modal, ModalHeader, ModalBody, Input,  } from "reactstrap";
+import Storage from "../utils/Storage";
+import { toast } from "react-toastify";
+import { toastError, toastsuccess } from "../utils/constants";
 
 const Dashboard = (props) => {
   const {
     isShown,
     setIsShown, //searchTerm
   } = props;
-  const [data, setData] = useState([]);
+  const [data1, setData] = useState([]);
 
   const [modal, setModal] = useState(false);
   const [reason, setReason] = useState("");
   const [selectedUserId,setSelectedUserId]=useState(null)
+
+
   const dispatch = useDispatch();
 
   const toggle = () => setModal(!modal);
 
   const handleDelete = async() => {
+    const roleList = Storage.get("role");
     const deleteData = {
       selectedUserId,
       reason
     };
-   await dispatch(adminDeleteRequest(deleteData))
+    if(roleList == "ADMIN"){
+      const data=await dispatch(adminDirectDeleteUser(deleteData))
+      if(data.payload?.message == "User Profile Deleted Successfully"){
+     toast.success("User Profile Deleted Successfully",toastsuccess)  
+      }else{
+        toast.error('something went wrong',toastError)
+      }
+    } else {
+   const data =  await dispatch (adminDeleteRequest(deleteData))
+   if("Delete Request Raised Successfully" == data?.payload?.message){
+     toast.success("Delete Request Raised Successfully",toastsuccess)
+    }else if("Delete Request Already Raised" == data?.payload?.message){
+     toast.success("Delete Request Already Raised",toastsuccess)
+   }else {
+     toast.error('something went wrong',toastError)
+   }
+
+    
+    }
+    
     toggle();
   };
   const changehandler = (e)=>{
@@ -62,7 +87,7 @@ const Dashboard = (props) => {
           <SingleUser />
         ) : (
           <>
-          {data.length ===0 ? <h1 className="text-center pt-5">No Users Found</h1> :             
+          {data1.length ===0 ? <h1 className="text-center pt-5">No Users Found</h1> :             
             <table className="table tab">
               <thead>
                 <tr>
@@ -76,7 +101,7 @@ const Dashboard = (props) => {
                 </tr>
               </thead>
               <tbody>                
-                {data?.map((user, ind) => (
+                {data1?.map((user, ind) => (
                   <tr key={user?.id}>
                     <td>{ind + 1}</td>
                     <td>{user?.name}</td>

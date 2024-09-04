@@ -25,7 +25,7 @@ const CustomWidget = () => {
     useEffect(()=>{
         fetchusersData()
     },[])
-    const formattedData = data?.map(item => ({
+    const formattedData = data?.graphDtos?.map(item => ({
         name: item?.date,
         sales: item?.noOfUsers
     }));

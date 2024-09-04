@@ -40,7 +40,10 @@ const endPoints = {
   getAllDeleteUsers:"delete-requests",
   getAllVendorApproveUsers:"vendor-approvals",
   adminDeleteUser:"delete-request",
-  graphapi:'users-analytics'
+  graphapi:'users-analytics',
+  userfilter :"users-by-mobile",
+  adminDirectDeleteUser:'profile',
+  approveByAdmin:'vendor-status'
  
 }
 
