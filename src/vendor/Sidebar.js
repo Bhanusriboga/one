@@ -12,7 +12,8 @@ import ApprovalUsers from "./ApprovalUsers";
 import Storage from "../utils/Storage";import { useSelector } from "react-redux";
 
 const Sidebar = () => {
-  const [activeContent, setActiveContent] = useState("DashBoard");
+  const role=Storage.get("role")
+  const [activeContent, setActiveContent] = useState(role=="ADMIN"?"DashBoard":"Filter");
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
