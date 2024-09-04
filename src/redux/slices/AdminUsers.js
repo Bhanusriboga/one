@@ -42,20 +42,16 @@ export const adminDeleteRequest = createAsyncThunk(
   'adminUsers/adminDeleteRequest',
   async (props, thunkAPI) => {
 
-    const data = {
-      userId: props.selectedUserId,
-      reason: props.reason,
-      vendorId: Storage.get('userId') 
-    };
+
     
     const header = {
       Authorization: `Bearer ${Storage.get("token")}`
     };
 
-    const url = `admin/${endPoints.adminDeleteUser}`;
+    const url = `admin/${endPoints.adminDeleteUser}?userId=${props.selectedUserId}&vendorId=${Storage.get("userId")}&reason=${props.reason}`;
 
     try {
-      const { response } = await networkCall(url, "POST", JSON.stringify(data), header);
+      const { response } = await networkCall(url, "POST", null, header);
       if (response) {
         return thunkAPI.fulfillWithValue(response);
       } else {
@@ -67,8 +63,7 @@ export const adminDeleteRequest = createAsyncThunk(
   }
 );
 
-//graph api
-//https://pr-pellisambanalu-springboot-service.azurewebsites.net/api/v1/admin/users-analytics
+
  export const graphApi = createAsyncThunk(
    'adminUsers/graphapi',
    async (_, thunkAPI) => {
@@ -80,6 +75,53 @@ export const adminDeleteRequest = createAsyncThunk(
        return thunkAPI.rejectWithValue("Something went wrong..!");
      }
    }
+ )
+ export const usersFilter = createAsyncThunk(
+  'adminUsers/usersFilter',
+  async (props, thunkAPI) => {
+    const data = {
+      vendorId: Storage.get('userId') ,
+      mobile: props.searchTerm
+    }
+    const url = `admin/${endPoints.userfilter}`;
+    const {response} = await networkCall(url, "POST", JSON.stringify(data));
+    if (response) {
+      return thunkAPI.fulfillWithValue(response);
+    } else {
+      return thunkAPI.rejectWithValue("Something went wrong..!");
+    }
+
+
+  }
+ )
+ export const adminDirectDeleteUser = createAsyncThunk(
+  'adminUsers/adminDirectDeleteUser',
+  async (props, thunkAPI) => {
+
+    const url=`${endPoints.adminDirectDeleteUser}?userId=${props.selectedUserId}&reason=${props.reason}`
+    const {response} = await networkCall(url, "DELETE");
+    if (response) {
+      return thunkAPI.fulfillWithValue(response)
+  }else {
+    return thunkAPI.rejectWithValue("Something went wrong..!")
+  }
+}
+ )
+ export const approveUsersByAdmin = createAsyncThunk(
+  'adminUsers/approveUsersByAdmin',
+
+  async(props, thunkAPI) => {
+    const header = {
+      Authorization: `Bearer ${Storage.get("token")}`
+    };
+   const url=`admin/${endPoints.approveByAdmin}?userId=${Storage.get("userId")}&mobileNumber=${props.mobileNumber}&status=${props.userStatus}`
+    const {response} = await networkCall(url, "POST",null, header);
+    if (response) {
+      return thunkAPI.fulfillWithValue(response)
+    }else {
+      return thunkAPI.rejectWithValue("Something went wrong..!")
+    }
+  }
  )
 
 
@@ -146,6 +188,39 @@ const adminUsers = createSlice({
          .addCase(graphApi.rejected,(state)=>{
            state.loading=false
          })
+         builder
+         .addCase(usersFilter.pending, (state) => {
+           state.loading = true;
+         })
+         .addCase(usersFilter.fulfilled, (state, action) => {
+           state.loading = false;
+           state.data = action.payload?.object;
+         })
+         .addCase(usersFilter.rejected, (state) => {
+           state.loading = false;
+         });
+         builder
+         .addCase (adminDirectDeleteUser.pending, (state) => {  
+           state.loading = true;
+         })
+         .addCase (adminDirectDeleteUser.fulfilled, (state, action) => {
+           state.loading = false;
+           state.data = action.payload?.object;
+         })
+         .addCase (adminDirectDeleteUser.rejected, (state) => {
+           state.loading = false;
+         });
+         builder
+         .addCase (approveUsersByAdmin.pending, (state) => {
+           state.loading = true;
+         })
+         .addCase (approveUsersByAdmin.fulfilled, (state, action) => {
+           state.loading = false;
+           state.data = action.payload?.object;
+         })
+         .addCase (approveUsersByAdmin.rejected, (state) => {
+           state.loading = false;
+         });
        }
   });
   export default adminUsers.reducer
