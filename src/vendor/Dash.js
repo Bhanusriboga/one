@@ -55,23 +55,23 @@ const CustomWidget = () => {
                 </Row>
             </div> */}
             <div className="dashboard-container">
-      <h1 className="dashboard-title">Dashboard</h1>
+      <h1 className="dashboard-title mb-3">Dashboard</h1>
       <Row>
-        <Col md="2" sm="6">
+        <Col md="3" sm="2" xs="6" className='me-md-5'>
           <Card className="dashboard-card today-users-card position-relative">
             <CardBody className="text-left">
               <div className="dashboard-card-text mb-1">Today Users</div>
-              <div className="dashboard-card-number mb-0">40,689</div>
+              <div className="dashboard-card-number mb-0">{data?.totalTodayUsers}</div>
               <HiMiniUsers className="dashboard-icon today-users-icon position-absolute" />
             </CardBody>
           </Card>
         </Col>
-        <Col md="2" sm="6">
+        <Col md="3" sm="2" xs="6" >
 
-          <Card className="dashboard-card total-users-card position-relative aaa">
+          <Card className="dashboard-card total-users-card position-relative">
             <CardBody className="text-left">
               <div className="dashboard-card-text mb-1">Total Users</div>
-              <div className="dashboard-card-number mb-0">10,293</div>
+              <div className="dashboard-card-number mb-0">{data?.totalNoOfUsers}</div>
               <FaUsers className="dashboard-icon total-users-icon position-absolute" />
             </CardBody>
           </Card>
@@ -81,8 +81,10 @@ const CustomWidget = () => {
             <div className='Graphdiv'>
                 <div className="row">
                     <div className="col-12">
-                        <div className="chart-container-fluid">
-                            <ResponsiveContainer width="100%" height={300} style={{backgroundColor:'white'}}>
+                        <div className="chart-container-fluid "  style={{backgroundColor:"white", height:"400px",borderRadius:"10px", margin:"0px 20px"}} >
+                            
+                            <ResponsiveContainer width="95%" height={300} ml-5 >
+                            <h3 className='sales-head mb-4 pt-4'>Sales Details</h3>
                                 <AreaChart
                                     data={formattedData}
                                     margin={{ top: 20, right: 30, left: 40, bottom: 20 }}

@@ -36,6 +36,7 @@ const endPoints = {
   getprofilepic:"profile-picture",
   uploadprofilepic:"profile-picture",
   media:"media-files",
+  adminSignup:"admin/add-details",
   getadminallusers:"all-users",
   getAllDeleteUsers:"delete-requests",
   getAllVendorApproveUsers:"vendor-approvals",

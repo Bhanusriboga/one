@@ -3,7 +3,8 @@ import "./Payment.css";
 import { useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import { toastsuccess } from "../../utils/constants";
-const UPIPayment = () => {
+import PropTypes from 'prop-types';
+const UPIPayment = (props) => {
   const {Mydata}=useSelector(state=>state.auth)
 
   const handlePayment = () => {
@@ -45,9 +46,9 @@ const UPIPayment = () => {
     
 
     <div className="main text-center d-flex justify-content-center align-items-center mt-5 vh-100 main-card-payment overlay">
-      <div className="card1">
+      <div className="card1 p-4 bg-white position-relative" >
         <div className="mt-3">
-        <button type="button" className="close-button" aria-label="Close">
+        <button type="button" className="close-button" aria-label="Close" onClick={props.closePayment}>
           <span aria-hidden="true">&times;</span>
         </button>
           </div>
@@ -70,6 +71,8 @@ const UPIPayment = () => {
     </div>
   );
 };
-
+UPIPayment.propTypes = {
+  closePayment: PropTypes.func.isRequired,
+}
 
 export default UPIPayment;

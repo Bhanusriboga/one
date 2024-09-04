@@ -19,7 +19,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { usersFilter } from "../redux/slices/AdminUsers";
 
 const Sidebar = () => {
-  const [activeContent, setActiveContent] = useState("DashBoard");
+  const role=Storage.get("role")
+  const [activeContent, setActiveContent] = useState(role=="ADMIN"?"DashBoard":"Filter");
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -101,7 +102,7 @@ const Sidebar = () => {
         </div>
 
         <ul className="nav flex-column">
-          {buttonData.map((button) => (
+          {buttonData?.map((button) => (
             <li
               key={button.id}
               className={`nav-item ${
