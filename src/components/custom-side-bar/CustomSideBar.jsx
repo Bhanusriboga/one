@@ -1,26 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import { Form } from "reactstrap";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { MdEdit } from "react-icons/md";
 import { FaArrowLeft } from "react-icons/fa6";
-import { Switch, Route, useHistory, useLocation,Redirect } from "react-router-dom";
-import Settings from "../settings/Settings";
-import IgnoreUsers from "../ignoreUsers/IgnoreUsers";
-import ShortListedUsers from "../shortlistedUsers/ShortListedUsers";
-import ProfileList from "../Dashboard/ProfileList";
+import { Switch, Route, useHistory, useLocation, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./CustomSideBar.scss";
-import Editprofile from "../editprofile/Editprofile";
-import AddPreferences from "../AddPreferences/AddPreference";
 import { useDispatch, useSelector } from "react-redux";
 import { logout as logoutAction } from "../../redux/slices/AuthSlice";
 import CustomWidget from "../ChatBot/CustomWidget";
-import Userprofile from "../UserProfile/Userprofile";
 import { getProfilePic, updateProfilePic } from "../../redux/slices/ProfilePic";
-import UPIPayment from "../payment/Payment";
 import { setIsOpen } from "../../redux/slices/users";
+
+// Lazy loading the components
+const Settings = lazy(() => import("../settings/Settings"));
+const IgnoreUsers = lazy(() => import("../ignoreUsers/IgnoreUsers"));
+const ShortListedUsers = lazy(() => import("../shortlistedUsers/ShortListedUsers"));
+const ProfileList = lazy(() => import("../Dashboard/ProfileList"));
+const Editprofile = lazy(() => import("../editprofile/Editprofile"));
+const AddPreferences = lazy(() => import("../AddPreferences/AddPreference"));
+const Userprofile = lazy(() => import("../UserProfile/Userprofile"));
+const UPIPayment = lazy(() => import("../payment/Payment"));
+
 const CustomSideBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [image, setImg] = useState("");
@@ -54,7 +57,7 @@ const CustomSideBar = () => {
     { id: "ignoredUsers", label: "Ignored Users", path: "ignored-users" },
     { id: "shortlisted", label: "Shortlisted", path: "shortlisted" },
     { id: "settings", label: "Settings", path: "settings" },
-    { id: "singleUser", label: "single User", path: "user-details" },
+    { id: "singleUser", label: "Single User", path: "user-details" },
   ];
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -73,33 +76,33 @@ const CustomSideBar = () => {
   };
 
   const extraButtons = [
-    { id: "Pricing", label: "Pricing", path: "payment",onclick:togglePayment },
-    { id: "Chat with Us", label: "Chat with Us", path: "chat",onclick:()=>{
-      dispatch(setIsOpen(true))
-    } },
-    { id: "Contact Us", label: "Contact Us", path: "contact",onclick:scrollToBottom },
+    { id: "Pricing", label: "Pricing", path: "payment", onclick: togglePayment },
+    { id: "Chat with Us", label: "Chat with Us", path: "chat", onclick: () => { dispatch(setIsOpen(true)) } },
+    { id: "Contact Us", label: "Contact Us", path: "contact", onclick: scrollToBottom },
   ];
   const RenderContent = () => {
     return (
-      <Switch>
-        <Route path="/dashboard" component={ProfileList} />
-        <Route path="/add-preferences" component={AddPreferences} />
-        <Route path="/edit-profile" component={Editprofile} />
-        <Route path="/ignored-users" component={IgnoreUsers} />
-        <Route path="/shortlisted" component={ShortListedUsers} />
-        <Route path="/settings" component={Settings} />
-        <Route path="/user-details/:id" component={Userprofile} />
-        {Mydata?.object?.basicDetailsAvailable ? <Redirect from="/" to="/dashboard" /> : <Redirect path="/register" to="/register" /> }
-      </Switch>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route path="/dashboard" exact component={ProfileList} />
+          <Route path="/add-preferences" component={AddPreferences} />
+          <Route path="/edit-profile" component={Editprofile} />
+          <Route path="/ignored-users" component={IgnoreUsers} />
+          <Route path="/shortlisted" component={ShortListedUsers} />
+          <Route path="/settings" component={Settings} />
+          <Route path="/user-details/:id" component={Userprofile} />
+          {Mydata?.object?.basicDetailsAvailable ? <Redirect from="/" to="/dashboard" /> : <Redirect from="/" to="/register" />}
+        </Switch>
+      </Suspense>
     );
   };
 
   return (
     <Container fluid className="outer-container mt-4 mb-4">
       <Row className=" w-100">
-      <button onClick={togglePayment} className='border-0 bg-transparent'>
-        {paymentPopup&&<UPIPayment/>}
-        </button>
+      <div className='border-0 bg-transparent'>
+          {paymentPopup && <UPIPayment closePayment={togglePayment}/>}
+        </div>
         <Col
           xs="12"
           className="d-flex flex-row justify-content-between d-md-none">

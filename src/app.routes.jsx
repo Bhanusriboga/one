@@ -14,12 +14,12 @@ const SignUp = lazy(() => import('./components/Signup/SignUp'));
 const Dashboard = lazy(() => import('./components/Dashboard/Dashboard'));
 const RegisterMain = lazy(() => import('./components/register/RegisterMain'));
 const Home = lazy(() => import('./components/home/Home'));
-const UPIPayment = lazy(() => import('./components/payment/Payment'));
 
 // admin and vendor
 const SignupForm = lazy(() => import('./vendor/SignUp/SignupForm'));
 const Sidebar = lazy(() => import('./vendor/Sidebar'));
 const VenderForm = lazy(() => import('./vendor/SignUp/VendorSignup'));
+const Userprofile = lazy(() => import("./components/UserProfile/Userprofile"));
 
 const Routes = () => {
     const { token, role } = useSelector(state => state.auth);
@@ -47,6 +47,12 @@ const RoleBasedRoutes = ({ role }) => {
                     history.push('/home');
                 } else if (data?.payload?.object?.basicDetailsAvailable) {
                     setBasicDetails(true);
+                    const currentpath = window.location.pathname;
+                    if (currentpath === '/register'|| currentpath === '/login'){
+                        history.push('/dashboard');
+                    }else{
+                        history.push(currentpath);
+                    }
                 } else {
                     setBasicDetails(false);
                     history.push('/register');
@@ -64,20 +70,7 @@ const RoleBasedRoutes = ({ role }) => {
         }
     }, [dispatch, role, history]);
 
-    useEffect(() => {
-        if (role === 'USER') {
-            if (basicDetails) {
-                const currentpath = window.location.pathname;
-                if (currentpath=="/dashboard"||currentpath=="/edit-profile"||currentpath=="/user-details"||currentpath=="/add-preferences"||currentpath=="/ignored-users"||currentpath=="/shortlisted"||currentpath=="/settings") {
-                    history.push(currentpath);
-                } else {
-                    history.push('/dashboard');
-                }
-            } else {
-                history.push('/register');
-            }
-        }
-    }, [basicDetails, history, role]);
+
 
     return (
         <Suspense fallback={<Loader />}>
@@ -88,9 +81,6 @@ const RoleBasedRoutes = ({ role }) => {
                     </Route>
                     <Route path="/">
                         <Dashboard />
-                    </Route>
-                    <Route path="/payment">
-                        <UPIPayment />
                     </Route>
                     {basicDetails === false ? (
                         <Redirect to="/register" />
@@ -109,7 +99,7 @@ const RoleBasedRoutes = ({ role }) => {
                     <Route path="/admin-signup">
                         <SignupForm />
                     </Route>
-                    
+                    <Route path="/user-details/:id" component={Userprofile} />
                     {role=="ADMIN"  ? <Redirect to="/admin" /> : <Redirect to="/vendor" />}
                 </Switch>
             )}

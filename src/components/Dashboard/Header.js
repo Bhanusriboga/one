@@ -45,9 +45,9 @@ const logout=async()=>{
           <NavLink onClick={logout} className='navBtn'>Logout</NavLink>
         </NavItem>
       </Nav>
-    <button onClick={toggle} className='border-0 bg-transparent'>
-    {paymentPopup&&<UPIPayment/>}
-    </button>
+    <div className='border-0 bg-transparent'>
+    {paymentPopup&&<UPIPayment closePayment={toggle}/>}
+    </div>
     </Navbar>
   )
 }
