@@ -3,15 +3,46 @@ import "./home.css"
 import StarRatings from 'react-star-ratings'
 import rightArrow from "./assets/Animation - 1721798930907.json"
 import Lottie from 'react-lottie'
-import customer from "./assets/customer.svg"
-import kareem from "./assets/kareem.png"
-import yukthifemale from "./assets/yukthifemale.png"
-import venkatimg from "./assets/venkatimg.png"
-
+import {testmonial1,testmonial2,testmonial3,testmonial4,testmonial5,testmonial6} from "./assets"
 
 
 function Endorse() {
-  const endorseList = [{ name: 'YUKTHI', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: customer, rating: 4.8 }, { name: 'Kareem', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl:kareem , rating: 3.4 }, { name: 'vishnu', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: kareem, rating: 5 }, { name: 'venkat', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: venkatimg, rating: 4.5 }, { name: 'YUKTHI', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: customer, rating: 5 }, { name: 'vasavi', description: "Joining this website was the best decision of my life! Within weeks, I found my perfect match.", imgUrl: yukthifemale, rating: 4 }]
+  const endorseList = [{ 
+    name: 'Shiva',
+    description: "Amazing platform with verified profiles and easy filters to find a perfect match!",
+    imgUrl: testmonial2,
+    rating: 4.8
+  }, 
+    {
+      name: 'Shyam',
+      description: "Pellisambandalu changed my life! Easy to use and supportive team. I found my soulmate!",
+      imgUrl: testmonial6,
+      rating: 4.4
+    },
+    {
+      name: 'Bhanu Sri',
+      description: "Effortless partner search with personalized recommendations and a secure platform.",
+      imgUrl: testmonial1,
+      rating: 5
+    },
+     {
+      name: 'Chandini',
+      description: "Well-organized site with great privacy and communication tools. Transparent process!",
+      imgUrl: testmonial4,
+      rating: 4.5
+    },
+    {
+      name: 'Nithin',
+      description: "This matrimony site exceeded expectations. Great service and genuine connections!",
+      imgUrl: testmonial5,
+      rating: 5
+    },
+    {
+      name: 'Joshi',
+      description: "Smooth experience with a user-friendly interface and large profile database",
+      imgUrl: testmonial3,
+      rating: 4
+    }]
   const scrollContainerRef = useRef(null);
   const scroll = (scrollOffset) => {
     if (scrollContainerRef.current) {
@@ -43,10 +74,12 @@ function Endorse() {
           {endorseList.map((item, index) => (
             <div key={index} className="scrollable-list-item">
               <div className='endorse-square d-flex flex-column justify-content-center align-items-center'>
-                <h5 className='endorse-heading'>{item.name}</h5>
-                <img className='customer-img' src={item.imgUrl} />
-                <div className='width-100'>
-                  <p className='endorse-text-para justify-self-center'>Joining this website was the best decision<br /> of my life! Within weeks,<br /> I found my perfect match. </p>
+                <h5 className='endorse-heading mt-2'>{item.name}</h5>
+                <img className='customer-img rounded-circle mt-3' src={item.imgUrl} />
+                <div className='width-100 mb-1'>
+                  <p className='endorse-text-para justify-self-center'>
+                    {item.description} 
+                  </p>
                 </div>
                 <div className="endorse-stars w-20">
                   <StarRatings

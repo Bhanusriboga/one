@@ -1,130 +1,104 @@
 # CustomWidget Component Documentation
-
 ## Description
 
 The CustomWidget component is a customizable chatbot widget built using
 react-simple-chatbot. It offers a floating button to open and close the
 chatbot interface and provides a conversational flow for matchmaking
 services.
+## Overview
 
-## Installation
+The `CustomWidget` component provides a chatbot interface for matchmaking services using the `react-simple-chatbot` library. It includes functionality to toggle the chatbot, customize the theme, and handle user interactions via steps. The chatbot also fetches the user's profile picture using Redux.
 
-### Prerequisites
+## Dependencies
 
-Ensure you have the following installed:
+- `react`: Core React library for component-based UI development.
+- `react-simple-chatbot`: A simple chatbot component for React applications.
+- `styled-components`: Allows for theming and styling of the chatbot component.
+- `react-redux`: Used for state management.
+- Redux Slices: 
+  - `getProfilePic` (ProfilePic slice): Fetches the user's profile picture.
+  - `setIsOpen` (Users slice): Toggles the chatbot's visibility state.
 
--   React
+## Props
 
--   styled-components
+This component does not receive any external props but manages its own internal state.
 
--   react-simple-chatbot
+## State
 
-### Installing Dependencies
+The component uses the following states:
 
-bash
+- **isOpen** (`useSelector` from Redux): Determines if the chatbot is currently open.
+- **key** (`useState`): Manages the key for resetting the chatbot session.
+- **isChatBotOpen** (`useState`): Local state to track whether the chatbot is open.
+- **isButtonVisible** (`useState`): Manages the visibility of the chatbot button.
 
-Copy code
+## Hooks
 
-npm install styled-components react-simple-chatbot
+- **useEffect**: Fetches the profile picture using `dispatch(getProfilePic())` when the component mounts.
+- **useSelector**: 
+  - Fetches the chatbot open state (`isOpen`) from the `users` slice.
+  - Fetches the profile picture from the `profilePic` slice.
+- **useDispatch**: Dispatches actions to:
+  - Fetch the profile picture.
+  - Toggle the chatbot's open state (`setIsOpen` action from the `users` slice).
 
-## Component Structure
+## Steps
 
-### Imports
+The chatbot follows a step-by-step interaction:
 
--   useState from react: For managing the state of the component.
+1. Initial welcome message.
+2. User input.
+3. Matchmaking service selection:
+   - "Find a Life Partner"
+   - "Consultation Services"
+4. Option to go back or restart.
 
--   Chatbot from react-simple-chatbot: For embedding the chatbot.
+## Theme Customization
 
--   ThemeProvider from styled-components: For applying custom themes.
+The chatbot UI can be customized using the `theme` object, which includes:
 
--   Icon, ChatBotIcon, ChatBotCloseButton: Images used in the component.
+- `background`: Background color of the chatbot.
+- `fontFamily`: Font used in the chatbot.
+- `fontSize`: General font size.
+- `color`: Text color.
+- `headerBgColor`: Background color of the header.
+- `headerFontColor`: Font color in the header.
+- `botBubbleColor`: Background color of the bot's message bubbles.
+- `userBubbleColor`: Background color of the user's message bubbles.
 
-### State Management
+## Chatbot Avatar
 
--   key: Used to reset the chatbot when it\'s toggled.
-
--   isOpen: Boolean state to track whether the chatbot is open or
-    closed.
-
-### Functions
-
-#### toggleChatbot
-
--   Toggles the chatbot\'s open/close state.
-
--   Increments key if the chatbot is being closed, to reset its state
-    when reopened.
-
-### Steps
-
-Defines the steps for the chatbot conversation flow:
-
-1.  Welcome message.
-
-2.  User input.
-
-3.  Inquiry about the type of matchmaking service.
-
-4.  Options for \"Find a Life Partner\" or \"Consultation Services\".
-
-5.  Messages based on the user\'s choice.
-
-6.  Option to go back or end the conversation.
-
-7.  End message and option to restart or exit.
-
-### Theme
-
-Defines the styling for the chatbot using the ThemeProvider from
-styled-components.
-
-### Render
-
--   The chatbot is rendered inside a styled div.
-
--   A button is used to toggle the visibility of the chatbot.
-
--   The chatbot component is customized with the defined steps and
-    theme.
+- The `userAvatar` is conditionally set to the user's profile picture. If no profile picture is available, it defaults to the `Icon` image.
 
 ## Styles
 
-Custom styles are defined for various elements:
+- `floatingButtonStyle`: Defines the style for the chatbot toggle button.
+- `iconStyle`: Specifies the size and style for the button icons.
+- `mobileStyle`: Adjusts the close button style for mobile devices.
+- `chatbotContainerStyle`: Container styling for the chatbot to be positioned fixed at the bottom-right of the page.
+- `chatbotStyle`: Styling for the chatbot itself, including margin and z-index.
 
--   floatingButtonStyle: Styles for the chatbot toggle button.
+## Functions
 
--   iconStyle: Styles for the icons used in the button.
+### `toggleChatbot()`
+This function handles the opening and closing of the chatbot. It performs the following actions:
 
--   chatbotContainerStyle: Styles for the chatbot container.
+- Toggles the `isChatBotOpen` state.
+- Manages the visibility of the chatbot button based on whether the chatbot is open or closed.
+- Increments the `key` state to reset the chatbot session.
+- Dispatches the `setIsOpen` action to update the chatbot's open state in Redux.
 
--   chatbotStyle: Styles for the chatbot itself.
+## Usage Example
 
-**Description**
+To use the `CustomWidget` component, simply import it and include it in your JSX:
 
-The CustomWidget is a React component that integrates a simple chatbot
-using react-simple-chatbot and styled-components. It provides
-matchmaking services interaction with options for finding a life partner
-and consultation services.
+```jsx
+import CustomWidget from './CustomWidget';
 
-**Features**
-
--   Displays initial welcome message and prompts user input.
-
--   Offers options to choose between \"Find a Life Partner\" and
-    \"Consultation Services\".
-
--   Handles user interactions such as going back, restarting, and ending
-    the session.
-
--   Customizable theme using styled-components.
-**OverView**
-
-The CustomWidget is a React component that integrates a simple chatbot using react-simple-chatbot and styled-components. It provides matchmaking services interaction with options for finding a life partner and consultation services.
-
-**Features**
-
-- Displays initial welcome message and prompts user input.
-- Offers options to choose between "Find a Life Partner" and "Consultation Services".
-- Handles user interactions such as going back, restarting, and ending the session.
-- Customizable theme using styled-components.
-
+function App() {
+  return (
+    <div>
+      <CustomWidget />
+    </div>
+  );
+}

@@ -66,7 +66,7 @@ const RoleBasedRoutes = ({ role }) => {
             }
             fetchMyDetails()
 
-            history.push(role === 'ADMIN'?'/admin':'/vendor');
+            history.push(role === 'ADMIN'?'/admin-dashboard':'/vendor-dashboard');
         }
     }, [dispatch, role, history]);
 
@@ -90,16 +90,22 @@ const RoleBasedRoutes = ({ role }) => {
                 </Switch>
             ) : (
                 <Switch>
-                    <Route path="/admin" exact>
+                    <Route path="/admin-dashboard" exact>
                         <Sidebar />
                     </Route>
-                    <Route path="/vendor" exact>
+                    <Route path="/vendor-dashboard" exact>
                         <Sidebar />
                     </Route>
                     <Route path="/admin-signup">
                         <SignupForm />
                     </Route>
                     <Route path="/user-details/:id" component={Userprofile} />
+                        <Route path="/register-user">
+                            <RegisterMain />
+                        </Route>
+                        <Route path="/add-user">
+                            <SignUp />
+                        </Route>
                     {role=="ADMIN"  ? <Redirect to="/admin" /> : <Redirect to="/vendor" />}
                 </Switch>
             )}
