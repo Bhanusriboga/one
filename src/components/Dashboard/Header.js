@@ -14,22 +14,27 @@ import UPIPayment from '../payment/Payment';
 import { useDispatch } from 'react-redux';
 import {logout as logoutAction} from '../../redux/slices/AuthSlice';
 import { setIsOpen } from '../../redux/slices/users';
+import {useHistory} from "react-router-dom"
 const Header = (props) => {
   const dispatch =useDispatch()
 const [paymentPopup,setPaymentPopup]=useState(false);
 const toggle=()=>setPaymentPopup(!paymentPopup);
-
+const history=useHistory();
   const chatBoxOpen = () => {
     dispatch(setIsOpen(true));
   };
 const logout=async()=>{
   await dispatch(logoutAction());
 }
-
+const navToMainPage=()=>{
+  history.push('/')
+}
   return (
     <Navbar className='navbck' light expand="md" >
       <div className='footer-logo navlogo'>
-        <NavbarBrand href="/"><img src={logo} className='h-100 w-100 position-relative' alt="Logo" /></NavbarBrand>
+        <button className='border-0 bg-transparent h-100' onClick={navToMainPage}>
+        <NavbarBrand ><img src={logo} className='h-100 w-100 position-relative' alt="Logo" /></NavbarBrand>
+        </button>
       </div>
       <Nav className="me-auto  w-100 d-none d-md-flex justify-content-end" navbar>
         <NavItem>

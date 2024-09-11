@@ -12,8 +12,6 @@
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "crypto-js": "^4.2.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-only-warn": "^1.1.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-circular-progressbar": "^2.1.0",
@@ -32,12 +30,10 @@
     "react-toastify": "^10.0.5",
     "reactstrap": "^9.2.2",
     "recharts": "^2.12.7",
-    "redux-mock-store": "^1.5.4",
     "redux-thunk": "^3.1.0",
     "sass": "^1.77.2",
     "sitemap": "^8.0.0",
     "styled-components": "^4.0.0",
-    "tiny-warning": "^1.0.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -52,13 +48,11 @@
   "eslintConfig": {
     "extends": [
       "eslint:recommended",
-      "plugin:import/errors",
       "plugin:react/recommended",
       "plugin:jsx-a11y/recommended"
     ],
     "plugins": [
       "react",
-      "import",
       "jsx-a11y"
     ],
     "rules": {
@@ -129,6 +123,8 @@
     "globals": "^15.4.0",
     "identity-obj-proxy": "^3.0.0",
     "purify-css": "^1.1.9",
-    "redux-mock-store": "^1.5.4"
+    "redux-mock-store": "^1.5.4",
+    "eslint": "^8.57.0",
+    "eslint-plugin-only-warn": "^1.1.0"
   }
 }

@@ -48,29 +48,34 @@ const Settings = () => {
   }
   };
   const handleInputChange = (setter) => (event) => setter(event.target.value);
-
-  const handleEmailVerify = (event) => {
+  const handleNumberInput =(setter)=>(event) => {
+    const number = /^[0-9\b]+$/;
+    if (event.target.value === '' || number.test(event.target.value)) {
+      setter(event.target.value);
+    }
+  }
+  const handleEmailVerify = async(event) => {
     event.preventDefault();
     if (validateEmail(email)) {
-      if(sendOtp()){
+      if(await sendOtp()){
         setEmailError('');
         setShowOtp(true);
       }else{
-        toast.error("Something went wrong..!",toastError)
+        toast.error("Kindly check your email..!",toastError)
       }
     } else {
       setEmailError(settings.validEmailError);
     }
   };
 
-  const handlePhoneVerify = (event) => {
+  const handlePhoneVerify = async(event) => {
     event.preventDefault();
     if (validatePhoneNumber(phone)) { 
-      if(sendOtpPhone()){
+      if(await sendOtpPhone()){
         setPhoneError('');
         setShowOtpPhone(true);
       }else{
-        toast.error("Something went wrong..!",toastError)
+        toast.error("Kindly check your number..!",toastError)
       }
     } else {
       setPhoneError(settings.validPhoneError);
@@ -165,7 +170,7 @@ const Settings = () => {
       type: 'text',
       placeholder: settings.otpPlaceholder,
       value: otp,
-      onChange: handleInputChange(setOtp),
+      onChange: handleNumberInput(setOtp),
       maxLength: 6
     },
     showOtp && {
@@ -183,7 +188,7 @@ const Settings = () => {
       type: 'text',
       placeholder: settings.phonePlaceholder,
       value: phone,
-      onChange: handleInputChange(setPhone),
+      onChange: handleNumberInput(setPhone),
       label: settings.phoneLabel,
       maxLength: 10
     },
@@ -192,7 +197,7 @@ const Settings = () => {
       type: 'text',
       placeholder: settings.otpPlaceholder,
       value: otpPhone,
-      onChange: handleInputChange(setOtpPhone),
+      onChange: handleNumberInput(setOtpPhone),
       maxLength: 6
     },
     showOtpPhone && {
@@ -200,7 +205,7 @@ const Settings = () => {
       type: 'text',
       placeholder: settings.newPhonePlaceholder,
       value: newPhone,
-      onChange: handleInputChange(setNewPhone),
+      onChange: handleNumberInput(setNewPhone),
       maxLength: 10
     }
   ].filter(Boolean);
@@ -222,9 +227,8 @@ const Settings = () => {
       <Form onSubmit={handleSubmit}>
         <section>
           <h2 className="settingsSubTitle">{settings.changeEmailTitle}</h2>
-          {emailFields.map(({ id, type, placeholder, value, onChange, label, maxLength }) => (
+          {emailFields.map(({ id, type, placeholder, value, onChange, maxLength }) => (
             <FormGroup key={id}>
-              {label && <Label for={id}>{label}</Label>}
               <div className='email-parent'>
                 <input
                   type={type}
@@ -232,7 +236,7 @@ const Settings = () => {
                   placeholder={placeholder}
                   value={value}
                   onChange={onChange}
-                  className={`${id !== 'email' ? 'input-otp' : 'input-email'} ${emailError && 'error'}`}
+                  className={`${id === 'otp' ? 'input-otp' : 'input-email'} ${emailError && 'error'}`}
                   maxLength={maxLength}
                 />
                 {id === 'email' && (
@@ -275,7 +279,7 @@ const Settings = () => {
                   placeholder={placeholder}
                   value={value}
                   onChange={onChange}
-                  className={`${id !== 'phone' ? 'input-otp' : 'input-email'} ${phoneError && 'error'}`}
+                  className={`${id === 'otpPhone' ? 'input-otp' : 'input-email'} ${phoneError && 'error'}`}
                   maxLength={maxLength}
                 />
                 {id === 'phone' && (
@@ -332,7 +336,7 @@ const Settings = () => {
                 {settings.deleteBtn}
               </button>}
           <h2 className="settingsSubTitle">{settings.logoutTitle}</h2>
-          <div>
+          <div className="logout-message">
             {settings.logoutMessage}
           </div>
           <button onClick={logout} className='logout logout-design'>

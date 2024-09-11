@@ -20,7 +20,6 @@ import TermsAndConditions from "./TermsAndConditions.jsx";
 import { terms_conditios} from "./assets"
 import { pdfjs } from "react-pdf";
 import * as pdfWorker from 'pdfjs-dist/build/pdf.worker.mjs';
-
 pdfjs.GlobalWorkerOptions.workerSrc = URL.createObjectURL(new Blob([pdfWorker], { type: 'application/javascript' }));
 import {
   userSignup,
@@ -73,11 +72,12 @@ const SignUp = () => {
   const [genderError, setGenderError] = useState("");
   const [displayOtp, setDisplayOtp] = useState(false);
   const [termsCondition, setTermsCondition] = useState(false);
+
   useEffect(() => {
     if (
       formData.userEmail === "" ||
       formData.fullname === "" ||
-      formData.gender === "" ||
+      formData.gender === "I am" ||
       formData.userPass === "" ||
       formData.repeatPass === "" ||
       formData.mobile === "" ||
@@ -166,7 +166,7 @@ const SignUp = () => {
         setGenderError(e.target.value === "");
         break;
       case "userEmail":
-        setEmailIdError(e.target.value === "");
+        setEmailIdError(!validateEmail(e.target.value));
         break;
       case "userPass":
         setPassError(e.target.value === "");
@@ -253,9 +253,12 @@ const SignUp = () => {
           )}
           <div className="position-relative">
             <FormGroup className="signup-form-input">
+     
               <Input
                 type="select"
-                className="signup-form-gender"
+                className={`signup-form-gender ${
+                  formData.gender == "I am" ? "placeholder-color":"form-control-genders-color" 
+                }`}
                 value={formData.gender}
                 onChange={handleChange}
                 name="gender">

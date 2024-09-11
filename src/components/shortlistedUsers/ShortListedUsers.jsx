@@ -13,19 +13,22 @@ import Storage from '../../utils/Storage';
 function ShortListedUsers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
-  const { loader } = useSelector(state => state.auth)
+  const { loader } = useSelector(state => state.users)
   const userId=Storage.get("userId")
   const dispatch = useDispatch();
   const history=useHistory();
   const { shortlisted } = useSelector((state) => state.users);
 
   useEffect(() => {
-    dispatch(getShortListedUsers());
+    getShortListedItemList();
     setTotalpages(Math.ceil(shortlisted?.length / 12));
     setCurrentPage(1);
   }, [dispatch]);
 
-  
+  const getShortListedItemList = async () => {
+    await dispatch(getShortListedUsers());
+    setTotalpages(Math.ceil(shortlisted?.length / 12));
+  }
 
   const changeUSerStateById = async (affectedUserId, changeByUserId, userStatus) => {
     await dispatch(changeUserStatus({ affectedUserId, changeByUserId, userStatus }))

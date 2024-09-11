@@ -58,8 +58,8 @@ export const personalDetailsAPICall = createAsyncThunk(
       noOfSiblings: props.noOfSiblings,
       maritalStatus: props.maritalStatus,
       anyDisabilities: props.disability == "Disabilities" ? "None" : props.disability,
-      // height: props.height?.toString(),// backend not accepting in form of string after that need to change
-      heiht: 6.2,
+      height: props.height?.toString(),// backend not accepting in form of string after that need to change
+      // heiht: 6.2,
       weightType: props.weightUnit,
       weight: props.weight,
       bodyType: props.bodyType,
@@ -90,8 +90,8 @@ export const professionalDetailsAPICall = createAsyncThunk("registrationDetails/
     const url = `${endPoints.professionalDetails}?userId=${Storage.get('userId')}`;
     const data = JSON.stringify({
       highestEducation: props.highestEducation,
-      // yearOfPassout: props.yearOfPassing?.toString(),
-      yearOfPassout: "2020-06-20",//after backend deployment need to change
+      yearOfPassout: props.yearOfPassing?.toString(),
+      // yearOfPassout: "2020-06-20",//after backend deployment need to change
       nameOfInstitute: props.nameOfTheInstitute,
       occupation: props.occupation,
       employmentStatus: props.employmentStatus,
