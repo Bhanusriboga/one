@@ -206,7 +206,6 @@ const SignUp = () => {
   const navtoLogin = () => {
     history.push("/login");
   };
-  console.log("formData------->",formData);
   return (
     <div className="main-cont">
      {termsCondition&& (
