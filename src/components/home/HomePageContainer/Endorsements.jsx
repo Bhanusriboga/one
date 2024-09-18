@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import SwardCard from '../../../Assets/square card 1.png'
-import Profile from '../../../Assets/ProfileImage.svg'
+import {testmonial1,testmonial2,testmonial3,testmonial4,testmonial5,testmonial6} from "../assets"
 import Carousel from 'react-multi-carousel';
 import { Chooseusstyle, DisplayBox, TextSize } from '../../../commonSyles/HomeStyles';
 import '../home.css'
@@ -8,9 +8,44 @@ import { FaStar } from "react-icons/fa";
 import { useHistory } from 'react-router-dom'
 const Endorsements = () => {
   const navigator = useHistory()
-    const [userdata, setUserdata]= useState([{title:'YUKTHI', content:'Joining this website was the best decision of my life! Within weeks, I found my perfect match.'},{title:'YUKTHI', content:'HJoining this website was the best decision of my life! Within weeks, I found my perfect match.'},{title:'YUKTHI', content:'Joining this website was the best decision of my life! Within weeks, I found my perfect match.'}])
+    const [userdata, setUserdata]= useState([])
     useEffect(()=>{
-        setUserdata([{title:'YUKTHI', content:'Joining this website was the best decision of my life! Within weeks, I found my perfect match.',ratings:5},{title:'YUKTHI', content:'Joining this website was the best decision of my life! Within weeks, I found my perfect match.',ratings:4},{title:'YUKTHI', content:'Joining this website was the best decision of my life! Within weeks, I found my perfect match.', ratings:3},{title:'YUKTHI', content:'Joining this website was the best decision of my life! Within weeks, I found my perfect match.', ratings:1},{title:'YUKTHI', content:'Joining this website was the best decision of my life! Within weeks, I found my perfect match.', ratings:0}])
+        setUserdata([{ 
+          name: 'Shiva',
+          description: "Amazing platform with verified profiles and easy filters to find a perfect match!",
+          imgUrl: testmonial2,
+          rating: 4.8
+        }, 
+          {
+            name: 'Shyam',
+            description: "Pellisambandalu changed my life! Easy to use and supportive team. I found my soulmate!",
+            imgUrl: testmonial6,
+            rating: 4.4
+          },
+          {
+            name: 'Bhanu Sri',
+            description: "Effortless partner search with personalized recommendations and a secure platform.",
+            imgUrl: testmonial1,
+            rating: 5
+          },
+           {
+            name: 'Chandini',
+            description: "Well-organized site with great privacy and communication tools. Transparent process!",
+            imgUrl: testmonial4,
+            rating: 4.5
+          },
+          {
+            name: 'Nithin',
+            description: "This matrimony site exceeded expectations. Great service and genuine connections!",
+            imgUrl: testmonial5,
+            rating: 5
+          },
+          {
+            name: 'Joshi',
+            description: "Smooth experience with a user-friendly interface and large profile database",
+            imgUrl: testmonial3,
+            rating: 4
+          }])
     },[]);
     const STAR_COUNT = 5;
 const Rating = (value) => {
@@ -57,10 +92,10 @@ const Rating = (value) => {
                 <div key={val.title} className='position-relative'>
                         <img src={SwardCard} width={'90%'}></img>
                         <div className='position-absolute cardhomecontent'>
-                        <span className='w-100 d-flex justify-content-center titleStyle'>{val.title}</span>
-                        <div className='cardcontentprofilehome'><img src={Profile} width={'35%'}></img></div>
-                        <div className='cardcontenthome'>{val.content}</div>
-                        <div className='cardcontenthome'>{Rating(val.ratings)}</div>
+                        <span className='w-100 d-flex justify-content-center titleStyle'>{val.name}</span>
+                        <div className='cardcontentprofilehome'><img src={val.imgUrl} width={'35%'}></img></div>
+                        <div className='cardcontenthome'>{val.description}</div>
+                        <div className='cardcontenthome'>{Rating(val.rating)}</div>
                         </div>
                 </div>
 

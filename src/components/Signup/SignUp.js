@@ -16,8 +16,11 @@ import { validateEmail } from "../../utils/validation";
 import { useDispatch } from "react-redux";
 import { registerlogo, tick, pelli } from "./assets/index.js";
 import register2 from "./assets/register2.svg";
-// import TermsAndConditions from "./TermsAndConditions.jsx";
-// import { terms_conditios} from "./assets"
+import TermsAndConditions from "./TermsAndConditions.jsx";
+import { terms_conditios} from "./assets"
+import { pdfjs } from "react-pdf";
+import * as pdfWorker from 'pdfjs-dist/build/pdf.worker.mjs';
+pdfjs.GlobalWorkerOptions.workerSrc = URL.createObjectURL(new Blob([pdfWorker], { type: 'application/javascript' }));
 import {
   userSignup,
   otpverify,
@@ -69,12 +72,12 @@ const SignUp = () => {
   const [genderError, setGenderError] = useState("");
   const [displayOtp, setDisplayOtp] = useState(false);
   const [termsCondition, setTermsCondition] = useState(false);
-  console.log({termsCondition})
+
   useEffect(() => {
     if (
       formData.userEmail === "" ||
       formData.fullname === "" ||
-      formData.gender === "" ||
+      formData.gender === "I am" ||
       formData.userPass === "" ||
       formData.repeatPass === "" ||
       formData.mobile === "" ||
@@ -163,7 +166,7 @@ const SignUp = () => {
         setGenderError(e.target.value === "");
         break;
       case "userEmail":
-        setEmailIdError(e.target.value === "");
+        setEmailIdError(!validateEmail(e.target.value));
         break;
       case "userPass":
         setPassError(e.target.value === "");
@@ -205,13 +208,13 @@ const SignUp = () => {
   };
   return (
     <div className="main-cont">
-     {/* {termsCondition&& (
-        <div className="terms-condition-parent overlay" onClick={() => setTermsCondition()}>
+     {termsCondition&& (
+        <div className="terms-condition-parent overlay" onClick={() => setTermsCondition(false)}>
           <div className="terms-condition">
             <TermsAndConditions pdfUrl={terms_conditios} />
           </div>
         </div>
-    )} */}
+    )}
       <img src={registerlogo} alt="image" className="img-logo-signup" />
       <div className="left-section">
         <Form onSubmit={handleSubmit} className="forms">
@@ -250,9 +253,12 @@ const SignUp = () => {
           )}
           <div className="position-relative">
             <FormGroup className="signup-form-input">
+     
               <Input
                 type="select"
-                className="signup-form-gender"
+                className={`signup-form-gender ${
+                  formData.gender == "I am" ? "placeholder-color":"form-control-genders-color" 
+                }`}
                 value={formData.gender}
                 onChange={handleChange}
                 name="gender">

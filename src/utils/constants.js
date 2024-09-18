@@ -221,7 +221,7 @@ export const settings={
   deleteReasonLabel: 'Reason for deletion',
   marriedLabel: 'Married',
   notInterestedLabel: 'Not interested',
-  logoutTitle: 'Log out',
+  logoutTitle: 'Logout',
   logoutMessage: 'If you have any questions or need further assistance, please feel free to contact our support team',
   logoutButton: 'Logout',
   saveAllButton: 'Save',
@@ -235,6 +235,7 @@ export const settings={
   trustIssue:"Trust issue",
   validPhoneError:"Please enter a valid phone number",
   changePhoneTitle:"Change your mobile number",
+  newPhonePlaceholder:"Enter new phone number",
 }
 export const EditProfile={
   editprofile:"Edit Profile",

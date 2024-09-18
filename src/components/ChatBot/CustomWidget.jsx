@@ -1,29 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Chatbot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
-import Icon from "./Assets/Icon.png";
+import Icon from "./Assets/Icon.png"; 
+import { useSelector, useDispatch } from 'react-redux';
+import { getProfilePic } from "../../redux/slices/ProfilePic";
 import ChatBotIcon from "./Assets/ChatBotIcon.png";
 import ChatBotCloseButton from "./Assets/ChatBotCloseButton.png";
 import mobileCloseButton from "./Assets/mobileClosebutton.png";
 import './CustomWidget.css';
-import { useSelector } from 'react-redux';
 import { setIsOpen } from '../../redux/slices/users';
-import { useDispatch } from 'react-redux';
 const CustomWidget = () => {
-  const {isOpen}=useSelector(state => state.auth);
+  const {isOpen}=useSelector(state => state.users);
   const [key, setKey] = useState(0);
   const [isChatBotOpen, setIsChatBotOpen] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
+  const profilePic = useSelector((state) => state.profilePic.profilePic);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProfilePic());
+  }, [dispatch]);
   const toggleChatbot = () => {
     setIsChatBotOpen(!isChatBotOpen);
     if (!isOpen) {
-      setIsButtonVisible(false); 
+      setIsButtonVisible(false);
     } else {
       setIsButtonVisible(true);
-      setKey(prevKey => prevKey + 1); 
+      setKey(prevKey => prevKey + 1);
     }
-   dispatch(setIsOpen( !isOpen));
+   dispatch(setIsOpen(!isOpen));
   };
 
   const steps = [
@@ -105,20 +109,22 @@ const CustomWidget = () => {
     textAlign: "center",
   };
 
+  const userAvatar = profilePic && profilePic.message ? profilePic.message : Icon;
+
   return (
     <ThemeProvider theme={theme}>
-      <div style={chatbotContainerStyle}>
+      <div style={chatbotContainerStyle} className='chatbotContainerStyle1'>
         <button onClick={toggleChatbot} style={floatingButtonStyle} className='d-none d-md-block' data-testid="chat-button-md">
-          <img src={isOpen ? ChatBotCloseButton : ChatBotIcon} alt="Chat Button" style={iconStyle}/>
+          <img src={isOpen ? ChatBotCloseButton : ChatBotIcon} alt="Chat Button" style={iconStyle} />
         </button>
         {isButtonVisible && (
           <button onClick={toggleChatbot} style={floatingButtonStyle} className='d-md-none' data-testid="chat-button-sm">
             <img src={ChatBotIcon} alt="Chat Button" style={iconStyle} />
           </button>
         )}
-        {isOpen && ( 
+        {isOpen && (
           <div style={chatbotStyle}>
-            <button onClick={toggleChatbot} style={mobileStyle} className='d-md-none' >
+            <button onClick={toggleChatbot} style={mobileStyle} className='d-md-none'>
               <img src={mobileCloseButton} alt="Chat Button" style={iconStyle} />
             </button>
             <Chatbot
@@ -126,8 +132,9 @@ const CustomWidget = () => {
               steps={steps}
               floating={false}
               botAvatar={Icon}
+              userAvatar={userAvatar} 
               headerTitle="Chat with our Service Expert"
-              headerTitleClass="header-title-custom" 
+              headerTitleClass="header-title-custom"
               inputStyle={{
                 background: "#e5e5e5",
                 fontSize: "16px",
@@ -147,7 +154,7 @@ const CustomWidget = () => {
 
 const floatingButtonStyle = {
   position: 'fixed',
-  bottom: '20px',
+  bottom: '10px',
   right: '20px',
   background: 'transparent',
   border: 'none',
@@ -182,7 +189,7 @@ const mobileStyle = {
 
 const chatbotContainerStyle = {
   position: 'fixed',
-  bottom: '20px',
+  bottom: '2px',
   right: '20px',
   display: 'flex',
   flexDirection: 'column-reverse',
@@ -191,7 +198,7 @@ const chatbotContainerStyle = {
 
 const chatbotStyle = {
   marginBottom: '80px',
-  zIndex: 1, 
+  zIndex: 1,
 };
 
 export default CustomWidget;

@@ -1,22 +1,39 @@
-/* this styles are for chat-boat */
-.illxGg{
-    margin-left: 12% !important;
+ /* chatbot message */
+.jBYABC {
+   margin: 8px 0 10px 40px;
  }
- .dxwjwP{
-font-size: 16px;
-font-weight: 600;
-line-height: 30px;
-text-align: left;
-width: 276px;
-height: 30px;
-top: 5px;
-left: 64px;
-gap: 0px;
-opacity: 0px;
-margin-left: 4rem !important;
+ /* for options */
+ .gkhNlr {
+   margin-left: 40px;
+   padding: 2px;
  }
- .iBkCIX{
-    max-width: 70% !important;
-    margin-top: "5rem" !important;
+ /* header text */
+ .bNgTFH {
+   font-size: 16px;
+   font-weight: 600;
+   line-height: 30px;
+   text-align: center;
+   width: 276px;
+   height: 30px;
+ }
+ /* chat area */
+ .sc-gZMcBi {
+   height: 20rem;
+ }
+ /* chat div */
+ .sc-iwsKbI {
+   height: 27rem;
+ }
+ 
+  @media (max-width: 768px) {
+   .chatbotContainerStyle1{
+      margin-left: 3rem;
+   }
+    .sc-iwsKbI {
+      max-height: 70%;
+    }
+    .sc-gZMcBi {
+      max-height: 95%;
+    }
  }
  

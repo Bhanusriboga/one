@@ -5,6 +5,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Button } from 'reactstrap';
 import { useHistory } from 'react-router-dom'
+import '../home.css'
 import { Chooseusstyle, DisplayBox, TextSize } from '../../../commonSyles/HomeStyles';
 const ExploreProfiles = () => {
   const navigator = useHistory()

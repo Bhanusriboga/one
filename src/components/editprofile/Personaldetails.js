@@ -63,33 +63,33 @@ const eatingHabitsOptions = [
   { value: "Non Veg", label: "Non Veg" },
   { value: "Vegan", label: "Vegan" },
 ];
-const familyStatusOptions = ["Select","Underclass", "Low class", "Middle class", "Upper class"];
+const familyStatusOptions = [{ label: "Low class", value: "LOWERCLASS" }, { label: "Middle class", value: "MIDDLECLASS" }, { label: "Upper class", value: "UPPERCLASS" }];
 const familyTypeOptions = [
-  "Select",
-  "Nuclear Family",
-  "Single-Parent Family",
-  "Joint Family",
-  "Blended Family",
-];
+  {value:"Select",label:"Select"},
+  { label:"Nuclear Family",value:"NUCLEARFAMILY"},
+  { label:"Single Parent Family",value:"SINGEPARENTFAMILY"},
+  { label:"Joint Family",value:"JOINTFAMILY"},
+  { label:"Blended Family",value:"BLENDEDFAMILY"},
+ ];
+
 const occupationsofFatherOptions = [
-  "Select",
-  "Business Owner",
-  "Employed",
-  "Professional",
-  "Retired",
-  "Unemployed",
-  "Passed Away",
-  "Others",
+  {label:"Business Owner",value:"BUSINESS"},
+  {label:"Home maker",value:"HOMEMAKER"},
+  {label:"Employed",value:"EMPLOYED"},
+  {label:"Retired",value:"RETIRED"},
+  {label:"Unemployed",value:"UNEMPLOYED"},
+  {label:"Passed Away",value:"PASSEDAWAY"},
+  {label:"Others",value:"OTHERS"},
 ];
+
 const occupationsOfMotherOptions = [
-  "Select",
-  "Others",
-  "Home maker",
-  "Employed",
-  "Business",
-  "Retired",
-  "Unemployed",
-  "Passed Away",
+  {label:"Business Owner",value:"BUSINESS"},
+  {label:"Home maker",value:"HOMEMAKER"},
+  {label:"Employed",value:"EMPLOYED"},
+  {label:"Retired",value:"RETIRED"},
+  {label:"Unemployed",value:"UNEMPLOYED"},
+  {label:"Passed Away",value:"PASSEDAWAY"},
+  {label:"None",value:"None"},
 ];
 const noOfSiblingsOptions = ["Select","1", "2", "3", "4", "5"];
 const casteOptions = ["Select", "Abdul",
@@ -438,33 +438,33 @@ const Personaldetails = () => {
     if (personaldetails) {
       setDetails({
         "Religion": {
-          "Caste": personaldetails?.caste?.toLowerCase(),
-          "Sub-Caste": personaldetails?.subCaste?.toLowerCase(),
-          "Gothra": personaldetails?.gothram?.toLowerCase(),
-          "Star": personaldetails?.star?.toLowerCase(),
-          "Zodiac Sign": personaldetails?.zodiacSign?.toLowerCase(),
-          "About Dosham": personaldetails?.whatTypeOfDosham?.toLowerCase()
+          "Caste": personaldetails?.caste,
+          "Sub-Caste": personaldetails?.subCaste,
+          "Gothra": personaldetails?.gothram,
+          "Star": personaldetails?.star,
+          "Zodiac Sign": personaldetails?.zodiacSign,
+          "About Dosham": personaldetails?.whatTypeOfDosham
         },
         "Family Information": {
-          "Family Status": personaldetails?.familyStatus?.toLowerCase(),
-          "Family Type": personaldetails?.familyType?.toLowerCase(),
-          "Father Name": personaldetails?.fatherName?.toLowerCase(),
-          "Father Occupation": personaldetails?.fatherOccupation?.toLowerCase(),
-          "Mother Name": personaldetails?.motherName?.toLowerCase(),
-          "Mother Occupation": personaldetails?.motherOccupation?.toLowerCase(),
-          "Siblings": personaldetails?.noOfSiblings?.toLowerCase()
+          "Family Status": personaldetails?.familyStatus,
+          "Family Type": personaldetails?.familyType,
+          "Father Name": personaldetails?.fatherName,
+          "Father Occupation": personaldetails?.fatherOccupation,
+          "Mother Name": personaldetails?.motherName,
+          "Mother Occupation": personaldetails?.motherOccupation,
+          "Siblings": personaldetails?.noOfSiblings
         },
         "Personal Information": {
-          "Marital Status": personaldetails?.maritalStatus?.toLowerCase(),
-          "Complexion": personaldetails?.complexion?.toLowerCase(),
-          "Any Disabilities": personaldetails?.anyDisabilities?.toLowerCase(),
-          "Body Type": personaldetails?.bodyType?.toLowerCase(),
-          "Drinking Habits": personaldetails?.drinkingHabits?.toLowerCase(),
-          "Eating Habits": personaldetails?.eatingHabits?.toLowerCase(),
-          "Smoking Habits": personaldetails?.smokingHabits?.toLowerCase(),
-          "Weight": personaldetails?.weight?.toLowerCase(),
-          "Height": personaldetails?.height?.toLowerCase(),
-          "About me": personaldetails?.description?.toLowerCase(),
+          "Marital Status": personaldetails?.maritalStatus,
+          "Complexion": personaldetails?.complexion,
+          "Any Disabilities": personaldetails?.anyDisabilities,
+          "Body Type": personaldetails?.bodyType,
+          "Drinking Habits": personaldetails?.drinkingHabits,
+          "Eating Habits": personaldetails?.eatingHabits,
+          "Smoking Habits": personaldetails?.smokingHabits,
+          "Weight": personaldetails?.weight,
+          "Height": personaldetails?.height,
+          "About me": personaldetails?.description,
         }
       })
     }
@@ -502,7 +502,7 @@ const Personaldetails = () => {
           "maritalStatus": details['Personal Information']['Marital Status'],
           "anyDisabilities": details['Personal Information']['Any Disabilities'],
           "height": details['Personal Information'].Height,
-          "weightType": details['Personal Information'].Weight,
+          "weightType": "Kgs",
           "weight": details['Personal Information'].Weight,
           "bodyType": details['Personal Information']['Body Type'],
           "complexion": details['Personal Information'].Complexion,
@@ -649,7 +649,7 @@ const Personaldetails = () => {
                           >
                             <option hidden disabled  value=''>Select</option>
                             {familyStatusOptions.map((option, i) => (
-                              <option key={i} disabled={i==0} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option.value}>{option.label}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Family Type" ? (
@@ -660,7 +660,7 @@ const Personaldetails = () => {
                           >
                             <option hidden disabled  value=''>Select</option>
                             {familyTypeOptions.map((option, i) => (
-                              <option key={i} disabled={i==0} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option.value}>{option.label}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Father Occupation" ? (
@@ -671,7 +671,7 @@ const Personaldetails = () => {
                           >
                             <option hidden disabled  value=''>Select</option>
                             {occupationsofFatherOptions.map((option, i) => (
-                              <option key={i} disabled={i==0} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option.value}>{option.label}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Mother Occupation" ? (
@@ -682,7 +682,7 @@ const Personaldetails = () => {
                           >
                             <option hidden disabled  value=''>Select</option>
                             {occupationsOfMotherOptions.map((option, i) => (
-                              <option key={i} disabled={i==0} value={option}>{option}</option>
+                              <option key={i} disabled={i==0} value={option.value}>{option.label}</option>
                             ))}
                           </Form.Control>
                         ) : key === "Siblings" ? (

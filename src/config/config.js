@@ -35,7 +35,17 @@ const endPoints = {
   getSubCaste:"getSubCaste",
   getprofilepic:"profile-picture",
   uploadprofilepic:"profile-picture",
-  media:"media-files"
+  media:"media-files",
+  adminSignup:"admin/add-details",
+  getadminallusers:"all-users",
+  getAllDeleteUsers:"delete-requests",
+  getAllVendorApproveUsers:"vendor-approvals",
+  adminDeleteUser:"delete-request",
+  graphapi:'users-analytics',
+  userfilter :"users-by-mobile",
+  adminDirectDeleteUser:'profile',
+  approveByAdmin:'vendor-status'
+ 
 }
 
 export { baseURL, endPoints, encryptionSalt }      

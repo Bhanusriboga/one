@@ -31,7 +31,7 @@ const occupationOptions = [
   "Others",
 ];
 
-const employmentStatusOptions = ["Select", "Full Time", "Part Time", "Contract"];
+const employmentStatusOptions = [{label:"Select",value:"Select"},{ label:"Full Time", value: "FullTime" },{ label:"Part Time", value: "PartTime" }, {label:"Contract",value:"Contract"}];
 
 const ProfessionalDetails = () => {
   const [details, setDetails] = useState(initialDetails);
@@ -154,7 +154,7 @@ const ProfessionalDetails = () => {
                     >
                       <option hidden disabled value=''>Select</option>
                       {employmentStatusOptions.map((option, i) => (
-                        <option key={i} disabled={i == 0} value={option}>{option}</option>
+                        <option key={i} disabled={i == 0} value={option.value}>{option.label}</option>
                       ))}
                     </Form.Control>
                   ) 

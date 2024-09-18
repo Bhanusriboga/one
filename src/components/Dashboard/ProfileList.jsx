@@ -8,11 +8,11 @@ import UsersCard from '../../common-components/UserCard';
 import Loader from '../../common-components/Loader';
 import { changeUserStatus, getAllUsers,UserFilterApi } from '../../redux/slices/users';
 import PaginationComponent from '../../common-components/pagination/PaginationComponent';
-
+import Storage from '../../utils/Storage';
 const ProfileList = () => {
   const [filterdata, setfilterData] = useState([])
   const { data, loading } = useSelector(state => state.users)
-  const { userId } = useSelector(state => state.auth)
+  const userId=Storage.get("userId")
   const [currentPage, setCurrentPage] = useState(1);
   const [totalpages, setTotalpages] = useState(1);
   const dispatch = useDispatch()
@@ -40,7 +40,7 @@ const ProfileList = () => {
     const filters = Object.fromEntries(
       Object.entries({
         religion: maindata?.religion,
-        cast: maindata?.cast,
+        caste: maindata?.cast,
         subcast: maindata?.subcast,
         martialStatus: maindata?.marital,
         occupation: maindata?.occupation,
