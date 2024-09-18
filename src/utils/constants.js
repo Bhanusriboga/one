@@ -9,6 +9,13 @@ export const footerContent={
   TermsC: 'Terms & Condition',
   copyright: 'Copyright@2024 All rights reserved'
 }
+export const homepage={
+  discover: 'Discover the ',
+  magic: 'Magic of True Connection',
+  subdiscover: "With a blend of modern technology and timeless matchmaking expertise, we're dedicated to crafting love stories that transcend distance, culture, and background.",
+  chooseus:'Why Choose Us ?',
+  choosetext:'In the enchanting landscape of matrimony, we proudly stand as the beacon of excellence. Our dedication to creating meaningful connections, coupled with a personalized approach, sets us apart as the premier destination for those seeking lifelong companionship. Trust in us to navigate the path to your happily ever after, for in the realm of matrimony, we are simply the best.'
+}
 export const addPreference = {
   hedding: "Add Preferences",
   ProfileCreatedFor: "Profile is required.",

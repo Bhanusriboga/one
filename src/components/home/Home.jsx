@@ -1,137 +1,80 @@
-import React, { useEffect, useState,useRef } from 'react'
-import { GiHamburgerMenu } from "react-icons/gi";
-import { AiOutlineClose } from "react-icons/ai";
-import newlogos from "./assets/new_logo.svg"
+import React, { useState, useRef } from 'react';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+} from 'reactstrap';
+import logo from '../../Assets/icon.svg'
+import { useHistory } from "react-router-dom";
 import "./home.css"
-import sidehalfimg from "./assets/side-half-img.png"
-import exploreright from "./assets/explore-right.svg"
-import lefthalfimg from "./assets/left-half-img.png"
-import Couple from './Couple'
-import Choose from './choose'
-import Explore from './Explore';
-import rightcircle from "./assets/right-circle.png"
-import Endorse from './Endorse';
-import rightchakra from "./assets/right-chakra.png"
-import Destination from './Destination';
+import FooterBar from "../Dashboard/FooterBar"
+import HomePageContainer from './HomePageContainer/HomePageContainer';
 import  googleplay from "./assets/googleplay.svg"
 import appstore from "./assets/apple.svg";
-import chakra from "./assets/chakraa.svg"
-import FooterBar from "../Dashboard/FooterBar"
-import TermsAndConditions from "../Signup/TermsAndConditions.jsx";
-import { terms_conditios} from "../Signup/assets"
-import * as pdfWorker from 'pdfjs-dist/build/pdf.worker.mjs';
-import { pdfjs } from "react-pdf";
-pdfjs.GlobalWorkerOptions.workerSrc = URL.createObjectURL(new Blob([pdfWorker], { type: 'application/javascript' }));
-
-
+// import chakra from "./assets/chakraa.svg"
 function Home() {
-  const [burger,setBurger]=useState(false)
-  const bottomRef=useRef()
-  const [scrolled, setScrolled] = useState(false)
-  const [width, setWidth] = useState(window.innerWidth)
-  const [termsCondition, setTermsCondition] = useState(false);
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 0) {
-        setScrolled(true)
-      }
-      else {
-        setScrolled(false)
-      }
-    })
-  }, [])
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth)
-    }
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener('resize', handleResize);
-  }, [])
-  const scrollToBottom=()=>{
-        if(bottomRef.current){
-          bottomRef.current.scrollIntoView({behaviour:"smooth"})
-        }
-         
-  }
-  const setTrueTermAndConditions=()=>{
-    setTermsCondition(true)
-  }
-  return (
-    <div className='home-page-div d-flex flex-column justify-content-between align-items-center w-100 ' >
-<nav className={`navbar navbar-expand-lg fixed-top ${scrolled ? 'navbar-blur' : ''}`} style={{ backgroundColor: '#780024' }}>
-            <div className="container-fluid">
-                <a className="navbar-brand" href="#">
-                    <img src={newlogos} className="nav-logo" alt="Company Logo" />
-                </a>
-                
-                {burger?<AiOutlineClose className='close-icon mt-3'  onClick={() => setBurger(!burger)} />:<button 
-                    className="navbar-toggler" 
-                    type="button" 
-                    onClick={() => setBurger(!burger)} 
-                    aria-controls="navbarNav" 
-                    aria-expanded={burger ? 'true' : 'false'} 
-                    aria-label="Toggle navigation"
-                >
-                    <GiHamburgerMenu className='navbar-toggler-icon' />
-                </button>}
-                <div className={`collapse navbar-collapse ${burger ? 'show' : ''}`} id="navbarNav">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <a className="nav-link" href="#" onClick={(e) => { e.preventDefault(); scrollToBottom(); }}>About Us</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/signUp">Signup</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/login">Login</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-      
-      <div className='content11 d-flex flex-column justify-content-center align-items-center'>
-     
-        <Couple />
-        <Choose width={width} />
-        <img src={sidehalfimg} className='side-choose' />
-        <div style={{ alignSelf: "flex-start", justifySelf: "flex-end" }}>
-          <img src={lefthalfimg} className='leftexplore' />
-        </div>
-        <img src={rightcircle} className="position-absolute right-circle"/>
-        <Explore width={width} />
-        <img src={exploreright} className='exploreRight' />
-        <Endorse />
-        <img src={rightchakra} className='position-absolute right-chakra'/>
-        <Destination />
+  const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory();
+  const bottomRef = useRef()
 
-        <div className='footer-1 mt-5 d-flex flex-column align-items-center justify-content-evenly' id="footer" ref={bottomRef}>
-              <div className='first-footer d-flex flex-column justify-content-evenly align-items-center'>
-              <div className='d-flex justify-content-center align-items-center'>
-               <img src={chakra} className='chakra'/>
+  const scrollToBottom = () => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behaviour: "smooth" })
+    }
+  }
+  
+  const handleNavigate = (type) => {
+    history.push(`/${type}`)
+  }
+
+  return (
+    <div className='h-100 w-100 pgback'>
+      <div className='pageHeader'>
+        <Navbar className='navbck' dark expand="md">
+          <div className='footer-logo navlogo'>
+            <NavbarBrand href="/"><img src={logo} className='h-100 w-100 position-relative'></img></NavbarBrand>
+          </div>
+          <NavbarToggler onClick={() => { setIsOpen(!isOpen) }} />
+          <Collapse isOpen={isOpen} navbar>
+            <Nav className="m-auto  w-100 d-md-flex justify-content-end" navbar>
+              <NavItem>
+                <NavLink href="#" onClick={(e) => { e.preventDefault(); scrollToBottom(); setIsOpen(!isOpen) }}>About Us</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#" onClick={(e) => { e.preventDefault(); handleNavigate('signUp'); setIsOpen(!isOpen) }}>Signup</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#" onClick={(e) => { e.preventDefault(); handleNavigate('login'); setIsOpen(!isOpen) }}>Login</NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+
+      </div>
+      <div className='pageContainer  conwidth'>
+        <div className='homeBack'>
+          <HomePageContainer></HomePageContainer>
+        </div>
+        <div className='footer-1 d-flex flex-column align-items-center justify-content-evenly subfooterBack' id="footer" ref={bottomRef}>
+              <div className='first-footer mt-5 d-flex flex-column justify-content-evenly w-100 align-items-center'>
+              <div className='d-flex justify-content-center align-items-center w-100 mb-5 text-center'>
                <h4 className='footer-head'>Let&apos;s write our own love story together : Download Our App For Any Queries</h4>
-               <img src={chakra} className='chakra'/>
               </div>
-              <p className='footer-para'>Our platform is dedicated to helping you find a lifelong partner who shares your values, dreams, and aspirations.</p>
+              <p className='footer-para text-center'>Our platform is dedicated to helping you find a lifelong partner who shares your values, dreams, and aspirations.</p>
               <div className='download d-flex justify-content-between'>
                <img src={googleplay} className='appstore '/>
                <img src={appstore} className='appstore'/>
               </div>
-            <div style={{ position: "relative" }}>
-              {termsCondition && (
-                <button className="terms-condition-parent overlay " onClick={() => setTermsCondition(false)}>
-                  <div className="terms-condition">
-                    <TermsAndConditions pdfUrl={terms_conditios} />
-                  </div>
-                </button>
-              )}
-            </div>
-          </div>
-          <hr className="hor-line"/>
-          <div className='pageFooter'>
-            <FooterBar setTermsCondition={setTrueTermAndConditions}/>
+              </div>
+              {/* <hr className="hor-line w-100"/> */}
+              </div>
 
-          </div>
+        <div className='pageFooter'>
+          <FooterBar ref={bottomRef} />
         </div>
       </div>
     </div>
